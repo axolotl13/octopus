@@ -1,5 +1,17 @@
 local M = {}
 
+M.disable_options = function()
+
+  local g = vim.g
+  local ok, disable = pcall(require,"core.disable")
+  if not ok then return end
+
+  for _, option in pairs(disable) do
+    g["loaded_" .. option] = 1
+  end
+
+end
+
 M.setup_options = function()
 
   local opt = vim.opt
@@ -12,18 +24,6 @@ M.setup_options = function()
 
   opt.shortmess:append("sI")
   opt.shortmess = opt.shortmess + {c = true}
-
-end
-
-M.disable_options = function()
-
-  local g = vim.g
-  local ok, disable = pcall(require,"core.disable")
-  if not ok then return end
-
-  for _, option in pairs(disable) do
-    g["loaded_" .. option] = 1
-  end
 
 end
 
