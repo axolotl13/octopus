@@ -15,4 +15,16 @@ M.setup_options = function()
 
 end
 
+M.disable_options = function()
+
+  local g = vim.g
+  local ok, disable = pcall(require,"core.disable")
+  if not ok then return end
+
+  for _, option in pairs(disable) do
+    g["loaded_" .. option] = 1
+  end
+
+end
+
 return M
