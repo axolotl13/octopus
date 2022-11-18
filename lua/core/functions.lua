@@ -1,5 +1,6 @@
 local M = {}
 
+-- Deshabilitar plugins innecesarios
 M.disable_options = function()
 
   local g = vim.g
@@ -12,6 +13,7 @@ M.disable_options = function()
 
 end
 
+-- Cargar opciones para nvim
 M.setup_options = function()
 
   local opt = vim.opt
@@ -24,6 +26,20 @@ M.setup_options = function()
 
   opt.shortmess:append("sI")
   opt.shortmess = opt.shortmess + {c = true}
+
+end
+
+-- Carga combinaciones de teclas
+M.keybinds_options = function()
+
+  local map = vim.keymap.set
+  local ok, keybinds = pcall(require,"core.keybinds")
+  if not ok then return end
+  
+  for _, key in pairs(keybinds) do
+    key.options.desc = key.desc
+    map(key.mode, key.lhs, key.rhs, key.options)
+  end
 
 end
 
