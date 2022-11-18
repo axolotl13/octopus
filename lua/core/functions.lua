@@ -1,9 +1,10 @@
+local g = vim.g
+
 local M = {}
 
 -- Deshabilitar plugins innecesarios
 M.disable_options = function()
 
-  local g = vim.g
   local ok, disable = pcall(require,"core.disable")
   if not ok then return end
 
@@ -35,11 +36,14 @@ M.keybinds_options = function()
   local map = vim.keymap.set
   local ok, keybinds = pcall(require,"core.keybinds")
   if not ok then return end
+
+  g.mapleader = " "
   
   for _, key in pairs(keybinds) do
     key.options.desc = key.desc
     map(key.mode, key.lhs, key.rhs, key.options)
   end
+
 
 end
 
