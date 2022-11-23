@@ -1,6 +1,6 @@
 local opts = {
   
-  -- Desasignar atajos
+  -- Designar atajos
   { mode = {""}, lhs = "<space>", rhs = "<nop>", options = {silent = true}, desc = "" },
   { mode = {"n"}, lhs = "<c-z>", rhs = "<nop>", options = {silent = true}, desc = "" },
   { mode = {"n"}, lhs = "<esc>", rhs = "<cmd>noh<cr>", options = {silent = true}, desc = "" },
@@ -53,7 +53,7 @@ local opts = {
 
   -- Packer Manager
   { mode = {"n"}, lhs = "<leader>pl", rhs = "<cmd>PackerStatus<cr>", options = {silent = true}, desc = "Mostrar estado de los plugins iniciados" },
-  { mode = {"n"}, lhs = "<leader>ps", rhs = "<cmd>PackerSync<cr>", options = {silent = true}, desc = "Actualizar plugins" },
+  { mode = {"n"}, lhs = "<leader>ps", rhs = "<cmd>PackerSync<cr>", options = {silent = true}, desc = "Actualizar todos los plugins" },
 
 }
 
