@@ -12,6 +12,10 @@ M.disable_options = function()
     g["loaded_" .. option] = 1
   end
 
+  -- g.do_filetype_lua = 1
+  -- g.did_load_filetypes = 0
+  -- g.loaded = 1
+
 end
 
 -- Cargar opciones para nvim
@@ -31,19 +35,25 @@ M.setup_options = function()
 end
 
 -- Carga combinaciones de teclas
-M.keybinds_options = function()
+M.keybinds_options = function(keybinds_ext)
 
   local map = vim.keymap.set
   local ok, keybinds = pcall(require,"core.keybinds")
   if not ok then return end
 
+  local keybinds_list = {}
+
+  table.insert(keybinds_list, keybinds)
+  table.insert(keybinds_list, keybinds_ext)
+
   g.mapleader = " "
   
-  for _, key in pairs(keybinds) do
-    key.options.desc = key.desc
-    map(key.mode, key.lhs, key.rhs, key.options)
+  for _, keylist in pairs(keybinds_list) do
+    for keylist, key in pairs(keylist) do
+      key.options.desc = key.desc
+      map(key.mode, key.lhs, key.rhs, key.options)
+    end
   end
-
 
 end
 
