@@ -23,6 +23,13 @@ local opts = {
       vim.cmd([[colorscheme adwaita]])
     end
   },
+  {
+    "kyazdani42/nvim-tree.lua",
+    cmd = {"NvimTreeToggle", "NvimTreeClose"},
+    config = function()
+      require("plugins.explorer")
+    end
+  },
 
 }
 

@@ -97,12 +97,3 @@ vim.api.nvim_create_autocmd('BufEnter', {
   command = [[if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif]],
   nested = true
 })
-
-local ok_keybinds, keybinds = pcall(require, "core.functions")
-if not ok_keybinds then return end
-
-keybinds.keybinds_options({
-  { mode = {"n"}, lhs = "ñ", rhs = "<cmd>NvimTreeToggle<cr>", options = {silent = true}, desc = "Explorador de Achivos" }
-})
-
-return keybinds

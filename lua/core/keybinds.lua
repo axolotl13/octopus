@@ -54,7 +54,9 @@ local opts = {
   -- Packer Manager
   { mode = {"n"}, lhs = "<leader>pl", rhs = "<cmd>PackerStatus<cr>", options = {silent = true}, desc = "Mostrar estado de los plugins iniciados" },
   { mode = {"n"}, lhs = "<leader>ps", rhs = "<cmd>PackerSync<cr>", options = {silent = true}, desc = "Actualizar todos los plugins" },
-
+  
+  -- Nvim-tree
+  { mode = {"n"}, lhs = "ñ", rhs = "<cmd>NvimTreeToggle<cr>", options = {silent = true}, desc = "Explorador de archivos" }
 }
 
 return opts
