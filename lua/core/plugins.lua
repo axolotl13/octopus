@@ -6,8 +6,15 @@ local opts = {
   -- Dependencias necesarias
   { "nvim-lua/plenary.nvim" },
   { "tweekmonster/startuptime.vim", cmd = "StartupTime" },
+  {
+    "kyazdani42/nvim-web-devicons",
+    after = "adwaita.nvim",
+    config = function()
+      require("plugins.devicons")
+    end
+  },
 
-  -- Interfaz de Usuario
+  -- Interfaz de usuario
   {
     "Mofiqul/adwaita.nvim",
     after = "plenary.nvim",
@@ -16,6 +23,7 @@ local opts = {
       vim.cmd([[colorscheme adwaita]])
     end
   },
+
 }
 
 return opts
