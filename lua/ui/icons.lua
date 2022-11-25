@@ -39,6 +39,13 @@ local icons = {
     -- warning = "",
     -- error = "", 
   },
+  signs = {
+    add = "┃", -- ┃ │
+    -- delete = "━",
+    -- top_delete = "🭶",
+    -- change_delete = "═",
+  },
+
 }
 
 return icons
