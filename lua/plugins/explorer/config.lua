@@ -1,5 +1,6 @@
-local icons_ok, icons = pcall(require, "ui.icons")
-if not icons_ok then return end
+local ok_icons, icons = pcall(require, "ui.icons")
+local ok_explorer, explorer = pcall(require, "nvim-tree")
+if not ok_icons and ok_explorer then return end
 
 local opts = {
   disable_netrw = true,
@@ -7,7 +8,7 @@ local opts = {
   hijack_cursor = true,
   open_on_tab = false,
   update_cwd = true,
-  respect_buf_cwd = true,
+  respect_buf_cwconfigd = true,
   view = {
     width = 32,
     -- preserve_window_proportions = true,
@@ -90,4 +91,4 @@ local opts = {
   live_filter = {prefix = "Filtro: "}
 }
 
-return opts
+explorer.setup(opts)
