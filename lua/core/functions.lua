@@ -34,19 +34,27 @@ M.setup_options = function()
 
 end
 
--- Carga combinaciones de teclas
-M.keybinds_options = function()
+-- Función para cargar atajos de teclado
+M.load_keybinds = function(keybinds)
 
   local map = vim.keymap.set
-  local ok, keybinds = pcall(require,"core.keybinds")
-  if not ok then return end
 
-  g.mapleader = " "
-  
   for _, key in pairs(keybinds) do
     key.options.desc = key.desc
     map(key.mode, key.lhs, key.rhs, key.options)
   end
+
+end
+
+-- Carga combinaciones de teclas
+M.keybinds_options = function()
+
+  local ok, keybinds = pcall(require,"core.keybinds")
+  if not ok then return end
+
+  g.mapleader = " "
+
+  M.load_keybinds(keybinds)
 
 end
 

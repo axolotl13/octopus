@@ -1,10 +1,10 @@
 local opts = {
-  
+
   -- Designar atajos
   { mode = {""}, lhs = "<space>", rhs = "<nop>", options = {silent = true}, desc = "" },
   { mode = {"n"}, lhs = "<c-z>", rhs = "<nop>", options = {silent = true}, desc = "" },
   { mode = {"n"}, lhs = "<esc>", rhs = "<cmd>noh<cr>", options = {silent = true}, desc = "" },
-  
+
   -- Opciones para el cursor
   { mode = {"n"}, lhs = "|", rhs = "^", options = {silent = true}, desc = "Mueve el cursor al inicio de la oración" },
   { mode = {"i"}, lhs = "<c-b>", rhs = "<ESC>^i", options = {silent = true}, desc = "Mueve el cursor al inicio de la oración" },
@@ -54,9 +54,6 @@ local opts = {
   -- Packer Manager
   { mode = {"n"}, lhs = "<leader>pl", rhs = "<cmd>PackerStatus<cr>", options = {silent = true}, desc = "Mostrar estado de los plugins iniciados" },
   { mode = {"n"}, lhs = "<leader>ps", rhs = "<cmd>PackerSync<cr>", options = {silent = true}, desc = "Actualizar todos los plugins" },
-  
-  -- Nvim-tree
-  { mode = {"n"}, lhs = "ñ", rhs = "<cmd>NvimTreeToggle<cr>", options = {silent = true}, desc = "Explorador de archivos" },
 
   -- Gitsigns
   { mode = {"n"}, lhs = "<leader>gr", rhs = "<cmd>Gitsigns reset_buffer<cr>", options = {silent = true}, desc = "Deshacer todos los cambios del archivo actual" },

@@ -8,7 +8,7 @@ local opts = {
   { "tweekmonster/startuptime.vim", cmd = "StartupTime" },
   {
     "kyazdani42/nvim-web-devicons",
-    after = "adwaita.nvim",
+    after = "catppuccin",
     config = function()
       require("plugins.devicons")
     end
@@ -16,18 +16,26 @@ local opts = {
 
   -- Interfaz de usuario
   {
-    "Mofiqul/adwaita.nvim",
+    "catppuccin/nvim",
+    as = "catppuccin",
     after = "plenary.nvim",
     config = function()
-      vim.g.adwaita_darker = true
-      vim.cmd([[colorscheme adwaita]])
+        vim.cmd [[colorscheme catppuccin]]
+    end
+  }, 
+  {
+    "kyazdani42/nvim-tree.lua",
+    event = "BufWinEnter",
+    --cmd = { "NvimTreeToggle", "NvimTreeClose" },
+    config = function()
+      require("plugins.explorer")
     end
   },
   {
-    "kyazdani42/nvim-tree.lua",
-    cmd = {"NvimTreeToggle", "NvimTreeClose"},
+    "akinsho/bufferline.nvim",
+    after = "nvim-web-devicons",
     config = function()
-      require("plugins.explorer")
+      require("plugins.bufferline")
     end
   },
   {
