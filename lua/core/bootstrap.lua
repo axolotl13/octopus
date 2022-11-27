@@ -1,10 +1,10 @@
-local ok, icons = pcall(require, "ui.icons") 
+local ok, icons = pcall(require, "ui.icons")
 if not ok then return end
 
 local M = {}
 
 M.ensure_packer = function()
-  
+
   local fn = vim.fn
   local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 
@@ -16,6 +16,7 @@ M.ensure_packer = function()
     vim.cmd [[packadd packer.nvim]]
     return true
   end
+
   print("No se instalo packer, intente nuevamente")
   return false
 
@@ -40,7 +41,7 @@ M.packer_float = {
 }
 
 M.loader_plugins = function()
-  
+
   local ok_plugins, plugins = pcall(require, "core.plugins")
   if not ok_plugins then return end
 
