@@ -28,7 +28,7 @@ local opts = {
     event = "BufWinEnter",
     --cmd = { "NvimTreeToggle", "NvimTreeClose" },
     config = function()
-      require("plugins.explorer")
+      require("plugins.explorer").start()
     end
   },
   {
