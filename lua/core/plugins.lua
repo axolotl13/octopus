@@ -22,7 +22,7 @@ local opts = {
     config = function()
         vim.cmd [[colorscheme catppuccin]]
     end
-  }, 
+  },
   {
     "kyazdani42/nvim-tree.lua",
     event = "BufWinEnter",
