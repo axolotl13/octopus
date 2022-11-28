@@ -45,6 +45,15 @@ local opts = {
       require("plugins.gitsigns").start()
     end
   },
+  -- Treesitter
+  {
+    "nvim-treesitter/nvim-treesitter",
+    run = ":TSUpdate",
+    event = { "BufRead", "BufNewFile" },
+    config = function()
+      require("plugins.treesitter").start()
+    end
+  },
 
 }
 
