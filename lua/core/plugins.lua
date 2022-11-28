@@ -35,7 +35,7 @@ local opts = {
     "akinsho/bufferline.nvim",
     after = "nvim-web-devicons",
     config = function()
-      require("plugins.bufferline")
+      require("plugins.bufferline").start()
     end
   },
   {

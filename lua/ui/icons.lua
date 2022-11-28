@@ -45,6 +45,14 @@ local icons = {
     -- top_delete = "🭶",
     -- change_delete = "═",
   },
+  buffer = {
+    indicator = "▎",
+    tab_close = "",
+    modified = "●",
+    close = "",
+    left = "",
+    right = "",
+  }
 
 }
 
