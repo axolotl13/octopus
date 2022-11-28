@@ -10,7 +10,7 @@ local opts = {
     "kyazdani42/nvim-web-devicons",
     after = "catppuccin",
     config = function()
-      require("plugins.devicons")
+      require("plugins.devicons").start()
     end
   },
 

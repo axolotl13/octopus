@@ -1,7 +1,6 @@
-local ok, icons = pcall(require, "nvim-web-devicons")
-if not ok then return end
+local M = {}
 
-local opts = {
+M.opts = {
   Dockerfile = { icon = "", color = "#61afef", name = "Dockerfile" },
   html = { icon = "", color = "#DE8C92", name = "html" },
   css = { icon = "", color = "#61afef", name = "css" },
@@ -33,4 +32,13 @@ local opts = {
   ["docker-compose.yml"] = { icon = "", color = "#F55385", name = "DockerCompose" }
 }
 
-icons.set_icon(opts)
+M.start = function()
+
+  local ok, devicons = pcall(require, "nvim-web-devicons")
+  if not ok then return end
+
+  devicons.set_icon(M.opts)
+
+end
+
+return M
