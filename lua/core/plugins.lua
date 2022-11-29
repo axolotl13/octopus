@@ -77,7 +77,14 @@ local opts = {
     config = function()
       require("plugins.autopairs").start()
     end
-  }
+  },
+  {
+    "ggandor/lightspeed.nvim",
+    keys = { "f", "F", "s", "S", "t", "T" },
+    config = function()
+      require("lightspeed").setup({ substitute_chars = {["\r"] = "ñ"} }) -- Enter
+    end
+  },
 
 }
 
