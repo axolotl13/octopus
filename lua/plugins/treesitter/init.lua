@@ -23,8 +23,12 @@ M.opts = {
     "vim",
     "yaml"
   },
-  highlight = {enable = true},
-  indent = {enable = true},
+  highlight = {
+    enable = true
+  },
+  indent = {
+    enable = true
+  },
   incremental_selection = {
     enable = true,
     keymaps = {
@@ -34,7 +38,12 @@ M.opts = {
       node_decremental = "g-"
     }
   },
-  -- rainbow = {enable = true, disable = {"html"}, extended_mode = false, max_file_lines = nil},
+  rainbow = {
+    enable = true,
+    disable = {"html"},
+    extended_mode = false,
+    max_file_lines = nil
+  },
   -- refactor = {highlight_definitions = {enable = true}, highlight_current_scope = {enable = false}},
   -- context_commentstring = {enable = true, enable_autocmd = false},
   -- autotag = {enable = true, filetypes = {"html", "xml"}}
