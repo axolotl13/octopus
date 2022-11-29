@@ -71,6 +71,13 @@ local opts = {
       require("plugins.comment").start()
     end
   },
+  {
+    "windwp/nvim-autopairs",
+    keys = { { "i", "(" }, { "i", "[" }, { "i", "{" }, { "i", "'" }, { "i", '"' } },
+    config = function()
+      require("plugins.autopairs").start()
+    end
+  }
 
 }
 
