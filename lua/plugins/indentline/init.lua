@@ -16,7 +16,7 @@ M.opts = {
   },
   filetype_exclude = {
     "alpha", "help", "terminal", "packer", "sh", "markdown", "md", "txt", "css", "lsp-installer",
-    "lspinfo"
+    "lspinfo", "NvimTree"
   },
   context_patterns = {
     "class", "function", "method", "try", "^if", "^while", "^for", "^switch", "^object", "^table",
