@@ -20,7 +20,7 @@ local opts = {
     as = "catppuccin",
     after = "plenary.nvim",
     config = function()
-        vim.cmd [[colorscheme catppuccin]]
+      vim.cmd [[colorscheme catppuccin]]
     end
   },
   {
@@ -45,6 +45,14 @@ local opts = {
       require("plugins.gitsigns").start()
     end
   },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    after = { "nvim-treesitter", "nvim-web-devicons" },
+    config = function()
+      require("plugins.indentline").start()
+    end
+  },
+
   -- Treesitter
   {
     "nvim-treesitter/nvim-treesitter",
