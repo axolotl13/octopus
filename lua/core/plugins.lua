@@ -26,7 +26,7 @@ local opts = {
   {
     "kyazdani42/nvim-tree.lua",
     event = "BufWinEnter",
-    --cmd = { "NvimTreeToggle", "NvimTreeClose" },
+    -- cmd = { "NvimTreeToggle", "NvimTreeClose" },
     config = function()
       require("plugins.explorer").start()
     end
@@ -60,6 +60,15 @@ local opts = {
     event = { "BufRead", "BufNewFile" },
     config = function()
       require("plugins.treesitter").start()
+    end
+  },
+  { "p00f/nvim-ts-rainbow", after = "nvim-treesitter" },
+
+  {
+    "numToStr/Comment.nvim",
+    keys = { { "n", "gcc" }, { "n", "gbc" }, { "v", "gc" }, { "v", "gb" } },
+    config = function()
+      require("plugins.comment").start()
     end
   },
 
