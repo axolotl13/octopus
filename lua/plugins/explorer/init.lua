@@ -22,7 +22,7 @@ M.opts = {
     highlight_opened_files = "icon",
     root_folder_modifier = table.concat {":t:gs?$?/..", string.rep(" ", 1000), "?:gs?^??"},
     indent_markers = {
-      enable = true,
+      enable = false,
       icons = {corner = "└ ", edge = "│ ", item = "│ ", none = "  "}
     },
     icons = {
