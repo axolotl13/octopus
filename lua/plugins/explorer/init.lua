@@ -20,6 +20,7 @@ M.opts = {
     group_empty = true,
     highlight_git = true,
     highlight_opened_files = "icon",
+    indent_width = 1,
     root_folder_modifier = table.concat {":t:gs?$?/..", string.rep(" ", 1000), "?:gs?^??"},
     indent_markers = {
       enable = false,
@@ -27,13 +28,13 @@ M.opts = {
     },
     icons = {
       symlink_arrow = icons.global.symlink_arrow,
-      show = {file = true, folder = true, folder_arrow = false, git = true},
+      show = {file = true, folder = true, folder_arrow = true, git = true},
       glyphs = {
         default = icons.global.default,
         symlink = icons.global.symlink,
         folder = {
-          -- arrow_open = icons.explorer.arrow_open,
-          -- arrow_closed = icons.explorer.arrow_closed,
+          arrow_open = icons.explorer.arrow_open,
+          arrow_closed = icons.explorer.arrow_closed,
           default = icons.explorer.default,
           open = icons.explorer.open,
           empty = icons.explorer.empty,
