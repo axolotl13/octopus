@@ -13,6 +13,13 @@ local opts = {
       require("plugins.devicons").start()
     end
   },
+  {
+    "rcarriga/nvim-notify",
+    module = "vim",
+    config = function()
+      require("plugins.notify").start()
+    end
+  },
 
   -- Interfaz de usuario
   {
