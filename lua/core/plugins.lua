@@ -93,6 +93,14 @@ local opts = {
     end
   },
 
+  -- Miscelanea
+  {
+    "windwp/nvim-spectre",
+    config = function()
+      require("plugins.spectre").start()
+    end
+  }
+
 }
 
 return opts
