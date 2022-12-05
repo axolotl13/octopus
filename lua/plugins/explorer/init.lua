@@ -11,7 +11,7 @@ M.opts = {
   update_cwd = true,
   respect_buf_cwd = true,
   view = {
-    width = 32,
+    width = 35,
     -- preserve_window_proportions = true,
     mappings = {custom_only = false, list = {}},
   },
