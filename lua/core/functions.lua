@@ -13,7 +13,6 @@ M.disable_options = function()
   end
 
   -- g.do_filetype_lua = 1
-  -- g.did_load_filetypes = 0
   -- g.loaded = 1
 
 end
