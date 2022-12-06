@@ -8,14 +8,14 @@ local opts = {
   { "tweekmonster/startuptime.vim", cmd = "StartupTime" },
   {
     "kyazdani42/nvim-web-devicons",
-    after = "catppuccin",
+    -- after = "catppuccin",
     config = function()
       require("plugins.devicons").start()
     end
   },
   {
     "rcarriga/nvim-notify",
-    module = "vim",
+    -- module = "vim",
     config = function()
       require("plugins.notify").start()
     end
@@ -24,15 +24,15 @@ local opts = {
   -- Interfaz de usuario
   {
     "catppuccin/nvim",
-    as = "catppuccin",
-    after = "plenary.nvim",
+    -- as = "catppuccin",
+    -- after = "plenary.nvim",
     config = function()
       vim.cmd [[colorscheme catppuccin]]
     end
   },
   {
     "kyazdani42/nvim-tree.lua",
-    event = "BufWinEnter",
+    -- event = "BufWinEnter",
     -- cmd = { "NvimTreeToggle", "NvimTreeClose" },
     config = function()
       require("plugins.explorer").start()
@@ -40,21 +40,21 @@ local opts = {
   },
   {
     "akinsho/bufferline.nvim",
-    after = "nvim-web-devicons",
+    -- after = "nvim-web-devicons",
     config = function()
       require("plugins.bufferline").start()
     end
   },
   {
     "lewis6991/gitsigns.nvim",
-    event = { "BufRead", "BufNewFile" },
+    -- event = { "BufRead", "BufNewFile" },
     config = function()
       require("plugins.gitsigns").start()
     end
   },
   {
     "lukas-reineke/indent-blankline.nvim",
-    after = { "nvim-treesitter", "nvim-web-devicons" },
+    -- after = { "nvim-treesitter", "nvim-web-devicons" },
     config = function()
       require("plugins.indentline").start()
     end
@@ -64,7 +64,7 @@ local opts = {
   {
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
-    event = { "BufRead", "BufNewFile" },
+    -- event = { "BufRead", "BufNewFile" },
     config = function()
       require("plugins.treesitter").start()
     end
@@ -73,21 +73,21 @@ local opts = {
 
   {
     "numToStr/Comment.nvim",
-    keys = { { "n", "gcc" }, { "n", "gbc" }, { "v", "gc" }, { "v", "gb" } },
+    -- keys = { { "n", "gcc" }, { "n", "gbc" }, { "v", "gc" }, { "v", "gb" } },
     config = function()
       require("plugins.comment").start()
     end
   },
   {
     "windwp/nvim-autopairs",
-    keys = { { "i", "(" }, { "i", "[" }, { "i", "{" }, { "i", "'" }, { "i", '"' } },
+    -- keys = { { "i", "(" }, { "i", "[" }, { "i", "{" }, { "i", "'" }, { "i", '"' } },
     config = function()
       require("plugins.autopairs").start()
     end
   },
   {
     "ggandor/lightspeed.nvim",
-    keys = { "f", "F", "s", "S", "t", "T" },
+    -- keys = { "f", "F", "s", "S", "t", "T" },
     config = function()
       require("lightspeed").setup({ substitute_chars = {["\r"] = "ñ"} }) -- Enter
     end
@@ -111,11 +111,18 @@ local opts = {
       require("plugins.spectre").start()
     end
   },
+  {
+    "akinsho/toggleterm.nvim",
+    -- cmd = "ToggleTerm",
+    config = function()
+      require("plugins.toggleterm").start()
+    end
+  },
 
   -- Vim Plugins
   {
     "tpope/vim-fugitive",
-    cmd = { "Git" }
+    -- cmd = { "Git" }
   }
 
 }
