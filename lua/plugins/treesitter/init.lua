@@ -7,6 +7,7 @@ M.opts = {
     "cpp",
     "css",
     "dockerfile",
+    "fish",
     "go",
     "html",
     "java",
