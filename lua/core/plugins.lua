@@ -99,6 +99,12 @@ local opts = {
     config = function()
       require("plugins.spectre").start()
     end
+  },
+
+  -- Vim Plugins
+  {
+    "tpope/vim-fugitive",
+    cmd = { "Git" }
   }
 
 }
