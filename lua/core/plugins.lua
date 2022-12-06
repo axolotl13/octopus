@@ -92,6 +92,13 @@ local opts = {
       require("lightspeed").setup({ substitute_chars = {["\r"] = "ñ"} }) -- Enter
     end
   },
+  { 
+    "kylechui/nvim-surround",
+    -- keys = { "ys", "ds", "cs" },
+    config = function()
+        require("nvim-surround").setup()
+    end
+  },
 
   -- Miscelanea
   {
