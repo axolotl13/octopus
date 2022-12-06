@@ -93,10 +93,14 @@ local opts = {
     end
   },
   { 
+    "windwp/nvim-ts-autotag",
+    ft = { "html", "xml" },
+  },
+  { 
     "kylechui/nvim-surround",
     -- keys = { "ys", "ds", "cs" },
     config = function()
-        require("nvim-surround").setup()
+      require("nvim-surround").setup()
     end
   },
 

@@ -46,7 +46,10 @@ M.opts = {
   },
   -- refactor = {highlight_definitions = {enable = true}, highlight_current_scope = {enable = false}},
   -- context_commentstring = {enable = true, enable_autocmd = false},
-  -- autotag = {enable = true, filetypes = {"html", "xml"}}
+  autotag = {
+    enable = true,
+    filetypes = { "html", "xml" }
+  }
 }
 
 
