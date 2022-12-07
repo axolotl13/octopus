@@ -41,7 +41,7 @@ local opts = {
   { mode = {"n"}, lhs = "<s-tab>", rhs = "<cmd>bprevious<cr>", options = {silent = true}, desc = "Moverse hacía el siguiente buffer" },
   { mode = {"n"}, lhs = "<c-s>", rhs = "<cmd>w<cr>", options = {silent = true}, desc = "Guarda archivo actual" },
   { mode = {"n"}, lhs = "<leader>ba", rhs = "<cmd>%y+<cr>", options = {silent = true}, desc = "Copiar todo el contenido del buffer actual" },
-  { mode = {"n"}, lhs = "<leader>q", rhs = "<cmd>bd!<cr>", options = {silent = true}, desc = "Cerrar buffer" },
+  { mode = {"n"}, lhs = "<leader>bq", rhs = "<cmd>bd!<cr>", options = {silent = true}, desc = "Cerrar buffer" },
   { mode = {"n"}, lhs = "<leader>bn", rhs = "<cmd>enew<cr>", options = {silent = true}, desc = "Crear nuevo buffer" },
   { mode = {"n"}, lhs = "<c-x>", rhs = "<cmd>qa!<cr>", options = {silent = true}, desc = "Cerrar todos los bufferes actuales" },
 

@@ -13,7 +13,7 @@ M.opts = {
 }
 
 M.maps = {
-  { mode = {"n"}, lhs = "<leader>tv", rhs = "<cmd>ToggleTerm<cr>", options = {silent = true}, desc = "Abrir nueva terminal en el buffer actual" },
+  { mode = {"n"}, lhs = "<leader>ts", rhs = "<cmd>ToggleTerm<cr>", options = {silent = true}, desc = "Abrir nueva terminal en el buffer actual" },
   { mode = {"n"}, lhs = "<leader>tf", rhs = "<cmd>ToggleTerm direction=float<cr>", options = {silent = true}, desc = "Abrir nueva terminal en una ventana flotante" },
   { mode = {"n"}, lhs = "<leader>tb", rhs = "<cmd>ToggleTerm direction=tab<cr>", options = {silent = true}, desc = "Abrir nueva terminal en una pestaña" },
   { mode = {"n"}, lhs = "<leader>tt", rhs = "<cmd>ToggleTerm direction=vertical<cr>", options = {silent = true}, desc = "Iniciar Terminal verticalmente" },
