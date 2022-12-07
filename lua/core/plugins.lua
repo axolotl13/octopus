@@ -23,11 +23,11 @@ local opts = {
 
   -- Interfaz de usuario
   {
-    "catppuccin/nvim",
-    -- as = "catppuccin",
+    "Mofiqul/adwaita.nvim",
     -- after = "plenary.nvim",
     config = function()
-      vim.cmd [[colorscheme catppuccin]]
+      vim.g.adwaita_darker = true
+      vim.cmd([[colorscheme adwaita]])
     end
   },
   {
