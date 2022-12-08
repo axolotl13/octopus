@@ -23,11 +23,11 @@ local opts = {
 
   -- Interfaz de usuario
   {
-    "catppuccin/nvim",
-    -- as = "catppuccin",
+    "Mofiqul/adwaita.nvim",
     -- after = "plenary.nvim",
     config = function()
-      vim.cmd [[colorscheme catppuccin]]
+      vim.g.adwaita_darker = true
+      vim.cmd([[colorscheme adwaita]])
     end
   },
   {
@@ -104,7 +104,7 @@ local opts = {
     end
   },
 
-  -- Miscelanea
+  -- Miscelánea
   {
     "windwp/nvim-spectre",
     config = function()
@@ -116,6 +116,13 @@ local opts = {
     -- cmd = "ToggleTerm",
     config = function()
       require("plugins.toggleterm").start()
+    end
+  },
+  {
+    "rmagatti/auto-session",
+    -- after = "project.nvim",
+    config = function()
+      require("plugins.session").start()
     end
   },
 
