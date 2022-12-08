@@ -20,6 +20,13 @@ local opts = {
       require("plugins.notify").start()
     end
   },
+  {
+    "nvim-telescope/telescope.nvim",
+    -- cmd = "Telescope",
+    config = function()
+      require("plugins.telescope").start()
+    end
+  },
 
   -- Interfaz de usuario
   {
@@ -104,7 +111,7 @@ local opts = {
     end
   },
 
-  -- Miscelanea
+  -- Miscelánea
   {
     "windwp/nvim-spectre",
     config = function()
@@ -116,6 +123,13 @@ local opts = {
     -- cmd = "ToggleTerm",
     config = function()
       require("plugins.toggleterm").start()
+    end
+  },
+  {
+    "rmagatti/auto-session",
+    -- after = "project.nvim",
+    config = function()
+      require("plugins.session").start()
     end
   },
 
