@@ -20,6 +20,13 @@ local opts = {
       require("plugins.notify").start()
     end
   },
+  {
+    "nvim-telescope/telescope.nvim",
+    -- cmd = "Telescope",
+    config = function()
+      require("plugins.telescope").start()
+    end
+  },
 
   -- Interfaz de usuario
   {
