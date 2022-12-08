@@ -3,7 +3,7 @@ local M = {}
 M.opts = {
   size = function(term)
     if term.direction == "horizontal" then
-      return 10
+      return 12
     elseif term.direction == "vertical" then
       return vim.o.columns * 0.5
     end
