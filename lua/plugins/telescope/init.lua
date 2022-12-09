@@ -1,4 +1,4 @@
-local N = {}
+local M = {}
 
 local mods = {"telescope", "telescope.actions", "telescope.previewers", "telescope.sorters"}
 local ok, l = nil, {}
@@ -71,6 +71,10 @@ M.opts = {
   }
 }
 
-telescope.setup(opts)
--- telescope.load_extension("projects")
--- telescope.load_extension("notify")
+M.start = function()
+  telescope.setup(M.opts)
+  -- telescope.load_extension("projects")
+  -- telescope.load_extension("notify")
+end
+
+return M
