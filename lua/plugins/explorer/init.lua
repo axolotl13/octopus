@@ -5,7 +5,6 @@ local M = {}
 
 M.opts = {
   disable_netrw = true,
-  create_in_closed_folder = true,
   hijack_cursor = true,
   open_on_tab = false,
   update_cwd = true,
