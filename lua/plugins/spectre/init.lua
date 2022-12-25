@@ -128,6 +128,8 @@ M.opts = {
 }
 
 M.maps = {
+  { mode = {"n"}, lhs = "<leader>sw", rhs = "<cmd>lua require('spectre').open_visual({select_word=true})<cr>", options = {silent = true}, desc = "Buscar palabra seleccionada en todos los archivos" },
+  { mode = {"n"}, lhs = "<leader>se", rhs = "<cmd>lua require('spectre').open_visual()<cr>", options = {silent = true}, desc = "Buscar palabra en modo visual en todos los archivos" },
   { mode = {"n"}, lhs = "<leader>ss", rhs = "<cmd>lua require('spectre').open_file_search()<cr>", options = {silent = true}, desc = "Buscar líneas desde el archivo" }
 }
 
