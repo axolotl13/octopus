@@ -96,17 +96,23 @@ M.maps = {
   { mode = {"n"}, lhs = "ñ", rhs = "<cmd>NvimTreeToggle<cr>", options = {silent = true}, desc = "Explorador de archivos" },
 }
 
+M.explorer_keybinds = function()
+
+  local ok, keybinds = pcall(require,"core.functions")
+  if not ok then return end
+
+  return keybinds.load_keybinds(M.maps)
+
+end
+
 M.start = function()
 
-  local ok_explorer, explorer = pcall(require, "nvim-tree")
-  if not ok_explorer then return end
-
-  local ok_keybinds, keybinds = pcall(require,"core.functions")
-  if not ok_keybinds then return end
+  local ok, explorer = pcall(require, "nvim-tree")
+  if not ok then return end
 
   explorer.setup(M.opts)
 
-  keybinds.load_keybinds(M.maps)
+  M.explorer_keybinds()
 
   vim.api.nvim_create_autocmd('BufEnter', {
     command = [[if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif]],
