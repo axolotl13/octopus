@@ -130,17 +130,23 @@ M.maps = {
   { mode = {"n"}, lhs = "<leader>ss", rhs = "<cmd>lua require('spectre').open_file_search()<cr>", options = {silent = true}, desc = "Buscar líneas desde el archivo" }
 }
 
-M.start = function()
-  
-  local ok,spectre = pcall(require, "spectre")
+M.spectre_keybinds = function()
+
+  local ok, keybinds = pcall(require,"core.functions")
   if not ok then return end
 
-  local ok_keybinds, keybinds = pcall(require, "core.functions")
-  if not ok_keybinds then return end
+  return keybinds.load_keybinds(M.maps)
+
+end
+
+M.start = function()
+  
+  local ok, spectre = pcall(require, "spectre")
+  if not ok then return end
 
   spectre.setup(M.opts)
 
-  keybinds.load_keybinds(M.maps)
+  M.spectre_keybinds()
 
 end
 
