@@ -1,8 +1,6 @@
 local ok, icons = pcall(require, "ui.icons")
-if not ok then return end
-
 local ok_colors, colors = pcall(require, "ui.colors")
-if not ok_colors then return end
+if not ok then return end
 
 local M = {}
 
@@ -132,17 +130,23 @@ M.maps = {
   { mode = {"n"}, lhs = "Ñ", rhs = "<cmd>BufferLinePick<cr>", options = {silent = true}, desc = "Pickear en bufferes actuales" }
 }
 
+M.bufferline_keybinds = function()
+
+  local ok, keybinds = pcall(require,"core.functions")
+  if not ok then return end
+
+  return keybinds.load_keybinds(M.maps)
+
+end
+
 M.start = function()
 
-  local ok_bufferline, bufferline = pcall(require, "bufferline")
-  if not ok_bufferline then return end
-
-  local ok_keybinds, keybinds = pcall(require,"core.functions")
-  if not ok_keybinds then return end
+  local ok, bufferline = pcall(require, "bufferline")
+  if not ok then return end
 
   bufferline.setup(M.opts)
 
-  keybinds.load_keybinds(M.maps)
+  M.bufferline_keybinds()
 
 end
 
