@@ -52,8 +52,42 @@ local icons = {
     close = "",
     left = "",
     right = "",
+  },
+  kinds_icons = {
+    Array = "",
+    Boolean = "",
+    Class = "",
+    Color = "",
+    Constant = "",
+    Constructor = "",
+    Enum = "練",
+    EnumMember = "",
+    Event = "🗲",
+    Field = "",
+    File = "",
+    Folder = "",
+    Function = "",
+    Interface = "ﰮ",
+    Keyword = "",
+    Null = "ﳠ",
+    Namespace = "",
+    Number = "",
+    Method = "",
+    Module = "",
+    Object = "",
+    Operator = "",
+    Package = "ﰪ",
+    Property = "",
+    Reference = "",
+    Snippet = "",
+    String = "",
+    Struct = "פּ",
+    Text = "",
+    TypeParameter = "",
+    Unit = "",
+    Value = "",
+    Variable = ""
   }
-
 }
 
 return icons

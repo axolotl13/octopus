@@ -24,9 +24,8 @@ M.start = function()
 
   autopairs.setup(M.opts)
 
-  -- require("cmp").event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done(
-  --                           {map_char = {tex = ""}}))
-
+  require("cmp").event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done(
+                            {map_char = {tex = ""}}))
 
 end
 
