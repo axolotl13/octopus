@@ -16,17 +16,23 @@ M.maps = {
   { mode = {"n"}, lhs = "<leader>vd", rhs = "<cmd>DeleteSession<cr>", options = {silent = true}, desc = "Eliminar sesión actual" }
 }
 
+M.session_keybinds = function()
+
+  local ok, keybinds = pcall(require,"core.functions")
+  if not ok then return end
+
+  return keybinds.load_keybinds(M.maps)
+
+end
+
 M.start = function()
 
-  local ok_session, session = pcall(require, "auto-session")
-  if not ok_session then return end
-
-  local ok_keybinds, keybinds = pcall(require, "core.functions")
-  if not ok_keybinds then return end
+  local ok, session = pcall(require, "auto-session")
+  if not ok then return end
 
   session.setup(M.opts)
-
-  keybinds.load_keybinds(M.maps)
+  
+  M.session_keybinds()
 
 end
 
