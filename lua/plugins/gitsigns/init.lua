@@ -79,17 +79,23 @@ M.maps = {
   { mode = {"n"}, lhs = "<leader>gn", rhs = "<cmd>Gitsigns toggle_numhl<cr>", options = {silent = true}, desc = "Pintar numeros" },
 }
 
+M.gitsigns_keybinds = function()
+
+  local ok, keybinds = pcall(require,"core.functions")
+  if not ok then return end
+
+  return keybinds.load_keybinds(M.maps)
+
+end
+
 M.start = function()
 
-  local ok_gitsigns, gitsigns = pcall(require, "gitsigns")
-  if not ok_gitsigns then return end
-
-  local ok_keybinds, keybinds = pcall(require, "core.functions")
-  if not ok_keybinds then return end
+  local ok, gitsigns = pcall(require, "gitsigns")
+  if not ok then return end
 
   gitsigns.setup(M.opts)
 
-  keybinds.load_keybinds(M.maps)
+  M.gitsigns_keybinds()
 
 end
 
