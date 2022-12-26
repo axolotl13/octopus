@@ -133,10 +133,53 @@ local opts = {
     end
   },
 
+  -- Autocompletion
+  { 
+    "rafamadriz/friendly-snippets",
+    -- event = "InsertEnter"
+  },
+  {
+    "hrsh7th/nvim-cmp",
+    -- after = "friendly-snippets",
+    config = function()
+      require("plugins.autocompletion").start()
+    end
+  },
+  {
+    "L3MON4D3/LuaSnip",
+    -- wants = "friendly-snippets",
+    -- after = "nvim-cmp"
+  },
+  {
+    "saadparwaiz1/cmp_luasnip",
+    -- after = "LuaSnip"
+  },
+  {
+    "hrsh7th/cmp-nvim-lua",
+    -- after = "cmp_luasnip"
+  },
+  {
+    "hrsh7th/cmp-nvim-lsp",
+    -- module = "cmp_nvim_lsp",
+    -- after = "cmp-nvim-lua"
+  },
+  {
+    "hrsh7th/cmp-buffer",
+    -- after = "cmp-nvim-lua"
+  },
+  {
+    "hrsh7th/cmp-path",
+    -- after = "cmp-buffer"
+  },
+
   -- Vim Plugins
   {
     "tpope/vim-fugitive",
     -- cmd = { "Git" }
+  },
+  {
+    "mg979/vim-visual-multi",
+    -- keys = {"<C-n>", "<C-Down>", "<C-Up>", "<S-Left>", "<S-Right>"} -- , n, N, q, Q
   }
 
 }
