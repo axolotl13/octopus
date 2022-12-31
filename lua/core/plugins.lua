@@ -29,13 +29,28 @@ local opts = {
   },
 
   -- Interfaz de usuario
+  -- {
+  --   "Mofiqul/adwaita.nvim",
+  --   -- after = "plenary.nvim",
+  --   config = function()
+  --     vim.g.adwaita_darker = true
+  --     vim.cmd([[colorscheme adwaita]])
+  --   end
+  -- },
   {
-    "Mofiqul/adwaita.nvim",
-    -- after = "plenary.nvim",
-    config = function()
-      vim.g.adwaita_darker = true
-      vim.cmd([[colorscheme adwaita]])
-    end
+  "rebelot/kanagawa.nvim",
+  config = function()
+    require("kanagawa").setup({
+      -- dimInactive = true, -- dim inactive window `:h hl-NormalNC`
+      colors = {},
+      overrides = {
+        NvimTreeNormal = {bg = "#16161d"},
+        NvimTreeNormalNC = {bg = "#16161d"},
+        VertSplit = {fg = "#1f1f28", bg = "NONE"}
+      }
+    })
+    vim.cmd([[colorscheme kanagawa]])
+  end
   },
   {
     "kyazdani42/nvim-tree.lua",
@@ -64,6 +79,14 @@ local opts = {
     -- after = { "nvim-treesitter", "nvim-web-devicons" },
     config = function()
       require("plugins.indentline").start()
+    end
+  },
+
+  -- LSP
+  {
+    "neovim/nvim-lspconfig",
+    config = function()
+      require("plugins.lsp").start()
     end
   },
 
@@ -180,6 +203,13 @@ local opts = {
   {
     "mg979/vim-visual-multi",
     -- keys = {"<C-n>", "<C-Down>", "<C-Up>", "<S-Left>", "<S-Right>"} -- , n, N, q, Q
+  },
+  {
+    "sindrets/diffview.nvim",
+    cmd = { "DiffviewFileHistory", "DiffviewOpen", "DiffviewClose" },
+    config = function()
+      require("plugins.diffview").start()
+    end
   }
 
 }
