@@ -108,7 +108,7 @@ M.opts = {
     offsets = {{filetype = "NvimTree", text = ""}}, -- padding = "1"
     show_close_icon = false,
     persist_buffer_sort = true,
-    separator_style = "thin",
+    separator_style = "thick",
     enforce_regular_tabs = false,
     always_show_bufferline = true,
     hover = {
