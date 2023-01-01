@@ -8,7 +8,7 @@ local opts = {
   -- Opciones para el cursor
   { "n", "|", "^", "Mover el cursor al inicio" },
   { "i", "<c-b>", "<ESC>^i", "Mover el cursor al inicio en modo insertar" },
-    { "i", "<c-e>", "<End>", "Mover el cursor al final en modo insertar" },
+  { "i", "<c-e>", "<End>", "Mover el cursor al final en modo insertar" },
   { "i", "<s-tab>", "<cmd>call search('[([{<]')<cr>", "Mover el cursor a los siguientes signos" },
   { { "v", "n" }, "$", "g_", "Mover el cursor al inicio ignorando espacio" },
 
