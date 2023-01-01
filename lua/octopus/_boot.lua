@@ -18,6 +18,9 @@ local opts = {
   performance = {
     rtp = {
       disabled_plugins = {
+        -- Deshabilitar netrw al comienzo para nvim-tree
+        "loaded_netrw",
+        "loaded_netrwPlugin",
         "gzip",
         "matchit",
         "matchparen",
