@@ -1,16 +1,10 @@
 local icons = {
-  packer = {
-    working = "",
-    error = "✗ ",
-    done = " ",
-    removed = " ",
-    moved = "",
-  },
   global = {
     default = "",
     prefix = "",
     symlink = "",
     symlink_arrow = "  ",
+    modified = "●",
   },
   explorer = {
     arrow_closed = "",
@@ -33,17 +27,11 @@ local icons = {
     deleted = "",
     ignored = "◌",
   },
-  diagnostics = {
-    hint = "", -- 
-    info = "", -- 
-    -- warning = "",
-    -- error = "", 
-  },
   signs = {
     add = "┃", -- ┃ │
-    -- delete = "━",
-    -- top_delete = "🭶",
-    -- change_delete = "═",
+    delete = "━",
+    top_delete = "🭶",
+    change_delete = "═",
   },
   buffer = {
     indicator = "▎",
