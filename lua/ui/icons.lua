@@ -5,6 +5,9 @@ local icons = {
     symlink = "",
     symlink_arrow = "  ",
     modified = "●",
+    Check = "",
+    BookMark = "",
+    Lock = ""
   },
   explorer = {
     arrow_closed = "",
@@ -26,6 +29,15 @@ local icons = {
     untracked = "",
     deleted = "",
     ignored = "◌",
+    added = "✚",
+    deleted2 = "✖",
+    modified = "",
+    renamed2 = "",
+    untracked2 = "",
+    ignored2 = "",
+    unstaged2 = "",
+    staged2 = "",
+    conflict = "",
   },
   signs = {
     add = "┃", -- ┃ │
@@ -40,6 +52,23 @@ local icons = {
     close = "",
     left = "",
     right = "",
+  },
+  diagnostics = {
+    hint = "",
+    hint2 = "",
+    info = "",
+    info2 = "",
+    info3 = "",
+    warning = "",
+    warning2 = "",
+    error = "",
+    error2 = "",
+  },
+  lsp = {
+    install = "",
+    uninstall = "ﮊ",
+    pending = "",
+    default = "◍"
   },
   kinds_icons = {
     Array = "",
@@ -75,6 +104,67 @@ local icons = {
     Unit = "",
     Value = "",
     Variable = ""
+  },
+  vscode = {
+    Array = " ",
+    Boolean = " ",
+    Class = " ",
+    Constant = " ",
+    Constructor = " ",
+    Enum = " ",
+    EnumMember = " ",
+    Event = " ",
+    Field = " ",
+    File = " ",
+    Function = " ",
+    Key = " ",
+    Interface = " ",
+    Namespace = " ",
+    Null = " ",
+    Number = " ",
+    Method = " ",
+    Module = " ",
+    Object = " ",
+    Operator = " ",
+    Package = " ",
+    Property = " ",
+    String = " ",
+    Struct = " ",
+    TypeParameter = " ",
+    Variable = " "
+  },
+  statusline = {
+    --[[ edit = "", ]]
+    edit = "",
+    readonly = "",
+    line_number = "",
+    line_percent = "",
+    lsp_client = "",
+    sbar = {"▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"},
+    sbar2 = { '🭶', '🭷', '🭸', '🭹', '🭺', '🭻' }
+  },
+  os = {
+    linux = "", -- 
+    macos = "",
+    windows = "",
+  },
+  separator = {
+    left = "",
+    right = "",
+    block = "█",
+    block2 = "▓",
+    block3 = "▒",
+    block4 = "░",
+    left_fill = "",
+    right_fill = "",
+    slant_left = "",
+    slant_right = "",
+    slant_right2 = "",
+    slant_left2 = "",
+    left_round = "",
+    right_round = "",
+    left_roundt = "",
+    right_roundt = "",
   }
 }
 
