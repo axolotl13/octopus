@@ -10,7 +10,6 @@ local opts = {
   { "i", "<c-b>", "<ESC>^i", "Mover el cursor al inicio en modo insertar" },
   { "i", "<c-e>", "<End>", "Mover el cursor al final en modo insertar" },
   { "i", "<s-tab>", "<cmd>call search('[([{<]')<cr>", "Mover el cursor a los siguientes signos" },
-  { { "v", "n" }, "$", "g_", "Mover el cursor al inicio ignorando espacio" },
 
   -- Habilitar idioma
   { "n", "<leader>es", "<cmd>set spell<cr>", "Habilita idioma en español" },
@@ -46,7 +45,7 @@ local opts = {
   -- Navegación entre bufferes
   { "n", "<tab>", "<cmd>bnext<cr>", "Moverse hacía el anterior buffer" },
   { "n", "<s-tab>", "<cmd>bprevious<cr>", "Moverse hacía el siguiente buffer" },
-  { "n", "<c-s>", "<cmd>w<cr>", "Guarda archivo actual" },
+  { "n", "<c-s>", "<cmd>w!<cr>", "Guarda archivo actual" },
   { "i", "<c-s>", "<cmd>w<cr><esc>", "Guarda archivo actual en modo insertar" },
   { "n", "<leader>ba", "<cmd>%y+<cr>", "Copiar todo el contenido del buffer actual" },
   { "n", "<leader>bq", "<cmd>bd!<pr>", "Cerrar buffer actual" },
@@ -58,6 +57,9 @@ local opts = {
   { "n", "<leader>tj", "<cmd>tabprevious<cr>", "Moverse hacía la anterior pestaña" },
   { "n", "<leader>tk", "<cmd>tabnext<cr>", "Moverse hacía la siguiente pestaña" },
   { "n", "<leader>tq", "<cmd>tabclose<cr>", "Cerrar pestaña actual" },
+
+  -- Terminal
+  { "t", "<esc>", "<C-\\><C-n>", "Escapa de la terminal" },
 
   -- Lazy
   { "n", "<leader>ps", "<cmd>Lazy<cr>", "Mostrar estado de los plugins" },
