@@ -40,16 +40,16 @@ local opts = {
   whichwrap = "b,s,<,>,[,],h,l",
   timeoutlen = 300,                                     -- Tiempo de espera para que se complete una secuencia mapeada
   updatetime = 300,                                     -- Finalización más raspida
-  sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,terminal",
+  sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions",
   guicursor = 'n-v-c:block-Cursor/lCursor,i-ci-ve:ver25-Cursor2/lCursor2,r-cr:hor20,o:hor20',
 }
 
 local opt = vim.opt
 
+opt.shortmess:append("sI")                              -- Elimina los mensajes al inicio
+opt.shortmess = opt.shortmess + { c = true }
+
 for _, k in pairs(opts) do
   opt[_] = k
 end
 
-opt.shortmess:append("sI")                              -- Elimina los mensajes al inicio
-opt.shortmess = opt.shortmess + { c = true }
---vim.cmd [[au BufEnter * set fo-=c fo-=r fo-=o]]
