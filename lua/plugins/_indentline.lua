@@ -1,6 +1,6 @@
 return {
   "lukas-reineke/indent-blankline.nvim",
-  event = "BufReadPre",
+  event = "VeryLazy",
   config = function()
     local identline = require("indent_blankline")
 
