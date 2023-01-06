@@ -17,10 +17,10 @@ return {
         max_name_length = 20,
         max_prefix_length = 20,
         tab_size = 20,
-        offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
+        offsets = { { filetype = "NvimTree", text = "", padding = 0 } },
         show_close_icon = false,
         persist_buffer_sort = true,
-        separator_style = "slant",
+        separator_style = "thin",
         enforce_regular_tabs = false,
         always_show_bufferline = true,
         hover = {
