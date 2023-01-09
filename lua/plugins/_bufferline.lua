@@ -26,7 +26,7 @@ return {
         hover = {
           enabled = true,
           delay = 200,
-          reveal = {'close'}
+          reveal = { 'close' }
         },
       },
       highlights = {
@@ -35,7 +35,7 @@ return {
           bg = { attribute = "bg", highlight = "TabLine" },
         },
         background = {
-          fg = { attribute = "fg", highlight = "TabLine" },
+          fg = { attribute = "fg", highlight = "Comment" },
           bg = { attribute = "bg", highlight = "TabLine" },
         },
         buffer_selected = {
@@ -44,7 +44,7 @@ return {
           italic = false
         },
         buffer_visible = {
-          fg = { attribute = "fg", highlight = "TabLine" },
+          fg = { attribute = "fg", highlight = "Comment" },
           bg = { attribute = "bg", highlight = "TabLine" },
         },
         close_button = {
