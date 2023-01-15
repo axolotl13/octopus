@@ -48,4 +48,19 @@ return {
       "neovim/nvim-lspconfig"
     }
   },
+  {
+    "anuvyklack/windows.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "anuvyklack/middleclass",
+    },
+    config = function()
+      require("windows").setup({
+        autowidth = {
+          enable = true,
+          winwidth = 40,
+        },
+      })
+    end
+  },
 }
