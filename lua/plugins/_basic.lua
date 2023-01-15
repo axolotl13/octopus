@@ -2,7 +2,7 @@ return {
   {
     "ggandor/lightspeed.nvim",
     keys = { "f", "F", "s", "S", "t", "T" },
-    config = { substitute_chars = {["\r"] = "ñ"} } -- Enter end
+    config = { substitute_chars = { ["\r"] = "ñ" } } -- Enter end
   },
   {
     "kylechui/nvim-surround",
@@ -47,5 +47,20 @@ return {
     dependencies = {
       "neovim/nvim-lspconfig"
     }
+  },
+  {
+    "anuvyklack/windows.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "anuvyklack/middleclass",
+    },
+    config = function()
+      require("windows").setup({
+        autowidth = {
+          enable = true,
+          winwidth = 40,
+        },
+      })
+    end
   },
 }
