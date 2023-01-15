@@ -2,7 +2,7 @@ return {
   {
     "ggandor/lightspeed.nvim",
     keys = { "f", "F", "s", "S", "t", "T" },
-    config = { substitute_chars = {["\r"] = "ñ"} } -- Enter end
+    config = { substitute_chars = { ["\r"] = "ñ" } } -- Enter end
   },
   {
     "kylechui/nvim-surround",
