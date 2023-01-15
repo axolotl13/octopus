@@ -1,13 +1,13 @@
 return {
   {
     "folke/tokyonight.nvim",
-    --[[ lazy = false,
-    priority = 1000, ]]
+    lazy = false,
+    priority = 1000,
     config = function()
       local tokyonight = require("tokyonight")
 
       local opts = {
-        style = "night",
+        style = "storm",
         styles = {
           comments = { italic = true },
           functions = {},
@@ -75,7 +75,7 @@ return {
   {
     "catppuccin/nvim",
     as = "catppuccin",
-  --[[   lazy = false,
+    --[[ lazy = false,
     priority = 1000, ]]
     config = function()
       vim.cmd([[colorscheme catppuccin]])
@@ -83,11 +83,11 @@ return {
   },
   {
     "rebelot/kanagawa.nvim",
-    lazy = false,
-    priority = 1000,
+    --[[ lazy = false,
+    priority = 1000, ]]
     config = function()
       require("kanagawa").setup({
-      -- dimInactive = true, -- dim inactive window `:h hl-NormalNC`
+        -- dimInactive = true, -- dim inactive window `:h hl-NormalNC`
         colors = {},
         overrides = {
           NvimTreeNormal = { bg = "#16161d" },
