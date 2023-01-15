@@ -1,9 +1,9 @@
 local cmd = vim.api.nvim_create_autocmd
 
---  autocmd("FileType", {
---  pattern = "html",
---  command = "setlocal shiftwidth=2 tabstop=2"
--- })
+-- Especificar sangría para ciertos tipos de archivo
+cmd("FileType", { pattern = "python", command = "setlocal shiftwidth=4 tabstop=4" })
+cmd("FileType", { pattern = "java", command = "setlocal shiftwidth=4 tabstop=4" })
+cmd("FileType", { pattern = "xml", command = "setlocal shiftwidth=4 tabstop=4" })
 
 -- Guardado automático
 -- cmd({"InsertLeave", "TextChanged"}, {
@@ -15,7 +15,7 @@ local cmd = vim.api.nvim_create_autocmd
 vim.cmd([[autocmd FileType markdown setlocal spell]])
 
 -- Deshabilitar auto comentario
-cmd("BufEnter", { pattern = "*", command = "set fo-=c fo-=r fo-=o" } )
+cmd("BufEnter", { pattern = "*", command = "set fo-=c fo-=r fo-=o" })
 
 -- Deshabilitar los números de línea en la terminal
-cmd("TermOpen", { group = init_group, command = "setlocal nonumber" } )
+cmd("TermOpen", { group = init_group, command = "setlocal nonumber" })
