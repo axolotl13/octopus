@@ -39,7 +39,7 @@ local opts = {
   writebackup = false,                                  -- Habilita archivos protegidos para que no se edite 2 veces
   whichwrap = "b,s,<,>,[,],h,l",
   timeoutlen = 300,                                     -- Tiempo de espera para que se complete una secuencia mapeada
-  updatetime = 300,                                     -- Finalización más raspida
+  updatetime = 300,                                     -- Finalización más rápida
   sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions",
   guicursor = 'n-v-c:block-Cursor/lCursor,i-ci-ve:ver25-Cursor2/lCursor2,r-cr:hor20,o:hor20',
 }
