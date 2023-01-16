@@ -126,9 +126,9 @@ return {
     for server, opts in pairs(servers) do
       opts = vim.tbl_deep_extend("force", {}, options, opts or {})
       -- if server == "tsserver" then
-        -- require("typescript").setup({ server = opts })
+      -- require("typescript").setup({ server = opts })
       -- else
-        require("lspconfig")[server].setup(opts)
+      require("lspconfig")[server].setup(opts)
       -- end
     end
 
