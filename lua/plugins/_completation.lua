@@ -18,6 +18,7 @@ return {
           return require("luasnip").jump(dir) or key
         end, { expr = true })
       end
+
       jump("<tab>", 1)
       jump("<s-tab>", -1)
     end,
@@ -66,7 +67,7 @@ return {
         formatting = {
           format = function(_, item)
             if icons[item.kind] then
-                item.kind = icons[item.kind] .. " " .. item.kind
+              item.kind = icons[item.kind] .. " " .. item.kind
             end
             return item
           end
@@ -86,7 +87,7 @@ return {
         },
         experimental = {
           ghost_text = {
-             hl_group = "LspCodeLens",
+            hl_group = "LspCodeLens",
           }
         },
         window = {
@@ -134,4 +135,3 @@ return {
     end
   }
 }
-
