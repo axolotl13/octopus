@@ -108,6 +108,7 @@ return {
       },
       exclude = {
         ".gitignore",
+        "gitsigns",
         ".plugins.lua",
       }
     },
