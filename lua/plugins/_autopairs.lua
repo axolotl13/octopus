@@ -10,7 +10,7 @@ return {
         lua = { "string", "source" },
         javascript = { "string", "template_string" }
       },
-      disable_filetype = { "TelescopePrompt", "vim" },
+      disable_filetype = { "TelescopePrompt", "vim", "spectre_panel" },
       fast_wrap = {
         map = "<M-e>", -- M = Alt
         chars = { "{", "[", "(", '"', "'" },
