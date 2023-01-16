@@ -62,6 +62,9 @@ local opts = {
 
   -- Lazy
   { "n", "<leader>ps", "<cmd>Lazy<cr>", "Mostrar estado de los plugins" },
+
+  { "v", "<leader>re", ":\'<,\'>SnipRun<cr>", "[SnipRun] Ejecutar bloque de código" },
+
 }
 
 local map = vim.keymap.set
