@@ -52,4 +52,3 @@ opt.shortmess = opt.shortmess + { c = true }
 for _, k in pairs(opts) do
   opt[_] = k
 end
-
