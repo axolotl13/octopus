@@ -4,9 +4,7 @@ return {
   dependencies = {
     { "nvim-treesitter/nvim-treesitter-refactor" },
     { "RRethy/nvim-treesitter-textsubjects" },
-    { "p00f/nvim-ts-rainbow" }
-    -- { "windwp/nvim-ts-autotag", ft = { "html", "xml" },
-  -- }
+    { "mrjones2014/nvim-ts-rainbow" }
   },
   event = "BufReadPost",
   config = function()
@@ -61,15 +59,15 @@ return {
         enable = true,
         prev_selection = ',',
         keymaps = {
-            ['.'] = 'textsubjects-smart',
-            [';'] = 'textsubjects-container-outer',
+          ['.'] = 'textsubjects-smart',
+          [';'] = 'textsubjects-container-outer',
         },
       },
       rainbow = {
-       enable = true,
-       disable = { "html" },
-       extended_mode = false,
-       max_file_lines = nil
+        enable = true,
+        disable = { "html" },
+        extended_mode = false,
+        max_file_lines = nil
       },
       refactor = {
         highlight_definitions = {
@@ -90,8 +88,8 @@ return {
         enable_autocmd = false
       },
       autotag = {
-       enable = true,
-       filetypes = { "html", "xml" }
+        enable = true,
+        filetypes = { "html", "xml" }
       }
     }
 
