@@ -1,6 +1,6 @@
 return {
   "rebelot/heirline.nvim",
-  event = "VeryLazy",
+  event = "BufReadPost",
   config = function ()
     local heirline = require("heirline")
     local conditions = require("heirline.conditions")
@@ -10,22 +10,25 @@ return {
     local colors = {
       bg = utils.get_highlight("Cursor").fg,
       fg = utils.get_highlight("Cursor").bg,
-      dark = utils.get_highlight("NormalFloat").bg,
+      statusline = utils.get_highlight("NormalFloat").bg,
       black = utils.get_highlight("CursorColumn").bg,
       comment = utils.get_highlight("Comment").fg,
       orange = utils.get_highlight("Constant").fg,
       red = utils.get_highlight("Error").fg,
       green = utils.get_highlight("String").fg,
       cyan = utils.get_highlight("Keyword").fg,
-      blue = utils.get_highlight("Directory").fg,
+      Directory = utils.get_highlight("Directory").fg,
       magenta = utils.get_highlight("Identifier").fg,
       error = utils.get_highlight("Error").fg,
-      DiffAdd = utils.get_highlight("DiffAdd").fg,
+      DiffAdd = utils.get_highlight("DiffAdd").bg,
       DiffChange = utils.get_highlight("DiffChange").fg,
       DiffDelete = utils.get_highlight("DiffDelete").fg,
       DiagnosticWarn = utils.get_highlight("DiagnosticWarn").fg,
       DiagnosticInfo = utils.get_highlight("DiagnosticInfo").fg,
       DiagnosticHint = utils.get_highlight("DiagnosticHint").fg,
+      GitSignsAdd = utils.get_highlight("GitSignsAdd").fg,
+      GitSignsChange = utils.get_highlight("GitSignsChange").fg,
+      GitSignsDelete = utils.get_highlight("GitSignsDelete").fg,
     }
 
     local Space = { provider = " " }
@@ -41,30 +44,24 @@ return {
       end,
       hl = {
         fg = colors.DiagnosticWarn,
-        --[[ bg = colors.black ]]
       },
       Space,
       {
         provider = function(self)
-          return icons.git.unmerged .. " " .. self.status_dict.head
+          return icons.git.unmerged2 .. " " .. self.status_dict.head
         end,
         hl = {
           bold = true
         }
       },
-      {
-        condition = function(self)
-          return self.has_changes
-        end,
-        provider = " "
-      },
+      Space,
       {
         provider = function(self)
           local count = self.status_dict.added or 0
           return count > 0 and (icons.git.add .. " " .. count)
         end,
         hl = {
-          fg = colors.DiffAdd
+          fg = colors.GitSignsAdd
         }
       },
       {
@@ -73,7 +70,7 @@ return {
           return count > 0 and (" " .. icons.git.deleted .. " " .. count)
         end,
         hl = {
-          fg = colors.DiffDelete
+          fg = colors.GitSignsDelete
         }
       },
       {
@@ -82,20 +79,15 @@ return {
           return count > 0 and (" " .. icons.git.change .. count)
         end,
         hl = {
-          fg = colors.DiffChange
+          fg = colors.GitSignsChange
         }
       },
-      --[[ Space,
-      { provider = icons.separator.right_fill, hl = { bg = colors.bg, fg = colors.black } } ]]
     }
 
     local FileNameBlock = {
       init = function(self)
         self.filename = vim.api.nvim_buf_get_name(0)
       end,
-      --[[ hl = {
-        bg = colors.bg
-      }, ]]
       Space
     }
 
@@ -103,10 +95,8 @@ return {
       init = function(self)
         local filename = self.filename
         local extension = vim.fn.fnamemodify(filename, ":e")
-        self.icon, self.icon_color = require("nvim-web-devicons").get_icon_color(filename, extension,
-                                                                                 { default = true })
+        self.icon, self.icon_color = require("nvim-web-devicons").get_icon_color(filename, extension, { default = true })
       end,
-
       provider = function(self)
         return self.icon and (self.icon .. " ")
       end,
@@ -122,52 +112,68 @@ return {
         local filename = vim.fn.fnamemodify(self.filename, ":.")
         if filename == "" then return "No Name " end
         if not conditions.width_percent_below(#filename, 0.25) then
-          filename = vim.fn.pathshorten(filename)
+          filename = vim.fn.expand "%:t"
         end
         return filename .. " "
       end,
-      --[[ hl = {
-        fg = utils.get_highlight("Directory").fg_dark
-      } ]]
+      hl = { fg = colors.Directory },
+    }
+
+     local FileNameWin = {
+      provider = function(self)
+        local filename = vim.fn.fnamemodify(self.filename, ":.")
+        if filename == "" then return "No Name " end
+        if not conditions.width_percent_below(#filename, 0) then
+          filename = vim.fn.expand "%:t"
+        end
+        local trail = filename:sub(-1) == " › " and '' or " › "
+        return filename .. trail
+      end,
+      -- hl = { bold = false },
+    }
+
+    local DirName = {
+      provider = function()
+        local dirname = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+        local trail = dirname:sub(-1) == " › " and '' or " ›"
+        return icons.explorer.default3 .. " " .. dirname .. trail
+      end,
+      -- hl = { bold = false },
     }
 
     local FileFlags = {
       {
-        provider = function()
-          if vim.bo.modified then return icons.statusline.edit .. " " end
+        condition = function()
+          return vim.bo.modified
         end,
+        provider = icons.statusline.edit .. " ",
         hl = {
           fg = colors.green
         }
-
       },
       {
-        provider = function()
-          if (not vim.bo.modifiable) or vim.bo.readonly then
-            return icons.statusline.readonly .. " "
-          end
+        condition = function()
+          return not vim.bo.modifiable or vim.bo.readonly
         end,
+        provider = icons.statusline.readonly .. " ",
         hl = {
-          fg = colors.error
+          fg = colors.orange
         }
       }
     }
 
     local FileNameModifer = {
       hl = function()
-        if vim.bo.modified then return { fg = colors.green, bold = true, force = true } end
+        if vim.bo.modified then return
+          { fg = colors.green, bold = true, force = true }
+        end
       end
     }
 
+    local FileNameBlockWin = utils.insert(FileNameBlock, FileIcon, FileNameWin)
+
     FileNameBlock = utils.insert(FileNameBlock, FileIcon, utils.insert(FileNameModifer, FileName),
                                  unpack(FileFlags)
-    --[[ {
-      provider = icons.separator.right_fill,
-      hl = {
-        fg = colors.bg,
-        bg = colors.dark
-      }
-    } ]]
     )
 
     local Diagnostics = {
@@ -187,12 +193,8 @@ return {
         self.info = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
       end,
 
-      --[[ update = { "DiagnosticChanged" }, ]]
+      update = { "DiagnosticChanged", "BufEnter" },
 
-      --[[ hl = {
-        bg = colors.dark
-      },
-      Space, ]]
       {
         provider = function(self)
           return self.errors > 0 and (self.error_icon .. self.errors .. " ")
@@ -225,15 +227,12 @@ return {
           fg = colors.DiagnosticHint
         }
       },
-      --[[ Space,
-      {
-        provider = icons.separator.right_fill,
-        hl = {
-          fg = colors.black,
-          bg = colors.dark
-        }
-      } ]]
     }
+
+    local null_ls_sources = function(filetype, method)
+      local methods_avail, methods = pcall(require, "null-ls.methods")
+      return methods_avail and null_ls_providers(filetype)[methods.internal[method]] or {}
+    end
 
     local lsp_names = { sumneko_lua = "sumneko" }
 
@@ -241,18 +240,15 @@ return {
       local clients = {}
 
       for _, client in pairs(vim.lsp.buf_get_clients(0)) do
-        local name = lsp_names[client.name] or client.name
-        clients[#clients + 1] = name
+        print(client.name)
+        -- local name = lsp_names[client.name] or client.name
+        -- clients[#clients + 1] = name
       end
 
       return table.concat(clients, " ")
     end
 
     local LSPActive = {
-      hl = {
-        fg = colors.DiagnosticHint,
-        bold = true
-      },
       condition = conditions.lsp_attached,
       update = { "LspAttach", "LspDetach" },
       provider = function()
@@ -260,52 +256,42 @@ return {
         for i, server in pairs(vim.lsp.buf_get_clients(0)) do
           table.insert(names, server.name)
         end
-        return icons.statusline.lsp_client .. " " .. "[" .. table.concat(names, " ") .. "]"
-        --[[ return icons.statusline.lsp_client .. " " .. lsp_client_names() ]]
+        return icons.global.gear .. " " .. table.concat(names, " ")
       end,
+      hl = {
+        fg = colors.DiagnosticHint,
+        bold = true
+      },
       Space
     }
 
-    --[[ local LSPMessages = {
-      provider = require("lsp-status").status,
-      hl = { fg = "gray" },
-    } ]]
-
     local FileType = {
-      hl = {
-        fg = colors.cyan,
-        bold = true
-      },
       provider = function()
         return string.upper(vim.bo.filetype)
-      end
+      end,
+      hl = {
+        bold = true
+      }
     }
 
     local Shiftab = {
-      --[[ hl = { fg = colors.comment }, ]]
-      provider = function()
-        return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
-      end,
+      {
+        provider = function()
+          return "SPACE:" .. vim.api.nvim_buf_get_option(0, "shiftwidth")
+        end,
+        hl = {
+          bold = true
+        }
+      },
       Space
     }
 
     local FileFormat = {
-      --[[ hl = {
-        fg = colors.fg,
-        bg = colors.darker
-      },
       {
-        provider = icons.separator.left_fill,
+        provider = function()
+          return string.upper(vim.bo.fileformat)
+        end,
         hl = {
-          fg = colors.darker,
-          bg = colors.dark
-        }
-      },
-      Space, ]]
-      {
-        provider = vim.bo.fileformat,
-        hl = {
-          --[[ bg = colors.darker, ]]
           bold = true
         }
       },
@@ -313,42 +299,38 @@ return {
     }
 
     local FileEncoding = {
-      hl = {
-        fg = colors.DiffAdd,
-        --[[ bg = colors.bg ]]
-      },
-      --[[ {
-        provider = icons.separator.left_fill,
-        hl = {
-          fg = colors.bg,
-          bg = colors.darker
-        }
-      },
-      Space, ]]
       {
         provider = function()
           local enc = (vim.bo.fenc ~= "" and vim.bo.fenc) or vim.o.enc
-          return enc
+          return enc:upper()
+        end,
+        hl = {
+          bold = true
+        },
+      },
+      Space
+    }
+
+    local FileSize = {
+      {
+        provider = function()
+          local suffix = { 'b', 'k', 'M', 'G', 'T', 'P', 'E' }
+          local fsize = vim.fn.getfsize(vim.api.nvim_buf_get_name(0))
+          fsize = (fsize < 0 and 0) or fsize
+          if fsize < 1024 then
+            return fsize..suffix[1]
+          end
+          local i = math.floor((math.log(fsize) / math.log(1024)))
+          return string.upper(string.format("%.2g%s", fsize / math.pow(1024, i), suffix[i + 1]))
         end
       },
       Space
     }
 
     local Ruler = {
-      hl = {
-        fg = colors.DiagnosticWarn,
-      },
-      --[[ {
-        provider = icons.separator.left_fill,
-        hl = {
-          fg = colors.black,
-          bg = colors.bg
-        }
-      }, ]]
       {
-        provider = " " .. icons.statusline.line_number .. " %2l/%3L:%2c %P",
+        provider = icons.statusline.line_number .. " %2l/%3L:%2c",
         hl = {
-          fg = colors.DiffAdd,
           bold = true
         },
       },
@@ -357,7 +339,7 @@ return {
 
     local ScrollBar = {
       static = {
-        sbar = icons.statusline.sbar
+        sbar = icons.statusline.sbar2
       },
       provider = function(self)
         local curr_line = vim.api.nvim_win_get_cursor(0)[1]
@@ -367,7 +349,6 @@ return {
       end,
       hl = {
         fg = colors.comment,
-        --[[ bg = colors.black ]]
       }
     }
 
@@ -377,7 +358,6 @@ return {
         return icons.kinds_icons.Number .. " " .. tname
       end,
       hl = {
-        fg = colors.comment,
         bold = true
       }
     }
@@ -464,13 +444,13 @@ return {
       update = "CursorMoved"
     }
 
-    local Left = { Git, FileNameBlock, Diagnostics }
+    local Left = { Git, FileNameBlock, FileSize, Diagnostics }
 
-    local Center = { Navic }
+    -- local Center = { Navic }
 
-    local Right = { LSPActive, Shiftab, FileFormat, FileEncoding, Ruler, ScrollBar }
+    local Right = { LSPActive, Shiftab, FileEncoding, FileFormat, Ruler, ScrollBar }
 
-    local statusline = { Left, Align, Center, Align, Right }
+    local statusline = { Left, Align, Right }
 
     local DefaultStatusline = {
       hl = { bg = colors.bg },
@@ -498,7 +478,7 @@ return {
       },
       utils.surround({ icons.separator.block, icons.separator.block }, function(self)
         return self:mode_color()
-      end, { statusline, hl = { bg = colors.dark } }),
+      end, { statusline, hl = { bg = colors.statusline } }),
       Space
     }
 
@@ -555,8 +535,23 @@ return {
       DefaultStatusline
     }
 
+    vim.api.nvim_create_autocmd("User", {
+    pattern = 'HeirlineInitWinbar',
+    callback = function(args)
+      local buf = args.buf
+      local buftype = vim.tbl_contains(
+        { "prompt", "nofile", "help", "quickfix" },
+        vim.bo[buf].buftype
+      )
+      local filetype = vim.tbl_contains({ "gitcommit", "fugitive" }, vim.bo[buf].filetype)
+      if buftype or filetype then
+        vim.opt_local.winbar = nil
+      end
+    end,
+    })
+
     local WinBars = {
-      allthrough = false,
+      fallthrough = false,
       {
         condition = function()
           return conditions.buffer_matches({
@@ -568,10 +563,21 @@ return {
           vim.opt_local.winbar = nil
         end
       },
-      provider = "  ",
-      Navic
+      {
+        condition = function()
+          return not conditions.is_active()
+        end,
+        hl = { fg = colors.comment, force = true },
+        FileNameBlock
+      },
+      {
+        Space,
+        DirName,
+        FileNameBlockWin,
+        Navic
+      }
     }
 
-    heirline.setup(Statusline, WinBars)
+    heirline.setup({statusline = Statusline, winbar = WinBars})
   end
 }
