@@ -87,6 +87,9 @@ return {
 
 
     local on_attach = function(client, bufnr)
+      client.server_capabilities.documentFormattingProvider = false
+      client.server_capabilities.documentRangeFormattingProvider = false
+
       require("nvim-navic").attach(client, bufnr)
       vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
@@ -100,8 +103,8 @@ return {
       keymap("n", "gr", vim.lsp.buf.rename, bufn)
       keymap("n", "gp", vim.lsp.buf.code_action, bufn)
       keymap("n", "gl", vim.lsp.buf.references, bufn)
-      keymap("n", "<leader>ff", vim.lsp.buf.formatting_sync, bufn)
-      keymap("x", "<leader>ff", vim.lsp.buf.range_formatting, bufn)
+      keymap("n", "<leader>ff", function() vim.lsp.buf.format { async = true } end, bufn)
+      --[[ keymap("x", "<leader>ff", vim.lsp.buf.range_formatting, bufn) ]]
       keymap("n", "gs", vim.lsp.buf.signature_help, bufn)
 
     end
