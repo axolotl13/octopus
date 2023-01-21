@@ -47,7 +47,7 @@ local opts = {
   { "n", "<c-s>", "<cmd>w!<cr>", "[Save] Guarda archivo actual" },
   { "i", "<c-s>", "<cmd>w<cr><esc>", "[Save] Guarda archivo actual en modo insertar" },
   { "n", "<leader>ba", "<cmd>%y+<cr>", "[Buffer] Copiar todo el contenido del buffer actual" },
-  { "n", "<leader>bq", "<cmd>bd!<pr>", "[Buffer] Cerrar buffer actual" },
+  { "n", "<leader>bq", "<cmd>bd!<cr>", "[Buffer] Cerrar buffer actual" },
   { "n", "<leader>bn", "<cmd>enew<cr>", "[Buffer] Crear nuevo buffer" },
   { "n", "<c-x>", "<cmd>qa!<cr>", "[Buffer] Cerrar todos los bufferes actuales" },
 
