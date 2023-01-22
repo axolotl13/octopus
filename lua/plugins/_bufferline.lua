@@ -1,6 +1,10 @@
 return {
   "akinsho/bufferline.nvim",
   event = "BufAdd",
+  dependencies = {
+    "tiagovla/scope.nvim",
+    config = true
+  },
   opts = {
     options = {
       middle_mouse_command = "vertical sbuffer %d",
