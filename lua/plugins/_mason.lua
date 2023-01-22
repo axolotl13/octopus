@@ -8,16 +8,6 @@ return {
     local mason_lsp = require("mason-lspconfig")
     local icons = require("ui.icons")
 
-    local analizer = {
-      "prettierd",
-      "stylua",
-      "eslint_d",
-      "shfmt",
-      "black",
-      "isort",
-      "flake8",
-    }
-
     local settings = {
       ui = {
         border = "rounded",
