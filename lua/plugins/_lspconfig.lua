@@ -9,7 +9,6 @@ return {
     local icons = require("ui.icons")
 
     local diagnostics = function()
-
       local signs = {
         Error = icons.diagnostics.info,
         Warn = icons.diagnostics.info,
@@ -34,7 +33,6 @@ return {
         local hl = "DiagnosticSign" .. type
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
       end
-
     end
 
     local servers = {
@@ -85,7 +83,6 @@ return {
       yamlls = {},
     }
 
-
     local on_attach = function(client, bufnr)
       client.server_capabilities.documentFormattingProvider = false
       client.server_capabilities.documentRangeFormattingProvider = false
@@ -106,7 +103,6 @@ return {
       keymap("n", "<leader>ff", function() vim.lsp.buf.format { async = true } end, bufn)
       --[[ keymap("x", "<leader>ff", vim.lsp.buf.range_formatting, bufn) ]]
       keymap("n", "gs", vim.lsp.buf.signature_help, bufn)
-
     end
 
     local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -134,7 +130,6 @@ return {
       require("lspconfig")[server].setup(opts)
       -- end
     end
-
   end,
   keys = {
     { "gf", function() vim.diagnostic.open_float() end, desc = "[Diagnostics] Ventana Flotante" },
