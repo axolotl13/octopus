@@ -2,6 +2,8 @@ return {
   "akinsho/toggleterm.nvim",
   cmd = "ToggleTerm",
   opts = {
+    shading_factor = 2,
+    start_in_insert = true,
     size = function(term)
       if term.direction == "horizontal" then
         return 16
