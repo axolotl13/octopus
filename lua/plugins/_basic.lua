@@ -58,9 +58,47 @@ return {
       require("windows").setup({
         autowidth = {
           enable = true,
-          winwidth = 40,
+          winwidth = 30,
         },
       })
-    end
+    end,
+    keys = {
+      { "<leader>ww", "<cmd>WindowsEqualize<cr>", desc = "[Windows] Igualar ventanas" },
+    },
   },
+  {
+    "rmagatti/session-lens",
+    dependencies = {
+      "rmagatti/auto-session",
+      "nvim-telescope/telescope.nvim"
+    },
+    config = function()
+      require("session-lens").setup({
+        path_display = { "shorten" },
+        -- theme = 'ivy',
+        -- previewer = true
+      })
+    end,
+    keys = {
+      { "<a-z>", "<cmd>SearchSession<cr>", desc = "[Windows] Igualar ventanas" },
+    }
+  },
+  {
+    "mfussenegger/nvim-jdtls",
+    ft = "java"
+  },
+  {
+    "jackMort/ChatGPT.nvim",
+    cmd = "ChatGPT",
+    config = function()
+      require("chatgpt").setup({
+        -- optional configuration
+      })
+    end,
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim"
+    }
+  }
 }
