@@ -8,7 +8,7 @@ return {
     display_options = { notification_timeout = 5 }
   },
   keys = {
-    { "<leader>rx", "<cmd>SnipRun<cr>", "[SnipRun] Ejecutar línea de código" },
+    { "<leader>re", "<cmd>SnipRun<cr>", "[SnipRun] Ejecutar línea de código" },
     { "<leader>rr", "<cmd>SnipReset<cr>", "[SnipRun] Reiniciar SnipRun" },
     { "<leader>rq", "<cmd>SnipClose<cr>", "[SnipRun] Cerrar SnipRun" }
   }
