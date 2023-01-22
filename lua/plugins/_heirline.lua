@@ -1,11 +1,11 @@
 return {
   "rebelot/heirline.nvim",
   event = "BufReadPost",
-  config = function ()
-    local heirline = require("heirline")
-    local conditions = require("heirline.conditions")
-    local utils = require("heirline.utils")
-    local icons = require("ui.icons")
+  config = function()
+    local heirline = require "heirline"
+    local conditions = require "heirline.conditions"
+    local utils = require "heirline.utils"
+    local icons = require "ui.icons"
 
     local colors = {
       bg = utils.get_highlight("Cursor").fg,
@@ -39,8 +39,7 @@ return {
 
       init = function(self)
         self.status_dict = vim.b.gitsigns_status_dict
-        self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0
-                               or self.status_dict.changed ~= 0
+        self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0
       end,
       hl = {
         fg = colors.DiagnosticWarn,
@@ -51,8 +50,8 @@ return {
           return icons.git.unmerged2 .. " " .. self.status_dict.head
         end,
         hl = {
-          bold = true
-        }
+          bold = true,
+        },
       },
       Space,
       {
@@ -61,8 +60,8 @@ return {
           return count > 0 and (icons.git.add .. " " .. count)
         end,
         hl = {
-          fg = colors.GitSignsAdd
-        }
+          fg = colors.GitSignsAdd,
+        },
       },
       {
         provider = function(self)
@@ -70,8 +69,8 @@ return {
           return count > 0 and (" " .. icons.git.deleted .. " " .. count)
         end,
         hl = {
-          fg = colors.GitSignsDelete
-        }
+          fg = colors.GitSignsDelete,
+        },
       },
       {
         provider = function(self)
@@ -79,8 +78,8 @@ return {
           return count > 0 and (" " .. icons.git.change .. count)
         end,
         hl = {
-          fg = colors.GitSignsChange
-        }
+          fg = colors.GitSignsChange,
+        },
       },
     }
 
@@ -88,29 +87,32 @@ return {
       init = function(self)
         self.filename = vim.api.nvim_buf_get_name(0)
       end,
-      Space
+      Space,
     }
 
     local FileIcon = {
       init = function(self)
         local filename = self.filename
         local extension = vim.fn.fnamemodify(filename, ":e")
-        self.icon, self.icon_color = require("nvim-web-devicons").get_icon_color(filename, extension, { default = true })
+        self.icon, self.icon_color =
+          require("nvim-web-devicons").get_icon_color(filename, extension, { default = true })
       end,
       provider = function(self)
         return self.icon and (self.icon .. " ")
       end,
       hl = function(self)
         return {
-          fg = self.icon_color
+          fg = self.icon_color,
         }
-      end
+      end,
     }
 
     local FileName = {
       provider = function(self)
         local filename = vim.fn.fnamemodify(self.filename, ":.")
-        if filename == "" then return "No Name " end
+        if filename == "" then
+          return "No Name "
+        end
         if not conditions.width_percent_below(#filename, 0.25) then
           filename = vim.fn.expand "%:t"
         end
@@ -119,14 +121,16 @@ return {
       hl = { fg = colors.Directory },
     }
 
-     local FileNameWin = {
+    local FileNameWin = {
       provider = function(self)
         local filename = vim.fn.fnamemodify(self.filename, ":.")
-        if filename == "" then return "No Name " end
+        if filename == "" then
+          return "No Name "
+        end
         if not conditions.width_percent_below(#filename, 0) then
           filename = vim.fn.expand "%:t"
         end
-        local trail = filename:sub(-1) == " › " and '' or " › "
+        local trail = filename:sub(-1) == " › " and "" or " › "
         return filename .. trail
       end,
       -- hl = { bold = false },
@@ -135,7 +139,7 @@ return {
     local DirName = {
       provider = function()
         local dirname = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
-        local trail = dirname:sub(-1) == " › " and '' or " ›"
+        local trail = dirname:sub(-1) == " › " and "" or " ›"
         return icons.explorer.default3 .. " " .. dirname .. trail
       end,
       -- hl = { bold = false },
@@ -148,8 +152,8 @@ return {
         end,
         provider = icons.statusline.edit .. " ",
         hl = {
-          fg = colors.green
-        }
+          fg = colors.green,
+        },
       },
       {
         condition = function()
@@ -157,24 +161,22 @@ return {
         end,
         provider = icons.statusline.readonly .. " ",
         hl = {
-          fg = colors.orange
-        }
-      }
+          fg = colors.orange,
+        },
+      },
     }
 
     local FileNameModifer = {
       hl = function()
-        if vim.bo.modified then return
-          { fg = colors.green, bold = true, force = true }
+        if vim.bo.modified then
+          return { fg = colors.green, bold = true, force = true }
         end
-      end
+      end,
     }
 
     local FileNameBlockWin = utils.insert(FileNameBlock, FileIcon, FileNameWin)
 
-    FileNameBlock = utils.insert(FileNameBlock, FileIcon, utils.insert(FileNameModifer, FileName),
-                                 unpack(FileFlags)
-    )
+    FileNameBlock = utils.insert(FileNameBlock, FileIcon, utils.insert(FileNameModifer, FileName), unpack(FileFlags))
 
     local Diagnostics = {
       condition = conditions.has_diagnostics,
@@ -183,7 +185,7 @@ return {
         error_icon = vim.fn.sign_getdefined("DiagnosticSignError")[1].text,
         warn_icon = vim.fn.sign_getdefined("DiagnosticSignWarn")[1].text,
         info_icon = vim.fn.sign_getdefined("DiagnosticSignInfo")[1].text,
-        hint_icon = vim.fn.sign_getdefined("DiagnosticSignHint")[1].text
+        hint_icon = vim.fn.sign_getdefined("DiagnosticSignHint")[1].text,
       },
 
       init = function(self)
@@ -200,32 +202,32 @@ return {
           return self.errors > 0 and (self.error_icon .. self.errors .. " ")
         end,
         hl = {
-          fg = colors.DiagnosticError
-        }
+          fg = colors.DiagnosticError,
+        },
       },
       {
         provider = function(self)
           return self.warnings > 0 and (self.warn_icon .. self.warnings .. " ")
         end,
         hl = {
-          fg = colors.DiagnosticWarn
-        }
+          fg = colors.DiagnosticWarn,
+        },
       },
       {
         provider = function(self)
           return self.info > 0 and (self.info_icon .. self.info .. " ")
         end,
         hl = {
-          fg = colors.DiagnosticInfo
-        }
+          fg = colors.DiagnosticInfo,
+        },
       },
       {
         provider = function(self)
           return self.hints > 0 and (self.hint_icon .. self.hints)
         end,
         hl = {
-          fg = colors.DiagnosticHint
-        }
+          fg = colors.DiagnosticHint,
+        },
       },
     }
 
@@ -260,9 +262,9 @@ return {
       end,
       hl = {
         fg = colors.DiagnosticHint,
-        bold = true
+        bold = true,
       },
-      Space
+      Space,
     }
 
     local FileType = {
@@ -270,8 +272,8 @@ return {
         return string.upper(vim.bo.filetype)
       end,
       hl = {
-        bold = true
-      }
+        bold = true,
+      },
     }
 
     local Shiftab = {
@@ -280,10 +282,10 @@ return {
           return "SPACE:" .. vim.api.nvim_buf_get_option(0, "shiftwidth")
         end,
         hl = {
-          bold = true
-        }
+          bold = true,
+        },
       },
-      Space
+      Space,
     }
 
     local FileFormat = {
@@ -292,10 +294,10 @@ return {
           return string.upper(vim.bo.fileformat)
         end,
         hl = {
-          bold = true
-        }
+          bold = true,
+        },
       },
-      Space
+      Space,
     }
 
     local FileEncoding = {
@@ -305,41 +307,41 @@ return {
           return enc:upper()
         end,
         hl = {
-          bold = true
+          bold = true,
         },
       },
-      Space
+      Space,
     }
 
     local FileSize = {
       {
         provider = function()
-          local suffix = { 'b', 'k', 'M', 'G', 'T', 'P', 'E' }
+          local suffix = { "b", "k", "M", "G", "T", "P", "E" }
           local fsize = vim.fn.getfsize(vim.api.nvim_buf_get_name(0))
           fsize = (fsize < 0 and 0) or fsize
           if fsize < 1024 then
-            return fsize..suffix[1]
+            return fsize .. suffix[1]
           end
           local i = math.floor((math.log(fsize) / math.log(1024)))
           return string.upper(string.format("%.2g%s", fsize / math.pow(1024, i), suffix[i + 1]))
-        end
+        end,
       },
-      Space
+      Space,
     }
 
     local Ruler = {
       {
         provider = icons.statusline.line_number .. " %2l/%3L:%2c",
         hl = {
-          bold = true
+          bold = true,
         },
       },
-      Space
+      Space,
     }
 
     local ScrollBar = {
       static = {
-        sbar = icons.statusline.sbar2
+        sbar = icons.statusline.sbar2,
       },
       provider = function(self)
         local curr_line = vim.api.nvim_win_get_cursor(0)[1]
@@ -349,7 +351,7 @@ return {
       end,
       hl = {
         fg = colors.comment,
-      }
+      },
     }
 
     local TerminalName = {
@@ -358,8 +360,8 @@ return {
         return icons.kinds_icons.Number .. " " .. tname
       end,
       hl = {
-        bold = true
-      }
+        bold = true,
+      },
     }
 
     local Navic = {
@@ -399,9 +401,9 @@ return {
         dec = function(c)
           local line = bit.rshift(c, 16)
           local col = bit.band(bit.rshift(c, 6), 1023)
-          local winnr = bit.band(c,  63)
+          local winnr = bit.band(c, 63)
           return line, col, winnr
-        end
+        end,
       },
       init = function(self)
         local data = require("nvim-navic").get_data() or {}
@@ -414,14 +416,14 @@ return {
               hl = self.type_hl[d.type],
             },
             {
-              provider = d.name:gsub("%%", "%%%%"):gsub("%s*->%s*", ''),
+              provider = d.name:gsub("%%", "%%%%"):gsub("%s*->%s*", ""),
               -- hl = self.type_hl[d.type],
 
               on_click = {
                 minwid = pos,
                 callback = function(_, minwid)
                   local line, col, winnr = self.dec(minwid)
-                  vim.api.nvim_win_set_cursor(vim.fn.win_getid(winnr), {line, col})
+                  vim.api.nvim_win_set_cursor(vim.fn.win_getid(winnr), { line, col })
                 end,
                 name = "heirline_navic",
               },
@@ -441,7 +443,7 @@ return {
         return self.child:eval()
       end,
       hl = { fg = colors.fg },
-      update = "CursorMoved"
+      update = "CursorMoved",
     }
 
     local Left = { Git, FileNameBlock, FileSize, Diagnostics }
@@ -469,44 +471,44 @@ return {
           R = colors.orange,
           r = colors.orange,
           ["!"] = colors.red,
-          t = colors.fg
+          t = colors.fg,
         },
         mode_color = function(self)
           local mode = conditions.is_active() and vim.fn.mode() or "n"
           return self.mode_colors[mode]
-        end
+        end,
       },
       utils.surround({ icons.separator.block, icons.separator.block }, function(self)
         return self:mode_color()
       end, { statusline, hl = { bg = colors.statusline } }),
-      Space
+      Space,
     }
 
     local SpecialStatusline = {
       condition = function()
-        return conditions.buffer_matches({
+        return conditions.buffer_matches {
           buftype = { "nofile", "prompt", "help", "quickfix" },
-          filetype = { "^git.*", "fugitive" }
-        })
+          filetype = { "^git.*", "fugitive" },
+        }
       end,
       Space,
       FileType,
-      Align
+      Align,
     }
 
     local TerminalStatusline = {
       condition = function()
-        return conditions.buffer_matches({ buftype = { "terminal" }, filetype = { "toggleterm" } })
+        return conditions.buffer_matches { buftype = { "terminal" }, filetype = { "toggleterm" } }
       end,
       hl = {
-        bg = colors.black
+        bg = colors.black,
       },
 
       { condition = conditions.is_active },
       FileType,
       Space,
       TerminalName,
-      Align
+      Align,
     }
 
     local InactiveStatusline = {
@@ -515,7 +517,7 @@ return {
       end,
       Space,
       FileType,
-      Align
+      Align,
     }
 
     local Statusline = {
@@ -532,52 +534,49 @@ return {
       SpecialStatusline,
       TerminalStatusline,
       InactiveStatusline,
-      DefaultStatusline
+      DefaultStatusline,
     }
 
     vim.api.nvim_create_autocmd("User", {
-    pattern = 'HeirlineInitWinbar',
-    callback = function(args)
-      local buf = args.buf
-      local buftype = vim.tbl_contains(
-        { "prompt", "nofile", "help", "quickfix" },
-        vim.bo[buf].buftype
-      )
-      local filetype = vim.tbl_contains({ "gitcommit", "fugitive" }, vim.bo[buf].filetype)
-      if buftype or filetype then
-        vim.opt_local.winbar = nil
-      end
-    end,
+      pattern = "HeirlineInitWinbar",
+      callback = function(args)
+        local buf = args.buf
+        local buftype = vim.tbl_contains({ "prompt", "nofile", "help", "quickfix" }, vim.bo[buf].buftype)
+        local filetype = vim.tbl_contains({ "gitcommit", "fugitive" }, vim.bo[buf].filetype)
+        if buftype or filetype then
+          vim.opt_local.winbar = nil
+        end
+      end,
     })
 
     local WinBars = {
       fallthrough = false,
       {
         condition = function()
-          return conditions.buffer_matches({
+          return conditions.buffer_matches {
             buftype = { "nofile", "prompt", "help", "quickfix" },
             filetype = { "^git.*", "fugitive", "toggleterm" },
-          })
+          }
         end,
         init = function()
           vim.opt_local.winbar = nil
-        end
+        end,
       },
       {
         condition = function()
           return not conditions.is_active()
         end,
         hl = { fg = colors.comment, force = true },
-        FileNameBlock
+        FileNameBlock,
       },
       {
         Space,
         DirName,
         FileNameBlockWin,
-        Navic
-      }
+        Navic,
+      },
     }
 
-    heirline.setup({statusline = Statusline, winbar = WinBars})
-  end
+    heirline.setup { statusline = Statusline, winbar = WinBars }
+  end,
 }
