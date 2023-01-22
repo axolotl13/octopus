@@ -11,14 +11,20 @@ return {
         nls.builtins.formatting.black,
         nls.builtins.formatting.isort,
         nls.builtins.formatting.stylua,
-        nls.builtins.formatting.shfmt,
+        nls.builtins.formatting.shfmt.with({ extra_args = { "-i", "2" } }),
         nls.builtins.formatting.xmllint,
         nls.builtins.formatting.cmake_format,
+        -- nls.builtins.formatting.pg_format,
         nls.builtins.formatting.codespell.with({ filetypes = { "markdown" } }),
         nls.builtins.formatting.clang_format.with({ filetypes = { "c", "cpp", "cs" } }),
-        nls.builtins.diagnostics.tidy.with({ filetypes = { "html", "xml" } }),
+        nls.builtins.diagnostics.tidy,
         nls.builtins.diagnostics.markdownlint,
         nls.builtins.diagnostics.hadolint,
+        nls.builtins.diagnostics.eslint_d,
+        nls.builtins.diagnostics.jsonlint,
+        nls.builtins.diagnostics.luacheck,
+        nls.builtins.diagnostics.sqlfluff,
+        nls.builtins.diagnostics.shellcheck,
         nls.builtins.diagnostics.yamllint,
         nls.builtins.diagnostics.stylelint,
         nls.builtins.diagnostics.pylint.with({
@@ -26,10 +32,7 @@ return {
             diagnostic.code = diagnostic.message_id
           end
         }),
-        nls.builtins.formatting.prettierd.with({
-          filetypes = { "markdown" },
-        }),
-        -- nls.builtins.code_actions.gitsigns,
+        nls.builtins.code_actions.gitsigns,
       },
     }
 
