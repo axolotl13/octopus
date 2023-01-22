@@ -65,8 +65,8 @@ return {
   },
   {
     "Mofiqul/adwaita.nvim",
-    --[[ lazy = false, ]]
-    --[[ priority = 1000, ]]
+    -- lazy = false,
+    -- priority = 1000,
     config = function()
       vim.g.adwaita_darker = true
       vim.cmd([[colorscheme adwaita]])
@@ -75,20 +75,23 @@ return {
   {
     "catppuccin/nvim",
     as = "catppuccin",
-    --[[ lazy = false,
-    priority = 1000, ]]
+    -- lazy = false,
+    -- priority = 1000,
     config = function()
+      require("catppuccin").setup({
+        flavour = "macchiato",
+      })
       vim.cmd([[colorscheme catppuccin]])
     end
   },
   {
     "rebelot/kanagawa.nvim",
-    --[[ lazy = false,
-    priority = 1000, ]]
+    -- lazy = false,
+    -- priority = 1000,
     config = function()
       require("kanagawa").setup({
         -- dimInactive = true, -- dim inactive window `:h hl-NormalNC`
-        colors = {},
+        -- colors = {},
         overrides = {
           NvimTreeNormal = { bg = "#16161d" },
           NvimTreeNormalNC = { bg = "#16161d" },
@@ -96,6 +99,50 @@ return {
         }
       })
       vim.cmd([[colorscheme kanagawa]])
+    end
+  },
+  {
+    "projekt0n/github-nvim-theme",
+    -- lazy = false,
+    -- priority = 1000,
+    config = function()
+      require("github-theme").setup({
+       theme_style = "dimmed"
+      })
+    end
+  },
+  {
+    "shaunsingh/nord.nvim",
+    -- lazy = false,
+    -- priority = 1000,
+    config = function()
+      vim.cmd[[colorscheme nord]]
+    end
+  },
+  {
+    "sam4llis/nvim-tundra",
+    -- lazy = false,
+    -- priority = 1000,
+    config = function()
+      require("nvim-tundra").setup({})
+      vim.cmd[[colorscheme tundra]]
+    end
+  },
+  {
+    "Mofiqul/vscode.nvim",
+    -- lazy = false,
+    -- priority = 1000,
+    config = function()
+      require("vscode").setup({})
+    end
+  },
+  {
+    "JoosepAlviste/palenightfall.nvim",
+    -- lazy = false,
+    -- priority = 1000,
+    config = function()
+      require("palenightfall").setup({})
+      vim.cmd[[colorscheme palenightfall]]
     end
   },
 }
