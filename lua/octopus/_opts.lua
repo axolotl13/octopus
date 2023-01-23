@@ -44,11 +44,9 @@ local opts = {
   guicursor = 'n-v-c:block-Cursor/lCursor,i-ci-ve:ver25-Cursor2/lCursor2,r-cr:hor20,o:hor20',
 }
 
-local opt = vim.opt
-
-opt.shortmess:append("sI")                              -- Elimina los mensajes al inicio
-opt.shortmess = opt.shortmess + { c = true }
+vim.opt.shortmess:append("sI")                              -- Elimina los mensajes al inicio
+vim.opt.shortmess = vim.opt.shortmess + { c = true }
 
 for _, k in pairs(opts) do
-  opt[_] = k
+  vim.opt[_] = k
 end

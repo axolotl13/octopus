@@ -5,7 +5,6 @@ return {
     priority = 1000,
     config = function()
       local tokyonight = require("tokyonight")
-
       local opts = {
         style = "storm",
         styles = {
@@ -60,8 +59,7 @@ return {
 
       tokyonight.setup(opts)
       tokyonight.load()
-
-    end
+    end,
   },
   {
     "Mofiqul/adwaita.nvim",
@@ -70,7 +68,7 @@ return {
     config = function()
       vim.g.adwaita_darker = true
       vim.cmd([[colorscheme adwaita]])
-    end
+    end,
   },
   {
     "catppuccin/nvim",
@@ -82,7 +80,7 @@ return {
         flavour = "macchiato",
       })
       vim.cmd([[colorscheme catppuccin]])
-    end
+    end,
   },
   {
     "rebelot/kanagawa.nvim",
@@ -95,11 +93,11 @@ return {
         overrides = {
           NvimTreeNormal = { bg = "#16161d" },
           NvimTreeNormalNC = { bg = "#16161d" },
-          VertSplit = { fg = "#1f1f28", bg = "NONE" }
-        }
+          VertSplit = { fg = "#1f1f28", bg = "NONE" },
+        },
       })
       vim.cmd([[colorscheme kanagawa]])
-    end
+    end,
   },
   {
     "projekt0n/github-nvim-theme",
@@ -107,17 +105,17 @@ return {
     -- priority = 1000,
     config = function()
       require("github-theme").setup({
-       theme_style = "dimmed"
+        theme_style = "dimmed",
       })
-    end
+    end,
   },
   {
     "shaunsingh/nord.nvim",
     -- lazy = false,
     -- priority = 1000,
     config = function()
-      vim.cmd[[colorscheme nord]]
-    end
+      vim.cmd([[colorscheme nord]])
+    end,
   },
   {
     "sam4llis/nvim-tundra",
@@ -125,8 +123,8 @@ return {
     -- priority = 1000,
     config = function()
       require("nvim-tundra").setup({})
-      vim.cmd[[colorscheme tundra]]
-    end
+      vim.cmd([[colorscheme tundra]])
+    end,
   },
   {
     "Mofiqul/vscode.nvim",
@@ -134,7 +132,7 @@ return {
     -- priority = 1000,
     config = function()
       require("vscode").setup({})
-    end
+    end,
   },
   {
     "JoosepAlviste/palenightfall.nvim",
@@ -142,7 +140,7 @@ return {
     -- priority = 1000,
     config = function()
       require("palenightfall").setup({})
-      vim.cmd[[colorscheme palenightfall]]
-    end
+      vim.cmd([[colorscheme palenightfall]])
+    end,
   },
 }

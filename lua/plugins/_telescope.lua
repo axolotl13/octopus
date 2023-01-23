@@ -79,7 +79,7 @@ return {
     { "<leader>sd", "<cmd>Telescope diagnostics<cr>", desc = "[Telescope] Buscar diagnosticos dentro del buffer " },
     { "<leader>sc", "<cmd>Telescope git_commits<cr>", desc = "[Telescope] Buscar palabra dentro los commits" },
     { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "[Telescope] Buscar keymaps" },
-    { "<leader>sh", "<cmd>Telescope oldfiles<cr>", desc = "[Telescope] Buscar en archivos históricos" },
+    { "<leader>so", "<cmd>Telescope oldfiles<cr>", desc = "[Telescope] Buscar en archivos históricos" },
     { "<leader>st", "<cmd>Telescope git_status<cr>", desc = "[Telescope] Buscar dentro de los estados en git" },
     { "<leader>sb", "<cmd>Telescope git_branches<cr>", desc = "[Telescope] Buscar branchs en git" },
     { "<leader>sm", "<cmd>Telescope fd cwd=$HOME<cr>", desc = "[Telescope] Buscar en HOME" },

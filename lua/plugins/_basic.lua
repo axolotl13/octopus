@@ -2,13 +2,13 @@ return {
   {
     "ggandor/lightspeed.nvim",
     keys = { "f", "F", "s", "S", "t", "T" },
-    config = { substitute_chars = { ["\r"] = "ñ" } } -- Enter end
+    config = { substitute_chars = { ["\r"] = "ñ" } }, -- Enter end
   },
   {
     "kylechui/nvim-surround",
     -- keys = { "ysiw", "ys", "yss","ds", "cs" },
     event = "VeryLazy",
-    config = true
+    config = true,
   },
   --[[ {
     "windwp/nvim-ts-autotag",
@@ -20,33 +20,33 @@ return {
   {
     "JoosepAlviste/nvim-ts-context-commentstring",
     dependencies = {
-      "nvim-treesitter/nvim-treesitter"
+      "nvim-treesitter/nvim-treesitter",
     },
-    ft = { "js", "jsx", "ts", "tsx", "css", "html" }
+    ft = { "js", "jsx", "ts", "tsx", "css", "html" },
   },
   {
     "tpope/vim-fugitive",
-    cmd = "Git"
+    cmd = "Git",
   },
   {
     "mg979/vim-visual-multi",
-    keys = { "<c-n>", "<c-down>", "<c-up>", "<s-left>", "<s-right>" } -- n, N, q, Q, -
+    keys = { "<c-n>", "<c-down>", "<c-up>", "<s-left>", "<s-right>" }, -- n, N, q, Q, -
   },
   {
     "NvChad/nvim-colorizer.lua",
     cmd = "ColorizerToggle",
     ft = { "css", "html" },
     config = true,
-    keys = { { "<leader>cc", "<cmd>ColorizerToggle<cr>", desc = "Habilitar ColorizerToggle" } }
+    keys = { { "<leader>cc", "<cmd>ColorizerToggle<cr>", desc = "Habilitar ColorizerToggle" } },
   },
   {
     "SmiteshP/nvim-navic",
     config = {
-      icons = require("ui.icons").vscode
+      icons = require("ui.icons").vscode,
     },
     dependencies = {
-      "neovim/nvim-lspconfig"
-    }
+      "neovim/nvim-lspconfig",
+    },
   },
   {
     "anuvyklack/windows.nvim",
@@ -54,14 +54,12 @@ return {
     dependencies = {
       "anuvyklack/middleclass",
     },
-    config = function()
-      require("windows").setup({
-        autowidth = {
-          enable = true,
-          winwidth = 30,
-        },
-      })
-    end,
+    opts = {
+      autowidth = {
+        enable = true,
+        winwidth = 30,
+      },
+    },
     keys = {
       { "<leader>ww", "<cmd>WindowsEqualize<cr>", desc = "[Windows] Igualar ventanas" },
     },
@@ -70,22 +68,20 @@ return {
     "rmagatti/session-lens",
     dependencies = {
       "rmagatti/auto-session",
-      "nvim-telescope/telescope.nvim"
+      "nvim-telescope/telescope.nvim",
     },
-    config = function()
-      require("session-lens").setup({
-        path_display = { "shorten" },
-        -- theme = 'ivy',
-        -- previewer = true
-      })
-    end,
+    opts = {
+      path_display = { "shorten" },
+      -- theme = 'ivy',
+      -- previewer = true
+    },
     keys = {
       { "<a-z>", "<cmd>SearchSession<cr>", desc = "[Windows] Igualar ventanas" },
-    }
+    },
   },
   {
     "mfussenegger/nvim-jdtls",
-    ft = "java"
+    ft = "java",
   },
   {
     "jackMort/ChatGPT.nvim",
@@ -98,7 +94,7 @@ return {
     dependencies = {
       "MunifTanjim/nui.nvim",
       "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim"
-    }
-  }
+      "nvim-telescope/telescope.nvim",
+    },
+  },
 }

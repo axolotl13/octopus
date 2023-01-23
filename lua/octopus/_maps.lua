@@ -22,8 +22,8 @@ local opts = {
   -- Mover texto
   { "n", "<a-up>", ":m .-2<cr>==", "Mover línea hacía arriba" },
   { "n", "<a-down>", ":m .+1<cr>==", "Mover línea hacía abajo" },
-  { "x", "<a-up>", ":m \'<-2<CR>gv-gv", "Mover líneas seleccionadas hacía arriba" },
-  { "x", "<a-down>", ":m \'>+1<CR>gv-gv", "Mover líneas seleccionadas hacía abajo" },
+  { "x", "<a-up>", ":m '<-2<CR>gv-gv", "Mover líneas seleccionadas hacía arriba" },
+  { "x", "<a-down>", ":m '>+1<CR>gv-gv", "Mover líneas seleccionadas hacía abajo" },
 
   -- Aplicar sangría
   { "v", "<", "<gv", "Aplica sangría hacía la izquierda en modo visual" },
@@ -63,14 +63,11 @@ local opts = {
   -- Lazy
   { "n", "<leader>ps", "<cmd>Lazy<cr>", "Mostrar estado de los plugins" },
 
-  { "v", "<leader>re", ":\'<,\'>SnipRun<cr>", "[SnipRun] Ejecutar bloque de código" },
-
+  { "v", "<leader>re", ":'<,'>SnipRun<cr>", "[SnipRun] Ejecutar bloque de código" },
 }
-
-local map = vim.keymap.set
 
 vim.g.mapleader = " "
 
 for _, key in pairs(opts) do
-  map(key[1], key[2], key[3], { desc = key[4], silent = true })
+  vim.keymap.set(key[1], key[2], key[3], { desc = key[4], silent = true })
 end

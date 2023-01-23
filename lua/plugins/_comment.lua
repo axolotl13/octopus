@@ -6,11 +6,11 @@ return {
     ignore = "^$",
     mapping = {
       basic = true,
-      extra = false
+      extra = false,
     },
     toggler = {
       line = "gcc",
-      block = "gbc"
+      block = "gbc",
     },
     pre_hook = function(ctx)
       local location = nil
@@ -20,11 +20,11 @@ return {
         location = require("ts_context_commentstring.utils").get_visual_start_location()
       end
 
-      return require("ts_context_commentstring.internal").calculate_commentstring {
+      return require("ts_context_commentstring.internal").calculate_commentstring({
         key = ctx.ctype == require("Comment.utils").ctype.linewise and "__default" or "__multiline",
         location = location,
-      }
-    end
+      })
+    end,
   },
   keys = { "gcc", "gbc", { "gb", mode = "v" }, { "gc", mode = "v" } },
 }

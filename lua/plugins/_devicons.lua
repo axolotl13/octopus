@@ -1,8 +1,7 @@
 return {
   "kyazdani42/nvim-web-devicons",
   config = function()
-    local devicons = require "nvim-web-devicons"
-
+    local devicons = require("nvim-web-devicons")
     local opts = {
       html = { icon = "", color = "#DE8C92", name = "html" },
       css = { icon = "", color = "#61afef", name = "css" },
@@ -34,7 +33,6 @@ return {
       ["package-lock.json"] = { icon = "", color = "#7a0d21", name = "PackageLockJson" },
       ["docker-compose.yml"] = { icon = "", color = "#F55385", name = "DockerCompose" },
     }
-
     devicons.set_icon(opts)
   end,
 }

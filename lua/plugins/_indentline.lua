@@ -19,7 +19,7 @@ return {
       "TelescopePrompt",
       "TelescopeResults",
       "DiffviewOpen",
-      "nofile"
+      "nofile",
     },
     filetype_exclude = {
       "alpha",
@@ -31,7 +31,7 @@ return {
       "txt",
       "css",
       "lspinfo",
-      "NvimTree"
+      "NvimTree",
     },
     context_patterns = {
       "class",
@@ -56,7 +56,7 @@ return {
       "catch_clause",
       "import_statement",
       "operation_type",
-      "export"
-    }
-  }
+      "export",
+    },
+  },
 }

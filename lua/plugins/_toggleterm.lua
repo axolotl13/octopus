@@ -20,5 +20,5 @@ return {
     { "<leader>tp", "<cmd>ToggleTerm direction=tab<cr>", desc = "[Terminal] Abre nueva pestaña" },
     { "<leader>tf", "<cmd>ToggleTerm direction=float<cr>", desc = "[Terminal] Abre nueva ventana flotante" },
     { "<leader>ts", "<cmd>ToggleTerm direction=vertical<cr>", desc = "[Terminal] Abre nueva ventana verticalmente" },
-  }
+  },
 }

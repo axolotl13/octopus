@@ -2,7 +2,7 @@ local modules = {
   "octopus._opts",
   "octopus._maps",
   "octopus._cmds",
-  "octopus._boot"
+  "octopus._boot",
 }
 
 for _, module in ipairs(modules) do

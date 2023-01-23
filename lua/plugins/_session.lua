@@ -8,7 +8,7 @@ return {
       "cclose",
       "lua vim.notify.dismiss()",
       "ToggleTermToggleAll",
-      "DiffviewClose"
+      "DiffviewClose",
     },
     auto_session_root_dir = vim.fn.expand("$HOME") .. "/.config/nvim/sessions/",
     auto_session_enabled = true,
@@ -19,6 +19,6 @@ return {
   },
   keys = {
     { "<leader>ws", "<cmd>SaveSession<cr>", desc = "[Session] Guardar sesión actual" },
-    { "<leader>wd", "<cmd>DeleteSession<cr>", desc = "[Session] Eliminar sesión actual" }
-  }
+    { "<leader>wd", "<cmd>DeleteSession<cr>", desc = "[Session] Eliminar sesión actual" },
+  },
 }

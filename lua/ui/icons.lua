@@ -87,7 +87,7 @@ local icons = {
     install = "",
     uninstall = "ﮊ",
     pending = "",
-    default = "◍"
+    default = "◍",
   },
   kinds_icons = {
     Array = "",
@@ -122,7 +122,7 @@ local icons = {
     TypeParameter = "",
     Unit = "",
     Value = "",
-    Variable = ""
+    Variable = "",
   },
   vscode = {
     Array = " ",
@@ -150,7 +150,7 @@ local icons = {
     String = " ",
     Struct = " ",
     TypeParameter = " ",
-    Variable = " "
+    Variable = " ",
   },
   statusline = {
     --[[ edit = "", ]]
@@ -160,7 +160,7 @@ local icons = {
     line_percent = "",
     lsp_client = "",
     sbar = { "▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" },
-    sbar2 = { '🭶', '🭷', '🭸', '🭹', '🭺', '🭻' }
+    sbar2 = { "🭶", "🭷", "🭸", "🭹", "🭺", "🭻" },
   },
   os = {
     linux = "", -- 
@@ -184,7 +184,7 @@ local icons = {
     right_round = "",
     left_roundt = "",
     right_roundt = "",
-  }
+  },
 }
 
 return icons

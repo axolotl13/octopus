@@ -3,7 +3,7 @@ return {
   event = "BufAdd",
   dependencies = {
     "tiagovla/scope.nvim",
-    config = true
+    config = true,
   },
   opts = {
     options = {
@@ -26,110 +26,116 @@ return {
       hover = {
         enabled = true,
         delay = 200,
-        reveal = { "close" }
+        reveal = { "close" },
       },
     },
     highlights = {
-      fill                  = {
+      fill = {
         fg = { attribute = "fg", highlight = "TabLine" },
         bg = { attribute = "bg", highlight = "TabLine" },
       },
-      background            = {
+      background = {
         fg = { attribute = "fg", highlight = "Comment" },
         bg = { attribute = "bg", highlight = "TabLine" },
       },
-      buffer_selected       = {
+      buffer_selected = {
         fg = { attribute = "fg", highlight = "Normal" },
         bg = { attribute = "bg", highlight = "Normal" },
-        italic = false
+        italic = false,
       },
-      buffer_visible        = {
+      buffer_visible = {
         fg = { attribute = "fg", highlight = "Comment" },
         bg = { attribute = "bg", highlight = "TabLine" },
       },
-      numbers               = {
+      numbers = {
         fg = { attribute = "fg", highlight = "TabLine" },
         bg = { attribute = "bg", highlight = "TabLine" },
       },
-      numbers_visible       = {
+      numbers_visible = {
         fg = { attribute = "fg", highlight = "TabLine" },
         bg = { attribute = "bg", highlight = "TabLine" },
       },
-      numbers_selected      = {
+      numbers_selected = {
         fg = { attribute = "fg", highlight = "Normal" },
         bg = { attribute = "bg", highlight = "Normal" },
       },
-      close_button          = {
+      close_button = {
         fg = { attribute = "fg", highlight = "TabLine" },
         bg = { attribute = "bg", highlight = "TabLine" },
       },
-      close_button_visible  = {
+      close_button_visible = {
         fg = { attribute = "fg", highlight = "TabLine" },
         bg = { attribute = "bg", highlight = "TabLine" },
       },
       close_button_selected = {
         fg = { attribute = "fg", highlight = "Error" },
-        bg = { attribute = "bg", highlight = "Error" }
+        bg = { attribute = "bg", highlight = "Error" },
       },
-      tab_selected          = {
+      tab_selected = {
         fg = { attribute = "fg", highlight = "Normal" },
         bg = { attribute = "bg", highlight = "Normal" },
       },
-      tab                   = {
+      tab = {
         fg = { attribute = "fg", highlight = "TabLine" },
         bg = { attribute = "bg", highlight = "TabLine" },
       },
-      tab_close             = {
+      tab_close = {
         fg = { attribute = "fg", highlight = "Error" },
         bg = { attribute = "bg", highlight = "TabLine" },
       },
-      duplicate_selected    = {
+      duplicate_selected = {
         fg = { attribute = "fg", highlight = "Comment" },
         bg = { attribute = "bg", highlight = "Normal" },
-        underline = false, undercurl = false, italic = true
+        underline = false,
+        undercurl = false,
+        italic = true,
       },
-      duplicate_visible     = {
+      duplicate_visible = {
         fg = { attribute = "fg", highlight = "Comment" },
         bg = { attribute = "bg", highlight = "TabLine" },
-        underline = false, undercurl = false, italic = true
+        underline = false,
+        undercurl = false,
+        italic = true,
       },
-      duplicate             = {
+      duplicate = {
         fg = { attribute = "fg", highlight = "TabLine" },
         bg = { attribute = "bg", highlight = "TabLine" },
-        underline = false, undercurl = false, italic = true
+        underline = false,
+        undercurl = false,
+        italic = true,
       },
-      modified              = {
+      modified = {
         fg = { attribute = "fg", highlight = "TabLine" },
         bg = { attribute = "bg", highlight = "TabLine" },
       },
-      modified_selected     = {
+      modified_selected = {
         fg = { attribute = "fg", highlight = "String" },
         bg = { attribute = "bg", highlight = "Normal" },
       },
-      modified_visible      = {
+      modified_visible = {
         fg = { attribute = "fg", highlight = "TabLine" },
         bg = { attribute = "bg", highlight = "TabLine" },
       },
-      separator             = {
+      separator = {
         fg = { attribute = "bg", highlight = "TabLine" },
         bg = { attribute = "bg", highlight = "TabLine" },
       },
-      separator_selected    = {
+      separator_selected = {
         fg = { attribute = "bg", highlight = "TabLine" },
         bg = { attribute = "bg", highlight = "Normal" },
       },
-      separator_visible     = {
+      separator_visible = {
         fg = { attribute = "bg", highlight = "TabLine" },
-        bg = { attribute = "bg", highlight = "TabLine" }
+        bg = { attribute = "bg", highlight = "TabLine" },
       },
-      indicator_selected    = {
+      indicator_selected = {
         fg = { attribute = "fg", highlight = "LspDiagnosticsDefaultHint" },
         bg = { attribute = "bg", highlight = "Normal" },
       },
-      offset_separator      = {
+      offset_separator = {
         fg = { attribute = "bg", highlight = "TabLine" },
         bg = { attribute = "bg", highlight = "TabLine" },
-      }
+      },
     },
   },
   keys = {
@@ -145,7 +151,7 @@ return {
         vim.cmd("BufferLineCloseRight")
         vim.cmd("BufferLineCloseLeft")
       end,
-      desc = "[Bufferline] Cerrar todos los bufferes excepto la actual"
-    }
-  }
+      desc = "[Bufferline] Cerrar todos los bufferes excepto la actual",
+    },
+  },
 }

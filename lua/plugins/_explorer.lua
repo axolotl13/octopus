@@ -1,7 +1,7 @@
 return {
   "nvim-tree/nvim-tree.lua",
   dependencies = {
-    { "kyazdani42/nvim-web-devicons" }
+    { "kyazdani42/nvim-web-devicons" },
   },
   cmd = "NvimTreeToggle",
   -- pin = true,
@@ -16,7 +16,7 @@ return {
         custom_only = false,
         list = {
           { key = "d", action = "trash" },
-        }
+        },
       },
     },
     renderer = {
@@ -25,7 +25,7 @@ return {
       highlight_git = true,
       highlight_opened_files = "icon",
       highlight_modified = "icon",
-      root_folder_label = table.concat { ":t:gs?$?/..", string.rep(" ", 1000), "?:gs?^??" },
+      root_folder_label = table.concat({ ":t:gs?$?/..", string.rep(" ", 1000), "?:gs?^??" }),
       indent_width = 1,
       indent_markers = {
         enable = false,
@@ -34,8 +34,8 @@ return {
           edge = "│",
           item = "│",
           bottom = "─",
-          none = " "
-        }
+          none = " ",
+        },
       },
       icons = {
         symlink_arrow = require("ui.icons").global.symlink_arrow,
@@ -58,7 +58,7 @@ return {
             empty = require("ui.icons").explorer.empty,
             empty_open = require("ui.icons").explorer.empty_open,
             symlink = require("ui.icons").explorer.symlink,
-            symlink_open = require("ui.icons").explorer.symlink_open
+            symlink_open = require("ui.icons").explorer.symlink_open,
           },
           git = {
             unstaged = require("ui.icons").git.unstaged,
@@ -67,27 +67,27 @@ return {
             renamed = require("ui.icons").git.renamed,
             untracked = require("ui.icons").git.untracked,
             deleted = require("ui.icons").git.deleted,
-            ignored = require("ui.icons").git.ignored
-          }
-        }
+            ignored = require("ui.icons").git.ignored,
+          },
+        },
       },
       special_files = {
         "Cargo.toml",
         "Makefile",
         "README.md",
-        "readme.md"
-      }
+        "readme.md",
+      },
     },
     update_focused_file = {
       enable = true,
       debounce_delay = 15,
       update_root = true,
-      ignore_list = {}
+      ignore_list = {},
     },
     ignore_ft_on_setup = {},
     system_open = {
       cmd = nil,
-      args = {}
+      args = {},
     },
     diagnostics = {
       enable = true,
@@ -96,26 +96,26 @@ return {
         hint = require("ui.icons").diagnostics.hint,
         info = require("ui.icons").diagnostics.info,
         warning = require("ui.icons").diagnostics.info,
-        error = require("ui.icons").diagnostics.info
-      }
+        error = require("ui.icons").diagnostics.info,
+      },
     },
     filters = {
       dotfiles = false,
       custom = {
         ".git",
         "node_modules",
-        ".cache"
+        ".cache",
       },
       exclude = {
         ".gitignore",
         "gitsigns",
         ".plugins.lua",
-      }
+      },
     },
     git = {
       enable = true,
       ignore = true,
-      timeout = 500
+      timeout = 500,
     },
     modified = {
       enable = true,
@@ -127,7 +127,7 @@ return {
       change_dir = {
         enable = true,
         global = true,
-        restrict_above_cwd = false
+        restrict_above_cwd = false,
       },
       open_file = {
         quit_on_open = false,
@@ -135,16 +135,16 @@ return {
           enable = true,
           exclude = {
             filetype = { "notify", "packer", "qf", "diff", "fugitive", "fugitiveblame", "toggleterm" },
-            buftype = { "nofile", "terminal", "help" }
-          }
-        }
+            buftype = { "nofile", "terminal", "help" },
+          },
+        },
       },
-      remove_file = { close_window = true }
+      remove_file = { close_window = true },
     },
     trash = { require_confirm = false },
-    live_filter = { prefix = "Filtro: " }
+    live_filter = { prefix = "Filtro: " },
   },
   keys = {
-    { "ñ", "<cmd>NvimTreeToggle<cr>", { desc = "[Explorer] Abrir el explorador de archivos" } }
+    { "ñ", "<cmd>NvimTreeToggle<cr>", { desc = "[Explorer] Abrir el explorador de archivos" } },
   },
 }

@@ -30,13 +30,11 @@ return {
         nls.builtins.diagnostics.pylint.with({
           diagnostics_postprocess = function(diagnostic)
             diagnostic.code = diagnostic.message_id
-          end
+          end,
         }),
         nls.builtins.code_actions.gitsigns,
       },
     }
-
     nls.setup(opts)
-
   end,
 }

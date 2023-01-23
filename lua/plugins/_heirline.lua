@@ -2,10 +2,10 @@ return {
   "rebelot/heirline.nvim",
   event = "BufReadPost",
   config = function()
-    local heirline = require "heirline"
-    local conditions = require "heirline.conditions"
-    local utils = require "heirline.utils"
-    local icons = require "ui.icons"
+    local heirline = require("heirline")
+    local conditions = require("heirline.conditions")
+    local utils = require("heirline.utils")
+    local icons = require("ui.icons")
 
     local colors = {
       bg = utils.get_highlight("Cursor").fg,
@@ -114,7 +114,7 @@ return {
           return "No Name "
         end
         if not conditions.width_percent_below(#filename, 0.25) then
-          filename = vim.fn.expand "%:t"
+          filename = vim.fn.expand("%:t")
         end
         return filename .. " "
       end,
@@ -128,7 +128,7 @@ return {
           return "No Name "
         end
         if not conditions.width_percent_below(#filename, 0) then
-          filename = vim.fn.expand "%:t"
+          filename = vim.fn.expand("%:t")
         end
         local trail = filename:sub(-1) == " › " and "" or " › "
         return filename .. trail
@@ -486,10 +486,10 @@ return {
 
     local SpecialStatusline = {
       condition = function()
-        return conditions.buffer_matches {
+        return conditions.buffer_matches({
           buftype = { "nofile", "prompt", "help", "quickfix" },
           filetype = { "^git.*", "fugitive" },
-        }
+        })
       end,
       Space,
       FileType,
@@ -498,7 +498,7 @@ return {
 
     local TerminalStatusline = {
       condition = function()
-        return conditions.buffer_matches { buftype = { "terminal" }, filetype = { "toggleterm" } }
+        return conditions.buffer_matches({ buftype = { "terminal" }, filetype = { "toggleterm" } })
       end,
       hl = {
         bg = colors.black,
@@ -553,10 +553,10 @@ return {
       fallthrough = false,
       {
         condition = function()
-          return conditions.buffer_matches {
+          return conditions.buffer_matches({
             buftype = { "nofile", "prompt", "help", "quickfix" },
             filetype = { "^git.*", "fugitive", "toggleterm" },
-          }
+          })
         end,
         init = function()
           vim.opt_local.winbar = nil
@@ -576,7 +576,6 @@ return {
         Navic,
       },
     }
-
-    heirline.setup { statusline = Statusline, winbar = WinBars }
+    heirline.setup({ statusline = Statusline, winbar = WinBars })
   end,
 }

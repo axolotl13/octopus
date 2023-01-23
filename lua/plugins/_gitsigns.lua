@@ -7,32 +7,32 @@ return {
         hl = "GitSignsAdd",
         text = require("ui.icons").signs.add,
         numhl = "GitSignsAddNr",
-        linehl = "GitSignsAddLn"
+        linehl = "GitSignsAddLn",
       },
       change = {
         hl = "GitSignsChange",
         text = require("ui.icons").signs.add,
         numhl = "GitSignsChangeNr",
-        linehl = "GitSignsChangeLn"
+        linehl = "GitSignsChangeLn",
       },
       delete = {
         hl = "GitSignsDelete",
         text = require("ui.icons").signs.add,
         numhl = "GitSignsDeleteNr",
-        linehl = "GitSignsDeleteLn"
+        linehl = "GitSignsDeleteLn",
       },
       topdelete = {
         hl = "GitSignsDelete",
         text = require("ui.icons").signs.add,
         numhl = "GitSignsDeleteNr",
-        linehl = "GitSignsDeleteLn"
+        linehl = "GitSignsDeleteLn",
       },
       changedelete = {
         hl = "GitSignsChange",
         text = require("ui.icons").signs.add,
         numhl = "GitSignsChangeNr",
-        linehl = "GitSignsChangeLn"
-      }
+        linehl = "GitSignsChangeLn",
+      },
     },
     signcolumn = true,
     numhl = false,
@@ -40,14 +40,14 @@ return {
     word_diff = false,
     watch_gitdir = {
       interval = 1000,
-      follow_files = true
+      follow_files = true,
     },
     attach_to_untracked = false,
     current_line_blame = false,
     current_line_blame_opts = {
       virt_text = true,
       virt_text_pos = "eol",
-      delay = 500
+      delay = 500,
       -- ignore_whitespace = false,
     },
     sign_priority = 6,
@@ -59,17 +59,17 @@ return {
       style = "minimal",
       relative = "cursor",
       row = 0,
-      col = 1
+      col = 1,
     },
     yadm = {
-      enable = false
-    }
+      enable = false,
+    },
   },
   keys = {
     {
       "<leader>gr",
       "<cmd>Gitsigns reset_buffer<cr>",
-      desc = "[Gitsigns] Deshacer todos los cambios del archivo actual"
+      desc = "[Gitsigns] Deshacer todos los cambios del archivo actual",
     },
     { "<leader>gs", "<cmd>Gitsigns stage_buffer<cr>", desc = "[Gitsigns] Poner la línea actual en el área de stage" },
     { "<leader>gu", "<cmd>Gitsigns reset_hunk<cr>", desc = "[Gitsigns] Deshacer cambios en la línea actual" },
@@ -101,5 +101,5 @@ return {
     },
     { "<leader>gh", "<cmd>Gitsigns toggle_deleted<cr>", desc = "[Gitsigns] Ver las líneas borradas" },
     { "<leader>gn", "<cmd>Gitsigns toggle_numhl<cr>", desc = "[Gitsigns] Pintar numeros" },
-  }
+  },
 }

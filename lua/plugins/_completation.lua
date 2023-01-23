@@ -54,7 +54,7 @@ return {
           { "╯", hl },
           { "─", hl },
           { "╰", hl },
-          { "│", hl }
+          { "│", hl },
         }
       end
 
@@ -62,7 +62,7 @@ return {
         snippet = {
           expand = function(args)
             require("luasnip").lsp_expand(args.body)
-          end
+          end,
         },
         formatting = {
           format = function(_, item)
@@ -70,13 +70,13 @@ return {
               item.kind = icons[item.kind] .. " " .. item.kind
             end
             return item
-          end
+          end,
         },
         duplicates = {
           nvim_lsp = 1,
           luasnip = 1,
           buffer = 1,
-          path = 1
+          path = 1,
         },
         sources = {
           { name = "nvim_lsp" },
@@ -88,20 +88,20 @@ return {
         experimental = {
           ghost_text = {
             hl_group = "LspCodeLens",
-          }
+          },
         },
         window = {
           completion = {
             border = border("CmpBorder"),
-            winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None"
+            winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
           },
           documentation = {
-            border = border("CmpDocBorder")
-          }
+            border = border("CmpDocBorder"),
+          },
         },
         confirm_opts = {
           behavior = cmp.ConfirmBehavior.Replace,
-          select = false
+          select = false,
         },
         mapping = cmp.mapping.preset.insert({
           ["<up>"] = cmp.mapping.select_prev_item(),
@@ -126,12 +126,10 @@ return {
             else
               fallback()
             end
-          end, { "i", "s" })
-        })
+          end, { "i", "s" }),
+        }),
       }
-
       cmp.setup(opts)
-
-    end
-  }
+    end,
+  },
 }

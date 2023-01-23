@@ -7,11 +7,10 @@ return {
       minimum_width = 40,
       timeout = 2000,
       stages = "fade",
-      background_colour = "Normal"
+      background_colour = "Normal",
     }
 
     notify.setup(opts)
     vim.notify = notify
-
-  end
+  end,
 }

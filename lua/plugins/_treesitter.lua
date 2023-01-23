@@ -4,12 +4,11 @@ return {
   dependencies = {
     { "nvim-treesitter/nvim-treesitter-refactor" },
     { "RRethy/nvim-treesitter-textsubjects" },
-    { "mrjones2014/nvim-ts-rainbow" }
+    { "mrjones2014/nvim-ts-rainbow" },
   },
   event = "BufReadPost",
   config = function()
     local treesitter = require("nvim-treesitter.configs")
-
     local opts = {
       ensure_installed = {
         "bash",
@@ -33,7 +32,7 @@ return {
         "tsx",
         "typescript",
         "vim",
-        "yaml"
+        "yaml",
       },
       highlight = {
         enable = true,
@@ -52,29 +51,29 @@ return {
           init_selection = "ga",
           node_incremental = "g+",
           -- scope_incremental = "gaa",
-          node_decremental = "g-"
-        }
+          node_decremental = "g-",
+        },
       },
       textsubjects = {
         enable = true,
-        prev_selection = ',',
+        prev_selection = ",",
         keymaps = {
-          ['.'] = 'textsubjects-smart',
-          [';'] = 'textsubjects-container-outer',
+          ["."] = "textsubjects-smart",
+          [";"] = "textsubjects-container-outer",
         },
       },
       rainbow = {
         enable = true,
         disable = { "html" },
         extended_mode = false,
-        max_file_lines = nil
+        max_file_lines = nil,
       },
       refactor = {
         highlight_definitions = {
-          enable = true
+          enable = true,
         },
         highlight_current_scope = {
-          enable = false
+          enable = false,
         },
         smart_rename = {
           enable = true,
@@ -85,15 +84,13 @@ return {
       },
       context_commentstring = {
         enable = true,
-        enable_autocmd = false
+        enable_autocmd = false,
       },
       --[[ autotag = {
         enable = true,
         filetypes = { "html", "xml" }
       } ]]
     }
-
     treesitter.setup(opts)
-
-  end
+  end,
 }
