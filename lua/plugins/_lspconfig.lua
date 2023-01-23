@@ -1,7 +1,7 @@
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
-    { "hrsh7th/cmp-nvim-lsp" }
+    { "hrsh7th/cmp-nvim-lsp" },
   },
   event = "BufReadPre",
   config = function()
@@ -25,8 +25,8 @@ return {
           focusable = true,
           style = "minimal",
           border = "rounded",
-          source = "always"
-        }
+          source = "always",
+        },
       })
 
       for type, icon in pairs(signs) do
@@ -100,7 +100,9 @@ return {
       keymap("n", "gr", vim.lsp.buf.rename, bufn)
       keymap("n", "gp", vim.lsp.buf.code_action, bufn)
       keymap("n", "gl", vim.lsp.buf.references, bufn)
-      keymap("n", "<leader>ff", function() vim.lsp.buf.format { async = true } end, bufn)
+      keymap("n", "<leader>ff", function()
+        vim.lsp.buf.format({ async = true })
+      end, bufn)
       --[[ keymap("x", "<leader>ff", vim.lsp.buf.range_formatting, bufn) ]]
       keymap("n", "gs", vim.lsp.buf.signature_help, bufn)
     end
@@ -132,9 +134,33 @@ return {
     end
   end,
   keys = {
-    { "gf", function() vim.diagnostic.open_float() end, desc = "[Diagnostics] Ventana Flotante" },
-    { "g{", function() vim.diagnostic.goto_prev() end, desc = "[Diagnostics] Ir al anterior diagnostico" },
-    { "g}", function() vim.diagnostic.goto_next() end, desc = "[Diagnostics] Ir al siguiente diagnostico" },
-    { "gs", function() vim.diagnostic.setloclist() end, desc = "[Diagnostics] Mostrar los diagnosticos en una ventana" }
-  }
+    {
+      "gf",
+      function()
+        vim.diagnostic.open_float()
+      end,
+      desc = "[Diagnostics] Ventana Flotante",
+    },
+    {
+      "g{",
+      function()
+        vim.diagnostic.goto_prev()
+      end,
+      desc = "[Diagnostics] Ir al anterior diagnostico",
+    },
+    {
+      "g}",
+      function()
+        vim.diagnostic.goto_next()
+      end,
+      desc = "[Diagnostics] Ir al siguiente diagnostico",
+    },
+    {
+      "gs",
+      function()
+        vim.diagnostic.setloclist()
+      end,
+      desc = "[Diagnostics] Mostrar los diagnosticos en una ventana",
+    },
+  },
 }
