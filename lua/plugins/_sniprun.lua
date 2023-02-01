@@ -1,6 +1,6 @@
 return {
   "michaelb/sniprun",
-  --[[ build = "bash ./install.sh", ]]
+  build = "bash ./install.sh",
   cmd = "SnipRun",
   opts = {
     interpreter_options = { JS_original = { use_on_filetypes = { "javascriptreact" } } },
