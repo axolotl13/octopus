@@ -8,7 +8,7 @@ return {
         -- require("luasnip.loaders.from_vscode").lazy_load { paths = { "./snippets/react_ts" } }
       end,
     },
-    config = {
+    opts = {
       history = true,
       delete_check_events = "TextChanged",
     },
@@ -27,7 +27,7 @@ return {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     dependencies = {
-      "hrsh7th/cmp-nvim-lua",
+      -- "hrsh7th/cmp-nvim-lua",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
@@ -80,7 +80,7 @@ return {
         },
         sources = {
           { name = "nvim_lsp" },
-          { name = "nvim_lua" },
+          -- { name = "nvim_lua" },
           { name = "luasnip" },
           { name = "buffer" },
           { name = "path" },
@@ -113,7 +113,7 @@ return {
           ["<c-space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
           ["<c-e>"] = cmp.mapping({ i = cmp.mapping.abort(), c = cmp.mapping.close() }),
           ["<cr>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
-          ["<Tab>"] = cmp.mapping(function(fallback)
+          ["<tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
             else
