@@ -269,7 +269,10 @@ return {
 
     local FileType = {
       provider = function()
-        return string.upper(vim.bo.filetype)
+        local filetype = vim.bo.filetype
+        filetype = filetype:gsub("^%l", string.upper)
+        local trail = filetype:sub(-1) == " ›" and "" or " ›"
+        return " " .. filetype .. trail
       end,
       hl = {
         bold = true,
@@ -572,6 +575,7 @@ return {
       {
         Space,
         DirName,
+        FileType,
         FileNameBlockWin,
         Navic,
       },
