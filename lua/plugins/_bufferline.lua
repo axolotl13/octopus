@@ -17,7 +17,7 @@ return {
       max_name_length = 20,
       max_prefix_length = 15,
       tab_size = 20,
-      offsets = { { filetype = "NvimTree", text = "", separator = true } },
+      offsets = { { filetype = "NvimTree", text = "", separator = false } },
       show_close_icon = false,
       persist_buffer_sort = true,
       separator_style = "thin",
