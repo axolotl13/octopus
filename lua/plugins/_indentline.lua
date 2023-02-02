@@ -26,7 +26,6 @@ return {
       "help",
       "terminal",
       "packer",
-      "sh",
       "md",
       "txt",
       "css",

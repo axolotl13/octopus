@@ -130,7 +130,7 @@ return {
         if not conditions.width_percent_below(#filename, 0) then
           filename = vim.fn.expand("%:t")
         end
-        local trail = filename:sub(-1) == " › " and "" or " › "
+        local trail = filename:sub(-1) == " ❭ " and "" or " ❭ "
         return filename .. trail
       end,
       -- hl = { bold = false },
@@ -139,7 +139,7 @@ return {
     local DirName = {
       provider = function()
         local dirname = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
-        local trail = dirname:sub(-1) == " › " and "" or " ›"
+        local trail = dirname:sub(-1) == " ❭ " and "" or " ❭"
         return icons.explorer.default3 .. " " .. dirname .. trail
       end,
       -- hl = { bold = false },
@@ -271,8 +271,8 @@ return {
       provider = function()
         local filetype = vim.bo.filetype
         filetype = filetype:gsub("^%l", string.upper)
-        local trail = filetype:sub(-1) == " ›" and "" or " ›"
-        return " " .. filetype .. trail
+        local trail = filetype:sub(-1) == " ❭ " and "" or " ❭ "
+        return filetype .. trail
       end,
       hl = {
         bold = true,
@@ -575,8 +575,8 @@ return {
       {
         Space,
         DirName,
-        FileType,
         FileNameBlockWin,
+        FileType,
         Navic,
       },
     }
