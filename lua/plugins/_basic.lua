@@ -24,6 +24,7 @@ return {
     },
     ft = { "js", "jsx", "ts", "tsx", "css", "html" },
   },
+  -- Vim plugins
   {
     "tpope/vim-fugitive",
     cmd = "Git",
@@ -43,6 +44,7 @@ return {
     "SmiteshP/nvim-navic",
     config = {
       icons = require("ui.icons").vscode,
+      depth_limit = 5,
     },
     dependencies = {
       "neovim/nvim-lspconfig",
@@ -58,6 +60,9 @@ return {
       autowidth = {
         enable = true,
         winwidth = 30,
+      },
+      ignore = {
+        filetype = { "NvimTree", "spectre_panel" },
       },
     },
     keys = {
@@ -96,5 +101,8 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope.nvim",
     },
+    keys = {
+      { "<space>qq", "<cmd>ChatGPT<cr>", desc = "[ChatGPT] Abre ChatGPT" },
+    }
   },
 }
