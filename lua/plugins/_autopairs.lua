@@ -8,6 +8,7 @@ return {
       ts_config = {
         lua = { "string", "source" },
         javascript = { "string", "template_string" },
+        java = false
       },
       disable_filetype = { "TelescopePrompt", "vim", "spectre_panel" },
       fast_wrap = {
@@ -25,7 +26,7 @@ return {
     pairs.setup(opts)
     require("cmp").event:on(
       "confirm_done",
-      require("nvim-autopairs.completion.cmp").on_confirm_done({ map_char = { tex = "" } })
+      require("nvim-autopairs.completion.cmp").on_confirm_done({ tex = "" })
     )
   end,
 }
