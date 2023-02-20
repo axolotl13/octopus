@@ -21,7 +21,7 @@ local config = {
     "-configuration",
     config_path,
     "-data",
-    "/home/gio/workspace",
+    "/home/joker/workspace",
   },
 
   root_dir = require("jdtls.setup").find_root({ ".git", "mvnw", "gradlew" }),
