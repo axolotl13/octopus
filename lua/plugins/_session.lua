@@ -9,6 +9,7 @@ return {
       "lua vim.notify.dismiss()",
       "ToggleTermToggleAll",
       "DiffviewClose",
+      "lua require('spectre').close()"
     },
     auto_session_root_dir = vim.fn.expand("$HOME") .. "/.config/nvim/sessions/",
     auto_session_enabled = true,
