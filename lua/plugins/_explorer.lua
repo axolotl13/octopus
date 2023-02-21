@@ -1,7 +1,7 @@
 return {
   "nvim-tree/nvim-tree.lua",
   dependencies = {
-    { "kyazdani42/nvim-web-devicons" },
+    { "nvim-tree/nvim-web-devicons" },
   },
   cmd = "NvimTreeToggle",
   -- pin = true,
@@ -23,6 +23,7 @@ return {
       add_trailing = true,
       group_empty = true,
       highlight_git = true,
+      full_name = false,
       highlight_opened_files = "icon",
       highlight_modified = "icon",
       root_folder_label = table.concat({ ":t:gs?$?/..", string.rep(" ", 1000), "?:gs?^??" }),
@@ -80,7 +81,6 @@ return {
     },
     update_focused_file = {
       enable = true,
-      debounce_delay = 15,
       update_root = true,
       ignore_list = {},
     },
@@ -141,7 +141,6 @@ return {
       },
       remove_file = { close_window = true },
     },
-    trash = { require_confirm = false },
     live_filter = { prefix = "Filtro: " },
   },
   keys = {
