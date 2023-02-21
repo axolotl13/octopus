@@ -6,18 +6,17 @@ return {
   event = "BufReadPre",
   config = function()
     local mason = require("mason")
-    local icons = require("ui.icons")
 
     local diagnostics = function()
       local signs = {
-        Error = icons.diagnostics.info,
-        Warn = icons.diagnostics.info,
-        Hint = icons.diagnostics.hint,
-        Info = icons.diagnostics.info,
+        Error = require("ui.icons").diagnostics.info,
+        Warn = require("ui.icons").diagnostics.info,
+        Hint = require("ui.icons").diagnostics.hint,
+        Info = require("ui.icons").diagnostics.info,
       }
 
       vim.diagnostic.config({
-        virtual_text = { prefix = icons.global.prefix },
+        virtual_text = { prefix = require("ui.icons").global.prefix },
         underline = true,
         update_in_insert = false,
         severity_sort = true,
