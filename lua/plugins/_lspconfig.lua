@@ -87,10 +87,6 @@ return {
       client.server_capabilities.documentFormattingProvider = false
       client.server_capabilities.documentRangeFormattingProvider = false
 
-      if client.name == "clangd" then
-        client.offset_encoding = "utf-16"
-      end
-
       require("nvim-navic").attach(client, bufnr)
       vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
