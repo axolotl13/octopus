@@ -6,15 +6,14 @@ return {
   config = function()
     local mason = require("mason")
     local mason_lsp = require("mason-lspconfig")
-    local icons = require("ui.icons")
 
     local opts = {
       ui = {
         border = "rounded",
         icons = {
-          package_installed = icons.lsp.install,
-          package_pending = icons.lsp.pending,
-          package_uninstalled = icons.lsp.uninstall,
+          package_installed = require("ui.icons").lsp.install,
+          package_pending = require("ui.icons").lsp.pending,
+          package_uninstalled = require("ui.icons").lsp.uninstall,
         },
         keymaps = {
           install_package = "i",
