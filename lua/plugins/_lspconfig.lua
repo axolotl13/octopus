@@ -40,6 +40,7 @@ return {
       clangd = {},
       cssls = {},
       dockerls = {},
+      docker_compose_language_service = {},
       emmet_ls = {
         filetypes = {
           "html",
@@ -63,7 +64,7 @@ return {
       marksman = {},
       pyright = {},
       sqls = {},
-      sumneko_lua = {
+      lua_ls = {
         Lua = {
           runtime = {
             version = "LuaJIT",
@@ -86,6 +87,10 @@ return {
     local on_attach = function(client, bufnr)
       client.server_capabilities.documentFormattingProvider = false
       client.server_capabilities.documentRangeFormattingProvider = false
+
+      if client.name == "clangd" then
+        client.offset_encoding = "utf-16"
+      end
 
       require("nvim-navic").attach(client, bufnr)
       vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
