@@ -1,5 +1,5 @@
 return {
-  "windwp/nvim-spectre",
+  "nvim-pack/nvim-spectre",
   opts = {
     color_devicons = true,
     open_cmd = "vnew",
