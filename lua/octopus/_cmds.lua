@@ -1,6 +1,7 @@
 local cmd = vim.api.nvim_create_autocmd
 
 -- Especificar sangría para ciertos tipos de archivo
+cmd("FileType", { pattern = "cpp", command = "setlocal shiftwidth=4 tabstop=4" })
 cmd("FileType", { pattern = "python", command = "setlocal shiftwidth=4 tabstop=4" })
 cmd("FileType", { pattern = "java", command = "setlocal shiftwidth=4 tabstop=4" })
 cmd("FileType", { pattern = "xml", command = "setlocal shiftwidth=4 tabstop=4" })
