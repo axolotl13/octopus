@@ -13,10 +13,11 @@ return {
         nls.builtins.formatting.stylua,
         nls.builtins.formatting.shfmt.with({ extra_args = { "-i", "2" } }),
         nls.builtins.formatting.xmllint,
-        nls.builtins.formatting.cmake_format,
+        -- nls.builtins.formatting.cmake_format,
         -- nls.builtins.formatting.pg_format,
         nls.builtins.formatting.codespell.with({ filetypes = { "markdown" } }),
-        nls.builtins.formatting.clang_format.with({ filetypes = { "c", "cpp", "cs" } }),
+        nls.builtins.formatting.clang_format.with({
+          filetypes = { "c", "cpp", "cs" }, extra_args = { "-style", "{IndentWidth: 4}" } } ),
         nls.builtins.diagnostics.tidy,
         nls.builtins.diagnostics.markdownlint,
         nls.builtins.diagnostics.hadolint,
