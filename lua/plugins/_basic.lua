@@ -55,6 +55,7 @@ return {
     event = "VeryLazy",
     dependencies = {
       "anuvyklack/middleclass",
+      "anuvyklack/animation.nvim",
     },
     opts = {
       autowidth = {
@@ -63,6 +64,11 @@ return {
       },
       ignore = {
         filetype = { "NvimTree", "spectre_panel" },
+      },
+      animation = {
+        enable = true,
+        duration = 220,
+        fps = 60,
       },
     },
     keys = {
@@ -92,9 +98,9 @@ return {
     "jackMort/ChatGPT.nvim",
     cmd = "ChatGPT",
     config = function()
-      require("chatgpt").setup({
+      require("chatgpt").setup {
         -- optional configuration
-      })
+      }
     end,
     dependencies = {
       "MunifTanjim/nui.nvim",
@@ -102,7 +108,20 @@ return {
       "nvim-telescope/telescope.nvim",
     },
     keys = {
-      { "<space>qq", "<cmd>ChatGPT<cr>", desc = "[ChatGPT] Abre ChatGPT" },
-    }
+      { "<leader>qq", "<cmd>ChatGPT<cr>", desc = "[ChatGPT] Abre ChatGPT" },
+    },
+  },
+  {
+    "s1n7ax/nvim-comment-frame",
+    dependencies = {
+      "nvim-treesitter",
+    },
+    config = {
+      keymap = "<leader>cc",
+      multiline_keymap = "<leader>cf",
+    },
+    keys = {
+      { "<leader>cc", "lua require('nvim-comment-frame').add_comment()<CR>", desc = "" },
+    },
   },
 }

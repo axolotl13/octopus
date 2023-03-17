@@ -42,6 +42,9 @@ local opts = {
   updatetime = 300,                                     -- Finalización más rápida
   sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions",
   guicursor = 'n-v-c:block-Cursor/lCursor,i-ci-ve:ver25-Cursor2/lCursor2,r-cr:hor20,o:hor20',
+  winwidth = 10,
+  winminwidth = 10,
+  equalalways = false,
 }
 
 vim.opt.shortmess:append("sI")                              -- Elimina los mensajes al inicio
