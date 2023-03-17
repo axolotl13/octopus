@@ -82,17 +82,4 @@ return {
       { "<leader>qq", "<cmd>ChatGPT<cr>", desc = "[ChatGPT] Abre ChatGPT" },
     },
   },
-  {
-    "s1n7ax/nvim-comment-frame",
-    dependencies = {
-      "nvim-treesitter",
-    },
-    config = {
-      keymap = "<leader>cc",
-      multiline_keymap = "<leader>cf",
-    },
-    keys = {
-      { "<leader>cc", "lua require('nvim-comment-frame').add_comment()<CR>", desc = "" },
-    },
-  },
 }
