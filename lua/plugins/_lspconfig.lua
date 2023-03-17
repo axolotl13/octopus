@@ -2,6 +2,7 @@ return {
   "neovim/nvim-lspconfig",
   dependencies = {
     { "hrsh7th/cmp-nvim-lsp" },
+    { "SmiteshP/nvim-navic" },
   },
   event = "BufReadPre",
   config = function()
