@@ -10,13 +10,6 @@ return {
     event = "VeryLazy",
     config = true,
   },
-  --[[ {
-    "windwp/nvim-ts-autotag",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter"
-    },
-    ft = { "html", "xml" }
-  } ]]
   {
     "JoosepAlviste/nvim-ts-context-commentstring",
     dependencies = {
