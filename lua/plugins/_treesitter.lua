@@ -19,6 +19,7 @@ return {
         "fish",
         "gitignore",
         "go",
+        "glimmer",
         "html",
         "java",
         "javascript",
