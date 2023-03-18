@@ -10,14 +10,18 @@ return {
       folder_open = require("ui.icons").explorer.open,
     },
     signs = {
-      fold_closed = "",
-      fold_open = "",
+      fold_closed = require("ui.icons").explorer.arrow_closed,
+      fold_open = require("ui.icons").explorer.arrow_open,
     },
     file_panel = {
-      listing_style = "list",
+      listing_style = "tree",
+      tree_options = {
+        flatten_dirs = true,
+        folder_statuses = "always",
+      },
       win_config = {
         position = "left",
-        width = 32,
+        width = 35,
       },
     },
     file_history_panel = {
