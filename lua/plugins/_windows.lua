@@ -11,7 +11,7 @@ return {
       winwidth = 30,
     },
     ignore = {
-      filetype = { "NvimTree", "spectre_panel" },
+      filetype = { "NvimTree", "spectre_panel", "DiffviewFiles" },
     },
     animation = {
       enable = true,
