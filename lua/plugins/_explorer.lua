@@ -27,9 +27,9 @@ return {
       highlight_opened_files = "icon",
       highlight_modified = "icon",
       root_folder_label = table.concat({ ":t:gs?$?/..", string.rep(" ", 1000), "?:gs?^??" }),
-      indent_width = 1,
+      indent_width = 2,
       indent_markers = {
-        enable = false,
+        enable = true,
         icons = {
           corner = "└",
           edge = "│",
@@ -82,7 +82,7 @@ return {
     update_focused_file = {
       enable = true,
       update_root = true,
-      ignore_list = {},
+      ignore_list = { "toggleterm" },
     },
     ignore_ft_on_setup = {},
     system_open = {
@@ -142,6 +142,11 @@ return {
       remove_file = { close_window = true },
     },
     live_filter = { prefix = "Filtro: " },
+    ui = {
+      confirm = {
+        trash = false,
+      },
+    },
   },
   keys = {
     { "ñ", "<cmd>NvimTreeToggle<cr>", { desc = "[Explorer] Abrir el explorador de archivos" } },
