@@ -39,8 +39,14 @@ return {
       bashls = {},
       clangd = {},
       cssls = {},
+      -- diagnosticls = {},
       dockerls = {},
       docker_compose_language_service = {},
+      ember = {
+        filetypes = {
+          "handlebars",
+        },
+      },
       emmet_ls = {
         filetypes = {
           "html",
@@ -114,7 +120,10 @@ return {
     end
 
     local capabilities = vim.lsp.protocol.make_client_capabilities()
+    -- Solución para utf en C++
+    -- capabilities.offsetEncoding = {"utf-16"}
     capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
     capabilities.textDocument.foldingRange = {
       dynamicRegistration = false,
       lineFoldingOnly = true,
