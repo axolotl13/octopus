@@ -18,7 +18,7 @@ return {
       max_prefix_length = 15,
       tab_size = 20,
       offsets = { { filetype = "NvimTree", text = "", separator = true } },
-      show_close_icon = false,
+      show_close_icon = true,
       persist_buffer_sort = true,
       separator_style = "slant",
       enforce_regular_tabs = false,
@@ -82,6 +82,14 @@ return {
       tab_close = {
         fg = { attribute = "fg", highlight = "Error" },
         bg = { attribute = "bg", highlight = "TabLine" },
+      },
+      tab_separator = {
+        fg = { attribute = "bg", highlight = "TabLine" },
+        bg = { attribute = "bg", highlight = "TabLine" },
+      },
+      tab_separator_selected = {
+        fg = { attribute = "bg", highlight = "Normal" },
+        bg = { attribute = "bg", highlight = "Normal" },
       },
       duplicate_selected = {
         fg = { attribute = "fg", highlight = "Comment" },
