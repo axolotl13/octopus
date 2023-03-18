@@ -4,7 +4,7 @@ return {
   dependencies = {
     { "nvim-treesitter/nvim-treesitter-refactor" },
     { "RRethy/nvim-treesitter-textsubjects" },
-    { "mrjones2014/nvim-ts-rainbow" },
+    { "HiPhish/nvim-ts-rainbow2" },
   },
   event = "BufReadPost",
   config = function()
