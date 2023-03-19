@@ -85,10 +85,6 @@ return {
         enable = true,
         enable_autocmd = false,
       },
-      --[[ autotag = {
-        enable = true,
-        filetypes = { "html", "xml" }
-      } ]]
     }
     treesitter.setup(opts)
   end,
