@@ -1,5 +1,9 @@
 return {
   "rebelot/heirline.nvim",
+  dependencies = {
+    "SmiteshP/nvim-navic",
+  },
+  -- commit = "480badd3151fb20ec380f866df650c5acfd61bf7",
   event = "BufReadPost",
   config = function()
     local heirline = require("heirline")
@@ -140,7 +144,7 @@ return {
       provider = function()
         local dirname = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
         local trail = dirname:sub(-1) == " ❭ " and "" or " ❭"
-        return icons.explorer.default3 .. " " .. dirname .. trail
+        return icons.explorer.default2 .. " " .. dirname .. trail
       end,
       -- hl = { bold = false },
     }
@@ -368,6 +372,15 @@ return {
     }
 
     local Navic = {
+      condition = function()
+        return require("nvim-navic").is_available()
+      end,
+      provider = function()
+        require("nvim-navic").get_location({ highlight = true })
+      end,
+      update = "CursorMoved",
+    }
+    --[[ local Navic = {
       condition = require("nvim-navic").is_available,
       static = {
         type_hl = {
@@ -447,7 +460,7 @@ return {
       end,
       hl = { fg = colors.fg },
       update = "CursorMoved",
-    }
+    } ]]
 
     local Left = { Git, FileNameBlock, FileSize, Diagnostics }
 
