@@ -2,7 +2,7 @@ return {
   {
     "ggandor/lightspeed.nvim",
     keys = { "f", "F", "s", "S", "t", "T" },
-    config = { substitute_chars = { ["\r"] = "ñ" } }, -- Enter end
+    opts = { substitute_chars = { ["\r"] = "ñ" } }, -- Enter end
   },
   {
     "kylechui/nvim-surround",
@@ -35,7 +35,7 @@ return {
   },
   {
     "SmiteshP/nvim-navic",
-    config = {
+    opts = {
       icons = require("ui.icons").vscode,
       depth_limit = 5,
     },
