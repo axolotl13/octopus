@@ -69,7 +69,8 @@ return {
       lemminx = {},
       marksman = {},
       pyright = {},
-      sqls = {},
+      rust_analyzer = {},
+      sqlls = {},
       lua_ls = {
         settings = {
           Lua = {
@@ -86,7 +87,7 @@ return {
               enable = false,
             },
           },
-        }
+        },
       },
       tsserver = {},
       yamlls = {},
