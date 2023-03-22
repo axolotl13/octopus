@@ -3,7 +3,7 @@ return {
   event = "VeryLazy",
   opts = {
     current_only = true,
-    winblend = 20,
+    winblend = 40,
     zindex = 40,
     excluded_filetypes = { "NvimTree" },
     width = 2,
