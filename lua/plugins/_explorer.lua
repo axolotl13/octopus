@@ -107,8 +107,9 @@ return {
         ".cache",
       },
       exclude = {
-        ".gitignore",
         "gitsigns",
+        ".gitignore",
+        ".env",
         ".plugins.lua",
       },
     },
