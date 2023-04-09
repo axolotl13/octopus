@@ -79,15 +79,17 @@ return {
     -- priority = 1000,
     config = function()
       require("kanagawa").setup({
-        -- dimInactive = true, -- dim inactive window `:h hl-NormalNC`
-        -- colors = {},
-        overrides = {
-          NvimTreeNormal = { bg = "#16161d" },
-          NvimTreeNormalNC = { bg = "#16161d" },
-          VertSplit = { fg = "#1f1f28", bg = "NONE" },
-        },
+        dimInactive = true,
+        terminalColors = false,
+        overrides = function ()
+          return {
+            NvimTreeNormal = { bg = "#16161d" },
+            NvimTreeNormalNC = { bg = "#16161d" },
+            -- VertSplit = { fg = "#1f1f28", bg = "NONE" },
+          }
+        end,
       })
-      vim.cmd([[colorscheme kanagawa]])
+      vim.cmd([[colorscheme kanagawa-wave]])
     end,
   },
   {
