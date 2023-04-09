@@ -3,7 +3,6 @@ return {
   dependencies = {
     "SmiteshP/nvim-navic",
   },
-  -- commit = "480badd3151fb20ec380f866df650c5acfd61bf7",
   event = "BufReadPost",
   config = function()
     local heirline = require("heirline")
@@ -375,13 +374,6 @@ return {
       condition = function()
         return require("nvim-navic").is_available()
       end,
-      provider = function()
-        require("nvim-navic").get_location({ highlight = true })
-      end,
-      update = "CursorMoved",
-    }
-    --[[ local Navic = {
-      condition = require("nvim-navic").is_available,
       static = {
         type_hl = {
           File = "Directory",
@@ -460,8 +452,7 @@ return {
       end,
       hl = { fg = colors.fg },
       update = "CursorMoved",
-    } ]]
-
+    }
     local Left = { Git, FileNameBlock, FileSize, Diagnostics }
 
     -- local Center = { Navic }
