@@ -15,7 +15,7 @@ return {
       mappings = {
         custom_only = false,
         list = {
-          { key = "d", action = "trash" },
+          -- { key = "d", action = "trash" },
         },
       },
     },
@@ -84,7 +84,6 @@ return {
       update_root = true,
       ignore_list = { "toggleterm", "diffview" },
     },
-    ignore_ft_on_setup = {},
     system_open = {
       cmd = nil,
       args = {},
