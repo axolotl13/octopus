@@ -11,7 +11,7 @@ return {
         nls.builtins.formatting.black,
         nls.builtins.formatting.isort,
         nls.builtins.formatting.stylua,
-        nls.builtins.formatting.shfmt.with({ extra_args = { "-i", "2" } }),
+        nls.builtins.formatting.shfmt.with({ extra_args = { "-i", "4" } }),
         nls.builtins.formatting.xmllint,
         nls.builtins.formatting.sqlfluff.with({ extra_args = { "--dialect", "mysql" } }),
         nls.builtins.formatting.codespell.with({ filetypes = { "markdown" } }),
