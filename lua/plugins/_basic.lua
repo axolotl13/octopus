@@ -3,7 +3,7 @@ return {
     "ggandor/lightspeed.nvim",
     keys = { "f", "F", "s", "S", "t", "T" },
     opts = { substitute_chars = { ["\r"] = "ñ" } }, -- Enter end
-  },
+},
   {
     "kylechui/nvim-surround",
     -- keys = { "ysiw", "ys", "yss","ds", "cs" },
@@ -16,15 +16,6 @@ return {
       "nvim-treesitter/nvim-treesitter",
     },
     ft = { "js", "jsx", "ts", "tsx", "css", "html" },
-  },
-  -- Vim plugins
-  {
-    "tpope/vim-fugitive",
-    cmd = "Git",
-  },
-  {
-    "mg979/vim-visual-multi",
-    keys = { "<c-n>", "<c-down>", "<c-up>", "<s-left>", "<s-right>" }, -- n, N, q, Q, -
   },
   {
     "NvChad/nvim-colorizer.lua",
@@ -62,17 +53,13 @@ return {
     "mfussenegger/nvim-jdtls",
     ft = "java",
   },
+  -- Vim plugins
   {
-    "jackMort/ChatGPT.nvim",
-    cmd = "ChatGPT",
-    config = true,
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim",
-    },
-    keys = {
-      { "<leader>qq", "<cmd>ChatGPT<cr>", desc = "[ChatGPT] Abre ChatGPT" },
-    },
+    "tpope/vim-fugitive",
+    cmd = "Git",
+  },
+  {
+    "mg979/vim-visual-multi",
+    keys = { "<c-n>", "<c-down>", "<c-up>", "<s-left>", "<s-right>" }, -- n, N, q, Q, -
   },
 }
