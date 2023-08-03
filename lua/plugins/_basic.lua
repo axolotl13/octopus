@@ -53,6 +53,16 @@ return {
     "mfussenegger/nvim-jdtls",
     ft = "java",
   },
+  {
+    "chrisgrieser/nvim-spider",
+    lazy = false,
+    keys = {
+      { "w", mode = { "n", "o", "x" }, "<cmd>lua require('spider').motion('w')<CR>", desc = "Spider-w" },
+      { "e", mode = { "n", "o", "x" }, "<cmd>lua require('spider').motion('e')<CR>", desc = "Spider-e" },
+      { "b", mode = { "n", "o", "x" }, "<cmd>lua require('spider').motion('b')<CR>", desc = "Spider-b" },
+      { "ge", mode = { "n", "o", "x" }, "<cmd>lua require('spider').motion('ge')<CR>", desc = "Spider-ge" },
+    },
+  },
   -- Vim plugins
   {
     "tpope/vim-fugitive",
