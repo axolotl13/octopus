@@ -4,11 +4,13 @@ return {
   dependencies = {
     { "nvim-treesitter/nvim-treesitter-refactor" },
     { "RRethy/nvim-treesitter-textsubjects" },
-    { "HiPhish/nvim-ts-rainbow2" },
+    {
+      "HiPhish/rainbow-delimiters.nvim",
+    },
   },
   event = "BufReadPost",
   config = function()
-    local treesitter = require("nvim-treesitter.configs")
+    local treesitter = require "nvim-treesitter.configs"
     local opts = {
       ensure_installed = {
         "bash",
@@ -17,9 +19,10 @@ return {
         "css",
         "dockerfile",
         "fish",
+        "gitattributes",
         "gitignore",
-        "go",
         "glimmer",
+        "go",
         "html",
         "java",
         "javascript",
@@ -62,10 +65,6 @@ return {
           ["."] = "textsubjects-smart",
           [";"] = "textsubjects-container-outer",
         },
-      },
-      rainbow = {
-        enable = true,
-        disable = { "html" },
       },
       refactor = {
         highlight_definitions = {
