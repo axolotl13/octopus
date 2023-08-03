@@ -3,7 +3,7 @@ return {
     "ggandor/lightspeed.nvim",
     keys = { "f", "F", "s", "S", "t", "T" },
     opts = { substitute_chars = { ["\r"] = "ñ" } }, -- Enter end
-},
+  },
   {
     "kylechui/nvim-surround",
     -- keys = { "ysiw", "ys", "yss","ds", "cs" },
