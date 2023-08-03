@@ -3,6 +3,7 @@ return {
   dependencies = {
     { "nvim-tree/nvim-web-devicons" },
   },
+  lazy = false,
   cmd = "NvimTreeToggle",
   -- pin = true,
   opts = {
@@ -10,8 +11,9 @@ return {
     hijack_cursor = true,
     respect_buf_cwd = true,
     view = {
+      debounce_delay = 30,
       width = 35,
-      -- preserve_window_proportions = true,
+      preserve_window_proportions = true,
       mappings = {
         custom_only = false,
         list = {
@@ -26,7 +28,7 @@ return {
       full_name = false,
       highlight_opened_files = "icon",
       highlight_modified = "icon",
-      root_folder_label = table.concat({ ":t:gs?$?/..", string.rep(" ", 1000), "?:gs?^??" }),
+      root_folder_label = table.concat { ":t:gs?$?/..", string.rep(" ", 1000), "?:gs?^??" },
       indent_width = 2,
       indent_markers = {
         enable = true,
@@ -50,6 +52,7 @@ return {
         glyphs = {
           default = require("ui.icons").global.default,
           symlink = require("ui.icons").global.symlink,
+          bookmark = require("ui.icons").global.bookMark,
           modified = require("ui.icons").global.modified,
           folder = {
             arrow_open = require("ui.icons").explorer.arrow_open,
@@ -91,6 +94,7 @@ return {
     diagnostics = {
       enable = true,
       show_on_dirs = false,
+      debounce_delay = 100,
       icons = {
         hint = require("ui.icons").diagnostics.hint,
         info = require("ui.icons").diagnostics.info,
@@ -112,10 +116,13 @@ return {
         ".plugins.lua",
       },
     },
+    filesystem_watchers = {
+      debounce_delay = 150,
+    },
     git = {
       enable = true,
       ignore = true,
-      timeout = 500,
+      timeout = 800,
     },
     modified = {
       enable = true,
@@ -141,7 +148,7 @@ return {
       },
       remove_file = { close_window = true },
     },
-    live_filter = { prefix = "Filtro: " },
+    live_filter = { prefix = "[Filtro]: " },
     ui = {
       confirm = {
         trash = false,
