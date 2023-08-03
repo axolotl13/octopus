@@ -16,7 +16,7 @@ return {
         nls.builtins.formatting.sqlfluff.with({ extra_args = { "--dialect", "mysql" } }),
         nls.builtins.formatting.codespell.with({ filetypes = { "markdown" } }),
         nls.builtins.formatting.clang_format.with({
-          filetypes = { "c", "cpp", "cs" }, extra_args = { "-style", "{IndentWidth: 4}" } } ),
+          filetypes = { "c", "cpp", "cs", "java" }, extra_args = { "-style", "{IndentWidth: 4}" } } ),
         nls.builtins.diagnostics.tidy,
         nls.builtins.diagnostics.checkstyle.with({ extra_args = { "-c", "/google_checks.xml" }}),
         nls.builtins.diagnostics.markdownlint,
