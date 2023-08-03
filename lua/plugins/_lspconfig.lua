@@ -6,7 +6,7 @@ return {
   },
   event = "BufReadPre",
   config = function()
-    local mason = require("mason")
+    local mason = require "mason"
 
     local diagnostics = function()
       local signs = {
@@ -16,7 +16,7 @@ return {
         Info = require("ui.icons").diagnostics.info,
       }
 
-      vim.diagnostic.config({
+      vim.diagnostic.config {
         virtual_text = { prefix = require("ui.icons").global.prefix },
         underline = true,
         update_in_insert = false,
@@ -27,7 +27,7 @@ return {
           border = "rounded",
           source = "always",
         },
-      })
+      }
 
       for type, icon in pairs(signs) do
         local hl = "DiagnosticSign" .. type
@@ -103,7 +103,7 @@ return {
       keymap("n", "gp", vim.lsp.buf.code_action, bufn)
       keymap("n", "gl", vim.lsp.buf.references, bufn)
       keymap("n", "<leader>ff", function()
-        vim.lsp.buf.format({ async = true })
+        vim.lsp.buf.format { async = true }
       end, bufn)
       --[[ keymap("x", "<leader>ff", vim.lsp.buf.range_formatting, bufn) ]]
       keymap("n", "gs", vim.lsp.buf.signature_help, bufn)
@@ -114,10 +114,6 @@ return {
     -- capabilities.offsetEncoding = {"utf-16"}
     capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
     capabilities.textDocument.completion.completionItem.snippetSupport = true
-    capabilities.textDocument.foldingRange = {
-      dynamicRegistration = false,
-      lineFoldingOnly = true,
-    }
 
     diagnostics()
 
