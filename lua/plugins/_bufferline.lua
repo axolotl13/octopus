@@ -15,8 +15,13 @@ return {
       left_trunc_marker = require("ui.icons").buffer.left,
       right_trunc_marker = require("ui.icons").buffer.right,
       max_name_length = 20,
-      max_prefix_length = 15,
       tab_size = 20,
+      diagnostics = "nvim_lsp",
+      diagnostics_indicator = function(count, level, diagnostics_dict, context)
+        local icon = level:match "error" and require("ui.icons").diagnostics.hint
+          or require("ui.icons").diagnostics.info
+        return icon .. " " .. count
+      end,
       offsets = { { filetype = "NvimTree", text = "", separator = true } },
       show_close_icon = true,
       persist_buffer_sort = true,
@@ -46,6 +51,105 @@ return {
       buffer_visible = {
         fg = { attribute = "fg", highlight = "Comment" },
         bg = { attribute = "bg", highlight = "TabLine" },
+      },
+      diagnostic = {
+        fg = { attribute = "fg", highlight = "TabLine" },
+        bg = { attribute = "bg", highlight = "TabLine" },
+      },
+      diagnostic_visible = {
+        fg = { attribute = "fg", highlight = "TabLine" },
+        bg = { attribute = "bg", highlight = "TabLine" },
+      },
+      diagnostic_selected = {
+        italic = false,
+      },
+      hint = {
+        fg = { attribute = "fg", highlight = "TabLine" },
+        bg = { attribute = "bg", highlight = "TabLine" },
+      },
+      hint_visible = {
+        fg = { attribute = "fg", highlight = "TabLine" },
+        bg = { attribute = "bg", highlight = "TabLine" },
+      },
+      hint_selected = {
+        italic = false,
+      },
+      hint_diagnostic = {
+        fg = { attribute = "fg", highlight = "TabLine" },
+        bg = { attribute = "bg", highlight = "TabLine" },
+      },
+      hint_diagnostic_visible = {
+        fg = { attribute = "fg", highlight = "TabLine" },
+        bg = { attribute = "bg", highlight = "TabLine" },
+      },
+      hint_diagnostic_selected = {
+        italic = false,
+      },
+      info = {
+        fg = { attribute = "fg", highlight = "TabLine" },
+        bg = { attribute = "bg", highlight = "TabLine" },
+      },
+      info_visible = {
+        fg = { attribute = "fg", highlight = "TabLine" },
+        bg = { attribute = "bg", highlight = "TabLine" },
+      },
+      info_selected = {
+        italic = false,
+      },
+      info_diagnostic = {
+        fg = { attribute = "fg", highlight = "TabLine" },
+        bg = { attribute = "bg", highlight = "TabLine" },
+      },
+      info_diagnostic_visible = {
+        fg = { attribute = "fg", highlight = "TabLine" },
+        bg = { attribute = "bg", highlight = "TabLine" },
+      },
+      info_diagnostic_selected = {
+        italic = false,
+      },
+      warning = {
+        fg = { attribute = "fg", highlight = "TabLine" },
+        bg = { attribute = "bg", highlight = "TabLine" },
+      },
+      warning_visible = {
+        fg = { attribute = "fg", highlight = "TabLine" },
+        bg = { attribute = "bg", highlight = "TabLine" },
+      },
+      warning_selected = {
+        italic = false,
+      },
+      warning_diagnostic = {
+        fg = { attribute = "fg", highlight = "TabLine" },
+        bg = { attribute = "bg", highlight = "TabLine" },
+      },
+      warning_diagnostic_visible = {
+        fg = { attribute = "fg", highlight = "TabLine" },
+        bg = { attribute = "bg", highlight = "TabLine" },
+      },
+      warning_diagnostic_selected = {
+        italic = false,
+      },
+      error = {
+        fg = { attribute = "fg", highlight = "TabLine" },
+        bg = { attribute = "bg", highlight = "TabLine" },
+      },
+      error_visible = {
+        fg = { attribute = "fg", highlight = "TabLine" },
+        bg = { attribute = "bg", highlight = "TabLine" },
+      },
+      error_selected = {
+        italic = false,
+      },
+      error_diagnostic = {
+        fg = { attribute = "fg", highlight = "TabLine" },
+        bg = { attribute = "bg", highlight = "TabLine" },
+      },
+      error_diagnostic_visible = {
+        fg = { attribute = "fg", highlight = "TabLine" },
+        bg = { attribute = "bg", highlight = "TabLine" },
+      },
+      error_diagnostic_selected = {
+        italic = false,
       },
       numbers = {
         fg = { attribute = "fg", highlight = "TabLine" },
@@ -156,8 +260,8 @@ return {
     {
       "<C-z>",
       function()
-        vim.cmd("BufferLineCloseRight")
-        vim.cmd("BufferLineCloseLeft")
+        vim.cmd "BufferLineCloseRight"
+        vim.cmd "BufferLineCloseLeft"
       end,
       desc = "[Bufferline] Cerrar todos los bufferes excepto la actual",
     },

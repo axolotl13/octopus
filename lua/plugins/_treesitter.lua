@@ -4,11 +4,37 @@ return {
   dependencies = {
     { "nvim-treesitter/nvim-treesitter-refactor" },
     { "RRethy/nvim-treesitter-textsubjects" },
-    { "HiPhish/nvim-ts-rainbow2" },
+    {
+      "HiPhish/rainbow-delimiters.nvim",
+    },
+    {
+      "kevinhwang91/nvim-ufo",
+      init = function()
+        vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+        vim.o.foldcolumn = "1"
+        vim.o.foldlevel = 99
+        vim.o.foldlevelstart = 99
+        vim.o.foldenable = true
+      end,
+      dependencies = {
+        "kevinhwang91/promise-async",
+      },
+      config = function()
+        require("ufo").setup {
+          provider_selector = function(bufnr, filetype, buftype)
+            return { "treesitter", "indent" }
+          end,
+        }
+      end,
+      keys = {
+        { "zR", "<cmd>require('ufo').openAllFolds<cr>", desc = "[UFO] Abrir fold" },
+        { "zM", "<cmd>require('ufo').closeAllFolds<cr>", desc = "[UFO] Cerrar fold" },
+      },
+    },
   },
   event = "BufReadPost",
   config = function()
-    local treesitter = require("nvim-treesitter.configs")
+    local treesitter = require "nvim-treesitter.configs"
     local opts = {
       ensure_installed = {
         "bash",
@@ -17,9 +43,10 @@ return {
         "css",
         "dockerfile",
         "fish",
+        "gitattributes",
         "gitignore",
-        "go",
         "glimmer",
+        "go",
         "html",
         "java",
         "javascript",
@@ -62,10 +89,6 @@ return {
           ["."] = "textsubjects-smart",
           [";"] = "textsubjects-container-outer",
         },
-      },
-      rainbow = {
-        enable = true,
-        disable = { "html" },
       },
       refactor = {
         highlight_definitions = {

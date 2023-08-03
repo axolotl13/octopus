@@ -1,37 +1,25 @@
 return {
   "lewis6991/gitsigns.nvim",
-  event = "BufReadPre",
+  event = { "BufReadPre", "BufNewFile" },
   opts = {
     signs = {
       add = {
-        hl = "GitSignsAdd",
         text = require("ui.icons").signs.add,
-        numhl = "GitSignsAddNr",
-        linehl = "GitSignsAddLn",
       },
       change = {
-        hl = "GitSignsChange",
         text = require("ui.icons").signs.add,
-        numhl = "GitSignsChangeNr",
-        linehl = "GitSignsChangeLn",
       },
       delete = {
-        hl = "GitSignsDelete",
         text = require("ui.icons").signs.add,
-        numhl = "GitSignsDeleteNr",
-        linehl = "GitSignsDeleteLn",
       },
       topdelete = {
-        hl = "GitSignsDelete",
         text = require("ui.icons").signs.add,
-        numhl = "GitSignsDeleteNr",
-        linehl = "GitSignsDeleteLn",
       },
       changedelete = {
-        hl = "GitSignsChange",
         text = require("ui.icons").signs.add,
-        numhl = "GitSignsChangeNr",
-        linehl = "GitSignsChangeLn",
+      },
+      untracked = {
+        text = require("ui.icons").signs.add,
       },
     },
     signcolumn = true,
@@ -47,7 +35,7 @@ return {
     current_line_blame_opts = {
       virt_text = true,
       virt_text_pos = "eol",
-      delay = 500,
+      delay = 1000,
       -- ignore_whitespace = false,
     },
     sign_priority = 6,
@@ -64,42 +52,24 @@ return {
     yadm = {
       enable = false,
     },
-  },
-  keys = {
-    {
-      "<leader>gr",
-      "<cmd>Gitsigns reset_buffer<cr>",
-      desc = "[Gitsigns] Deshacer todos los cambios del archivo actual",
-    },
-    { "<leader>gs", "<cmd>Gitsigns stage_buffer<cr>", desc = "[Gitsigns] Poner la línea actual en el área de stage" },
-    { "<leader>gu", "<cmd>Gitsigns reset_hunk<cr>", desc = "[Gitsigns] Deshacer cambios en la línea actual" },
-    { "<leader>gp", "<cmd>Gitsigns preview_hunk<cr>", desc = "[Gitsigns] Previsualizar cambios que se han hecho" },
-    {
-      "<leader>g{",
-      "<cmd>Gitsigns next_hunk<cr>",
-      desc = "[Gitsigns] Moverse hacía el siguiente cambio que se ha realizado",
-    },
-    {
-      "<leader>g}",
-      "<cmd>Gitsigns prev_hunk<cr>",
-      desc = "[Gitsigns] Moverse hacía el anterior cambio que se ha realizado",
-    },
-    {
-      "<leader>gd",
-      "<cmd>Gitsigns diffthis<cr>",
-      desc = "[Gitsigns] Ver los cambios posteriores que se habían hecho",
-    },
-    {
-      "<leader>gq",
-      "<cmd>Gitsigns undo_stage_hunk<cr>",
-      desc = "[Gitsigns] Salir en el área de stage en la línea actual",
-    },
-    {
-      "<leader>gl",
-      "<cmd>Gitsigns toggle_current_line_blame<cr>",
-      desc = "[Gitsigns] Habilitar línea de cambios por usuario",
-    },
-    { "<leader>gh", "<cmd>Gitsigns toggle_deleted<cr>", desc = "[Gitsigns] Ver las líneas borradas" },
-    { "<leader>gn", "<cmd>Gitsigns toggle_numhl<cr>", desc = "[Gitsigns] Pintar numeros" },
+    on_attach = function(bufnr)
+      local gs = package.loaded.gitsigns
+
+      local function map(mode, l, r, desc)
+        vim.keymap.set(mode, l, r, { buffer = bufnr, desc = desc })
+      end
+
+      map("n", "<leader>gr", gs.reset_buffer, "[Gitsigns] Deshacer todos los cambios del archivo actual")
+      map("n", "<leader>gs", gs.stage_buffer, "[Gitsigns] Poner la línea actual en el área de stage")
+      map("n", "<leader>gu", gs.reset_hunk, "[Gitsigns] Deshacer cambios en la línea actual")
+      map("n", "<leader>gp", gs.preview_hunk, "[Gitsigns] Previsualizar cambios que se han hecho")
+      map("n", "<leader>g{", gs.next_hunk, "[Gitsigns] Moverse hacía el siguiente cambio que se ha realizado")
+      map("n", "<leader>g}", gs.prev_hunk, "[Gitsigns] Moverse hacía el anterior cambio que se ha realizado")
+      map("n", "<leader>gd", gs.diffthis, "[Gitsigns] Ver los cambios posteriores que se habían hecho")
+      map("n", "<leader>gq", gs.undo_stage_hunk, "[Gitsigns] Salir en el área de stage en la línea actual")
+      map("n", "<leader>gl", gs.toggle_current_line_blame, "[Gitsigns] Habilitar línea de cambios por usuario")
+      map("n", "<leader>gh", gs.toggle_deleted, "[Gitsigns] Ver las líneas borradas")
+      map("n", "<leader>gn", gs.toggle_numhl, "[Gitsigns] Pintar numeros")
+    end,
   },
 }

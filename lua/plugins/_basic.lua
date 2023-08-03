@@ -17,15 +17,6 @@ return {
     },
     ft = { "js", "jsx", "ts", "tsx", "css", "html" },
   },
-  -- Vim plugins
-  {
-    "tpope/vim-fugitive",
-    cmd = "Git",
-  },
-  {
-    "mg979/vim-visual-multi",
-    keys = { "<c-n>", "<c-down>", "<c-up>", "<s-left>", "<s-right>" }, -- n, N, q, Q, -
-  },
   {
     "NvChad/nvim-colorizer.lua",
     cmd = "ColorizerToggle",
@@ -63,16 +54,22 @@ return {
     ft = "java",
   },
   {
-    "jackMort/ChatGPT.nvim",
-    cmd = "ChatGPT",
-    config = true,
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim",
-    },
+    "chrisgrieser/nvim-spider",
+    lazy = false,
     keys = {
-      { "<leader>qq", "<cmd>ChatGPT<cr>", desc = "[ChatGPT] Abre ChatGPT" },
+      { "w", mode = { "n", "o", "x" }, "<cmd>lua require('spider').motion('w')<CR>", desc = "Spider-w" },
+      { "e", mode = { "n", "o", "x" }, "<cmd>lua require('spider').motion('e')<CR>", desc = "Spider-e" },
+      { "b", mode = { "n", "o", "x" }, "<cmd>lua require('spider').motion('b')<CR>", desc = "Spider-b" },
+      { "ge", mode = { "n", "o", "x" }, "<cmd>lua require('spider').motion('ge')<CR>", desc = "Spider-ge" },
     },
+  },
+  -- Vim plugins
+  {
+    "tpope/vim-fugitive",
+    cmd = "Git",
+  },
+  {
+    "mg979/vim-visual-multi",
+    keys = { "<c-n>", "<c-down>", "<c-up>", "<s-left>", "<s-right>" }, -- n, N, q, Q, -
   },
 }

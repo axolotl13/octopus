@@ -68,7 +68,7 @@ return {
     -- priority = 1000,
     config = function()
       require("catppuccin").setup({
-        flavour = "macchiato",
+        flavour = "mocha",
       })
       vim.cmd([[colorscheme catppuccin]])
     end,
@@ -81,7 +81,7 @@ return {
       require("kanagawa").setup({
         dimInactive = true,
         terminalColors = false,
-        overrides = function ()
+        overrides = function()
           return {
             NvimTreeNormal = { bg = "#16161d" },
             NvimTreeNormalNC = { bg = "#16161d" },
@@ -99,5 +99,5 @@ return {
     config = function()
       require("nordic").load()
     end,
-  }
+  },
 }

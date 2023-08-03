@@ -1,6 +1,7 @@
 return {
   "lewis6991/satellite.nvim",
   event = "VeryLazy",
+  commit = "5d33376287e384f04b84962a20d90bd10a9dac86",
   opts = {
     current_only = true,
     winblend = 40,
