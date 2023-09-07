@@ -21,16 +21,6 @@ return {
     keys = { { "<leader>cc", "<cmd>ColorizerToggle<cr>", desc = "Habilitar ColorizerToggle" } },
   },
   {
-    "SmiteshP/nvim-navic",
-    opts = {
-      icons = require("ui.icons").vscode,
-      depth_limit = 5,
-    },
-    dependencies = {
-      "neovim/nvim-lspconfig",
-    },
-  },
-  {
     "rmagatti/session-lens",
     dependencies = {
       "rmagatti/auto-session",
