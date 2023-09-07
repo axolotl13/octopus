@@ -8,9 +8,10 @@ return {
   {
     "JoosepAlviste/nvim-ts-context-commentstring",
     dependencies = {
+      "numToStr/Comment.nvim",
       "nvim-treesitter/nvim-treesitter",
     },
-    ft = { "js", "jsx", "ts", "tsx", "css", "html" },
+    ft = { "css", "hbs", "html", "js", "jsx", "php", "ts", "tsx" },
   },
   {
     "NvChad/nvim-colorizer.lua",
