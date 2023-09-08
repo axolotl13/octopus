@@ -1,10 +1,13 @@
 return {
   "akinsho/bufferline.nvim",
-  event = "BufAdd",
   dependencies = {
-    "tiagovla/scope.nvim",
-    config = true,
+    "nvim-tree/nvim-web-devicons",
+    -- { "tiagovla/scope.nvim", config = true },
   },
+  init = function()
+    vim.opt.mousemoveevent = true
+  end,
+  event = "VeryLazy",
   opts = {
     options = {
       middle_mouse_command = "vertical sbuffer %d",
@@ -15,14 +18,13 @@ return {
       left_trunc_marker = require("ui.icons").buffer.left,
       right_trunc_marker = require("ui.icons").buffer.right,
       max_name_length = 20,
-      tab_size = 20,
       diagnostics = "nvim_lsp",
       diagnostics_indicator = function(count, level, diagnostics_dict, context)
-        local icon = level:match "error" and require("ui.icons").diagnostics.hint
-          or require("ui.icons").diagnostics.info
-        return icon .. " " .. count
+        local icon = level:match "error" and require("ui.icons").diagnostics.info
+          or require("ui.icons").diagnostics.hint2
+        return count .. " " .. icon
       end,
-      offsets = { { filetype = "NvimTree", text = "", separator = true } },
+      offsets = { { filetype = "NvimTree", text = "", separator = false } },
       show_close_icon = true,
       persist_buffer_sort = true,
       separator_style = "slant",
@@ -252,6 +254,7 @@ return {
   },
   keys = {
     { "Ñ", "<cmd>BufferLinePick<cr>", desc = "[Bufferline] Pickear en bufferes actuales" },
+    { "<leader>e", "<cmd>BufferLinePick<cr>", desc = "[Bufferline] Pickear en bufferes actuales" },
     { "<A-1>", "<cmd>BufferLineGoToBuffer 1<cr>", desc = "[Bufferline] Mover al primer buffer" },
     { "<A-right>", "<cmd>BufferLineMoveNext<cr>", desc = "[Bufferline] Mover buffer hacía la derecha" },
     { "<A-left>", "<cmd>BufferLineMovePrev<cr>", desc = "[Bufferline] Mover buffer hacía la izquierda" },
