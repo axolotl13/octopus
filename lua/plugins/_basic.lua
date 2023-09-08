@@ -11,12 +11,11 @@ return {
       "numToStr/Comment.nvim",
       "nvim-treesitter/nvim-treesitter",
     },
-    ft = { "css", "hbs", "html", "js", "jsx", "php", "ts", "tsx" },
+    lazy = true,
   },
   {
     "NvChad/nvim-colorizer.lua",
     cmd = "ColorizerToggle",
-    ft = { "css", "html" },
     config = true,
     keys = { { "<leader>cc", "<cmd>ColorizerToggle<cr>", desc = "Habilitar ColorizerToggle" } },
   },
@@ -32,7 +31,7 @@ return {
       -- previewer = true
     },
     keys = {
-      { "<a-z>", "<cmd>SearchSession<cr>", desc = "[Windows] Igualar ventanas" },
+      { "<a-z>", "<cmd>SearchSession<cr>", desc = "[Session] Mostrar una lista de sesiones" },
     },
   },
   {
@@ -52,7 +51,6 @@ return {
     "iamcco/markdown-preview.nvim",
     build = "cd app && npm install",
     cmd = "MarkdownPreview",
-    ft = { "markdown" },
   },
   -- Vim plugins
   {
