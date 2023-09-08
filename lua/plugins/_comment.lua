@@ -2,29 +2,11 @@ return {
   "numToStr/Comment.nvim",
   -- event = "VeryLazy",
   opts = {
-    padding = true,
     ignore = "^$",
-    mapping = {
-      basic = true,
+    mappings = {
       extra = false,
     },
-    toggler = {
-      line = "gcc",
-      block = "gbc",
-    },
-    pre_hook = function(ctx)
-      local location = nil
-      if ctx.ctype == require("Comment.utils").ctype.blockwise then
-        location = require("ts_context_commentstring.utils").get_cursor_location()
-      elseif ctx.cmotion == require("Comment.utils").cmotion.v or ctx.cmotion == require("Comment.utils").cmotion.V then
-        location = require("ts_context_commentstring.utils").get_visual_start_location()
-      end
-
-      return require("ts_context_commentstring.internal").calculate_commentstring({
-        key = ctx.ctype == require("Comment.utils").ctype.linewise and "__default" or "__multiline",
-        location = location,
-      })
-    end,
+    pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
   },
   keys = { "gcc", "gbc", { "gb", mode = "v" }, { "gc", mode = "v" } },
 }
