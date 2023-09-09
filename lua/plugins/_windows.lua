@@ -20,6 +20,8 @@ return {
     },
   },
   keys = {
+    { "<leader>wq", "<cmd>WindowsToggleAutowidth<cr>", desc = "[Windows] Des/habilitar windows" },
+    { "<leader>we", "<cmd>WindowsMaximize<cr>", desc = "[Windows] Maximizar ventana actual" },
     { "<leader>ww", "<cmd>WindowsEqualize<cr>", desc = "[Windows] Igualar ventanas" },
   },
 }
