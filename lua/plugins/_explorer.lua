@@ -4,27 +4,21 @@ return {
     { "nvim-tree/nvim-web-devicons" },
   },
   lazy = false,
-  cmd = "NvimTreeToggle",
   -- pin = true,
   opts = {
-    disable_netrw = true,
     hijack_cursor = true,
+    disable_netrw = true,
     respect_buf_cwd = true,
     view = {
       debounce_delay = 30,
       width = 35,
       preserve_window_proportions = true,
-      mappings = {
-        custom_only = false,
-        list = {
-          -- { key = "d", action = "trash" },
-        },
-      },
     },
     renderer = {
       add_trailing = true,
       group_empty = true,
       highlight_git = true,
+      highlight_diagnostics = true,
       full_name = false,
       highlight_opened_files = "icon",
       highlight_modified = "icon",
@@ -32,21 +26,9 @@ return {
       indent_width = 2,
       indent_markers = {
         enable = true,
-        icons = {
-          corner = "└",
-          edge = "│",
-          item = "│",
-          bottom = "─",
-          none = " ",
-        },
       },
       icons = {
-        symlink_arrow = require("ui.icons").global.symlink_arrow,
         show = {
-          file = true,
-          folder = true,
-          folder_arrow = true,
-          git = true,
           modified = false,
         },
         glyphs = {
@@ -75,21 +57,11 @@ return {
           },
         },
       },
-      special_files = {
-        "Cargo.toml",
-        "Makefile",
-        "README.md",
-        "readme.md",
-      },
     },
     update_focused_file = {
       enable = true,
       update_root = true,
       ignore_list = { "toggleterm", "diffview" },
-    },
-    system_open = {
-      cmd = nil,
-      args = {},
     },
     diagnostics = {
       enable = true,
@@ -103,7 +75,6 @@ return {
       },
     },
     filters = {
-      dotfiles = false,
       custom = {
         ".git",
         "node_modules",
@@ -116,6 +87,7 @@ return {
         ".plugins.lua",
       },
     },
+    live_filter = { prefix = "[Filtro]: " },
     filesystem_watchers = {
       debounce_delay = 150,
     },
@@ -126,15 +98,10 @@ return {
     },
     modified = {
       enable = true,
-      show_on_dirs = true,
-      show_on_open_dirs = true,
     },
     actions = {
-      use_system_clipboard = true,
       change_dir = {
-        enable = true,
         global = true,
-        restrict_above_cwd = false,
       },
       open_file = {
         quit_on_open = false,
@@ -146,16 +113,22 @@ return {
           },
         },
       },
-      remove_file = { close_window = true },
     },
-    live_filter = { prefix = "[Filtro]: " },
+    tab = {
+      sync = {
+        open = true,
+        close = true,
+      },
+    },
     ui = {
       confirm = {
+        remove = false,
         trash = false,
       },
     },
   },
   keys = {
-    { "ñ", "<cmd>NvimTreeToggle<cr>", { desc = "[Explorer] Abrir el explorador de archivos" } },
+    { "ñ", "<cmd>NvimTreeToggle<cr> ", { desc = "[Explorer] Abrir el explorador de archivos" } },
+    { "<leader>e", "<cmd>NvimTreeToggle<cr> ", { desc = "[Explorer] Abrir el explorador de archivos" } },
   },
 }
