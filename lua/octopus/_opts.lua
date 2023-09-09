@@ -6,7 +6,6 @@ local opts = {
   ignorecase = false,                                   -- Ignorar mayúsculas y minúsculas en las búsquedas
   encoding = "utf-8",                                   -- Define la codificación
   guifont = "Victor Mono:h15",                          -- Define la fuente para las apps
-  completeopt = "menuone,noselect",                     -- Opción principalmente para cmp
   pumheight = 10,                                       -- Altura del menú emergente
   background = "dark",
   conceallevel = 0,                                     -- Permite que `` sea visible en markdown
