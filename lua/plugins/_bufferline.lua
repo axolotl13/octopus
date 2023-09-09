@@ -20,8 +20,8 @@ return {
       max_name_length = 20,
       diagnostics = "nvim_lsp",
       diagnostics_indicator = function(count, level, diagnostics_dict, context)
-        local icon = level:match "error" and require("ui.icons").diagnostics.info
-          or require("ui.icons").diagnostics.hint2
+        local icon = level:match "error" and require("ui.icons").diagnostics.hint2
+          or require("ui.icons").diagnostics.hint
         return count .. " " .. icon
       end,
       offsets = { { filetype = "NvimTree", text = "", separator = false } },
