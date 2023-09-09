@@ -114,12 +114,6 @@ return {
         },
       },
     },
-    tab = {
-      sync = {
-        open = true,
-        close = true,
-      },
-    },
     ui = {
       confirm = {
         remove = false,
