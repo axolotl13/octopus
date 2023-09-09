@@ -18,7 +18,6 @@ return {
       add_trailing = true,
       group_empty = true,
       highlight_git = true,
-      highlight_diagnostics = true,
       full_name = false,
       highlight_opened_files = "icon",
       highlight_modified = "icon",
