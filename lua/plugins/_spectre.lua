@@ -1,17 +1,6 @@
 return {
   "nvim-pack/nvim-spectre",
   opts = {
-    color_devicons = true,
-    open_cmd = "vnew",
-    live_update = false,
-    line_sep_start = "╭─────────────────────────────────────────",
-    result_padding = "│  ",
-    line_sep = "╰─────────────────────────────────────────",
-    highlight = {
-      ui = "String",
-      search = "DiffChange",
-      replace = "DiffDelete",
-    },
     mapping = {
       ["toggle_line"] = {
         map = "dd",
@@ -74,61 +63,17 @@ return {
         "Alternar busqueda oculta",
       },
     },
-    find_engine = {
-      ["rg"] = {
-        cmd = "rg",
-        args = {
-          "--color=never",
-          "--no-heading",
-          "--with-filename",
-          "--line-number",
-          "--column",
-        },
-        options = {
-          ["ignore-case"] = {
-            value = "--ignore-case",
-            icon = "⏼",
-            "ignore case",
-          },
-          ["hidden"] = {
-            value = "--hidden",
-            "hidden file",
-            icon = "👁",
-          },
-        },
-      },
-    },
-    replace_engine = {
-      ["sed"] = {
-        cmd = "sed",
-        args = nil,
-        options = {
-          ["ignore-case"] = {
-            value = "--ignore-case",
-            icon = "[I]",
-            "ignore case",
-          },
-        },
-      },
-    },
-    default = {
-      find = {
-        cmd = "rg",
-        options = { "ignore-case" },
-      },
-      replace = {
-        cmd = "sed",
-      },
-    },
-    replace_vim_cmd = "cdo",
-    is_open_target_win = true,
-    is_insert_mode = false,
   },
   keys = {
     {
       "<leader>fs",
-      "<cmd>lua require('spectre').open_file_search()<cr>",
-      desc = "[Spectre] Buscar líneas desde el archivo",
+      "<cmd>lua require('spectre').open_file_search(select_word=true)<cr>",
+      desc = "[Spectre] Buscar palabra seleccionada en el archivo actual",
+    },
+    {
+      "<leader>fw",
+      "<cmd>lua require('spectre').open_file_search(select_word=true)<cr>",
+      desc = "[Spectre] Buscar palabra seleccionada en el archivo actual",
     },
     {
       "<leader>fe",
@@ -136,7 +81,7 @@ return {
       desc = "[Spectre] Buscar palabra en modo visual en todos los archivos",
     },
     {
-      "<leader>fw",
+      "<leader>fv",
       "<cmd>lua require('spectre').open_visual({select_word=true})<cr>",
       desc = "[Spectre] Buscar palabra seleccionada en todos los archivos",
     },
