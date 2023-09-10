@@ -7,15 +7,13 @@ cmd("FileType", { pattern = "java", command = "setlocal shiftwidth=4 tabstop=4" 
 cmd("FileType", { pattern = "sql", command = "setlocal shiftwidth=4 tabstop=4" })
 cmd("FileType", { pattern = "xml", command = "setlocal shiftwidth=4 tabstop=4" })
 cmd("FileType", { pattern = "sh", command = "setlocal shiftwidth=4 tabstop=4" })
+cmd("FileType", { pattern = "markdown", command = "setlocal spell" })
 
 -- Guardado automático
 -- cmd({"InsertLeave", "TextChanged"}, {
 --   pattern = { "*" },
 --   command = "silent! wall",
 -- })
-
--- Habilitar idioma para archivos markdown
-vim.cmd([[autocmd FileType markdown setlocal spell]])
 
 -- Deshabilitar auto comentario
 cmd("BufEnter", { pattern = "*", command = "set fo-=c fo-=r fo-=o" })
