@@ -1,12 +1,14 @@
 return {
   "rcarriga/nvim-notify",
   opts = {
-    minimum_width = 40,
-    timeout = 2000,
+    render = "compact",
+    timeout = 2150,
+    max_width = function()
+      return math.floor(vim.o.columns * 0.60)
+    end,
     stages = "fade",
-    background_colour = "Normal",
   },
   init = function()
-    vim.notify = require("notify")
+    vim.notify = require "notify"
   end,
 }
