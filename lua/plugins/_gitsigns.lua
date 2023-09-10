@@ -37,7 +37,7 @@ return {
       end
 
       map("n", "<leader>gr", gs.reset_buffer, "[Gitsigns] Deshacer todos los cambios del archivo actual")
-      map("n", "<leader>gs", gs.stage_buffer, "[Gitsigns] Poner las líneas actuales en el área de stage")
+      map("n", "<leader>ga", gs.stage_buffer, "[Gitsigns] Poner las líneas actuales en el área de stage")
       map("n", "<leader>gu", gs.reset_hunk, "[Gitsigns] Deshacer cambios en la línea actual")
       map("n", "<leader>gp", gs.preview_hunk, "[Gitsigns] Previsualizar cambios que se han hecho")
       map("n", "<leader>g{", gs.next_hunk, "[Gitsigns] Moverse hacía el siguiente cambio que se ha realizado")
