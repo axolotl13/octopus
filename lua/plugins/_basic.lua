@@ -51,6 +51,22 @@ return {
     build = "cd app && npm install",
     cmd = "MarkdownPreview",
   },
+  {
+    "tzachar/local-highlight.nvim",
+    init = function()
+      vim.api.nvim_create_autocmd("BufRead", {
+        pattern = { "*.*" },
+        callback = function(data)
+          require("local-highlight").attach(data.buf)
+        end,
+      })
+    end,
+    opts = {
+      disable_file_types = { "tex" },
+      hlgroup = "MiniCursorword",
+    },
+  },
+
   -- Vim plugins
   {
     "tpope/vim-fugitive",

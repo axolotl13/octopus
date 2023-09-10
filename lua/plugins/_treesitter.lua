@@ -2,7 +2,6 @@ return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
   dependencies = {
-    "nvim-treesitter/nvim-treesitter-refactor",
     "HiPhish/rainbow-delimiters.nvim",
     {
       "kevinhwang91/nvim-ufo",
@@ -79,14 +78,6 @@ return {
         node_incremental = "g+",
         -- scope_incremental = "gaa",
         node_decremental = "g-",
-      },
-    },
-    refactor = {
-      highlight_definitions = {
-        enable = true,
-      },
-      highlight_current_scope = {
-        enable = false,
       },
     },
     context_commentstring = {
