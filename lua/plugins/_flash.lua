@@ -2,7 +2,8 @@ return {
   "folke/flash.nvim",
   opts = {
     search = {
-      multi_window = false,
+      multi_window = true,
+      exclude = { "NvimTree" },
     },
   },
   keys = {
