@@ -1,41 +1,47 @@
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
-    { "hrsh7th/cmp-nvim-lsp" },
-    { "SmiteshP/nvim-navic" },
-  },
-  event = "BufReadPre",
-  config = function()
-    local mason = require "mason"
-
-    local diagnostics = function()
-      local signs = {
-        Error = require("ui.icons").diagnostics.info,
-        Warn = require("ui.icons").diagnostics.info,
-        Hint = require("ui.icons").diagnostics.hint,
-        Info = require("ui.icons").diagnostics.info,
-      }
-
-      vim.diagnostic.config {
-        virtual_text = { prefix = require("ui.icons").global.prefix },
-        underline = true,
-        update_in_insert = false,
-        severity_sort = true,
-        float = {
-          focusable = true,
-          style = "minimal",
+    {
+      "williamboman/mason.nvim",
+      dependencies = { "williamboman/mason-lspconfig.nvim" },
+      opts = {
+        ui = {
           border = "rounded",
-          source = "always",
+          icons = {
+            package_installed = require("ui.icons").lsp.install,
+            package_pending = require("ui.icons").lsp.pending,
+            package_uninstalled = require("ui.icons").lsp.uninstall,
+          },
+          keymaps = {
+            install_package = "i",
+            update_package = "u",
+            uninstall_package = "d",
+            cancel_installation = "<C-c>",
+          },
         },
-      }
-
-      for type, icon in pairs(signs) do
-        local hl = "DiagnosticSign" .. type
-        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-      end
-    end
-
-    local servers = {
+      },
+      keys = { { "<leader>mm", "<cmd>Mason<cr>", desc = "Mason" } },
+    },
+    "hrsh7th/cmp-nvim-lsp",
+    "SmiteshP/nvim-navic",
+  },
+  event = { "BufReadPre", "BufNewFile" },
+  opts = {
+    diagnostics = {
+      underline = true,
+      update_in_insert = false,
+      virtual_text = {
+        prefix = require("ui.icons").global.prefix,
+      },
+      severity_sort = true,
+    },
+    signs = {
+      Error = require("ui.icons").diagnostics.info,
+      Warn = require("ui.icons").diagnostics.info,
+      Hint = require("ui.icons").diagnostics.hint,
+      Info = require("ui.icons").diagnostics.info,
+    },
+    servers = {
       bashls = {},
       clangd = {},
       cssls = {},
@@ -47,11 +53,11 @@ return {
           "handlebars",
         },
       },
-      emmet_ls = {},
+      emmet_language_server = {},
       -- eslint = {},
       gopls = {},
       html = {},
-      -- intelephense = {},
+      intelephense = {},
       jdtls = {},
       jsonls = {},
       lemminx = {},
@@ -80,8 +86,10 @@ return {
       sqlls = {},
       tsserver = {},
       yamlls = {},
-    }
-
+    },
+    setup = {},
+  },
+  config = function(_, opts)
     local on_attach = function(client, bufnr)
       client.server_capabilities.documentFormattingProvider = false
       client.server_capabilities.documentRangeFormattingProvider = false
@@ -89,8 +97,6 @@ return {
       if client.server_capabilities.documentSymbolProvider then
         require("nvim-navic").attach(client, bufnr)
       end
-
-      vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
       local keymap = vim.keymap.set
       local bufn = { noremap = true, silent = true, buffer = bufnr }
@@ -109,30 +115,52 @@ return {
       keymap("n", "gs", vim.lsp.buf.signature_help, bufn)
     end
 
+    -- diagnostics
+    for name, icon in pairs(opts.signs) do
+      local hl = "DiagnosticSign" .. name
+      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+    end
+
+    vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
+
+    -- servers
     local capabilities = vim.lsp.protocol.make_client_capabilities()
-    -- Solución para utf en C++
-    -- capabilities.offsetEncoding = {"utf-16"}
+    -- capabilities.offsetEncoding = {"utf-16"} Solución para utf en C++
     capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
-    capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-    diagnostics()
-
-    local options = {
-      on_attach = on_attach,
-      capabilities = capabilities,
-      flags = {
-        debounce_text_changes = 150,
-      },
+    capabilities.textDocument.completion.completionItem = {
+      commitCharactersSupport = true,
+      deprecatedSupport = true,
+      preselectSupport = true,
+      snippetSupport = true,
     }
 
-    for server, opts in pairs(servers) do
-      opts = vim.tbl_deep_extend("force", {}, options, opts or {})
-      -- if server == "tsserver" then
-      -- require("typescript").setup({ server = opts })
-      -- else
-      require("lspconfig")[server].setup(opts)
-      -- end
+    local servers = opts.servers
+
+    local function setup(server)
+      local server_opts = vim.tbl_deep_extend("force", {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        flags = {
+          debounce_text_changes = 150,
+        },
+      }, servers[server] or {})
+
+      if opts.setup[server] then
+        if opts.setup[server](server, server_opts) then
+          return
+        end
+      end
+      require("lspconfig")[server].setup(server_opts)
     end
+
+    local ensure_installed = {}
+    for server, server_opts in pairs(servers) do
+      setup(server)
+      ensure_installed[#ensure_installed + 1] = server
+    end
+
+    local mlsp = require "mason-lspconfig"
+    mlsp.setup { ensure_installed = ensure_installed, automatic_installation = true }
   end,
   keys = {
     {
