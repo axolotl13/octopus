@@ -10,10 +10,13 @@ return {
     lazy = true,
   },
   {
-    "NvChad/nvim-colorizer.lua",
-    cmd = "ColorizerToggle",
+    "uga-rosa/ccc.nvim",
+    cmd = { "CccHighlighterToggle", "CccPick" },
     config = true,
-    keys = { { "<leader>cc", "<cmd>ColorizerToggle<cr>", desc = "Habilitar ColorizerToggle" } },
+    keys = {
+      { "<leader>cc", "<cmd>CccHighlighterToggle<cr>", desc = "Habilitar CccHighlighterToggle" },
+      { "<leader>cp", "<cmd>CccPick<cr>", desc = "Habilitar CccPick" },
+    },
   },
   {
     "rmagatti/session-lens",
