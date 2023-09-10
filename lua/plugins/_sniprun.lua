@@ -11,5 +11,6 @@ return {
     { "<leader>re", "<cmd>SnipRun<cr>", "[SnipRun] Ejecutar línea de código" },
     { "<leader>rr", "<cmd>SnipReset<cr>", "[SnipRun] Reiniciar SnipRun" },
     { "<leader>rq", "<cmd>SnipClose<cr>", "[SnipRun] Cerrar SnipRun" },
+    { "<leader>re", mode = { "v" }, ":SnipRun<cr>", "[SnipRun] Ejecutar bloque de código" },
   },
 }

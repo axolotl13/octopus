@@ -2,7 +2,7 @@ local opts = {
   -- Designar atajos
   { "", "<space>", "<nop>", "Designar espacio" },
   { "n", "<c-z>", "<nop>", "Designar ctrl + z" },
-  { "n", "<esc>", "<cmd>noh<cr>", "Designar esc" },
+  -- { { "n", "i" }, "<esc>", "<cmd>noh<cr>", "Designar esc" },
 
   -- Opciones para el cursor
   { "n", "|", "^", "[Cursor] Mover al inicio" },
@@ -62,7 +62,6 @@ local opts = {
 
   -- Lazy
   { "n", "<leader>ps", "<cmd>Lazy<cr>", "Mostrar estado de los plugins" },
-  { "v", "<leader>re", ":'<,'>SnipRun<cr>", "[SnipRun] Ejecutar bloque de código" },
 }
 
 vim.g.mapleader = " "
