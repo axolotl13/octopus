@@ -1,7 +1,7 @@
 return {
   "rcarriga/nvim-notify",
   opts = {
-    render = "compact",
+    render = "wrapped-compact",
     timeout = 2150,
     max_width = function()
       return math.floor(vim.o.columns * 0.60)
