@@ -87,7 +87,6 @@ return {
       tsserver = {},
       yamlls = {},
     },
-    setup = {},
   },
   config = function(_, opts)
     local on_attach = function(client, bufnr)
@@ -134,28 +133,17 @@ return {
       snippetSupport = true,
     }
 
+    local ensure_installed = {}
     local servers = opts.servers
 
-    local function setup(server)
-      local server_opts = vim.tbl_deep_extend("force", {
-        on_attach = on_attach,
-        capabilities = capabilities,
-        flags = {
-          debounce_text_changes = 150,
-        },
-      }, servers[server] or {})
+    local options = {
+      on_attach = on_attach,
+      capabilities = capabilities,
+    }
 
-      if opts.setup[server] then
-        if opts.setup[server](server, server_opts) then
-          return
-        end
-      end
-      require("lspconfig")[server].setup(server_opts)
-    end
-
-    local ensure_installed = {}
     for server, server_opts in pairs(servers) do
-      setup(server)
+      server_opts = vim.tbl_deep_extend("force", {}, options, server_opts or {})
+      require("lspconfig")[server].setup(server_opts)
       ensure_installed[#ensure_installed + 1] = server
     end
 
