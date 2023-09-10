@@ -2,11 +2,8 @@ return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
   dependencies = {
-    { "nvim-treesitter/nvim-treesitter-refactor" },
-    { "RRethy/nvim-treesitter-textsubjects" },
-    {
-      "HiPhish/rainbow-delimiters.nvim",
-    },
+    "nvim-treesitter/nvim-treesitter-refactor",
+    "HiPhish/rainbow-delimiters.nvim",
     {
       "kevinhwang91/nvim-ufo",
       init = function()
@@ -32,83 +29,72 @@ return {
       },
     },
   },
-  event = "BufReadPost",
-  config = function()
-    local treesitter = require "nvim-treesitter.configs"
-    local opts = {
-      ensure_installed = {
-        "bash",
-        "comment",
-        "cpp",
-        "css",
-        "dockerfile",
-        "fish",
-        "gitattributes",
-        "gitignore",
-        "glimmer",
-        "go",
-        "html",
-        "java",
-        "javascript",
-        "json",
-        "lua",
-        "markdown",
-        "php",
-        "python",
-        "rust",
-        "scss",
-        "tsx",
-        "typescript",
-        "vim",
-        "yaml",
+  event = { "BufReadPost", "BufNewFile" },
+  opts = {
+    ensure_installed = {
+      "bash",
+      "comment",
+      "cpp",
+      "css",
+      "csv",
+      "dockerfile",
+      "fish",
+      "gitattributes",
+      "gitignore",
+      "glimmer",
+      "go",
+      "html",
+      "java",
+      "javascript",
+      "json",
+      "lua",
+      "markdown",
+      "markdown_inline",
+      "php",
+      "python",
+      "scss",
+      "requirements",
+      "rust",
+      "tsx",
+      "typescript",
+      "vim",
+      "xml",
+      "yaml",
+    },
+    highlight = {
+      enable = true,
+      disable = function(lang, buf)
+        local max_filesize = 100 * 1024 -- 100 KB
+        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+        if ok and stats and stats.size > max_filesize then
+          return true
+        end
+      end,
+    },
+    indent = { enable = true },
+    incremental_selection = {
+      enable = true,
+      keymaps = {
+        init_selection = "ga",
+        node_incremental = "g+",
+        -- scope_incremental = "gaa",
+        node_decremental = "g-",
       },
-      highlight = {
+    },
+    refactor = {
+      highlight_definitions = {
         enable = true,
-        disable = function(lang, buf)
-          local max_filesize = 100 * 1024 -- 100 KB
-          local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-          if ok and stats and stats.size > max_filesize then
-            return true
-          end
-        end,
       },
-      indent = { enable = true },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "ga",
-          node_incremental = "g+",
-          -- scope_incremental = "gaa",
-          node_decremental = "g-",
-        },
+      highlight_current_scope = {
+        enable = false,
       },
-      textsubjects = {
-        enable = true,
-        prev_selection = ",",
-        keymaps = {
-          ["."] = "textsubjects-smart",
-          [";"] = "textsubjects-container-outer",
-        },
-      },
-      refactor = {
-        highlight_definitions = {
-          enable = true,
-        },
-        highlight_current_scope = {
-          enable = false,
-        },
-        smart_rename = {
-          enable = true,
-          keymaps = {
-            smart_rename = "grr",
-          },
-        },
-      },
-      context_commentstring = {
-        enable = true,
-        enable_autocmd = false,
-      },
-    }
-    treesitter.setup(opts)
+    },
+    context_commentstring = {
+      enable = true,
+      enable_autocmd = false,
+    },
+  },
+  config = function(_, opts)
+    require("nvim-treesitter.configs").setup(opts)
   end,
 }
