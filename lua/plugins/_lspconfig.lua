@@ -22,6 +22,7 @@ return {
       },
       keys = { { "<leader>mm", "<cmd>Mason<cr>", desc = "Mason" } },
     },
+    "hrsh7th/cmp-nvim-lsp",
   },
   event = { "BufReadPre", "BufNewFile" },
   opts = {
