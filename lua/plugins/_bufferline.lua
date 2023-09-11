@@ -175,7 +175,7 @@ return {
       },
       close_button_selected = {
         fg = { attribute = "fg", highlight = "Error" },
-        bg = { attribute = "bg", highlight = "Error" },
+        bg = { attribute = "bg", highlight = "Normal" },
       },
       tab_selected = {
         fg = { attribute = "fg", highlight = "Normal" },
