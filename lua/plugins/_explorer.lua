@@ -83,7 +83,7 @@ return {
         "gitsigns",
         ".gitignore",
         ".env",
-        "plugins_olds",
+        "lua/extra",
       },
     },
     live_filter = { prefix = "[Filtro]: " },
