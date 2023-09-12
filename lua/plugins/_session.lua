@@ -10,7 +10,6 @@ return {
       "NvimTreeClose",
       "cclose",
       "lua vim.notify.dismiss()",
-      "ToggleTermToggleAll",
       "DiffviewClose",
       "lua require('spectre').close()",
     },

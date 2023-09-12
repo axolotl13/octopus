@@ -6,7 +6,7 @@ return {
     current_only = true,
     winblend = 40,
     zindex = 40,
-    excluded_filetypes = { "NvimTree" },
+    excluded_filetypes = { "NvimTree", "terminal" },
     width = 2,
     handlers = {
       search = {

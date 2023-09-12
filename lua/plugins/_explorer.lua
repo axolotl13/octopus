@@ -60,7 +60,7 @@ return {
     update_focused_file = {
       enable = true,
       update_root = true,
-      ignore_list = { "toggleterm", "diffview" },
+      ignore_list = { "diffview" },
     },
     diagnostics = {
       enable = true,
@@ -107,7 +107,7 @@ return {
         window_picker = {
           enable = true,
           exclude = {
-            filetype = { "notify", "packer", "qf", "diff", "fugitive", "fugitiveblame", "toggleterm" },
+            filetype = { "notify", "qf", "diff", "fugitive", "fugitiveblame" },
             buftype = { "nofile", "terminal", "help" },
           },
         },
