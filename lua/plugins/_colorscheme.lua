@@ -64,13 +64,14 @@ return {
       background_clear = { "telescope" },
       override = function(c)
         return {
-          NvimTreeGitNew = { fg = c.gitDecoration.accent4 },
+          NvimTreeGitNew = { fg = c.gitDecoration.addedResourceForeground },
+          NvimTreeGitStaged = { fg = c.gitDecoration.conflictingResourceForeground },
           TelescopePromptNormal = { bg = c.sideBar.background },
           TelescopePromptBorder = { fg = c.sideBar.background, bg = c.sideBar.background },
-          TelescopeResultsNormal = { fg = c.common_fg, bg = c.sideBar.background },
-          TelescopeResultsBorder = { fg = c.sideBar.background, bg = c.sideBar.background },
-          TelescopePreviewNormal = { bg = c.sideBar.background },
-          TelescopePreviewBorder = { bg = c.sideBar.background, fg = c.sideBar.background },
+          TelescopeResultsNormal = { fg = c.common_fg, bg = c.base.dark },
+          TelescopeResultsBorder = { fg = c.base.dark, bg = c.base.dark },
+          TelescopePreviewNormal = { bg = c.base.dark },
+          TelescopePreviewBorder = { bg = c.base.dark, fg = c.base.dark },
         }
       end,
     },
