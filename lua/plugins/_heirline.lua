@@ -2,13 +2,17 @@ return {
   "rebelot/heirline.nvim",
   dependencies = {
     "SmiteshP/nvim-navic",
+    opts = {
+      icons = require("ui.icons").vscode,
+      depth_limit = 5,
+    },
   },
-  event = "BufReadPost",
+  event = { "BufReadPost", "BufNewFile" },
   config = function()
-    local heirline = require("heirline")
-    local conditions = require("heirline.conditions")
-    local utils = require("heirline.utils")
-    local icons = require("ui.icons")
+    local heirline = require "heirline"
+    local conditions = require "heirline.conditions"
+    local utils = require "heirline.utils"
+    local icons = require "ui.icons"
 
     local colors = {
       bg = utils.get_highlight("Cursor").fg,
@@ -117,7 +121,7 @@ return {
           return "No Name "
         end
         if not conditions.width_percent_below(#filename, 0.25) then
-          filename = vim.fn.expand("%:t")
+          filename = vim.fn.expand "%:t"
         end
         return filename .. " "
       end,
@@ -131,9 +135,9 @@ return {
           return "No Name "
         end
         if not conditions.width_percent_below(#filename, 0) then
-          filename = vim.fn.expand("%:t")
+          filename = vim.fn.expand "%:t"
         end
-        local trail = filename:sub(-1) == " ❭ " and "" or " ❭ "
+        local trail = filename:sub(-1) == " › " and "" or " › "
         return filename .. trail
       end,
       -- hl = { bold = false },
@@ -142,7 +146,7 @@ return {
     local DirName = {
       provider = function()
         local dirname = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
-        local trail = dirname:sub(-1) == " ❭ " and "" or " ❭"
+        local trail = dirname:sub(-1) == " › " and "" or " ›"
         return icons.explorer.default2 .. " " .. dirname .. trail
       end,
       -- hl = { bold = false },
@@ -234,25 +238,6 @@ return {
       },
     }
 
-    local null_ls_sources = function(filetype, method)
-      local methods_avail, methods = pcall(require, "null-ls.methods")
-      return methods_avail and null_ls_providers(filetype)[methods.internal[method]] or {}
-    end
-
-    local lsp_names = { sumneko_lua = "sumneko" }
-
-    local lsp_client_names = function()
-      local clients = {}
-
-      for _, client in pairs(vim.lsp.buf_get_clients(0)) do
-        print(client.name)
-        -- local name = lsp_names[client.name] or client.name
-        -- clients[#clients + 1] = name
-      end
-
-      return table.concat(clients, " ")
-    end
-
     local LSPActive = {
       condition = conditions.lsp_attached,
       update = { "LspAttach", "LspDetach" },
@@ -274,7 +259,7 @@ return {
       provider = function()
         local filetype = vim.bo.filetype
         filetype = filetype:gsub("^%l", string.upper)
-        local trail = filetype:sub(-1) == " ❭ " and "" or " ❭ "
+        local trail = filetype:sub(-1) == " › " and "" or " › "
         return filetype .. trail
       end,
       hl = {
@@ -363,7 +348,7 @@ return {
     local TerminalName = {
       provider = function()
         local tname, _ = vim.api.nvim_buf_get_name(0):gsub(".*:", "")
-        return icons.kinds_icons.Number .. " " .. tname
+        return icons.vscode.Number .. " " .. tname
       end,
       hl = {
         bold = true,
@@ -461,9 +446,18 @@ return {
 
     local statusline = { Left, Align, Right }
 
+    local StatusSpace = {
+      {
+        provider = " ",
+        hl = {
+          bg = utils.get_highlight("TabLineSel").bg,
+        },
+      },
+    }
+
     local DefaultStatusline = {
-      hl = { bg = colors.bg },
-      Space,
+      -- hl = { bg = colors.bg },
+      StatusSpace,
       static = {
         mode_colors = {
           n = colors.green,
@@ -488,24 +482,26 @@ return {
       utils.surround({ icons.separator.block, icons.separator.block }, function(self)
         return self:mode_color()
       end, { statusline, hl = { bg = colors.statusline } }),
-      Space,
+      StatusSpace,
     }
 
     local SpecialStatusline = {
       condition = function()
-        return conditions.buffer_matches({
+        return conditions.buffer_matches {
           buftype = { "nofile", "prompt", "help", "quickfix" },
           filetype = { "^git.*", "fugitive" },
-        })
+        }
       end,
+      StatusSpace,
       Space,
       FileType,
       Align,
+      StatusSpace,
     }
 
     local TerminalStatusline = {
       condition = function()
-        return conditions.buffer_matches({ buftype = { "terminal" }, filetype = { "toggleterm" } })
+        return conditions.buffer_matches { buftype = { "terminal" }, filetype = { "toggleterm" } }
       end,
       hl = {
         bg = colors.black,
@@ -558,12 +554,15 @@ return {
 
     local WinBars = {
       fallthrough = false,
+      hl = {
+        bg = utils.get_highlight("TabLineSel").bg,
+      },
       {
         condition = function()
-          return conditions.buffer_matches({
+          return conditions.buffer_matches {
             buftype = { "nofile", "prompt", "help", "quickfix" },
             filetype = { "^git.*", "fugitive", "toggleterm" },
-          })
+          }
         end,
         init = function()
           vim.opt_local.winbar = nil
@@ -575,15 +574,17 @@ return {
         end,
         hl = { fg = colors.comment, force = true },
         FileNameBlock,
+        Align,
       },
       {
-        Space,
+        StatusSpace,
         DirName,
         FileNameBlockWin,
         FileType,
         Navic,
+        Align,
       },
     }
-    heirline.setup({ statusline = Statusline, winbar = WinBars })
+    heirline.setup { statusline = Statusline, winbar = WinBars }
   end,
 }
