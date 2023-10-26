@@ -4,6 +4,12 @@ return {
   dependencies = {
     "HiPhish/rainbow-delimiters.nvim",
     {
+      "nvim-treesitter/nvim-treesitter-context",
+      opts = {
+        max_lines = 1,
+      },
+    },
+    {
       "kevinhwang91/nvim-ufo",
       init = function()
         vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
