@@ -91,10 +91,10 @@ return {
             winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
             scrollbar = false,
           },
-          documentation = cmp.config.disable,
-          -- documentation = {
-          --   border = border "CmpDocBorder",
-          -- },
+          -- documentation = cmp.config.disable,
+          documentation = {
+            border = border "CmpDocBorder",
+          },
         },
         mapping = cmp.mapping.preset.insert {
           ["<up>"] = cmp.mapping.select_prev_item(),
