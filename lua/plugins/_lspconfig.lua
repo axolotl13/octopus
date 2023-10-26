@@ -24,7 +24,7 @@ return {
     },
     "hrsh7th/cmp-nvim-lsp",
   },
-  event = { "BufReadPre", "BufNewFile" },
+  event = { "BufReadPost", "BufNewFile", "BufWritePre" },
   opts = {
     diagnostics = {
       underline = true,
