@@ -7,5 +7,5 @@ return {
     },
     pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
   },
-  keys = { "gcc", "gbc", { "gb", mode = "v" }, { "gc", mode = "v" } },
+  keys = { "gcc", "gbc", { "gb", mode = "x" }, { "gc", mode = "x" } },
 }
