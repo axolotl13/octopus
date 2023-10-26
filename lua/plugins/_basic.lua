@@ -72,8 +72,8 @@ return {
   },
   {
     "linux-cultist/venv-selector.nvim",
-    lazy = true,
     dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim" },
+    lazy = true,
     opts = {
       name = { "Packages", "venv", ".venv" },
     },
