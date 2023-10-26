@@ -1,9 +1,9 @@
 return {
   "sindrets/diffview.nvim",
-  cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles", "DiffviewFileHistory" },
   dependencies = {
     { "nvim-lua/plenary.nvim" },
   },
+  cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles", "DiffviewFileHistory" },
   opts = {
     icons = {
       folder_closed = require("ui.icons").explorer.default,
