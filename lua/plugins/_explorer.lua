@@ -17,12 +17,14 @@ return {
     renderer = {
       add_trailing = true,
       group_empty = true,
-      highlight_git = true,
       full_name = false,
-      highlight_opened_files = "icon",
-      highlight_modified = "icon",
       root_folder_label = table.concat { ":t:gs?$?/..", string.rep(" ", 1000), "?:gs?^??" },
       indent_width = 2,
+      highlight_git = true,
+      highlight_diagnostics = false,
+      highlight_opened_files = "icon",
+      highlight_modified = "icon",
+      highlight_bookmarks = "icon",
       indent_markers = {
         enable = true,
       },
@@ -62,6 +64,10 @@ return {
       update_root = true,
       ignore_list = { "diffview" },
     },
+    git = {
+      enable = true,
+      timeout = 800,
+    },
     diagnostics = {
       enable = true,
       show_on_dirs = false,
@@ -72,6 +78,9 @@ return {
         warning = require("ui.icons").diagnostics.info,
         error = require("ui.icons").diagnostics.info,
       },
+    },
+    modified = {
+      enable = true,
     },
     filters = {
       custom = {
@@ -89,14 +98,6 @@ return {
     live_filter = { prefix = "[Filtro]: " },
     filesystem_watchers = {
       debounce_delay = 150,
-    },
-    git = {
-      enable = true,
-      ignore = true,
-      timeout = 800,
-    },
-    modified = {
-      enable = true,
     },
     actions = {
       change_dir = {
