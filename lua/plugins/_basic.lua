@@ -70,6 +70,15 @@ return {
       hlgroup = "Search",
     },
   },
+  {
+    "linux-cultist/venv-selector.nvim",
+    lazy = true,
+    dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim" },
+    opts = {
+      name = { "Packages", "venv", ".venv" },
+    },
+    keys = { { "<leader>vv", "<cmd>VenvSelect<cr>", desc = "Selecciona el entorno virtual de Python" } },
+  },
   -- Vim plugins
   {
     "tpope/vim-fugitive",
