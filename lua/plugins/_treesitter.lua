@@ -11,6 +11,9 @@ return {
     },
     {
       "kevinhwang91/nvim-ufo",
+      dependencies = {
+        "kevinhwang91/promise-async",
+      },
       init = function()
         vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
         vim.o.foldcolumn = "1"
@@ -18,9 +21,6 @@ return {
         vim.o.foldlevelstart = 99
         vim.o.foldenable = true
       end,
-      dependencies = {
-        "kevinhwang91/promise-async",
-      },
       config = function()
         require("ufo").setup {
           provider_selector = function(bufnr, filetype, buftype)
