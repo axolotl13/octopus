@@ -48,8 +48,12 @@ return {
   },
   {
     "iamcco/markdown-preview.nvim",
-    build = "cd app && npm install",
-    cmd = "MarkdownPreview",
+    build = "cd app && yarn install",
+    cmd = { "MarkdownPreview", "MarkdownPreviewToggle" },
+    ft = { "markdown" },
+    keys = {
+      { "<leader>md", "<cmd>MarkdownPreviewToggle<cr>", desc = "Muestra el archivo markdown en un nvegador web" },
+    },
   },
   {
     "tzachar/local-highlight.nvim",
