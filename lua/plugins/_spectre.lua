@@ -67,18 +67,13 @@ return {
   keys = {
     {
       "<leader>fs",
-      "<cmd>lua require('spectre').open_file_search(select_word=true)<cr>",
-      desc = "[Spectre] Buscar palabra seleccionada en el archivo actual",
+      "<cmd>lua require('spectre').toggle()<cr>",
+      desc = "[Spectre] Buscar palabra",
     },
     {
       "<leader>fw",
-      "<cmd>lua require('spectre').open_file_search(select_word=true)<cr>",
+      "<cmd>lua require('spectre').open_file_search({select_word=true})<cr>",
       desc = "[Spectre] Buscar palabra seleccionada en el archivo actual",
-    },
-    {
-      "<leader>fe",
-      "<cmd>lua require('spectre').open_visual()<cr>",
-      desc = "[Spectre] Buscar palabra en modo visual en todos los archivos",
     },
     {
       "<leader>fv",
