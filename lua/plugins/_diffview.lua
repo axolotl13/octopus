@@ -23,6 +23,9 @@ return {
         },
       },
     },
+{ "gf", { desc = "Open the file in the previous tabpage" } },
+{ "[x", { desc = "In the merge-tool: jump to the previous conflict" } },
+{ "]x", { desc = "In the merge-tool: jump to the next conflict" } },
   },
   keys = {
     { "<leader>dd", "<cmd>DiffviewOpen<cr>", desc = "[Diffview] Abre Diffview" },
