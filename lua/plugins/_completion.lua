@@ -9,7 +9,7 @@ return {
           "rafamadriz/friendly-snippets",
           config = function()
             require("luasnip.loaders.from_vscode").lazy_load()
-            -- require("luasnip.loaders.from_vscode").lazy_load { paths = { "./snippets/react_ts" } }
+            require("luasnip.loaders.from_vscode").lazy_load { paths = { "./snippets" } }
             -- require("luasnip").filetype_extend("javascriptreact", { "html" })
             -- require("luasnip").filetype_extend("typescriptreact", { "html" })
           end,
@@ -91,9 +91,10 @@ return {
             winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
             scrollbar = false,
           },
-          documentation = {
-            border = border "CmpDocBorder",
-          },
+          documentation = cmp.config.disable,
+          -- documentation = {
+          --   border = border "CmpDocBorder",
+          -- },
         },
         mapping = cmp.mapping.preset.insert {
           ["<up>"] = cmp.mapping.select_prev_item(),
