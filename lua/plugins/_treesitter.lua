@@ -1,14 +1,7 @@
 return {
   "nvim-treesitter/nvim-treesitter",
-  build = ":TSUpdate",
   dependencies = {
     "HiPhish/rainbow-delimiters.nvim",
-    {
-      "nvim-treesitter/nvim-treesitter-context",
-      opts = {
-        max_lines = 1,
-      },
-    },
     {
       "kevinhwang91/nvim-ufo",
       dependencies = {
@@ -34,7 +27,8 @@ return {
       },
     },
   },
-  event = { "BufReadPost", "BufNewFile" },
+  build = ":TSUpdate",
+  event = { "BufReadPost", "BufNewFile", "BufWritePre" },
   opts = {
     ensure_installed = {
       "bash",
