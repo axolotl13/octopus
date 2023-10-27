@@ -54,7 +54,7 @@ return {
       },
       emmet_language_server = {},
       -- eslint = {},
-      gopls = {},
+      -- gopls = {},
       html = {},
       intelephense = {},
       jdtls = {},
