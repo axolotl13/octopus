@@ -33,14 +33,14 @@ return {
           modified = false,
         },
         glyphs = {
-          default = require("ui.icons").gl.defaultf,
+          default = require("ui.icons").gl.default,
           symlink = require("ui.icons").gl.symlink,
           bookmark = require("ui.icons").gl.bookmark,
           modified = require("ui.icons").bl.modified,
           folder = {
             arrow_open = require("ui.icons").fl.arrow_open,
             arrow_closed = require("ui.icons").fl.arrow_closed,
-            default = require("ui.icons").fl.default,
+            default = require("ui.icons").fl.defaultf,
             open = require("ui.icons").fl.open,
             empty = require("ui.icons").fl.empty,
             empty_open = require("ui.icons").fl.empty_open,
