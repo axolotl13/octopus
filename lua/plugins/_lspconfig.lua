@@ -8,9 +8,9 @@ return {
         ui = {
           border = "rounded",
           icons = {
-            package_installed = require("ui.icons").lsp.install,
-            package_pending = require("ui.icons").lsp.pending,
-            package_uninstalled = require("ui.icons").lsp.uninstall,
+            package_installed = "",
+            package_pending = "",
+            package_uninstalled = "ﮊ",
           },
           keymaps = {
             install_package = "i",
@@ -30,15 +30,15 @@ return {
       underline = true,
       update_in_insert = false,
       virtual_text = {
-        prefix = require("ui.icons").global.prefix,
+        prefix = "",
       },
       severity_sort = true,
     },
     signs = {
-      Error = require("ui.icons").diagnostics.info,
-      Warn = require("ui.icons").diagnostics.info,
-      Hint = require("ui.icons").diagnostics.hint,
-      Info = require("ui.icons").diagnostics.info,
+      Error = require("ui.icons").dg.bugf,
+      Warn = require("ui.icons").dg.bugf,
+      Hint = require("ui.icons").dg.hint,
+      Info = require("ui.icons").dg.bugf,
     },
     servers = {
       bashls = {},

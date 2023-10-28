@@ -18,9 +18,9 @@ return {
       gitsigns = {
         enable = true,
         signs = {
-          add = require("ui.icons").signs.add,
-          change = require("ui.icons").signs.add,
-          delete = require("ui.icons").signs.add,
+          add = "│",
+          change = "│",
+          delete = "│",
         },
       },
       marks = {

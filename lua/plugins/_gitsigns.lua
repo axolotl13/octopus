@@ -3,24 +3,12 @@ return {
   event = { "BufReadPost", "BufNewFile", "BufWritePre" },
   opts = {
     signs = {
-      add = {
-        text = require("ui.icons").signs.add,
-      },
-      change = {
-        text = require("ui.icons").signs.add,
-      },
-      delete = {
-        text = require("ui.icons").signs.add,
-      },
-      topdelete = {
-        text = require("ui.icons").signs.add,
-      },
-      changedelete = {
-        text = require("ui.icons").signs.add,
-      },
-      untracked = {
-        text = require("ui.icons").signs.add,
-      },
+      add = { text = "│" }, --┃
+      change = { text = "│" },
+      delete = { text = "│" },
+      topdelete = { text = "│" },
+      changedelete = { text = "│" },
+      untracked = { text = "│" },
     },
     attach_to_untracked = false,
     current_line_blame = false,

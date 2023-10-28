@@ -2,7 +2,7 @@ return {
   "akinsho/bufferline.nvim",
   dependencies = {
     "nvim-tree/nvim-web-devicons",
-    -- { "tiagovla/scope.nvim", config = true },
+    { "tiagovla/scope.nvim", config = true },
   },
   init = function()
     vim.opt.mousemoveevent = true
@@ -11,17 +11,16 @@ return {
   opts = {
     options = {
       middle_mouse_command = "vertical sbuffer %d",
-      indicator = { icon = require("ui.icons").buffer.indicator, style = "none" },
-      buffer_close_icon = require("ui.icons").buffer.tab_close,
-      modified_icon = require("ui.icons").buffer.modified,
-      close_icon = require("ui.icons").buffer.close,
-      left_trunc_marker = require("ui.icons").buffer.left,
-      right_trunc_marker = require("ui.icons").buffer.right,
+      indicator = { icon = require("ui.icons").bl.indicator, style = "none" },
+      buffer_close_icon = require("ui.icons").bl.buffer_close,
+      modified_icon = require("ui.icons").bl.modified,
+      close_icon = require("ui.icons").bl.close,
+      left_trunc_marker = require("ui.icons").bl.left,
+      right_trunc_marker = require("ui.icons").bl.right,
       max_name_length = 20,
       diagnostics = "nvim_lsp",
       diagnostics_indicator = function(count, level, diagnostics_dict, context)
-        local icon = level:match "error" and require("ui.icons").diagnostics.hint2
-          or require("ui.icons").diagnostics.hint
+        local icon = level:match "error" and require("ui.icons").dg.hintf or require("ui.icons").dg.hint
         return count .. " " .. icon
       end,
       offsets = { { filetype = "NvimTree", text = "", separator = false } },

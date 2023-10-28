@@ -6,8 +6,8 @@ return {
   cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles", "DiffviewFileHistory" },
   opts = {
     icons = {
-      folder_closed = require("ui.icons").explorer.default,
-      folder_open = require("ui.icons").explorer.open,
+      folder_closed = "",
+      folder_open = "",
     },
     file_panel = {
       tree_options = {
