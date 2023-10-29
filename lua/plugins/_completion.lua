@@ -42,7 +42,7 @@ return {
     },
     config = function()
       local cmp = require "cmp"
-      local icons = require("ui.icons").vscode
+      local icons = require("ui.icons").vs
 
       local border = function(hl)
         return {
