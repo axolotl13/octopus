@@ -1,8 +1,7 @@
 return {
   {
     "kylechui/nvim-surround",
-    -- keys = { "ysiw", "ys", "yss","ds", "cs" },
-    event = "VeryLazy",
+    keys = { "ys", "ds", "cs" },
     config = true,
   },
   {
@@ -16,21 +15,6 @@ return {
     keys = {
       { "<leader>cc", "<cmd>CccHighlighterToggle<cr>", desc = "Habilitar CccHighlighterToggle" },
       { "<leader>cp", "<cmd>CccPick<cr>", desc = "Habilitar CccPick" },
-    },
-  },
-  {
-    "rmagatti/session-lens",
-    dependencies = {
-      "rmagatti/auto-session",
-      "nvim-telescope/telescope.nvim",
-    },
-    opts = {
-      path_display = { "shorten" },
-      -- theme = 'ivy',
-      -- previewer = true
-    },
-    keys = {
-      { "<a-z>", "<cmd>SearchSession<cr>", desc = "[Session] Mostrar una lista de sesiones" },
     },
   },
   {

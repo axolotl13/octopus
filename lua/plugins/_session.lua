@@ -1,30 +1,60 @@
 return {
-  "rmagatti/auto-session",
-  init = function()
-    vim.opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
-  end,
+  "stevearc/resession.nvim",
   lazy = false,
   opts = {
-    pre_save_cmds = {
-      function() end,
-      "NvimTreeClose",
-      "cclose",
-      "lua vim.notify.dismiss()",
-      "DiffviewClose",
-      "lua require('spectre').close()",
+    dir = "resession",
+    autosave = {
+      enabled = true,
+      interval = 60,
+      notify = false,
     },
-    auto_session_root_dir = vim.fn.expand "$HOME" .. "/.config/nvim/sessions/",
-    auto_session_enabled = true,
-    auto_restore_enabled = true,
-    auto_save_enabled = true,
-    auto_session_use_git_branch = true,
-    auto_session_suppress_dirs = { "~/", "~/Descargas" },
-    cwd_change_handling = {
-      restore_upcoming_session = false,
+    options = {
+      "binary",
+      "bufhidden",
+      "buflisted",
+      "cmdheight",
+      "diff",
+      "filetype",
+      "modifiable",
+      "previewwindow",
+      "readonly",
+      "scrollbind",
+      "winfixheight",
+      "winfixwidth",
+      "tabstop",
+      "shiftwidth",
+      "relativenumber",
     },
+    extensions = {},
   },
+  config = function(_, opts)
+    local resession = require "resession"
+    resession.setup(opts)
+    local function get_session_name()
+      local name = vim.fn.getcwd()
+      local branch = vim.trim(vim.fn.system "git branch --show-current")
+      if vim.v.shell_error == 0 then
+        return name .. branch
+      else
+        return name
+      end
+    end
+    vim.api.nvim_create_autocmd("VimEnter", {
+      callback = function()
+        if vim.fn.argc(-1) == 0 then
+          resession.load(get_session_name(), { dir = "dirsession", silence_errors = true })
+        end
+      end,
+    })
+    vim.api.nvim_create_autocmd("VimLeavePre", {
+      callback = function()
+        resession.save(get_session_name(), { dir = "dirsession", notify = false })
+      end,
+    })
+  end,
   keys = {
-    { "<leader>xs", "<cmd>SessionSave<cr>", desc = "[Session] Guardar sesión actual" },
-    { "<leader>xq", "<cmd>SessionDelete<cr>", desc = "[Session] Eliminar sesión actual" },
+    { "<leader>xs", "<cmd>lua require('resession').save()<cr>", desc = "[resession] Guardar Sesión" },
+    { "<leader>xl", "<cmd>lua require('resession').load()<cr>", desc = "[resession] Cargar Sesión" },
+    { "<leader>xd", "<cmd>lua require('resession').delete()<cr>", desc = "[resession] Eliminar Sesión" },
   },
 }
