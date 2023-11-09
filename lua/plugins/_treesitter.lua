@@ -3,6 +3,11 @@ return {
   dependencies = {
     "HiPhish/rainbow-delimiters.nvim",
     {
+      "danymat/neogen",
+      config = true,
+      keys = { { "<leader>nn", "<cmd>lua require('neogen').generate()<cr>", desc = "Generar anotaciones" } },
+    },
+    {
       "kevinhwang91/nvim-ufo",
       dependencies = {
         "kevinhwang91/promise-async",
