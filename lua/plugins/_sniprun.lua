@@ -8,9 +8,9 @@ return {
     display_options = { notification_timeout = 5 },
   },
   keys = {
-    { "<leader>re", "<cmd>SnipRun<cr>", "[SnipRun] Ejecutar línea de código" },
-    { "<leader>rr", "<cmd>SnipReset<cr>", "[SnipRun] Reiniciar SnipRun" },
-    { "<leader>rq", "<cmd>SnipClose<cr>", "[SnipRun] Cerrar SnipRun" },
-    { "<leader>re", mode = { "x" }, ":SnipRun<cr>", "[SnipRun] Ejecutar bloque de código" },
+    { "<leader>re", "<cmd>SnipRun<cr>", desc = "[SnipRun] Ejecutar línea de código" },
+    { "<leader>rr", "<cmd>SnipReset<cr>", desc = "[SnipRun] Reiniciar SnipRun" },
+    { "<leader>rq", "<cmd>SnipClose<cr>", desc = "[SnipRun] Cerrar SnipRun" },
+    { "<leader>re", mode = { "x" }, ":SnipRun<cr>", desc = "[SnipRun] Ejecutar bloque de código" },
   },
 }
