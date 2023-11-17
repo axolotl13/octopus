@@ -43,6 +43,30 @@ return {
       require("tokyonight").load()
     end,
   },
+  -- {
+  --   "sam4llis/nvim-tundra",
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = true,
+  --   init = function()
+  --     vim.cmd "colorscheme tundra"
+  --   end,
+  -- },
+  {
+    "projekt0n/github-nvim-theme",
+    lazy = false,
+    priority = 1000,
+    config = function()
+        groups = {
+          all = {
+            NormalNC = { fg = "#000000", bg = "#ffffff" }, -- Non-current windows
+          },
+              require("github-theme").setup {
+},
+      }
+      vim.cmd "colorscheme github_dark_colorblind"
+    end,
+  },
   {
     "catppuccin/nvim",
     as = "catppuccin",
