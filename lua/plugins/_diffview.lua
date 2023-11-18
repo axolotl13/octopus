@@ -29,9 +29,9 @@ return {
   },
   keys = {
     { "<leader>dd", "<cmd>DiffviewOpen<cr>", desc = "[Diffview] Abre Diffview" },
-    { "<leader>db", "<cmd>DiffviewOpen %<cr>", desc = "[Diffview] Abre Diffview en el buffer actual" },
     { "<leader>dq", "<cmd>DiffviewClose<cr>", desc = "[Diffview] Cierra Diffview" },
     { "<leader>dh", "<cmd>DiffviewFileHistory<cr>", desc = "[Diffview] Abre DiffviewFileHistory" },
+    { "<leader>dw", "<cmd>DiffviewFileHistory %<cr>", desc = "[Diffview] Abre Diffview en el buffer actual" },
     { "<leader>dt", "<cmd>DiffviewToggleFiles<cr>", desc = "[Diffview] DiffviewToggleFiles" },
   },
 }
