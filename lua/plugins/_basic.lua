@@ -1,13 +1,7 @@
 return {
-  {
-    "kylechui/nvim-surround",
-    keys = { "ys", "ds", "cs" },
-    config = true,
-  },
-  {
-    "JoosepAlviste/nvim-ts-context-commentstring",
-    lazy = true,
-  },
+  { "kylechui/nvim-surround", keys = { "ys", "ds", "cs" }, config = true },
+  { "JoosepAlviste/nvim-ts-context-commentstring", lazy = true },
+  { "mfussenegger/nvim-jdtls", ft = "java" },
   {
     "uga-rosa/ccc.nvim",
     cmd = { "CccHighlighterToggle", "CccPick" },
@@ -16,10 +10,6 @@ return {
       { "<leader>cc", "<cmd>CccHighlighterToggle<cr>", desc = "Habilitar CccHighlighterToggle" },
       { "<leader>cp", "<cmd>CccPick<cr>", desc = "Habilitar CccPick" },
     },
-  },
-  {
-    "mfussenegger/nvim-jdtls",
-    ft = "java",
   },
   {
     "chrisgrieser/nvim-spider",
