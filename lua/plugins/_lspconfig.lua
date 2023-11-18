@@ -105,7 +105,7 @@ return {
       keymap("n", "gu", vim.lsp.buf.type_definition, bufn)
       keymap("n", "gr", vim.lsp.buf.rename, bufn)
       keymap("n", "gp", vim.lsp.buf.code_action, bufn)
-      keymap("n", "gl", vim.lsp.buf.references, bufn)
+      keymap("n", "gc", vim.lsp.buf.references, bufn)
       keymap("n", "<leader>ff", function()
         vim.lsp.buf.format { async = true }
       end, bufn)
