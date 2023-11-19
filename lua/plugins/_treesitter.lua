@@ -2,6 +2,7 @@ return {
   "nvim-treesitter/nvim-treesitter",
   dependencies = {
     "HiPhish/rainbow-delimiters.nvim",
+    { "nvim-treesitter/nvim-treesitter-context", opts = { max_lines = 1 } },
     {
       "danymat/neogen",
       config = true,
