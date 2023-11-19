@@ -1,6 +1,7 @@
 local jdtls_path = vim.fn.stdpath "data" .. "/mason/packages/jdtls/"
-local jar_path = jdtls_path .. "plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar"
+local jar_path = jdtls_path .. "plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar"
 local config_path = jdtls_path .. "config_linux"
+local home = vim.fn.expand "$HOME" .. "/.workspace"
 
 local config = {
   cmd = {
@@ -21,7 +22,7 @@ local config = {
     "-configuration",
     config_path,
     "-data",
-    "/home/joker/workspace",
+    home,
   },
 
   root_dir = require("jdtls.setup").find_root { ".git", "mvnw", "gradlew" },

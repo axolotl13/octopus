@@ -79,6 +79,31 @@ return {
       vim.cmd [[colorscheme catppuccin]]
     end,
   },
+{
+    "loctvl842/monokai-pro.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {
+      filter = "pro",
+      background_clear = { "telescope" },
+      override = function(c)
+        return {
+          NvimTreeGitNew = { fg = c.gitDecoration.addedResourceForeground },
+          NvimTreeGitStaged = { fg = c.gitDecoration.conflictingResourceForeground },
+          TelescopePromptNormal = { bg = c.sideBar.background },
+          TelescopePromptBorder = { fg = c.sideBar.background, bg = c.sideBar.background },
+          TelescopeResultsNormal = { fg = c.common_fg, bg = c.base.dark },
+          TelescopeResultsBorder = { fg = c.base.dark, bg = c.base.dark },
+          TelescopePreviewNormal = { bg = c.base.dark },
+          TelescopePreviewBorder = { bg = c.base.dark, fg = c.base.dark },
+        }
+      end,
+    },
+    config = function(_, opts)
+      require("monokai-pro").setup(opts)
+      vim.cmd [[colorscheme monokai-pro]]
+    end,
+  }
   {
     "loctvl842/monokai-pro.nvim",
     lazy = false,
