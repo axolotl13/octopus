@@ -53,11 +53,16 @@ return {
     },
     keys = { { "<leader>vv", "<cmd>VenvSelect<cr>", desc = "Selecciona el entorno virtual de Python" } },
   },
-  -- Vim plugins
   {
-    "tpope/vim-fugitive",
-    cmd = "Git",
+    "utilyre/sentiment.nvim",
+    event = "VeryLazy",
+    config = true,
+    init = function()
+      vim.g.loaded_matchparen = 1
+    end,
   },
+  -- Vim plugins
+  { "tpope/vim-fugitive", cmd = "Git" },
   {
     "mg979/vim-visual-multi",
     keys = { "<c-n>", "<c-down>", "<c-up>", "<s-left>", "<s-right>" }, -- n, N, q, Q, -
