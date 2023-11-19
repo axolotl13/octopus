@@ -1,6 +1,6 @@
 return {
   { "kylechui/nvim-surround", keys = { "ys", "ds", "cs" }, config = true },
-  { "JoosepAlviste/nvim-ts-context-commentstring", lazy = true },
+  { "JoosepAlviste/nvim-ts-context-commentstring", lazy = true, opts = { enable_autocmd = false } },
   { "mfussenegger/nvim-jdtls", ft = "java" },
   {
     "uga-rosa/ccc.nvim",
