@@ -14,6 +14,7 @@ return {
             -- require("luasnip").filetype_extend("typescriptreact", { "html" })
           end,
         },
+        build = "make install_jsregexp",
         opts = {
           history = true,
           delete_check_events = "TextChanged",
