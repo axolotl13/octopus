@@ -36,6 +36,86 @@ return {
     local Align = { provider = "%=" }
     local Space = { provider = " " }
 
+    local mode_colors = {
+      n = colors.red,
+      i = colors.green,
+      v = colors.cyan,
+      V = colors.cyan,
+      ["\22"] = colors.cyan,
+      c = colors.orange,
+      s = colors.purple,
+      S = colors.purple,
+      ["\19"] = colors.purple,
+      R = colors.orange,
+      r = colors.orange,
+      ["!"] = colors.red,
+      t = colors.red,
+    }
+
+    local ViMode = {
+      init = function(self)
+        self.mode = vim.fn.mode(1)
+      end,
+      static = {
+        mode_names = {
+          n = "NORMAL",
+          no = "OP",
+          nov = "OP",
+          noV = "OP",
+          ["no\22"] = "OP",
+          niI = "NORMAL",
+          niR = "NORMAL",
+          niV = "NORMAL",
+          nt = "TERMINAL",
+          v = "VISUAL",
+          vs = "VISUAL",
+          V = "V-LINE",
+          Vs = "V-LINE",
+          ["\22"] = "V-BLOCK",
+          ["\22s"] = "V-BLOCK",
+          s = "SELECT",
+          S = "SELECT",
+          ["\19"] = "BLOCK",
+          i = "INSERT",
+          ic = "INSERT",
+          ix = "INSERT",
+          R = "REPLACE",
+          Rc = "REPLACE",
+          Rx = "REPLACE",
+          Rv = "V-REPLACE",
+          Rvc = "V-REPLACE",
+          Rvx = "V-REPLACE",
+          c = "COMMAND",
+          cv = "COMMAND",
+          r = "PROMPT",
+          rm = "MORE",
+          ["r?"] = "CONFIRM",
+          ["!"] = "SHELL",
+          t = "TERMINAL",
+        },
+      },
+      provider = function(self)
+        return self.mode_names[self.mode]
+      end,
+      hl = function(self)
+        local mode = self.mode:sub(1, 1)
+        return { fg = mode_colors[mode], bg = colors.statusline, bold = true }
+      end,
+      update = {
+        "ModeChanged",
+        pattern = "*:*",
+        callback = vim.schedule_wrap(function()
+          vim.cmd "redrawstatus"
+        end),
+      },
+      Space,
+    }
+
+    ViMode = {
+      hl = { bg = colors.statusline },
+      utils.surround({ " ", icons.sp.right }, colors.none, ViMode),
+    }
+
     local FileNameBlock = {
       Space,
       init = function(self)
@@ -207,7 +287,7 @@ return {
       Space,
     }
 
-    local Left = { FileNameBlock, Git, Space, FileSize, Space, Venv }
+    local Left = { ViMode, FileNameBlock, Git, Space, FileSize, Space, Venv }
 
     local Diagnostics = {
 
@@ -264,9 +344,10 @@ return {
         for _, server in pairs(vim.lsp.get_active_clients { bufnr = 0 }) do
           table.insert(names, server.name)
         end
-        return icons.st.gear .. table.concat(names, " ")
+        return " " .. icons.st.gear .. table.concat(names, " ")
       end,
       hl = { fg = colors.green, bold = true },
+      Space,
     }
 
     local Shiftab = {
@@ -306,7 +387,7 @@ return {
 
     local ScrollBar = {
       static = {
-        sbar = icons.sp.zbar,
+        sbar = icons.st.sbar,
       },
       provider = function(self)
         local curr_line = vim.api.nvim_win_get_cursor(0)[1]
@@ -314,14 +395,19 @@ return {
         local i = math.floor((curr_line - 1) / lines * #self.sbar) + 1
         return string.rep(self.sbar[i], 2)
       end,
-      hl = { fg = colors.statuslinenc, bg = colors.statusline },
+      hl = { fg = colors.statusline, bg = colors.statuslinenc },
     }
 
     local RightPart = { Space, FileFormat, Space, FileEncoding, Space, Shiftab, Ruler, Space, ScrollBar }
 
-    RightPart = { utils.surround({ icons.sp.left_fill, "" }, colors.statusline, RightPart) }
+    RightPart = {
+      hl = { bg = colors.statuslinenc },
+      utils.surround({ icons.sp.left_fill, "" }, colors.statusline, RightPart),
+    }
 
-    local Right = { Diagnostics, Space, LSPActive, Space, RightPart }
+    LSPActive = { utils.surround({ icons.sp.left_fill, "" }, colors.statuslinenc, LSPActive) }
+
+    local Right = { Diagnostics, Space, LSPActive, RightPart }
 
     local Line = { Left, Align, Right }
 
@@ -390,24 +476,9 @@ return {
 
     local ViStatusLine = {
       static = {
-        mode_colors = {
-          n = colors.red,
-          i = colors.green,
-          v = colors.cyan,
-          V = colors.cyan,
-          ["\22"] = colors.cyan,
-          c = colors.orange,
-          s = colors.purple,
-          S = colors.purple,
-          ["\19"] = colors.purple,
-          R = colors.orange,
-          r = colors.orange,
-          ["!"] = colors.red,
-          t = colors.red,
-        },
         mode_color = function(self)
           local mode = conditions.is_active() and vim.fn.mode() or "n"
-          return self.mode_colors[mode]
+          return mode_colors[mode]
         end,
       },
       utils.surround({ icons.sp.block, icons.sp.block }, function(self)
@@ -527,6 +598,35 @@ return {
       hl = { bold = true },
     }
 
+    local WinFileName = {
+      provider = function(self)
+        local filename = self.filename
+        filename = filename == "" and "[No Name]" or vim.fn.fnamemodify(filename, ":t")
+        local trail = filename:sub(-1) == " › " and "" or " › "
+        return filename .. trail
+      end,
+    }
+
+    local WinFileNameBlock = {
+      init = function(self)
+        self.filename = vim.api.nvim_buf_get_name(0)
+      end,
+      FileIcon,
+      WinFileName,
+    }
+
+    local WinFileType = {
+      provider = function()
+        local filetype = vim.bo.filetype
+        filetype = filetype:gsub("^%l", string.upper)
+        local trail = filetype:sub(-1) == " › " and "" or " › "
+        return filetype .. trail
+      end,
+      hl = {
+        bold = true,
+      },
+    }
+
     local FileLastModified = {
       provider = function()
         local ftime = vim.fn.getftime(vim.api.nvim_buf_get_name(0))
@@ -560,6 +660,8 @@ return {
       utils.surround({ icons.sp.block, icons.sp.block }, colors.none, {
         {
           DirName,
+          WinFileNameBlock,
+          WinFileType,
           Navic,
           Align,
         },
@@ -568,7 +670,7 @@ return {
       hl = { bg = colors.none },
     }
 
-    local click_args = function(self, minwid, clicks, button, mods)
+    local click_args = function(minwid, clicks, button, mods)
       local args = {
         minwid = minwid,
         clicks = clicks,
@@ -579,47 +681,71 @@ return {
       return args
     end
 
+    local ffi = require "ffi"
+
+    ffi.cdef [[
+      typedef struct {} Error;
+      typedef struct {} win_T;
+      typedef struct {
+        int start;  // line number where deepest fold starts.
+        int level;  // fold level, when zero other fields are N/A.
+        int llevel; // lowest level that starts in v:lnum.
+        int lines;  // number of lines from v:lnum to end of closed fold.
+      } foldinfo_T;
+      foldinfo_T fold_info(win_T* wp, int lnum);
+      win_T *find_window_by_handle(int Window, Error *err);
+      int compute_foldcolumn(win_T *wp, int col);
+    ]]
+
     local Folds = {
+      static = {
+        fillchars = vim.opt.fillchars:get(),
+      },
       condition = function()
-        return vim.v.virtnum == 0
+        return vim.opt.foldcolumn:get() ~= "0"
       end,
-      init = function(self)
-        self.lnum = vim.v.lnum
-        self.folded = vim.fn.foldlevel(self.lnum) > vim.fn.foldlevel(self.lnum - 1)
+      provider = function()
+        local foldopen = icons.fl.arrow_open
+        local foldclosed = icons.fl.arrow_closed
+        local foldsep = " "
+        local wp = ffi.C.find_window_by_handle(0, ffi.new "Error")
+        local width = ffi.C.compute_foldcolumn(wp, 0)
+        local foldinfo = width > 0 and ffi.C.fold_info(wp, vim.v.lnum)
+          or { start = 0, level = 0, llevel = 0, lines = 0 }
+        local str = ""
+        if width ~= 0 then
+          str = vim.v.relnum > 0 and "%#FoldColumn#" or "%#CursorLineFold#"
+          if foldinfo.level == 0 then
+            str = str .. (" "):rep(width)
+          else
+            local closed = foldinfo.lines > 0
+            local first_level = foldinfo.level - width - (closed and 1 or 0) + 1
+            if first_level < 1 then
+              first_level = 1
+            end
+
+            for col = 1, width do
+              str = str
+                .. (
+                  (vim.v.virtnum ~= 0 and foldsep)
+                  or ((closed and (col == foldinfo.level or col == width)) and foldclosed)
+                  or ((foldinfo.start == vim.v.lnum and first_level + col > foldinfo.llevel) and foldopen)
+                  or foldsep
+                )
+              if col == foldinfo.level then
+                str = str .. (" "):rep(width - col)
+                break
+              end
+            end
+          end
+        end
+        return str .. "%*"
       end,
-      {
-        condition = function(self)
-          return self.folded
-        end,
-        provider = function(self)
-          if vim.fn.foldclosed(self.lnum) == -1 then
-            return icons.fl.arrow_open
-          else
-            return icons.fl.arrow_closed
-          end
-        end,
-        hl = function(self)
-          if vim.fn.foldclosed(self.lnum) == -1 then
-            return "StatusColumnUnfoldedIcon"
-          else
-            return "StatusColumnFoldedIcon"
-          end
-        end,
-      },
-      {
-        condition = function(self)
-          return not self.folded
-        end,
-        provider = " ",
-      },
       on_click = {
         name = "fold_click",
         callback = function(self, ...)
           local args = click_args(self, ...)
           local lnum = args.mousepos.line
-          if vim.fn.foldlevel(lnum) <= vim.fn.foldlevel(lnum - 1) then
-            return
-          end
           vim.cmd.execute("'" .. lnum .. "fold" .. (vim.fn.foldclosed(lnum) == -1 and "close" or "open") .. "'")
         end,
       },
