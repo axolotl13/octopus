@@ -47,9 +47,9 @@ return {
   {
     "linux-cultist/venv-selector.nvim",
     dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim" },
-    lazy = true,
+    ft = { "python" },
     opts = {
-      name = { "Packages", "venv", ".venv" },
+      name = { "venv", ".venv" },
     },
     keys = { { "<leader>vv", "<cmd>VenvSelect<cr>", desc = "Selecciona el entorno virtual de Python" } },
   },
