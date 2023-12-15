@@ -3,12 +3,15 @@ return {
   { "JoosepAlviste/nvim-ts-context-commentstring", lazy = true, opts = { enable_autocmd = false } },
   { "mfussenegger/nvim-jdtls", ft = "java" },
   {
-    "uga-rosa/ccc.nvim",
-    cmd = { "CccHighlighterToggle", "CccPick" },
-    config = true,
+    "NvChad/nvim-colorizer.lua",
+    cmd = { "ColorizerToggle" },
+    opts = {
+      user_default_options = {
+        css = true,
+      },
+    },
     keys = {
-      { "<leader>cc", "<cmd>CccHighlighterToggle<cr>", desc = "Habilitar CccHighlighterToggle" },
-      { "<leader>cp", "<cmd>CccPick<cr>", desc = "Habilitar CccPick" },
+      { "<leader>cc", "<cmd>ColorizerToggle<cr>", desc = "Habilitar Colorizer" },
     },
   },
   {
