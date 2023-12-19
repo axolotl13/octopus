@@ -62,6 +62,8 @@ local opts = {
 
   -- Lazy
   { "n", "<leader>ps", "<cmd>Lazy<cr>", "Mostrar estado de los plugins" },
+
+  -- { "n", "<f5>", "<cmd>!python3 %<cr>", "Ejecutar Código Python"}
 }
 
 vim.g.mapleader = " "

@@ -58,48 +58,48 @@ return {
       end,
       static = {
         mode_names = {
-          n = "NORMAL",
+          n = "NO",
           no = "OP",
-          nov = "OP",
-          noV = "OP",
-          ["no\22"] = "OP",
-          niI = "NORMAL",
-          niR = "NORMAL",
-          niV = "NORMAL",
-          nt = "TERMINAL",
-          v = "VISUAL",
-          vs = "VISUAL",
-          V = "V-LINE",
-          Vs = "V-LINE",
-          ["\22"] = "V-BLOCK",
-          ["\22s"] = "V-BLOCK",
-          s = "SELECT",
-          S = "SELECT",
-          ["\19"] = "BLOCK",
-          i = "INSERT",
-          ic = "INSERT",
-          ix = "INSERT",
-          R = "REPLACE",
-          Rc = "REPLACE",
-          Rx = "REPLACE",
-          Rv = "V-REPLACE",
-          Rvc = "V-REPLACE",
-          Rvx = "V-REPLACE",
-          c = "COMMAND",
-          cv = "COMMAND",
-          r = "PROMPT",
-          rm = "MORE",
-          ["r?"] = "CONFIRM",
-          ["!"] = "SHELL",
-          t = "TERMINAL",
+          nov = "OC",
+          noV = "OL",
+          ["no\22"] = "OB",
+          niI = "IN",
+          niR = "RE",
+          niV = "RV",
+          nt = "NT",
+          v = "VI",
+          vs = "VI",
+          V = "VL",
+          Vs = "VL",
+          ["\22"] = "VB",
+          ["\22s"] = "VB",
+          s = "SE",
+          S = "SL",
+          ["\19"] = "SB",
+          i = "IN",
+          ic = "IC",
+          ix = "IX",
+          R = "RE",
+          Rc = "RC",
+          Rx = "RX",
+          Rv = "RV",
+          Rvc = "RC",
+          Rvx = "RX",
+          c = "CO",
+          cv = "CV",
+          r = "PR",
+          rm = "PM",
+          ["r?"] = "P?",
+          ["!"] = "SH",
+          t = "TE",
         },
       },
       provider = function(self)
-        return self.mode_names[self.mode]
+        return self.mode_names[self.mode] .. " "
       end,
       hl = function(self)
         local mode = self.mode:sub(1, 1)
-        return { fg = mode_colors[mode], bg = colors.statusline, bold = true }
+        return { fg = colors.statusline, bg = mode_colors[mode], bold = true }
       end,
       update = {
         "ModeChanged",
@@ -108,16 +108,33 @@ return {
           vim.cmd "redrawstatus"
         end),
       },
+    }
+
+    local Gitter = {
+      condition = conditions.is_git_repo,
+
+      init = function(self)
+        self.status_dict = vim.b.gitsigns_status_dict
+        self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0
+      end,
+
+      hl = { fg = colors.orange, bg = colors.statusline },
+
+      {
+        provider = function(self)
+          return icons.st.unmerged .. self.status_dict.head
+        end,
+        hl = { bold = true },
+      },
       Space,
     }
 
-    ViMode = {
+    Gitter = {
       hl = { bg = colors.statusline },
-      utils.surround({ " ", icons.sp.right }, colors.none, ViMode),
+      utils.surround({ "", icons.sp.right }, colors.none, Gitter),
     }
 
     local FileNameBlock = {
-      Space,
       init = function(self)
         self.filename = vim.api.nvim_buf_get_name(0)
       end,
@@ -178,11 +195,13 @@ return {
       end,
     }
 
-    FileNameBlock =
-      utils.insert(FileNameBlock, FileIcon, utils.insert(FileNameModifer, FileName), FileFlags, { provider = "%<" })
+    FileNameBlock = {
+      Space,
+      utils.insert(FileNameBlock, FileIcon, utils.insert(FileNameModifer, FileName), FileFlags, { provider = "%<" }),
+    }
 
     FileNameBlock = {
-      hl = { bg = colors.statuslinenc },
+      hl = { bg = colors.none },
       utils.surround({ "", icons.sp.right_fill }, colors.statusline, FileNameBlock),
     }
 
@@ -194,20 +213,6 @@ return {
         self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0
       end,
 
-      hl = { fg = colors.orange },
-
-      {
-        provider = function(self)
-          return icons.st.unmerged .. self.status_dict.head
-        end,
-        hl = { bold = true },
-      },
-      {
-        condition = function(self)
-          return self.has_changes
-        end,
-        provider = " ",
-      },
       {
         provider = function(self)
           local count = self.status_dict.added or 0
@@ -235,11 +240,6 @@ return {
         end,
         provider = " ",
       },
-    }
-
-    Git = {
-      hl = { bg = colors.none },
-      utils.surround({ "", icons.sp.right_fill }, colors.statuslinenc, Git),
     }
 
     local FileSize = {
@@ -287,7 +287,7 @@ return {
       Space,
     }
 
-    local Left = { ViMode, FileNameBlock, Git, Space, FileSize, Space, Venv }
+    local Left = { ViMode, Gitter, FileNameBlock, Git, Space, FileSize, Space, Venv }
 
     local Diagnostics = {
 
@@ -344,7 +344,7 @@ return {
         for _, server in pairs(vim.lsp.get_active_clients { bufnr = 0 }) do
           table.insert(names, server.name)
         end
-        return " " .. icons.st.gear .. table.concat(names, " ")
+        return icons.st.gear .. table.concat(names, " ")
       end,
       hl = { fg = colors.green, bold = true },
       Space,
@@ -401,11 +401,8 @@ return {
     local RightPart = { Space, FileFormat, Space, FileEncoding, Space, Shiftab, Ruler, Space, ScrollBar }
 
     RightPart = {
-      hl = { bg = colors.statuslinenc },
       utils.surround({ icons.sp.left_fill, "" }, colors.statusline, RightPart),
     }
-
-    LSPActive = { utils.surround({ icons.sp.left_fill, "" }, colors.statuslinenc, LSPActive) }
 
     local Right = { Diagnostics, Space, LSPActive, RightPart }
 

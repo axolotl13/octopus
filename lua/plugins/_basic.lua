@@ -6,9 +6,7 @@ return {
     "NvChad/nvim-colorizer.lua",
     cmd = { "ColorizerToggle" },
     opts = { user_default_options = { css = true } },
-    keys = {
-      { "<leader>cc", "<cmd>ColorizerToggle<cr>", desc = "Habilitar Colorizer" },
-    },
+    keys = { { "<leader>cc", "<cmd>ColorizerToggle<cr>", desc = "Habilitar Colorizer" } },
   },
   {
     "chrisgrieser/nvim-spider",
@@ -53,6 +51,15 @@ return {
     keys = { { "<leader>vv", "<cmd>VenvSelect<cr>", desc = "Selecciona el entorno virtual de Python" } },
   },
   {
+    "CRAG666/code_runner.nvim",
+    config = true,
+    cmd = { "RunCode", "RunFile" },
+    keys = {
+      { "<f5>", "<cmd>RunCode<cr>", desc = "Ejecuta el código actual" },
+      -- { "<leader>rf", "<cmd>RunFile<cr>", desc = "Ejecuta el código actual" },
+    },
+  },
+  {
     "utilyre/sentiment.nvim",
     event = "VeryLazy",
     config = true,
@@ -60,6 +67,7 @@ return {
       vim.g.loaded_matchparen = 1
     end,
   },
+  -- { "mfussenegger/nvim-dap", event = "VeryLazy" },
   -- Vim plugins
   { "tpope/vim-fugitive", cmd = "Git" },
   {

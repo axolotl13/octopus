@@ -131,8 +131,6 @@ local icons = {
     right_round = "",
     left_roundt = "",
     right_roundt = "",
-    sbar = { "▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" },
-    zbar = { "🭶", "🭷", "🭸", "🭹", "🭺", "🭻" },
   },
 }
 

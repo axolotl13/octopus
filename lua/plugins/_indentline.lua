@@ -13,7 +13,7 @@ return {
       show_start = true,
       show_end = false,
       injected_languages = true,
-      highlight = "Function",
+      highlight = "IblScope",
       include = {
         node_type = {
           bash = {
@@ -26,6 +26,7 @@ return {
             "for_statement",
             "method_statement",
             "return_statement",
+            "table_constructor",
           },
           python = {
             "if_statement",
@@ -37,7 +38,7 @@ return {
         },
       },
       exclude = {
-        language = { "fish" },
+        language = { "fish", "yaml" },
       },
     },
     exclude = {
@@ -47,6 +48,8 @@ return {
         "notify",
         "NvimTree",
         "spectre_panel",
+        "markdown",
+        "text"
       },
     },
   },
