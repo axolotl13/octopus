@@ -28,7 +28,6 @@ return {
           disable_filetype = { "TelescopePrompt", "vim", "spectre_panel" },
           fast_wrap = {
             map = "<M-e>", -- M = Alt
-            pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], "%s+", ""),
           },
         },
         config = function(_, opts)
