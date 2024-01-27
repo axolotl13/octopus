@@ -10,10 +10,7 @@ return {
       changedelete = { text = "│" },
       untracked = { text = "│" },
     },
-    attach_to_untracked = false,
-    current_line_blame = false,
     current_line_blame_opts = {
-      delay = 1000,
       ignore_whitespace = true,
     },
     max_file_length = 20000,
