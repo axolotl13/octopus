@@ -6,7 +6,7 @@ return {
     {
       "danymat/neogen",
       config = true,
-      keys = { { "<leader>nn", "<cmd>lua require('neogen').generate()<cr>", desc = "Generar anotaciones" } },
+      keys = { { "<leader>nn", "<cmd>lua require('neogen').generate()<cr>", desc = "[Neogen] Generar anotaciones" } },
     },
     {
       "kevinhwang91/nvim-ufo",
@@ -38,6 +38,7 @@ return {
   opts = {
     ensure_installed = {
       "bash",
+      "bibtex",
       "comment",
       "cpp",
       "css",
@@ -53,6 +54,7 @@ return {
       "java",
       "javascript",
       "json",
+      "latex",
       "lua",
       "markdown",
       "markdown_inline",
@@ -60,8 +62,10 @@ return {
       "python",
       "scss",
       "sql",
+      "ssh_config",
       "requirements",
       "rust",
+      "ruby",
       "toml",
       "tsx",
       "typescript",
