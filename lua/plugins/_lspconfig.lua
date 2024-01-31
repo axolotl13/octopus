@@ -44,9 +44,9 @@ return {
       bashls = {},
       clangd = {},
       cssls = {},
-      -- diagnosticls = {},
-      dockerls = {},
+      diagnosticls = {},
       docker_compose_language_service = {},
+      dockerls = {},
       ember = {
         filetypes = {
           "handlebars",
@@ -80,9 +80,12 @@ return {
         },
       },
       marksman = {},
+      nginx_language_server = {},
       pyright = {},
+      ruby_ls = {},
       rust_analyzer = {},
       sqlls = {},
+      texlab = {},
       tsserver = {},
       yamlls = {},
     },
@@ -105,7 +108,7 @@ return {
       keymap("n", "gu", vim.lsp.buf.type_definition, bufn)
       keymap("n", "gr", vim.lsp.buf.rename, bufn)
       keymap("n", "gp", vim.lsp.buf.code_action, bufn)
-      keymap("n", "gc", vim.lsp.buf.references, bufn)
+      keymap("n", "gm", vim.lsp.buf.references, bufn)
       keymap("n", "<leader>ff", function()
         vim.lsp.buf.format { async = true }
       end, bufn)
@@ -146,9 +149,11 @@ return {
       ensure_installed[#ensure_installed + 1] = server
     end
 
+    -- Mason
     local mlsp = require "mason-lspconfig"
     mlsp.setup { ensure_installed = ensure_installed, automatic_installation = true }
   end,
+
   keys = {
     {
       "gf",

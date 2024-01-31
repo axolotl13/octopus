@@ -2,7 +2,13 @@ return {
   "nvim-telescope/telescope.nvim",
   dependencies = {
     { "nvim-lua/plenary.nvim" },
-    { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true },
+    {
+      "nvim-telescope/telescope-fzf-native.nvim",
+      build = "make",
+      enabled = vim.fn.executable "make" == 1,
+      lazy = true,
+    },
+    { "benfowler/telescope-luasnip.nvim", lazy = true },
   },
   cmd = "Telescope",
   opts = {
@@ -19,53 +25,25 @@ return {
       mappings = {
         i = {
           ["<esc>"] = require("telescope.actions").close,
-          ["<c-s>"] = require("telescope.actions").select_horizontal,
-          ["<c-v>"] = require("telescope.actions").select_vertical,
           ["<c-n>"] = require("telescope.actions").cycle_history_next,
           ["<c-p>"] = require("telescope.actions").cycle_history_prev,
-          ["<c-j>"] = require("telescope.actions").move_selection_next,
-          ["<c-k>"] = require("telescope.actions").move_selection_previous,
-          ["<pageup>"] = require("telescope.actions").results_scrolling_up,
-          ["<pagedown>"] = require("telescope.actions").results_scrolling_down,
-          ["<tab>"] = require("telescope.actions").toggle_selection + require("telescope.actions").move_selection_worse,
-          ["<s-tab>"] = require("telescope.actions").toggle_selection
-            + require("telescope.actions").move_selection_better,
+          ["<c-u>"] = false,
         },
       },
       prompt_prefix = "  ",
       selection_caret = "  ",
-      entry_prefix = "  ",
-      initial_mode = "insert",
-      selection_strategy = "reset",
       sorting_strategy = "ascending",
-      layout_strategy = "horizontal",
       layout_config = {
         horizontal = {
           prompt_position = "top",
           preview_width = 0.55,
           results_width = 0.8,
         },
-        vertical = {
-          mirror = false,
-        },
         width = 0.87,
         height = 0.80,
         preview_cutoff = 120,
       },
-      file_sorter = require("telescope.sorters").get_fuzzy_file,
       file_ignore_patterns = { "node_modules" },
-      generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
-      winblend = 0,
-      border = {},
-      borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-      color_devicons = true,
-      use_less = true,
-      path_display = {},
-      set_env = { ["COLORTERM"] = "truecolor" },
-      file_previewer = require("telescope.previewers").vim_buffer_cat.new,
-      grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
-      qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
-      buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
       extensions = {
         fzf = {
           fuzzy = true,
@@ -75,10 +53,16 @@ return {
         },
       },
     },
+    pickers = {
+      find_files = {
+        find_command = { "fd", "--type", "f", "--strip-cwd-prefix" },
+      },
+    },
   },
   config = function(_, opts)
     require("telescope").setup(opts)
     require("telescope").load_extension "fzf"
+    require("telescope").load_extension "luasnip"
   end,
   keys = {
     {
@@ -98,6 +82,7 @@ return {
     { "<leader>sm", "<cmd>Telescope fd cwd=$HOME<cr>", desc = "[Telescope] Buscar en HOME" },
     { "<leader>sn", "<cmd>Telescope notify<cr>", desc = "[Telescope] Buscar últimas notificaciones" },
     { "<leader>sq", "<cmd>Telescope buffers<cr>", desc = "[Telescope] Buscar en buffer actuales" },
+    { "<leader>sl", "<cmd>Telescope luasnip<cr>", desc = "[Telescope] Buscar snippets" },
     {
       "<leader>se",
       "<cmd>lua require('telescope.builtin').grep_string()<cr>",
