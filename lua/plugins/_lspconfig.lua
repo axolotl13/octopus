@@ -84,7 +84,7 @@ return {
       pyright = {},
       ruby_ls = {},
       rust_analyzer = {},
-      sqlls = {},
+      sqls = {},
       texlab = {},
       tsserver = {},
       yamlls = {},
