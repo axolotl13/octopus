@@ -25,7 +25,11 @@ return {
     cmd = { "MarkdownPreview", "MarkdownPreviewToggle" },
     ft = { "markdown" },
     keys = {
-      { "<leader>md", "<cmd>MarkdownPreviewToggle<cr>", desc = "Muestra el archivo markdown en un navegador web" },
+      {
+        "<leader>md",
+        "<cmd>MarkdownPreviewToggle<cr>",
+        desc = "[MarkdownPreview] Muestra el archivo markdown en un navegador web",
+      },
     },
   },
   {
