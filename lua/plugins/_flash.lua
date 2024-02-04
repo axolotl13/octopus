@@ -3,7 +3,7 @@ return {
   opts = {
     search = {
       multi_window = true,
-      exclude = { "NvimTree", "terminal", "lazy", "mason", "DiffviewFiles", "DiffviewFilesHistory" },
+      exclude = { "NvimTree", "terminal", "lazy", "mason", "DiffviewFiles", "DiffviewFilesHistory", "notify" },
     },
   },
   keys = {
