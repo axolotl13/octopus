@@ -69,9 +69,30 @@ return {
       vim.g.loaded_matchparen = 1
     end,
   },
+  {
+    "Cassin01/wf.nvim",
+    event = "VeryLazy",
+    keys = function()
+      local which_key = require "wf.builtin.which_key"
+      return {
+        {
+          "<Leader>",
+          which_key { text_insert_in_advance = "<Leader>" },
+          desc = "[wf.nvim] which-key /",
+        },
+      }
+    end,
+    config = function()
+      require("wf").setup()
+    end,
+  },
   -- { "mfussenegger/nvim-dap", event = "VeryLazy" },
   -- Vim plugins
-  { "tpope/vim-fugitive", cmd = "Git" },
+  {
+    "tpope/vim-fugitive",
+    cmd = "Git",
+    keys = { { "<leader>gc", "<cmd>Git commit<cr>", desc = "[Fugitive] Git commit" } },
+  },
   {
     "mg979/vim-visual-multi",
     keys = { "<c-n>", "<c-down>", "<c-up>", "<s-left>", "<s-right>" }, -- n, N, q, Q, -
