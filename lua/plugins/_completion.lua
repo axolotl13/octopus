@@ -22,13 +22,7 @@ return {
       },
       {
         "windwp/nvim-autopairs",
-        opts = {
-          check_ts = true,
-          disable_filetype = { "TelescopePrompt", "vim", "spectre_panel" },
-          fast_wrap = {
-            map = "<M-e>", -- M = Alt
-          },
-        },
+        opts = { disable_filetype = { "TelescopePrompt", "vim", "spectre_panel" } },
         config = function(_, opts)
           require("nvim-autopairs").setup(opts)
           require("cmp").event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done { tex = "" })
