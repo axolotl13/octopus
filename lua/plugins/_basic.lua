@@ -28,7 +28,7 @@ return {
       {
         "<leader>md",
         "<cmd>MarkdownPreviewToggle<cr>",
-        desc = "[MarkdownPreview] Muestra el archivo markdown en un navegador web",
+        desc = "[MarkdownPreview] Muestra una vista previa del archivo en un navegador web",
       },
     },
   },
