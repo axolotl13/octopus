@@ -8,7 +8,6 @@ return {
       enabled = vim.fn.executable "make" == 1,
       lazy = true,
     },
-    { "benfowler/telescope-luasnip.nvim", lazy = true },
   },
   cmd = "Telescope",
   opts = {
@@ -62,7 +61,6 @@ return {
   config = function(_, opts)
     require("telescope").setup(opts)
     require("telescope").load_extension "fzf"
-    require("telescope").load_extension "luasnip"
   end,
   keys = {
     {
@@ -82,7 +80,6 @@ return {
     { "<leader>sm", "<cmd>Telescope fd cwd=$HOME<cr>", desc = "[Telescope] Buscar en HOME" },
     { "<leader>sn", "<cmd>Telescope notify<cr>", desc = "[Telescope] Buscar últimas notificaciones" },
     { "<leader>sq", "<cmd>Telescope buffers<cr>", desc = "[Telescope] Buscar en buffer actuales" },
-    { "<leader>sl", "<cmd>Telescope luasnip<cr>", desc = "[Telescope] Buscar snippets" },
     {
       "<leader>se",
       "<cmd>lua require('telescope.builtin').grep_string()<cr>",
