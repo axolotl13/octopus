@@ -19,6 +19,7 @@ return {
       group_empty = true,
       full_name = false,
       indent_width = 2,
+      root_folder_label = ":t:gs?$?/..?",
       highlight_git = "all",
       highlight_diagnostics = "all",
       highlight_opened_files = "icon",
