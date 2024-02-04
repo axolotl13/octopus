@@ -10,6 +10,7 @@ return {
         nls.builtins.formatting.prettier,
         nls.builtins.formatting.black,
         nls.builtins.formatting.isort,
+        nls.builtins.formatting.rubocop,
         nls.builtins.formatting.stylua,
         nls.builtins.formatting.shfmt.with { extra_args = { "-i", "4" } },
         nls.builtins.formatting.xmllint,
@@ -34,7 +35,8 @@ return {
         nls.builtins.diagnostics.sqlfluff.with {
           extra_args = { "--config", "/home/joker/.sqlfluff" },
         },
-        -- nls.builtins.diagnostics.shellcheck,
+        nls.builtins.diagnostics.rubocop,
+        nls.builtins.diagnostics.shellcheck,
         nls.builtins.diagnostics.yamllint,
         nls.builtins.diagnostics.stylelint,
         nls.builtins.diagnostics.pylint.with {
