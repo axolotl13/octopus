@@ -39,6 +39,7 @@ return {
       "hrsh7th/cmp-path",
       "saadparwaiz1/cmp_luasnip",
       "hrsh7th/cmp-nvim-lsp-signature-help",
+      "hrsh7th/cmp-emoji",
     },
     config = function()
       local cmp = require "cmp"
@@ -140,6 +141,22 @@ return {
         },
       }
       cmp.setup(opts)
+      cmp.setup.filetype("gitcommit", {
+        sources = cmp.config.sources {
+          { name = "emoji" },
+          { name = "luasnip" },
+          { name = "buffer" },
+        },
+      })
+      cmp.setup.filetype("markdown", {
+        sources = cmp.config.sources {
+          { name = "nvim_lsp" },
+          { name = "luasnip" },
+          { name = "emoji" },
+          { name = "buffer" },
+          { name = "path" },
+        },
+      })
     end,
   },
 }
