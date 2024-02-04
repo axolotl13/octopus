@@ -6,7 +6,7 @@ return {
     "NvChad/nvim-colorizer.lua",
     cmd = { "ColorizerToggle" },
     opts = { user_default_options = { css = true } },
-    keys = { { "<leader>cc", "<cmd>ColorizerToggle<cr>", desc = "[Colorizer] Habilitar Colorizer" } },
+    keys = { { "<leader>cc", "<cmd>ColorizerToggle<cr>", desc = "[Colorizer] Habilitar highlighter" } },
   },
   {
     "chrisgrieser/nvim-spider",
