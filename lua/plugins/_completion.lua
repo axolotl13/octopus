@@ -40,6 +40,8 @@ return {
       "saadparwaiz1/cmp_luasnip",
       "hrsh7th/cmp-nvim-lsp-signature-help",
       "hrsh7th/cmp-emoji",
+      "hrsh7th/cmp-cmdline",
+      { "tzachar/cmp-fuzzy-path", dependencies = "tzachar/fuzzy.nvim" },
     },
     config = function()
       local cmp = require "cmp"
@@ -155,6 +157,13 @@ return {
           { name = "emoji" },
           { name = "buffer" },
           { name = "path" },
+        },
+      })
+      cmp.setup.cmdline(":", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources {
+          { name = "fuzzy_path" },
+          { name = "cmdline" },
         },
       })
     end,
