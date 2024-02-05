@@ -86,9 +86,10 @@ return {
         },
       }
     end,
-    config = function()
-      require("wf").setup()
-    end,
+  },
+  {
+    "folke/zen-mode.nvim",
+    keys = { { "<leader>zz", "<cmd>ZenMode<cr>", desc = "[ZenMode] Habilita ZenMode" } },
   },
   -- { "mfussenegger/nvim-dap", event = "VeryLazy" },
   -- Vim plugins
