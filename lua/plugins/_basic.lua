@@ -99,6 +99,6 @@ return {
   },
   {
     "mg979/vim-visual-multi",
-    keys = { "<c-n>", "<c-down>", "<c-up>", "<s-left>", "<s-right>" }, -- n, N, q, Q, -
+    keys = { "<c-n>", "<c-down>", "<c-up>", "<s-left>", "<s-right>" },
   },
 }
