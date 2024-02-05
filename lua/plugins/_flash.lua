@@ -8,6 +8,7 @@ return {
         "terminal",
         "lazy",
         "mason",
+        "spectre_panel",
         "DiffviewFiles",
         "DiffviewFilesHistory",
         "notify",
