@@ -3,7 +3,21 @@ return {
   opts = {
     search = {
       multi_window = true,
-      exclude = { "NvimTree", "terminal", "lazy", "mason", "DiffviewFiles", "DiffviewFilesHistory", "notify" },
+      exclude = {
+        "NvimTree",
+        "terminal",
+        "lazy",
+        "mason",
+        "DiffviewFiles",
+        "DiffviewFilesHistory",
+        "notify",
+        "cmp_menu",
+        "flash_prompt",
+        "fugitive",
+        function(win)
+          return not vim.api.nvim_win_get_config(win).focusable
+        end,
+      },
     },
   },
   keys = {
@@ -22,30 +36,6 @@ return {
         require("flash").treesitter()
       end,
       desc = "Flash",
-    },
-    {
-      "r",
-      mode = "o",
-      function()
-        require("flash").remote()
-      end,
-      desc = "Remote Flash",
-    },
-    {
-      "R",
-      mode = { "o", "x" },
-      function()
-        require("flash").treesitter_search()
-      end,
-      desc = "Treesitter Search",
-    },
-    {
-      "<c-s>",
-      mode = { "c" },
-      function()
-        require("flash").toggle()
-      end,
-      desc = "Toggle Flash Search",
     },
   },
 }
