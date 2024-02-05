@@ -4,17 +4,11 @@ return {
     "HiPhish/rainbow-delimiters.nvim",
     { "nvim-treesitter/nvim-treesitter-context", opts = { max_lines = 3 } },
     {
-      "danymat/neogen",
-      config = true,
-      keys = { { "<leader>nn", "<cmd>lua require('neogen').generate()<cr>", desc = "[Neogen] Generar anotaciones" } },
-    },
-    {
       "kevinhwang91/nvim-ufo",
       dependencies = {
         "kevinhwang91/promise-async",
       },
       init = function()
-        vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
         vim.o.foldcolumn = "1"
         vim.o.foldlevel = 99
         vim.o.foldlevelstart = 99

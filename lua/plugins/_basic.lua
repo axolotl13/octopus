@@ -4,6 +4,12 @@ return {
   { "mfussenegger/nvim-jdtls", ft = "java" },
   { "tzachar/local-highlight.nvim", event = "VeryLazy", opts = true },
   {
+    "danymat/neogen",
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    opts = true,
+    keys = { { "<leader>nn", "<cmd>lua require('neogen').generate()<cr>", desc = "[Neogen] Generar anotaciones" } },
+  },
+  {
     "NvChad/nvim-colorizer.lua",
     cmd = { "ColorizerToggle" },
     opts = { user_default_options = { css = true } },
