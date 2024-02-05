@@ -2,6 +2,7 @@ return {
   { "kylechui/nvim-surround", opts = true, keys = { "ys", "ds", "cs" } },
   { "JoosepAlviste/nvim-ts-context-commentstring", lazy = true },
   { "mfussenegger/nvim-jdtls", ft = "java" },
+  { "tzachar/local-highlight.nvim", event = "VeryLazy", opts = true },
   {
     "NvChad/nvim-colorizer.lua",
     cmd = { "ColorizerToggle" },
