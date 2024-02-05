@@ -1,9 +1,8 @@
 return {
   "nvim-tree/nvim-tree.lua",
   dependencies = {
-    { "nvim-tree/nvim-web-devicons" },
+     "nvim-tree/nvim-web-devicons" ,
   },
-  lazy = false,
   -- pin = true,
   opts = {
     hijack_cursor = true,
@@ -122,7 +121,7 @@ return {
     },
   },
   keys = {
+    { "<leader>ex", "<cmd>NvimTreeToggle<cr> ", { desc = "[Explorer] Abrir el explorador de archivos" } },
     { "ñ", "<cmd>NvimTreeToggle<cr> ", { desc = "[Explorer] Abrir el explorador de archivos" } },
-    { "<leader>e", "<cmd>NvimTreeToggle<cr> ", { desc = "[Explorer] Abrir el explorador de archivos" } },
   },
 }
