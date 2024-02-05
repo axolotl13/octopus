@@ -1,7 +1,7 @@
 return {
   "nvim-telescope/telescope.nvim",
   dependencies = {
-    { "nvim-lua/plenary.nvim" },
+     "nvim-lua/plenary.nvim" ,
     {
       "nvim-telescope/telescope-fzf-native.nvim",
       build = "make",
@@ -26,7 +26,6 @@ return {
           ["<esc>"] = require("telescope.actions").close,
           ["<c-n>"] = require("telescope.actions").cycle_history_next,
           ["<c-p>"] = require("telescope.actions").cycle_history_prev,
-          ["<c-u>"] = false,
         },
       },
       prompt_prefix = "  ",
