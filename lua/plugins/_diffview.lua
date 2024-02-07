@@ -1,9 +1,6 @@
 return {
   "sindrets/diffview.nvim",
-  dependencies = {
-    { "nvim-lua/plenary.nvim" },
-  },
-  cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles", "DiffviewFileHistory" },
+  dependencies = "nvim-lua/plenary.nvim",
   opts = {
     icons = {
       folder_closed = "",
@@ -28,10 +25,10 @@ return {
     -- { "]x", { desc = "In the merge-tool: jump to the next conflict" } },
   },
   keys = {
-    { "<leader>dd", "<cmd>DiffviewOpen<cr>", desc = "[Diffview] Abre Diffview" },
-    { "<leader>dq", "<cmd>DiffviewClose<cr>", desc = "[Diffview] Cierra Diffview" },
-    { "<leader>dh", "<cmd>DiffviewFileHistory<cr>", desc = "[Diffview] Abre DiffviewFileHistory" },
-    { "<leader>dw", "<cmd>DiffviewFileHistory %<cr>", desc = "[Diffview] Abre Diffview en el buffer actual" },
+    { "<leader>df", "<cmd>DiffviewOpen<cr>", desc = "[Diffview] Abrir Diffview" },
+    { "<leader>dq", "<cmd>DiffviewClose<cr>", desc = "[Diffview] Cerrar Diffview" },
     { "<leader>dt", "<cmd>DiffviewToggleFiles<cr>", desc = "[Diffview] DiffviewToggleFiles" },
+    { "<leader>dh", "<cmd>DiffviewFileHistory<cr>", desc = "[Diffview] Abre DiffviewFileHistory" },
+    { "<leader>dd", "<cmd>DiffviewFileHistory %<cr>", desc = "[Diffview] Abre Diffview en el buffer actual" },
   },
 }
