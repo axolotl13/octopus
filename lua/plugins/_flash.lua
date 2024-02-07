@@ -15,6 +15,7 @@ return {
         "cmp_menu",
         "flash_prompt",
         "fugitive",
+        "Glance",
         function(win)
           return not vim.api.nvim_win_get_config(win).focusable
         end,
