@@ -2,7 +2,7 @@ return {
   "akinsho/bufferline.nvim",
   dependencies = {
     "nvim-tree/nvim-web-devicons",
-    { "tiagovla/scope.nvim", config = true },
+    { "tiagovla/scope.nvim", opts = true },
   },
   init = function()
     vim.opt.mousemoveevent = true
@@ -252,19 +252,19 @@ return {
     },
   },
   keys = {
-    { "Ñ", "<cmd>BufferLinePick<cr>", desc = "[Bufferline] Pickear en bufferes actuales" },
-    { "<A-1>", "<cmd>BufferLineGoToBuffer 1<cr>", desc = "[Bufferline] Mover al primer buffer" },
-    { "<A-right>", "<cmd>BufferLineMoveNext<cr>", desc = "[Bufferline] Mover buffer hacía la derecha" },
-    { "<A-left>", "<cmd>BufferLineMovePrev<cr>", desc = "[Bufferline] Mover buffer hacía la izquierda" },
-    { "<leader>bi", "<cmd>BufferLineSortByDirectory<cr>", desc = "[Bufferline] Ordernar bufferes por directorio" },
-    { "<leader>be", "<cmd>BufferLineSortByExtension<cr>", desc = "[Bufferline] Ordernar bufferes por extensiones" },
+    { "<a-left>", "<cmd>BufferLineMovePrev<cr>", desc = "[Bufferline] Mover buffer hacía la izquierda" },
+    { "<a-right>", "<cmd>BufferLineMoveNext<cr>", desc = "[Bufferline] Mover buffer hacía la derecha" },
+    { "<leader>bp", "<cmd>BufferLinePick<cr>", desc = "[Bufferline] Pickear en los bufferes actuales" },
+    { "<leader>b|", "<cmd>BufferLineGoToBuffer 1<cr>", desc = "[Bufferline] Moverse al primer buffer" },
+    { "<leader>bi", "<cmd>BufferLineSortByDirectory<cr>", desc = "[Bufferline] Ordernar buffer por directorio" },
+    { "<leader>be", "<cmd>BufferLineSortByExtension<cr>", desc = "[Bufferline] Ordernar buffer por extensiones" },
     {
-      "<C-z>",
+      "<c-z>",
       function()
         vim.cmd "BufferLineCloseRight"
         vim.cmd "BufferLineCloseLeft"
       end,
-      desc = "[Bufferline] Cerrar todos los bufferes excepto la actual",
+      desc = "[Bufferline] Cerrar todos los bufferes excepto el actual",
     },
   },
 }
