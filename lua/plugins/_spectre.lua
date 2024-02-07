@@ -33,17 +33,17 @@ return {
     {
       "<leader>fs",
       "<cmd>lua require('spectre').toggle()<cr>",
-      desc = "[Spectre] Buscar palabra",
+      desc = "[Spectre] Reemplazar palabra en todos los archivos",
     },
     {
       "<leader>fw",
       "<cmd>lua require('spectre').open_file_search({select_word=true})<cr>",
-      desc = "[Spectre] Buscar palabra seleccionada en el archivo actual",
+      desc = "[Spectre] Reemplazar palabra seleccionada en el archivo actual",
     },
     {
-      "<leader>fv",
+      "<leader>fa",
       "<cmd>lua require('spectre').open_visual({select_word=true})<cr>",
-      desc = "[Spectre] Buscar palabra seleccionada en todos los archivos",
+      desc = "[Spectre] Reemplazar palabra seleccionada en todos los archivos",
     },
   },
 }
