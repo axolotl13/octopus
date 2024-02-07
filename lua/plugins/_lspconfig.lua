@@ -1,28 +1,19 @@
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
+    "hrsh7th/cmp-nvim-lsp",
+    "dnlhc/glance.nvim",
     {
       "williamboman/mason.nvim",
       dependencies = { "williamboman/mason-lspconfig.nvim" },
       opts = {
         ui = {
-          border = "rounded",
-          icons = {
-            package_installed = "",
-            package_pending = "",
-            package_uninstalled = "ﮊ",
-          },
-          keymaps = {
-            install_package = "i",
-            update_package = "u",
-            uninstall_package = "d",
-            cancel_installation = "<C-c>",
-          },
+          icons = { package_installed = "", package_pending = "", package_uninstalled = "ﮊ" },
+          keymaps = { uninstall_package = "d" },
         },
       },
       keys = { { "<leader>mm", "<cmd>Mason<cr>", desc = "Mason" } },
     },
-    "hrsh7th/cmp-nvim-lsp",
   },
   event = { "BufReadPost", "BufNewFile", "BufWritePre" },
   opts = {
@@ -102,13 +93,19 @@ return {
       local keymap = vim.keymap.set
       local bufn = { noremap = true, silent = true, buffer = bufnr }
 
-      keymap("n", "gd", vim.lsp.buf.definition, bufn)
-      keymap("n", "gl", vim.lsp.buf.declaration, bufn)
+      keymap("n", "gd", "<cmd>Glance definitions<cr>", bufn)
+      keymap("n", "gi", "<cmd>Glance implementations<cr>", bufn)
+      keymap("n", "gD", vim.lsp.buf.declaration, bufn)
       keymap("n", "K", vim.lsp.buf.hover, bufn)
-      keymap("n", "gu", vim.lsp.buf.type_definition, bufn)
-      keymap("n", "gr", vim.lsp.buf.rename, bufn)
+      keymap("n", "gt", "<cmd>Glance type_definitions<cr>", bufn)
+      keymap("n", "gn", vim.lsp.buf.rename, bufn)
       keymap("n", "gp", vim.lsp.buf.code_action, bufn)
-      keymap("n", "gm", vim.lsp.buf.references, bufn)
+      keymap("n", "gr", "<cmd>Glance references<cr>", bufn)
+      keymap("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, bufn)
+      keymap("n", "<leader>wd", vim.lsp.buf.remove_workspace_folder, bufn)
+      keymap("n", "<leader>wl", function()
+        vim.notify(vim.inspect(vim.lsp.buf.list_workspace_folders()), vim.log.levels.INFO)
+      end, bufn)
       keymap("n", "<leader>ff", function()
         vim.lsp.buf.format { async = true }
       end, bufn)
@@ -125,9 +122,9 @@ return {
     vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
     -- servers
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    local capabilities = require("cmp_nvim_lsp").default_capabilities()
+    capabilities = vim.lsp.protocol.make_client_capabilities()
     -- capabilities.offsetEncoding = {"utf-16"} Solución para utf en C++
-    capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
     capabilities.textDocument.completion.completionItem = {
       commitCharactersSupport = true,
       deprecatedSupport = true,
@@ -153,14 +150,13 @@ return {
     local mlsp = require "mason-lspconfig"
     mlsp.setup { ensure_installed = ensure_installed, automatic_installation = true }
   end,
-
   keys = {
     {
       "gf",
       function()
         vim.diagnostic.open_float()
       end,
-      desc = "[Diagnostics] Ventana Flotante",
+      desc = "[Diagnostics] Diagnostico flotante",
     },
     {
       "g{",
@@ -177,11 +173,11 @@ return {
       desc = "[Diagnostics] Ir al siguiente diagnostico",
     },
     {
-      "gs",
+      "gk",
       function()
         vim.diagnostic.setloclist()
       end,
-      desc = "[Diagnostics] Mostrar los diagnosticos en una ventana",
+      desc = "[Diagnostics] Mostrar mensajes de diagnosticos en quickfix",
     },
   },
 }
