@@ -12,7 +12,7 @@ return {
           keymaps = { uninstall_package = "d" },
         },
       },
-      keys = { { "<leader>mm", "<cmd>Mason<cr>", desc = "Mason" } },
+      keys = { { "<leader>mm", "<cmd>Mason<cr>", desc = "[Mason] Abrir Mason" } },
     },
   },
   event = { "BufReadPost", "BufNewFile", "BufWritePre" },
