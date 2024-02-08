@@ -97,13 +97,10 @@ return {
   },
   -- { "mfussenegger/nvim-dap", event = "VeryLazy" },
   -- Vim plugins
+  { "mg979/vim-visual-multi", keys = { "<c-n>", "<c-down>", "<c-up>", "<s-left>", "<s-right>" } },
   {
     "tpope/vim-fugitive",
     cmd = "Git",
     keys = { { "<leader>gc", "<cmd>Git commit<cr>", desc = "[Fugitive] Git commit" } },
-  },
-  {
-    "mg979/vim-visual-multi",
-    keys = { "<c-n>", "<c-down>", "<c-up>", "<s-left>", "<s-right>" },
   },
 }
