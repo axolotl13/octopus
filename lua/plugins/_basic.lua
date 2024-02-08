@@ -95,6 +95,7 @@ return {
     "folke/zen-mode.nvim",
     keys = { { "<leader>zz", "<cmd>ZenMode<cr>", desc = "[ZenMode] Habilitar ZenMode" } },
   },
+  { "HakonHarnes/img-clip.nvim", ft = { "markdown", "html", "tex" }, opts = true },
   -- { "mfussenegger/nvim-dap", event = "VeryLazy" },
   -- Vim plugins
   { "mg979/vim-visual-multi", keys = { "<c-n>", "<c-down>", "<c-up>", "<s-left>", "<s-right>" } },
