@@ -1,12 +1,12 @@
 return {
-  { "kylechui/nvim-surround", opts = true, keys = { "ys", "ds", "cs" } },
+  { "kylechui/nvim-surround", opts = {}, keys = { "ys", "ds", "cs" } },
   { "JoosepAlviste/nvim-ts-context-commentstring", lazy = true },
   { "mfussenegger/nvim-jdtls", ft = "java" },
-  { "tzachar/local-highlight.nvim", event = "VeryLazy", opts = true },
+  { "tzachar/local-highlight.nvim", event = "VeryLazy", opts = {} },
   {
     "danymat/neogen",
     dependencies = "nvim-treesitter/nvim-treesitter",
-    opts = true,
+    opts = {},
     keys = { { "<leader>nn", "<cmd>lua require('neogen').generate()<cr>", desc = "[Neogen] Generar anotaciones" } },
   },
   {
@@ -37,21 +37,6 @@ return {
     },
   },
   {
-    "tzachar/local-highlight.nvim",
-    init = function()
-      vim.api.nvim_create_autocmd("BufRead", {
-        pattern = { "*.*" },
-        callback = function(data)
-          require("local-highlight").attach(data.buf)
-        end,
-      })
-    end,
-    opts = {
-      disable_file_types = { "tex" },
-      hlgroup = "Search",
-    },
-  },
-  {
     "linux-cultist/venv-selector.nvim",
     dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim" },
     ft = { "python" },
@@ -75,7 +60,7 @@ return {
     init = function()
       vim.g.loaded_matchparen = 1
     end,
-    opts = true,
+    opts = {},
   },
   {
     "Cassin01/wf.nvim",
@@ -95,7 +80,7 @@ return {
     "folke/zen-mode.nvim",
     keys = { { "<leader>zz", "<cmd>ZenMode<cr>", desc = "[ZenMode] Habilitar ZenMode" } },
   },
-  { "HakonHarnes/img-clip.nvim", ft = { "markdown", "html", "tex" }, opts = true },
+  { "HakonHarnes/img-clip.nvim", ft = { "markdown", "html", "tex" }, opts = {} },
   -- { "mfussenegger/nvim-dap", event = "VeryLazy" },
   -- Vim plugins
   { "mg979/vim-visual-multi", keys = { "<c-n>", "<c-down>", "<c-up>", "<s-left>", "<s-right>" } },
