@@ -5,9 +5,7 @@ return {
     { "nvim-treesitter/nvim-treesitter-context", opts = { max_lines = 3 } },
     {
       "kevinhwang91/nvim-ufo",
-      dependencies = {
-        "kevinhwang91/promise-async",
-      },
+      dependencies = "kevinhwang91/promise-async",
       init = function()
         vim.o.foldcolumn = "1"
         vim.o.foldlevel = 99
