@@ -11,6 +11,7 @@ return {
   dependencies = {
     "3rd/image.nvim",
     lazy = true,
+    ft = "markdown",
     opts = {
       integrations = {
         markdown = {
