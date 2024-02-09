@@ -267,7 +267,9 @@ return {
 
     local Venv = {
       condition = function()
-        return require("venv-selector").get_active_venv()
+        if vim.bo.filetype == "python" then
+          return require("venv-selector").get_active_venv()
+        end
       end,
       {
         provider = function()
