@@ -35,7 +35,6 @@ return {
       bashls = {},
       clangd = {},
       cssls = {},
-      diagnosticls = {},
       docker_compose_language_service = {},
       dockerls = {},
       ember = {
@@ -73,7 +72,7 @@ return {
       marksman = {},
       nginx_language_server = {},
       pyright = {},
-      ruby_ls = {},
+      solargraph = {},
       rust_analyzer = {},
       sqls = {},
       texlab = {},
