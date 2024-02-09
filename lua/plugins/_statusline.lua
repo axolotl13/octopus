@@ -669,88 +669,72 @@ return {
       hl = { bg = colors.none },
     }
 
-    local click_args = function(minwid, clicks, button, mods)
-      local args = {
-        minwid = minwid,
-        clicks = clicks,
-        button = button,
-        mods = mods,
-        mousepos = vim.fn.getmousepos(),
-      }
-      return args
-    end
-
-    local ffi = require "ffi"
-
-    ffi.cdef [[
-      typedef struct {} Error;
-      typedef struct {} win_T;
-      typedef struct {
-        int start;  // line number where deepest fold starts.
-        int level;  // fold level, when zero other fields are N/A.
-        int llevel; // lowest level that starts in v:lnum.
-        int lines;  // number of lines from v:lnum to end of closed fold.
-      } foldinfo_T;
-      foldinfo_T fold_info(win_T* wp, int lnum);
-      win_T *find_window_by_handle(int Window, Error *err);
-      int compute_foldcolumn(win_T *wp, int col);
-    ]]
-
-    local Folds = {
+    local Folder = {
       static = {
-        fillchars = vim.opt.fillchars:get(),
-      },
-      condition = function()
-        return vim.opt.foldcolumn:get() ~= "0"
-      end,
-      provider = function()
-        local foldopen = icons.fl.arrow_open
-        local foldclosed = icons.fl.arrow_closed
-        local foldsep = " "
-        local wp = ffi.C.find_window_by_handle(0, ffi.new "Error")
-        local width = ffi.C.compute_foldcolumn(wp, 0)
-        local foldinfo = width > 0 and ffi.C.fold_info(wp, vim.v.lnum)
-          or { start = 0, level = 0, llevel = 0, lines = 0 }
-        local str = ""
-        if width ~= 0 then
-          str = vim.v.relnum > 0 and "%#FoldColumn#" or "%#CursorLineFold#"
-          if foldinfo.level == 0 then
-            str = str .. (" "):rep(width)
-          else
-            local closed = foldinfo.lines > 0
-            local first_level = foldinfo.level - width - (closed and 1 or 0) + 1
-            if first_level < 1 then
-              first_level = 1
-            end
-
-            for col = 1, width do
-              str = str
-                .. (
-                  (vim.v.virtnum ~= 0 and foldsep)
-                  or ((closed and (col == foldinfo.level or col == width)) and foldclosed)
-                  or ((foldinfo.start == vim.v.lnum and first_level + col > foldinfo.llevel) and foldopen)
-                  or foldsep
-                )
-              if col == foldinfo.level then
-                str = str .. (" "):rep(width - col)
-                break
-              end
-            end
+        click_args = function(self, minwid, clicks, button, mods)
+          local args = {
+            minwid = minwid,
+            clicks = clicks,
+            button = button,
+            mods = mods,
+            mousepos = vim.fn.getmousepos(),
+          }
+          local sign = vim.fn.screenstring(args.mousepos.screenrow, args.mousepos.screencol)
+          if sign == " " then
+            sign = vim.fn.screenstring(args.mousepos.screenrow, args.mousepos.screencol - 1)
           end
-        end
-        return str .. "%*"
-      end,
-      on_click = {
-        name = "fold_click",
-        callback = function(self, ...)
-          local args = click_args(self, ...)
-          local lnum = args.mousepos.line
-          vim.cmd.execute("'" .. lnum .. "fold" .. (vim.fn.foldclosed(lnum) == -1 and "close" or "open") .. "'")
+          args.sign = self.signs[sign]
+          vim.api.nvim_set_current_win(args.mousepos.winid)
+          vim.api.nvim_win_set_cursor(0, { args.mousepos.line, 0 })
+
+          return args
         end,
+        handlers = {
+          Fold = function(args)
+            local line = args.mousepos.line
+            if vim.fn.foldlevel(line) <= vim.fn.foldlevel(line - 1) then
+              return
+            end
+            vim.cmd.execute("'" .. line .. "fold" .. (vim.fn.foldclosed(line) == -1 and "close" or "open") .. "'")
+          end,
+        },
+      },
+      init = function(self)
+        self.signs = {}
+      end,
+      {
+        init = function(self)
+          self.can_fold = vim.fn.foldlevel(vim.v.lnum) > vim.fn.foldlevel(vim.v.lnum - 1)
+        end,
+        {
+          condition = function(self)
+            return vim.v.virtnum == 0 and self.can_fold
+          end,
+          provider = "%C",
+        },
+        {
+          condition = function(self)
+            return not self.can_fold
+          end,
+          Space,
+        },
+        on_click = {
+          name = "sc_fold_click",
+          callback = function(self, ...)
+            self.handlers.Fold(self.click_args(self, ...))
+          end,
+        },
       },
     }
 
-    local LineNumbers = {
+    local SignColumn = {
+      condition = function()
+        return vim.opt.signcolumn:get() ~= "no"
+      end,
+      provider = "%s",
+    }
+
+    local LineNumber = {
       condition = function()
         return vim.v.virtnum == 0
       end,
@@ -767,13 +751,6 @@ return {
       end,
     }
 
-    local SignColumn = {
-      condition = function()
-        return vim.opt.signcolumn:get() ~= "no"
-      end,
-      provider = "%s",
-    }
-
     local StatusColumn = {
       {
         condition = function()
@@ -785,7 +762,7 @@ return {
           vim.opt_local.statuscolumn = nil
         end,
       },
-      { Space, SignColumn, LineNumbers, Folds, Space },
+      { SignColumn, LineNumber, Folder },
     }
 
     heirline.setup { statusline = Statusline, winbar = WinBars, statuscolumn = StatusColumn }
