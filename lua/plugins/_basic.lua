@@ -74,17 +74,17 @@ return {
   },
   {
     "Cassin01/wf.nvim",
-    event = "VeryLazy",
+    lazy = true,
     keys = function()
-      local which_key = require "wf.builtin.which_key"
       return {
         {
           "<Leader>",
-          which_key { text_insert_in_advance = "<Leader>" },
-          desc = "[wf.nvim] which-key /",
+          require "wf.builtin.which_key" { text_insert_in_advance = "<Leader>" },
+          desc = "[wf] which-key /",
         },
       }
     end,
+    opts = { theme = "space" },
   },
   {
     "folke/zen-mode.nvim",
