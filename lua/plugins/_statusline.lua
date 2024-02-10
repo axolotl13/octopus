@@ -1,12 +1,6 @@
 return {
   "rebelot/heirline.nvim",
-  dependencies = {
-    "SmiteshP/nvim-navic",
-    opts = {
-      icons = require("ui.icons").vs,
-      depth_limit = 5,
-    },
-  },
+  dependencies = { "SmiteshP/nvim-navic", lazy = "true", opts = { icons = require("ui.icons").vs } },
   event = { "BufReadPost", "BufNewFile" },
   opts = function()
     local heirline = require "heirline"
@@ -115,7 +109,6 @@ return {
 
       init = function(self)
         self.status_dict = vim.b.gitsigns_status_dict
-        self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0
       end,
 
       hl = { fg = colors.orange, bg = colors.statusline },
@@ -344,12 +337,32 @@ return {
       provider = function()
         local names = {}
         for _, server in pairs(vim.lsp.get_active_clients { bufnr = 0 }) do
-          table.insert(names, server.name)
+          if server.name ~= "null-ls" then
+            table.insert(names, server.name)
+          else
+            local sources = require("null-ls.sources").get_available(vim.bo.filetype)
+
+            local null_ls_sources = {}
+            for _, source in ipairs(sources) do
+              local null_ls_name = source.name
+              null_ls_sources[null_ls_name] = true
+            end
+
+            vim.list_extend(names, vim.tbl_keys(null_ls_sources))
+          end
         end
         return icons.st.gear .. table.concat(names, " ")
       end,
       hl = { fg = colors.green, bold = true },
       Space,
+      on_click = {
+        callback = function()
+          vim.defer_fn(function()
+            vim.cmd "LspInfo"
+          end, 100)
+        end,
+        name = "heirline_LSP",
+      },
     }
 
     local Shiftab = {
