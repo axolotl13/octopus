@@ -90,6 +90,15 @@ return {
     "folke/zen-mode.nvim",
     keys = { { "<leader>zz", "<cmd>ZenMode<cr>", desc = "[ZenMode] Habilitar ZenMode" } },
   },
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    },
+    opts = { lsp = { progress = { enabled = false } } },
+  },
   { "HakonHarnes/img-clip.nvim", ft = { "markdown", "html", "tex" }, opts = {} },
   -- { "mfussenegger/nvim-dap", event = "VeryLazy" },
   -- Vim plugins
