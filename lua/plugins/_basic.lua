@@ -37,15 +37,6 @@ return {
     },
   },
   {
-    "CRAG666/code_runner.nvim",
-    config = true,
-    cmd = { "RunCode", "RunFile" },
-    keys = {
-      { "<f5>", "<cmd>RunCode<cr>", desc = "Ejecuta el código actual" },
-      -- { "<leader>rf", "<cmd>RunFile<cr>", desc = "Ejecuta el código actual" },
-    },
-  },
-  {
     "utilyre/sentiment.nvim",
     event = "VeryLazy",
     init = function()
