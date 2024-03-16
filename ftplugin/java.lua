@@ -1,4 +1,4 @@
-local jdtls_path = vim.fn.stdpath "data" .. "/mason/packages/jdtls/"
+local jdtls_path = vim.fn.stdpath "data" .. "/mason/packages/jdtls/plugins/"
 local jar_path = jdtls_path .. "org.eclipse.equinox.launcher_1.6.700.v20231214-2017.jar"
 local config_path = jdtls_path .. "config_linux"
 local home = vim.fn.expand "$HOME" .. "/.workspace"
