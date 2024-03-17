@@ -1,12 +1,12 @@
 return {
   "nvim-tree/nvim-tree.lua",
   dependencies = "nvim-tree/nvim-web-devicons",
-  -- pin = true,
   opts = {
     hijack_cursor = true,
     disable_netrw = true,
     respect_buf_cwd = true,
     view = {
+      centralize_selection = true,
       debounce_delay = 30,
       width = 35,
       preserve_window_proportions = true,
@@ -61,10 +61,6 @@ return {
       update_root = true,
       ignore_list = { "diffview" },
     },
-    git = {
-      enable = true,
-      timeout = 800,
-    },
     diagnostics = {
       enable = true,
       show_on_dirs = false,
@@ -92,10 +88,6 @@ return {
         "lua/extra",
       },
     },
-    live_filter = { prefix = "[Filtro]: " },
-    filesystem_watchers = {
-      debounce_delay = 150,
-    },
     actions = {
       change_dir = {
         global = true,
@@ -103,12 +95,16 @@ return {
       open_file = {
         quit_on_open = false,
         window_picker = {
-          enable = true,
           exclude = {
             filetype = { "notify", "qf", "diff", "fugitive", "fugitiveblame" },
             buftype = { "nofile", "terminal", "help" },
           },
         },
+      },
+    },
+    tab = {
+      sync = {
+        open = true,
       },
     },
     ui = {
@@ -118,5 +114,21 @@ return {
       },
     },
   },
+  init = function()
+    vim.api.nvim_create_autocmd("BufEnter", {
+      group = vim.api.nvim_create_augroup("NvimTreeClose", { clear = true }),
+      pattern = "NvimTree_*",
+      callback = function()
+        local layout = vim.api.nvim_call_function("winlayout", {})
+        if
+          layout[1] == "leaf"
+          and vim.api.nvim_buf_get_option(vim.api.nvim_win_get_buf(layout[2]), "filetype") == "NvimTree"
+          and layout[3] == nil
+        then
+          vim.api.nvim_command [[confirm quit]]
+        end
+      end,
+    })
+  end,
   keys = { { "ñ", "<cmd>NvimTreeToggle<cr> ", { desc = "[Explorer] Abrir el explorador de archivos" } } },
 }
