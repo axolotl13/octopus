@@ -1,74 +1,64 @@
-local opts = {
-  -- Designar atajos
-  { "", "<space>", "<nop>", "Desasignar espacio" },
-  { "n", "<c-z>", "<nop>", "Desasignar ctrl + z" },
-  -- { { "n", "i" }, "<esc>", "<cmd>noh<cr>", "Designar esc" },
-
-  -- Opciones para el cursor
-  { "n", "|", "^", "[Cursor] Mover al inicio" },
-  { "i", "<c-b>", "<esc>^i", "[Cursor] Mover inicio en modo insertar" },
-  { "i", "<c-e>", "<end>", "[Cursor] Mover al final en modo insertar" },
-  --[[ { "i", "<s-tab>", "<cmd>call search('[([{<]')<cr>", "[Cursor] Mover a los siguientes signos" }, ]]
-
-  -- Habilitar idioma
-  { "n", "<leader>es", "<cmd>set spell<cr>", "[Spell] Habilitar idioma en español" },
-  { "n", "<leader>eq", "<cmd>set nospell<cr>", "[Spell] Deshabilitar idioma en español" },
-
-  -- Diferenciar archivos
-  { "n", "<a-e>", "<cmd>diffthis<cr>", "[Diff] Habilitar diferencia en el buffer actual" },
-  { "n", "<a-q>", "<cmd>diffoff<cr>", "[Diff] Deshabilitar diferencia en el buffer actual" },
-  { "n", "<a-w>", "<cmd>diffput<cr>", "[Diff] Copia diferencia en el buffer" },
-
-  -- Mover texto
-  { "n", "<a-up>", ":m .-2<cr>==", "Mover línea hacía arriba" },
-  { "n", "<a-down>", ":m .+1<cr>==", "Mover línea hacía abajo" },
-  { "x", "<a-up>", ":m '<-2<CR>gv-gv", "Mover líneas seleccionadas hacía arriba" },
-  { "x", "<a-down>", ":m '>+1<CR>gv-gv", "Mover líneas seleccionadas hacía abajo" },
-
-  -- Aplicar sangría
-  { "v", "<", "<gv", "Aplica sangría hacía la izquierda en modo visual" },
-  { "v", ">", ">gv", "Aplica sangría hacía la derecha en modo visual" },
-
-  -- Moverse entre ventanas
-  { "n", "<c-h>", "<c-w>h", "[Window] Moverse hacía la vista izquierda" },
-  { "n", "<c-l>", "<c-w>l", "[Window] Moverse hacía la vista derecha" },
-  { "n", "<c-k>", "<c-w>k", "[Window] Moverse hacía la vista de arriba" },
-  { "n", "<c-j>", "<c-w>j", "[Window] Moverse hacía la vista de abajo" },
-
-  -- Redimensionar ventana
-  { "n", "<c-up>", ":resize +2<cr>", "[Window] Redimensionar vista hacía arriba" },
-  { "n", "<c-down>", ":resize -2<cr>", "[Window] Redimensionar vista hacía abajo" },
-  { "n", "<c-left>", ":vertical resize -2<cr>", "[Window] Redimensionar vista hacía la izquierda" },
-  { "n", "<c-right>", ":vertical resize +2<cr>", "[Window] Redimensionar vista hacía la derecha" },
-
-  -- Navegación entre bufferes
-  { "n", "<tab>", "<cmd>bnext<cr>", "[Buffer] Moverse hacía el anterior buffer" },
-  { "n", "<s-tab>", "<cmd>bprevious<cr>", "[Buffer] Moverse hacía el siguiente buffer" },
-  { "n", "<c-s>", "<cmd>w!<cr>", "[Save] Guarda archivo actual" },
-  { "i", "<c-s>", "<cmd>w<cr><esc>", "[Save] Guarda archivo actual en modo insertar" },
-  { "n", "<leader>ba", "<cmd>%y+<cr>", "[Buffer] Copiar todo el contenido del buffer actual" },
-  { "n", "<leader>bq", "<cmd>bd!<cr>", "[Buffer] Cerrar buffer actual" },
-  { "n", "<leader>bn", "<cmd>enew<cr>", "[Buffer] Crear nuevo buffer" },
-  { "n", "<c-x>", "<cmd>qa!<cr>", "[Buffer] Cerrar todos los bufferes actuales" },
-
-  -- Navegación entre pestañas
-  { "n", "<leader>tn", "<cmd>tabnew<cr>", "[Tabline] Añadir nueva pestaña" },
-  { "n", "<leader>tj", "<cmd>tabprevious<cr>", "[Tabline] Moverse hacía la anterior pestaña" },
-  { "n", "<leader>tk", "<cmd>tabnext<cr>", "[Tabline] Moverse hacía la siguiente pestaña" },
-  { "n", "<leader>tq", "<cmd>tabclose<cr>", "[Tabline] Cerrar pestaña actual" },
-
-  -- Terminal
-  -- { "n", "<leader>tt", "<cmd>15split term://fish<cr>", "[Terminal] Abrir terminal horizontal" },
-  { "t", "<esc>", "<C-\\><C-n>", "[Terminal] Escapa de la terminal" },
-
-  -- Lazy
-  { "n", "<leader>ps", "<cmd>Lazy<cr>", "[Lazy] Abrir Lazy" },
-
-  -- { "n", "<f5>", "<cmd>!python3 %<cr>", "Ejecutar Código Python"}
-}
+local keymap = vim.keymap.set
 
 vim.g.mapleader = " "
 
-for _, key in pairs(opts) do
-  vim.keymap.set(key[1], key[2], key[3], { desc = key[4], silent = true })
-end
+keymap("", "<space>", "<nop>", { desc = "Desasignar espacio", silent = true })
+keymap("n", "<c-z>", "<nop>", { desc = "Desasignar ctrl+z", silent = true })
+-- keymap( { "n", "i" }, "<esc>", "<cmd>noh<cr>", "Desasignar esc" )
+-- Cursor
+keymap("n", "|", "^", { desc = "[Cursor] Mover cursor al inicio", silent = true })
+-- Habilitar idioma
+keymap("n", "<leader>es", "<cmd>set spell<cr>", { desc = "[Spell] Habilitar spell", silent = true })
+keymap("n", "<leader>eq", "<cmd>set nospell<cr>", { desc = "[Spell] Deshabilitar spell", silent = true })
+-- Diff
+keymap("n", "<a-e>", "<cmd>diffthis<cr>", { desc = "[Diff] Habilitar diff en el buffer", silent = true })
+keymap("n", "<a-q>", "<cmd>diffoff<cr>", { desc = "[Diff] Deshabilitar diff en el buffer", silent = true })
+keymap("n", "<a-w>", "<cmd>diffput<cr>", { desc = "[Diff] Copiar diff en el buffer", silent = true })
+-- Mover texto
+keymap("n", "<a-up>", ":m .-2<cr>==", { desc = "Mover línea hacía arriba", silent = true })
+keymap("n", "<a-down>", ":m .+1<cr>==", { desc = "Mover línea hacía abajo", silent = true })
+keymap("x", "<a-up>", ":m '<-2<CR>gv-gv", { desc = "Mover líneas seleccionadas hacía arriba", silent = true })
+keymap("x", "<a-down>", ":m '>+1<CR>gv-gv", { desc = "Mover líneas seleccionadas hacía abajo", silent = true })
+-- Sangría
+keymap("v", "<", "<gv", { desc = "Aplicar sangría a la izquierda", silent = true })
+keymap("v", ">", ">gv", { desc = "Aplicar sangría a la derecha", silent = true })
+-- Moverse entre ventana
+keymap("n", "<c-h>", "<c-w>h", { desc = "[Window] Cambiar a la vista izquierda", silent = true })
+keymap("n", "<c-l>", "<c-w>l", { desc = "[Window] Cambiar a la vista derecha", silent = true })
+keymap("n", "<c-k>", "<c-w>k", { desc = "[Window] Cambiar a la vista de arriba", silent = true })
+keymap("n", "<c-j>", "<c-w>j", { desc = "[Window] Cambiar a la vista de abajo", silent = true })
+-- Redimensionar ventan
+keymap("n", "<c-up>", ":resize +2<cr>", { desc = "[Window] Redimensionar hacía arriba", silent = true })
+keymap("n", "<c-down>", ":resize -2<cr>", { desc = "[Window] Redimensionar hacía abajo", silent = true })
+keymap(
+  "n",
+  "<c-left>",
+  ":vertical resize -2<cr>",
+  { desc = "[Window] Redimensionar hacía la izquierda", silent = true }
+)
+keymap(
+  "n",
+  "<c-right>",
+  ":vertical resize +2<cr>",
+  { desc = "[Window] Redimensionar hacía la derecha", silent = true }
+)
+-- Buffer
+keymap("n", "<c-s>", "<cmd>w!<cr>", { desc = "[Save] Guarda archivo", silent = true })
+keymap("i", "<c-s>", "<cmd>w!<cr><esc>", { desc = "[Save] Guarda archivo", silent = true })
+keymap("n", "<tab>", "<cmd>bnext<cr>", { desc = "[Buffer] Cambiar al buffer anterior", silent = true })
+keymap("n", "<s-tab>", "<cmd>bprevious<cr>", { desc = "[Buffer] Cambiar al buffer próximo", silent = true })
+keymap("n", "<leader>ba", "<cmd>%y+<cr>", { desc = "[Buffer] Copiar contenido del buffer", silent = true })
+keymap("n", "<leader>bq", "<cmd>bd!<cr>", { desc = "[Buffer] Cerrar buffer", silent = true })
+keymap("n", "<leader>bn", "<cmd>enew<cr>", { desc = "[Buffer] Crear buffer nuevo", silent = true })
+keymap("n", "<c-x>", "<cmd>qa!<cr>", { desc = "[Buffer] Cerrar todos los bufferes", silent = true })
+-- Tabline
+keymap("n", "<leader>tn", "<cmd>tabnew<cr>", { desc = "[Tabline] Añadir nuevo tabline", silent = true })
+keymap("n", "<leader>tj", "<cmd>tabprevious<cr>", { desc = "[Tabline] Cambiar al tabline anterior", silent = true })
+keymap("n", "<leader>tk", "<cmd>tabnext<cr>", { desc = "[Tabline] Cambiar al tabline próximo", silent = true })
+keymap("n", "<leader>tq", "<cmd>tabclose<cr>", { desc = "[Tabline] Cerrar tabline", silent = true })
+-- Terminal
+keymap("t", "<esc>", "<C-\\><C-n>", { desc = "[Terminal] Escapa de la terminal", silent = true })
+-- keymap( "n", "<leader>tt", "<cmd>15split term://fish<cr>", "[Terminal] Abrir terminal horizontal" )
+-- Lazy
+keymap("n", "<leader>ps", "<cmd>Lazy<cr>", { desc = "[Lazy] Abrir Lazy", silent = true })
+-- ( "n", "<f5>", "<cmd>!python3 %<cr>", "Ejecutar Código Python"
