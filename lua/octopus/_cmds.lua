@@ -9,11 +9,14 @@ autocmd("FileType", { pattern = "xml", command = "setlocal shiftwidth=4 tabstop=
 autocmd("FileType", { pattern = "sh", command = "setlocal shiftwidth=4 tabstop=4" })
 autocmd("FileType", { pattern = "markdown", command = "setlocal spell colorcolumn=80" })
 
--- Guardado automático
--- cmd({"InsertLeave", "TextChanged"}, {
---   pattern = { "*" },
---   command = "silent! wall",
--- })
+autocmd("TextYankPost", {
+  desc = "Highlight yanked text",
+  group = vim.api.nvim_create_augroup("highlightyank", { clear = true }),
+  pattern = "*",
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+})
 
 -- Deshabilitar auto comentario
 autocmd("BufEnter", { pattern = "*", command = "setlocal fo-=c fo-=r fo-=o" })
