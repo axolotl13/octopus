@@ -1,18 +1,18 @@
 local opts = {
   -- Designar atajos
-  { "", "<space>", "<nop>", "Designar espacio" },
-  { "n", "<c-z>", "<nop>", "Designar ctrl + z" },
+  { "", "<space>", "<nop>", "Desasignar espacio" },
+  { "n", "<c-z>", "<nop>", "Desasignar ctrl + z" },
   -- { { "n", "i" }, "<esc>", "<cmd>noh<cr>", "Designar esc" },
 
   -- Opciones para el cursor
   { "n", "|", "^", "[Cursor] Mover al inicio" },
-  { "i", "<c-b>", "<ESC>^i", "[Cursor] Mover inicio en modo insertar" },
-  { "i", "<c-e>", "<End>", "[Cursor] Mover al final en modo insertar" },
+  { "i", "<c-b>", "<esc>^i", "[Cursor] Mover inicio en modo insertar" },
+  { "i", "<c-e>", "<end>", "[Cursor] Mover al final en modo insertar" },
   --[[ { "i", "<s-tab>", "<cmd>call search('[([{<]')<cr>", "[Cursor] Mover a los siguientes signos" }, ]]
 
   -- Habilitar idioma
   { "n", "<leader>es", "<cmd>set spell<cr>", "[Spell] Habilitar idioma en español" },
-  { "n", "<leader>nes", "<cmd>set nospell<cr>", "[Spell] Deshabilitar idioma en español" },
+  { "n", "<leader>eq", "<cmd>set nospell<cr>", "[Spell] Deshabilitar idioma en español" },
 
   -- Diferenciar archivos
   { "n", "<a-e>", "<cmd>diffthis<cr>", "[Diff] Habilitar diferencia en el buffer actual" },
@@ -52,16 +52,17 @@ local opts = {
   { "n", "<c-x>", "<cmd>qa!<cr>", "[Buffer] Cerrar todos los bufferes actuales" },
 
   -- Navegación entre pestañas
-  { "n", "<leader>tn", "<cmd>tabnew<cr>", "[Pestaña] Añadir nueva pestaña" },
-  { "n", "<leader>tj", "<cmd>tabprevious<cr>", "[Pestaña] Moverse hacía la anterior pestaña" },
-  { "n", "<leader>tk", "<cmd>tabnext<cr>", "[Pestaña] Moverse hacía la siguiente pestaña" },
-  { "n", "<leader>tq", "<cmd>tabclose<cr>", "[Pestaña] Cerrar pestaña actual" },
+  { "n", "<leader>tn", "<cmd>tabnew<cr>", "[Tabline] Añadir nueva pestaña" },
+  { "n", "<leader>tj", "<cmd>tabprevious<cr>", "[Tabline] Moverse hacía la anterior pestaña" },
+  { "n", "<leader>tk", "<cmd>tabnext<cr>", "[Tabline] Moverse hacía la siguiente pestaña" },
+  { "n", "<leader>tq", "<cmd>tabclose<cr>", "[Tabline] Cerrar pestaña actual" },
 
   -- Terminal
-  { "t", "<esc>", "<C-\\><C-n>", "Escapa de la terminal" },
+  -- { "n", "<leader>tt", "<cmd>15split term://fish<cr>", "[Terminal] Abrir terminal horizontal" },
+  { "t", "<esc>", "<C-\\><C-n>", "[Terminal] Escapa de la terminal" },
 
   -- Lazy
-  { "n", "<leader>ps", "<cmd>Lazy<cr>", "Mostrar estado de los plugins" },
+  { "n", "<leader>ps", "<cmd>Lazy<cr>", "[Lazy] Abrir Lazy" },
 
   -- { "n", "<f5>", "<cmd>!python3 %<cr>", "Ejecutar Código Python"}
 }
