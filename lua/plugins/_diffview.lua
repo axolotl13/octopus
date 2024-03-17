@@ -2,6 +2,7 @@ return {
   "sindrets/diffview.nvim",
   dependencies = "nvim-lua/plenary.nvim",
   opts = {
+    diff_binaries = true,
     icons = {
       folder_closed = "",
       folder_open = "",
@@ -25,7 +26,7 @@ return {
     -- { "]x", { desc = "In the merge-tool: jump to the next conflict" } },
   },
   keys = {
-    { "<leader>df", "<cmd>DiffviewOpen<cr>", desc = "[Diffview] Abrir Diffview" },
+    { "<leader>do", "<cmd>DiffviewOpen<cr>", desc = "[Diffview] Abrir Diffview" },
     { "<leader>dq", "<cmd>DiffviewClose<cr>", desc = "[Diffview] Cerrar Diffview" },
     { "<leader>dt", "<cmd>DiffviewToggleFiles<cr>", desc = "[Diffview] DiffviewToggleFiles" },
     { "<leader>dh", "<cmd>DiffviewFileHistory<cr>", desc = "[Diffview] Abre DiffviewFileHistory" },
