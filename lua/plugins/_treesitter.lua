@@ -12,13 +12,11 @@ return {
         vim.o.foldlevelstart = 99
         vim.o.foldenable = true
       end,
-      config = function()
-        require("ufo").setup {
-          provider_selector = function(bufnr, filetype, buftype)
-            return { "treesitter", "indent" }
-          end,
-        }
-      end,
+      opts = {
+        provider_selector = function(bufnr, filetype, buftype)
+          return { "treesitter", "indent" }
+        end,
+      },
       keys = {
         { "zR", "<cmd>require('ufo').openAllFolds<cr>", desc = "[UFO] Abrir fold" },
         { "zM", "<cmd>require('ufo').closeAllFolds<cr>", desc = "[UFO] Cerrar fold" },
