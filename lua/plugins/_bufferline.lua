@@ -1,9 +1,6 @@
 return {
   "akinsho/bufferline.nvim",
-  dependencies = {
-    "nvim-tree/nvim-web-devicons",
-    { "tiagovla/scope.nvim", opts = {} },
-  },
+  dependencies = "nvim-tree/nvim-web-devicons",
   init = function()
     vim.opt.mousemoveevent = true
   end,
