@@ -106,25 +106,16 @@ return {
 
     local Gitter = {
       condition = conditions.is_git_repo,
-
       init = function(self)
         self.status_dict = vim.b.gitsigns_status_dict
       end,
-
       hl = { fg = colors.orange, bg = colors.statusline },
-
       {
         provider = function(self)
           return icons.st.unmerged .. self.status_dict.head
         end,
         hl = { bold = true },
       },
-      Space,
-    }
-
-    Gitter = {
-      hl = { bg = colors.statusline },
-      utils.surround({ "", icons.sp.right }, colors.none, Gitter),
     }
 
     local FileNameBlock = {
@@ -160,7 +151,6 @@ return {
         return filename
       end,
       hl = { fg = colors.directory },
-      Space,
     }
 
     local FileFlags = {
@@ -189,23 +179,15 @@ return {
     }
 
     FileNameBlock = {
-      Space,
       utils.insert(FileNameBlock, FileIcon, utils.insert(FileNameModifer, FileName), FileFlags, { provider = "%<" }),
-    }
-
-    FileNameBlock = {
-      hl = { bg = colors.none },
-      utils.surround({ "", icons.sp.right_fill }, colors.statusline, FileNameBlock),
     }
 
     local Git = {
       condition = conditions.is_git_repo,
-
       init = function(self)
         self.status_dict = vim.b.gitsigns_status_dict
         self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0
       end,
-
       {
         provider = function(self)
           local count = self.status_dict.added or 0
@@ -282,19 +264,16 @@ return {
       Space,
     }
 
-    local Left = { ViMode, Gitter, FileNameBlock, Git, Space, FileSize, Space, Venv }
+    local Left = { ViMode, Gitter, Space, FileNameBlock, Git, FileSize, Space, Venv }
 
     local Diagnostics = {
-
       condition = conditions.has_diagnostics,
-
       static = {
         error_icon = icons.dg.bugf .. " ",
         warn_icon = icons.dg.warningf .. " ",
         info_icon = icons.dg.infof .. " ",
         hint_icon = icons.dg.hint .. " ",
       },
-
       init = function(self)
         self.errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
         self.warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
@@ -333,7 +312,6 @@ return {
     local LSPActive = {
       condition = conditions.lsp_attached,
       update = { "LspAttach", "LspDetach" },
-
       provider = function()
         local names = {}
         for _, server in pairs(vim.lsp.get_active_clients { bufnr = 0 }) do
@@ -351,7 +329,7 @@ return {
             vim.list_extend(names, vim.tbl_keys(null_ls_sources))
           end
         end
-        return icons.st.gear .. table.concat(names, " ")
+        return icons.st.gear .. table.concat(names, ", ")
       end,
       hl = { fg = colors.green, bold = true },
       Space,
@@ -367,9 +345,9 @@ return {
 
     local Shiftab = {
       provider = function()
-        return "SPACE:" .. vim.api.nvim_buf_get_option(0, "shiftwidth")
+        return "Spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
       end,
-      hl = { bold = true },
+      -- hl = { bold = true },
     }
 
     local FileEncoding = {
@@ -377,7 +355,7 @@ return {
         local enc = (vim.bo.fenc ~= "" and vim.bo.fenc) or vim.o.enc
         return enc:upper()
       end,
-      hl = { bold = true },
+      -- hl = { bold = true },
     }
 
     local FileFormat = {
@@ -392,12 +370,12 @@ return {
           return symbols[fmt] .. " " .. fmt:upper()
         end
       end,
-      hl = { bold = true },
+      -- hl = { bold = true },
     }
 
     local Ruler = {
-      provider = icons.st.line_number .. "%2l/%3L%::%2c",
-      hl = { bold = true },
+      provider = "Ln %l/%L, Col %2c",
+      -- hl = { bold = true },
     }
 
     local ScrollBar = {
@@ -413,7 +391,7 @@ return {
       hl = { fg = colors.statusline, bg = colors.statuslinenc },
     }
 
-    local RightPart = { Space, FileFormat, Space, FileEncoding, Space, Shiftab, Ruler, Space, ScrollBar }
+    local RightPart = { Ruler, Space, Shiftab, Space, FileEncoding, Space, FileFormat, Space, ScrollBar }
 
     RightPart = {
       utils.surround({ icons.sp.left_fill, "" }, colors.statusline, RightPart),
@@ -495,7 +473,7 @@ return {
       },
       utils.surround({ icons.sp.block, icons.sp.block }, function(self)
         return self:mode_color()
-      end, { Line, hl = { bg = colors.none } }),
+      end, { Line, hl = { bg = colors.statusline } }),
     }
 
     ViStatusLine = { utils.surround({ icons.sp.block, icons.sp.block }, colors.none, ViStatusLine) }
