@@ -466,7 +466,7 @@ return {
 
     local ViStatusLine = {
       static = {
-        mode_color = function(self)
+        mode_color = function()
           local mode = conditions.is_active() and vim.fn.mode() or "n"
           return mode_colors[mode]
         end,
