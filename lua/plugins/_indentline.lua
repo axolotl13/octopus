@@ -9,7 +9,7 @@ return {
     },
     scope = {
       enabled = true,
-      char = "▎",
+      char = "▏",
       show_start = true,
       show_end = false,
       injected_languages = true,
