@@ -10,7 +10,7 @@ return {
   version = "^1.0.0",
   dependencies = {
     "3rd/image.nvim",
-    lazy = true,
+    dependencies = "nvim-treesitter/nvim-treesitter",
     ft = "markdown",
     opts = {
       integrations = {
