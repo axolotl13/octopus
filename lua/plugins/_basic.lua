@@ -66,10 +66,6 @@ return {
     opts = { theme = "space" },
   },
   {
-    "folke/zen-mode.nvim",
-    keys = { { "<leader>zz", "<cmd>ZenMode<cr>", desc = "[ZenMode] Habilitar ZenMode" } },
-  },
-  {
     "folke/noice.nvim",
     event = "VeryLazy",
     dependencies = {
