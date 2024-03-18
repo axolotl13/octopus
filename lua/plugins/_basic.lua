@@ -13,8 +13,8 @@ return {
   {
     "danymat/neogen",
     dependencies = "nvim-treesitter/nvim-treesitter",
-    opts = {},
     keys = { { "<leader>nn", "<cmd>lua require('neogen').generate()<cr>", desc = "[Neogen] Generar anotaciones" } },
+    opts = {},
   },
   {
     "NvChad/nvim-colorizer.lua",
@@ -78,7 +78,11 @@ return {
     },
     opts = { lsp = { progress = { enabled = false } } },
   },
-  { "HakonHarnes/img-clip.nvim", ft = { "markdown", "html", "tex" }, opts = {} },
+  {
+    "HakonHarnes/img-clip.nvim",
+    keys = { { "<leader>pi", "<cmd>PasteImage<cr>", desc = "[Image] Paste clipboard Image" } },
+    opts = {},
+  },
   -- { "mfussenegger/nvim-dap", event = "VeryLazy" },
   -- Vim plugins
   {
