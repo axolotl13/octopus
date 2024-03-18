@@ -1,5 +1,13 @@
 return {
-  { "kylechui/nvim-surround", opts = {}, keys = { "ys", "ds", "cs" } },
+  {
+    "kylechui/nvim-surround",
+    keys = {
+      { "ys", mode = "n" },
+      { "ds", mode = "n" },
+      { "cs", mode = "n" },
+    },
+    opts = {},
+  },
   { "mfussenegger/nvim-jdtls", ft = "java" },
   { "tzachar/local-highlight.nvim", event = "VeryLazy", opts = {} },
   {
@@ -73,7 +81,16 @@ return {
   { "HakonHarnes/img-clip.nvim", ft = { "markdown", "html", "tex" }, opts = {} },
   -- { "mfussenegger/nvim-dap", event = "VeryLazy" },
   -- Vim plugins
-  { "mg979/vim-visual-multi", keys = { "<c-n>", "<c-down>", "<c-up>", "<s-left>", "<s-right>" } },
+  {
+    "mg979/vim-visual-multi",
+    keys = {
+      { "<c-n>", mode = "n" },
+      { "<c-up>", mode = "n" },
+      { "<c-down>", mode = "n" },
+      { "<s-left>", mode = "n" },
+      { "<s-right>", mode = "n" },
+    },
+  },
   {
     "tpope/vim-fugitive",
     cmd = "Git",
