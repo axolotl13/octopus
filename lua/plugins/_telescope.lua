@@ -1,7 +1,7 @@
 return {
   "nvim-telescope/telescope.nvim",
   dependencies = {
-     "nvim-lua/plenary.nvim" ,
+    "nvim-lua/plenary.nvim",
     {
       "nvim-telescope/telescope-fzf-native.nvim",
       build = "make",
@@ -10,53 +10,55 @@ return {
     },
   },
   cmd = "Telescope",
-  opts = {
-    defaults = {
-      vimgrep_arguments = {
-        "rg",
-        "--color=never",
-        "--no-heading",
-        "--with-filename",
-        "--line-number",
-        "--column",
-        "--smart-case",
-      },
-      mappings = {
-        i = {
-          ["<esc>"] = require("telescope.actions").close,
-          ["<c-n>"] = require("telescope.actions").cycle_history_next,
-          ["<c-p>"] = require("telescope.actions").cycle_history_prev,
+  opts = function()
+    return {
+      defaults = {
+        vimgrep_arguments = {
+          "rg",
+          "--color=never",
+          "--no-heading",
+          "--with-filename",
+          "--line-number",
+          "--column",
+          "--smart-case",
+        },
+        mappings = {
+          i = {
+            ["<esc>"] = require("telescope.actions").close,
+            ["<c-n>"] = require("telescope.actions").cycle_history_next,
+            ["<c-p>"] = require("telescope.actions").cycle_history_prev,
+          },
+        },
+        prompt_prefix = "  ",
+        selection_caret = "  ",
+        sorting_strategy = "ascending",
+        layout_config = {
+          horizontal = {
+            prompt_position = "top",
+            preview_width = 0.55,
+            results_width = 0.8,
+          },
+          width = 0.87,
+          height = 0.80,
+          preview_cutoff = 120,
+        },
+        file_ignore_patterns = { "node_modules" },
+        extensions = {
+          fzf = {
+            fuzzy = true,
+            override_generic_sorter = true,
+            override_file_sorter = true,
+            case_mode = "smart_case",
+          },
         },
       },
-      prompt_prefix = "  ",
-      selection_caret = "  ",
-      sorting_strategy = "ascending",
-      layout_config = {
-        horizontal = {
-          prompt_position = "top",
-          preview_width = 0.55,
-          results_width = 0.8,
-        },
-        width = 0.87,
-        height = 0.80,
-        preview_cutoff = 120,
-      },
-      file_ignore_patterns = { "node_modules" },
-      extensions = {
-        fzf = {
-          fuzzy = true,
-          override_generic_sorter = true,
-          override_file_sorter = true,
-          case_mode = "smart_case",
+      pickers = {
+        find_files = {
+          find_command = { "fd", "--type", "f", "--strip-cwd-prefix" },
         },
       },
-    },
-    pickers = {
-      find_files = {
-        find_command = { "fd", "--type", "f", "--strip-cwd-prefix" },
-      },
-    },
-  },
+    }
+  end,
   config = function(_, opts)
     require("telescope").setup(opts)
     require("telescope").load_extension "fzf"
