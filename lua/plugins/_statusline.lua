@@ -1,6 +1,10 @@
 return {
   "rebelot/heirline.nvim",
-  dependencies = { "SmiteshP/nvim-navic", lazy = "true", opts = { icons = require("ui.icons").vs } },
+  dependencies = {
+    "SmiteshP/nvim-navic",
+    lazy = "true",
+    opts = { icons = require("ui.icons").vs },
+  },
   event = { "BufReadPost", "BufNewFile" },
   opts = function()
     local heirline = require "heirline"

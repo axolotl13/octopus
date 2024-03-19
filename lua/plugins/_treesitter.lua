@@ -2,10 +2,13 @@ return {
   "nvim-treesitter/nvim-treesitter",
   dependencies = {
     "HiPhish/rainbow-delimiters.nvim",
-    { "nvim-treesitter/nvim-treesitter-context", opts = { max_lines = 3 } },
+    {
+      "nvim-treesitter/nvim-treesitter-context",
+      opts = { max_lines = 3 },
+    },
     {
       "kevinhwang91/nvim-ufo",
-      dependencies = "kevinhwang91/promise-async",
+      dependencies = { "kevinhwang91/promise-async" },
       init = function()
         vim.o.foldcolumn = "1"
         vim.o.foldlevel = 99
@@ -73,7 +76,9 @@ return {
         end
       end,
     },
-    indent = { enable = true },
+    indent = {
+      enable = true,
+    },
     incremental_selection = {
       enable = true,
       keymaps = {
