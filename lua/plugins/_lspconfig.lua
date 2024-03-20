@@ -72,7 +72,28 @@ return {
         },
         marksman = {},
         nginx_language_server = {},
-        pyright = {},
+        pyright = {
+          settings = {
+            pyright = {
+              disableOrganizeImports = true,
+            },
+            python = {
+              analysis = {
+                ignore = { "*" },
+              },
+            },
+          },
+        },
+        ruff_lsp = {
+          init_options = {
+            settings = {
+              args = {
+                "--config",
+                vim.fn.expand "$XDG_CONFIG_HOME" .. "/ruff/ruff.toml",
+              },
+            },
+          },
+        },
         solargraph = {},
         -- rubocop = {},
         -- rust_analyzer = {},
@@ -96,6 +117,10 @@ return {
       local on_attach = function(client, bufnr)
         client.server_capabilities.documentFormattingProvider = false
         client.server_capabilities.documentRangeFormattingProvider = false
+
+        if client.name == "ruff_lsp" then
+          client.server_capabilities.hoverProvider = false
+        end
 
         if client.server_capabilities.documentSymbolProvider then
           require("nvim-navic").attach(client, bufnr)
