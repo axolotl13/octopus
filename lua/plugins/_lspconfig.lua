@@ -98,7 +98,35 @@ return {
         -- rubocop = {},
         -- rust_analyzer = {},
         sqls = {},
-        texlab = {},
+        texlab = {
+          settings = {
+            texlab = {
+              auxDirectory = ".",
+              -- bibtexFormatter = "texlab",
+              diagnosticsDelay = 50,
+              build = {
+                args = {
+                  "--keep-intermediates",
+                  "--keep-logs",
+                  "--synctex",
+                  "%f",
+                },
+                executable = "tectonic",
+                onSave = true,
+              },
+              -- forwardSearch = {
+              --   args = { "%p" },
+              --   executable = "zathura",
+              --   onSave = true
+              -- },
+              -- chktex = { onOpenAndSave = false, onEdit = true },
+              -- formatterLineLength = 120,
+              -- latexFormatter = "latexindent",
+              -- latexindent = { modifyLineBreaks = false },
+            },
+          },
+        },
+        taplo = {},
         tsserver = {},
         yamlls = {
           settings = {
