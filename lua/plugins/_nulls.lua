@@ -7,44 +7,65 @@ return {
       debounce = 150,
       save_after_format = false,
       sources = {
-        nls.builtins.formatting.prettier,
-        nls.builtins.formatting.black,
-        nls.builtins.formatting.isort,
-        nls.builtins.formatting.rubocop,
-        nls.builtins.formatting.stylua,
-        nls.builtins.formatting.shfmt.with { extra_args = { "-i", "4" } },
-        nls.builtins.formatting.xmllint,
-        nls.builtins.formatting.sql_formatter.with {
-          extra_args = { "--config", "/home/joker/.sql_formatter.json" },
+        -- Commit
+        -- nls.builtins.diagnostics.commitlint,
+        -- nls.builtins.diagnostics.dotenv_linter,
+        -- Bash
+        nls.builtins.formatting.shfmt.with {
+          extra_args = { "-i", "4" },
         },
-        nls.builtins.formatting.codespell.with {
-          extra_args = { "-L", "hace,utiliza,posible,caracteres,conector" },
-          filetypes = { "markdown" },
+        -- Cssls, Javascript, Html, ...
+        nls.builtins.formatting.prettier.with {
+          disabled_filetypes = { "markdown" },
+        },
+        -- Docker and Yaml
+        nls.builtins.diagnostics.yamllint,
+        nls.builtins.diagnostics.hadolint,
+        -- XML
+        nls.builtins.diagnostics.tidy,
+        nls.builtins.formatting.tidy.with {
+          extra_args = { "-xml" },
+          disabled_filetypes = { "html" },
+        },
+        -- Java
+        nls.builtins.diagnostics.checkstyle.with {
+          extra_args = { "-c", vim.fn.expand "$XDG_CONFIG_HOME" .. "/linters/google_checks.xml" },
         },
         nls.builtins.formatting.clang_format.with {
-          filetypes = { "c", "cpp", "cs", "java" },
           extra_args = { "-style", "{IndentWidth: 4}" },
         },
-        nls.builtins.diagnostics.tidy,
-        nls.builtins.diagnostics.checkstyle.with { extra_args = { "-c", "/google_checks.xml" } },
+        -- Lua
+        nls.builtins.diagnostics.selene,
+        nls.builtins.formatting.stylua,
+        -- Markdown
         nls.builtins.diagnostics.markdownlint,
-        nls.builtins.diagnostics.hadolint,
-        nls.builtins.diagnostics.eslint_d,
-        nls.builtins.diagnostics.jsonlint,
-        nls.builtins.diagnostics.luacheck,
+        nls.builtins.formatting.markdownlint,
+        nls.builtins.diagnostics.codespell.with {
+          filetypes = { "markdown", "tex" },
+        },
+        nls.builtins.formatting.codespell.with {
+          filetypes = { "markdown", "tex" },
+        },
+        -- Python
+        -- nls.builtins.diagnostics.pylint.with {
+        --   diagnostics_postprocess = function(diagnostic)
+        --     diagnostic.code = diagnostic.message_id
+        --   end,
+        -- },
+        nls.builtins.formatting.black,
+        -- nls.builtins.formatting.isort,
+        -- Ruby
+        nls.builtins.formatting.rubocop,
+        -- SQL
         nls.builtins.diagnostics.sqlfluff.with {
-          extra_args = { "--config", "/home/joker/.sqlfluff" },
+          extra_args = { "--config", vim.fn.expand "$XDG_CONFIG_HOME" .. "/linters/sqlfluff" },
         },
-        nls.builtins.diagnostics.rubocop,
-        nls.builtins.diagnostics.shellcheck,
-        nls.builtins.diagnostics.yamllint,
-        nls.builtins.diagnostics.stylelint,
-        nls.builtins.diagnostics.pylint.with {
-          diagnostics_postprocess = function(diagnostic)
-            diagnostic.code = diagnostic.message_id
-          end,
+        nls.builtins.formatting.sqlfluff.with {
+          extra_args = { "--config", vim.fn.expand "$XDG_CONFIG_HOME" .. "/linters/sqlfluff" },
         },
-        nls.builtins.code_actions.gitsigns,
+        -- nls.builtins.formatting.pretty_php,
+        -- nls.builtins.diagnostics.phpstan,
+        -- nls.builtins.code_actions.gitsigns,
       },
     }
     nls.setup(opts)
