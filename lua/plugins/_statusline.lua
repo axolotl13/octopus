@@ -268,7 +268,7 @@ return {
       Space,
     }
 
-    local Left = { ViMode, Gitter, Space, FileNameBlock, Git, FileSize, Space, Venv }
+    local Left = { ViMode, Gitter, Space, FileNameBlock, Git, Space, FileSize, Space, Venv }
 
     local Diagnostics = {
       condition = conditions.has_diagnostics,
