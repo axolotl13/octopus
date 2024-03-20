@@ -9,6 +9,7 @@ return {
     opts = {},
   },
   { "mfussenegger/nvim-jdtls", ft = "java" },
+  { "b0o/schemastore.nvim", lazy = true },
   { "tzachar/local-highlight.nvim", event = "VeryLazy", opts = {} },
   {
     "danymat/neogen",

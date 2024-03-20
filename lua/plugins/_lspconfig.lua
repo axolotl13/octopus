@@ -31,22 +31,25 @@ return {
       },
       servers = {
         bashls = {},
-        clangd = {},
+        -- clangd = {},
         cssls = {},
         docker_compose_language_service = {},
         dockerls = {},
-        ember = {
-          filetypes = {
-            "handlebars",
-          },
-        },
         emmet_language_server = {},
         -- eslint = {},
         -- gopls = {},
         html = {},
         intelephense = {},
         jdtls = {},
-        jsonls = {},
+        jsonls = {
+          settings = {
+            json = {
+              schemas = require("schemastore").json.schemas(),
+              validate = { enable = true },
+            },
+          },
+        },
+        -- ltex={},
         lemminx = {},
         lua_ls = {
           settings = {
@@ -71,11 +74,22 @@ return {
         nginx_language_server = {},
         pyright = {},
         solargraph = {},
-        rust_analyzer = {},
+        -- rubocop = {},
+        -- rust_analyzer = {},
         sqls = {},
         texlab = {},
         tsserver = {},
-        yamlls = {},
+        yamlls = {
+          settings = {
+            yaml = {
+              schemaStore = {
+                enable = false,
+                url = "",
+              },
+              schemas = require("schemastore").yaml.schemas(),
+            },
+          },
+        },
       },
     },
     config = function(_, opts)
