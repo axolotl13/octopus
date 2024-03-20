@@ -74,6 +74,7 @@ return {
         "spectre_panel",
         "markdown",
         "text",
+        "tex",
       },
     },
   },
