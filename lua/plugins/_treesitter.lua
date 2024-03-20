@@ -16,7 +16,7 @@ return {
         vim.o.foldenable = true
       end,
       opts = {
-        provider_selector = function(bufnr, filetype, buftype)
+        provider_selector = function(_, _, _)
           return { "treesitter", "indent" }
         end,
       },
@@ -57,6 +57,7 @@ return {
       "sql",
       "ssh_config",
       "requirements",
+      "rst",
       "rust",
       "ruby",
       "toml",
@@ -68,7 +69,7 @@ return {
     },
     highlight = {
       enable = true,
-      disable = function(lang, buf)
+      disable = function(_, buf)
         local max_filesize = 100 * 1024 -- 100 KB
         local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
         if ok and stats and stats.size > max_filesize then
@@ -84,7 +85,6 @@ return {
       keymaps = {
         init_selection = "ga",
         node_incremental = "g+",
-        -- scope_incremental = "gaa",
         node_decremental = "g-",
       },
     },
