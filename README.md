@@ -1,0 +1,2 @@
+# octopus
+My nvim config
