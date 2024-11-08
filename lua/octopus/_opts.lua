@@ -17,6 +17,13 @@ opt.fillchars = {
 	diff = "╱",
 	eob = " ",
 }
+opt.foldenable = true
+opt.foldcolumn = "1"
+opt.foldlevelstart = 99
+opt.foldlevel = 99
+opt.foldmethod = "expr"
+opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+opt.foldtext = ""
 opt.guicursor = "n:blinkon200,i-ci-ve:ver25" -- Enable cursor blink
 opt.hidden = true -- Allows you to hide buffers with unsaved changes
 opt.ignorecase = false -- Case insensitive searching
