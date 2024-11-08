@@ -53,3 +53,8 @@ map("n", "<leader>tq", "<cmd>tabclose<cr>", "Close Tab")
 map("t", "<esc>", "<C-\\><C-n>", "Escape terminal mode")
 -- Misc
 map("n", "<leader>n", "<cmd>set rnu!<cr>", "Toggle Relativenumber")
+-- Lazy
+map("n", "<leader>ps", "<cmd>Lazy<cr>", "Lazy")
+map("n", "<leader>pu", "<cmd>Lazy update<cr>", "Update Plugins")
+map("n", "<leader>py", "<cmd>Lazy sync<cr>", "Lazy Sync")
+map("n", "<leader>pc", "<cmd>Lazy clean<cr>", "Clean Plugins")
