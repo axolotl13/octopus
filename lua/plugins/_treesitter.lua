@@ -4,7 +4,8 @@ return {
     {
       "nvim-treesitter/nvim-treesitter-context",
       opts = { max_lines = 5 }
-    }
+    },
+    { "HiPhish/rainbow-delimiters.nvim" },
   },
   build = ":TSUpdate",
   event = { "BufReadPost", "BufNewFile", "BufWritePre" },
