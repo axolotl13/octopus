@@ -79,4 +79,9 @@ return {
       end,
     },
   },
+  {
+    "tpope/vim-fugitive",
+    cmd = "Git",
+    keys = { { "<leader>gc", "<cmd>Git commit<cr>", desc = "Git commit" } },
+  },
 }
