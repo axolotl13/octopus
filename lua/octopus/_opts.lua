@@ -1,21 +1,21 @@
 local opt = vim.opt
 
-vim.cmd([[colorscheme habamax]])
+vim.cmd [[colorscheme habamax]]
 
 opt.background = "dark" -- Background color
-opt.backspace:append({ "nostop" }) -- Don't stop backspace at insert
+opt.backspace:append { "nostop" } -- Don't stop backspace at insert
 opt.backup = false -- Make backups before writing
 opt.clipboard = "unnamedplus" -- System clipboard
 opt.cursorline = true -- Highlight the text line of the cursor
 opt.expandtab = true -- Enable the use of space in tab
 opt.fileencoding = "utf-8" -- File content encoding for the buffer
 opt.fillchars = {
-	foldopen = "",
-	foldclose = "",
-	fold = " ",
-	foldsep = " ",
-	diff = "╱",
-	eob = " ",
+  foldopen = "",
+  foldclose = "",
+  fold = " ",
+  foldsep = " ",
+  diff = "╱",
+  eob = " ",
 }
 opt.foldenable = true
 opt.foldcolumn = "1"
@@ -30,10 +30,10 @@ opt.ignorecase = false -- Case insensitive searching
 opt.laststatus = 3 -- Global statusline
 opt.list = true -- Show invisible characters
 opt.listchars = {
-	eol = "↩",
-	trail = "·",
-	lead = "·",
-	tab = "..",
+  eol = "↩",
+  trail = "·",
+  lead = "·",
+  tab = "..",
 }
 opt.mouse = "a" -- Enable mouse support
 opt.number = true -- Show numberline
@@ -41,7 +41,7 @@ opt.pumheight = 15 -- Height of the pop up menu
 opt.relativenumber = true -- Show relative numberline
 opt.scrolloff = 6 -- Number of lines to leave before/after the cursor when scrolling
 opt.shiftwidth = 2 -- Number of space inserted for indentation
-opt.shortmess:append({ s = true, I = true, c = true }) -- Disable search count wrap and startup messages
+opt.shortmess:append { s = true, I = true, c = true } -- Disable search count wrap and startup messages
 opt.showmode = false -- Disable showing modes in command line
 opt.sidescrolloff = 6 -- Same but for side scrolling.
 opt.smartcase = true -- Case sensitivie searching
