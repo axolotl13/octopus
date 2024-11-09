@@ -83,6 +83,18 @@ return {
           },
           capabilities = vim.lsp.protocol.make_client_capabilities(),
           config = {
+            basedpyright = {
+              settings = {
+                basedpyright = {
+                  disableOrganizeImports = true,
+                  analysis = {
+                    typeCheckingMode = "standard",
+                  },
+                },
+              },
+            },
+            cssls = { init_options = { provideFormatter = false } },
+            html = { init_options = { provideFormatter = false } },
             lua_ls = {
               settings = {
                 Lua = {
@@ -95,6 +107,56 @@ return {
                   },
                   telemetry = {
                     enable = false,
+                  },
+                },
+              },
+            },
+            ruff = {
+              on_attach = function(client)
+                client.server_capabilities.hoverProvider = false
+              end,
+            },
+            texlab = {
+              settings = {
+                texlab = {
+                  auxDirectory = ".",
+                  diagnosticsDelay = 50,
+                  build = {
+                    args = {
+                      "--keep-intermediates",
+                      "--keep-logs",
+                      "--synctex",
+                      "%f",
+                    },
+                    executable = "tectonic",
+                    onSave = true,
+                  },
+                },
+              },
+            },
+            vtsls = {
+              settings = {
+                complete_function_calls = true,
+                vtsls = {
+                  enableMoveToFileCodeAction = true,
+                  experimental = {
+                    completion = {
+                      enableServerSideFuzzyMatch = true,
+                    },
+                  },
+                },
+                typescript = {
+                  updateImportsOnFileMove = { enabled = "always" },
+                  suggest = {
+                    completeFunctionCalls = true,
+                  },
+                  inlayHints = {
+                    enumMemberValues = { enabled = true },
+                    functionLikeReturnTypes = { enabled = true },
+                    parameterNames = { enabled = "literals" },
+                    parameterTypes = { enabled = true },
+                    propertyDeclarationTypes = { enabled = true },
+                    variableTypes = { enabled = false },
                   },
                 },
               },
@@ -213,7 +275,28 @@ return {
         },
         opts = function()
           return {
-            ensure_installed = { "lua_ls" },
+            ensure_installed = {
+              "basedpyright",
+              "bashls",
+              "cssls",
+              "docker_compose_language_service",
+              "dockerls",
+              "emmet_language_server",
+              "eslint",
+              "html",
+              "jsonls",
+              "lemminx",
+              "lua_ls",
+              "marksman",
+              "phpactor",
+              "ruff",
+              "solargraph",
+              "sqls",
+              "texlab",
+              "taplo",
+              "vtsls",
+              "yamlls",
+            },
             handlers = {
               function(server)
                 require("astrolsp").lsp_setup(server)
