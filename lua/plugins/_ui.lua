@@ -12,6 +12,10 @@ return {
       integrations = {
         mason = true,
         nvim_surround = true,
+        telescope = {
+          enabled = true,
+          style = "nvchad",
+        },
         which_key = true,
       },
     },
