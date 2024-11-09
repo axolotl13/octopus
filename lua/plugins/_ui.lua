@@ -122,10 +122,10 @@ return {
       diagnostics = {
         enable = true,
         icons = {
-          hint = require("octopus._icons").hl.DiagnosticHint,
-          info = require("octopus._icons").hl.DiagnosticInfo,
-          warning = require("octopus._icons").hl.DiagnosticWarn,
-          error = require("octopus._icons").hl.DiagnosticError,
+          hint = require("octopus._icons").hl.hint,
+          info = require("octopus._icons").hl.info,
+          warning = require("octopus._icons").hl.warn,
+          error = require("octopus._icons").hl.error,
         },
       },
       modified = {
