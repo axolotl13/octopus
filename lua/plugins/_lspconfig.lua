@@ -256,4 +256,31 @@ return {
 			vim.diagnostic.config(vim.deepcopy(diagnostics))
 		end,
 	},
+	{
+		"AstroNvim/astrolsp",
+		opts = function(_, opts)
+			opts.capabilities = require("cmp_nvim_lsp").default_capabilities()
+			opts.capabilities = vim.list_extend(opts.capabilities, {
+				textDocument = {
+					foldingRange = {
+						dynamicRegistration = false,
+						lineFoldingOnly = true,
+					},
+					completion = {
+						completionItem = {
+							documentationFormat = { "markdown", "plaintext" },
+							snippetSupport = true,
+							preselectSupport = true,
+							insertReplaceSupport = true,
+							labelDetailsSupport = true,
+							deprecatedSupport = true,
+							commitCharactersSupport = true,
+							tagSupport = { valueSet = { 1 } },
+							resolveSupport = { properties = { "documentation", "detail", "additionalTextEdits" } },
+						},
+					},
+				},
+			})
+		end,
+	},
 }
