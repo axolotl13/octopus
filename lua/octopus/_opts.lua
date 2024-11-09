@@ -1,8 +1,6 @@
 local opt = vim.opt
 local g = vim.g
 
-vim.cmd [[colorscheme habamax]]
-
 opt.background = "dark" -- Background color
 opt.backspace:append { "nostop" } -- Don't stop backspace at insert
 opt.backup = false -- Make backups before writing
