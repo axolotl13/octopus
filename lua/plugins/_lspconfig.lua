@@ -240,7 +240,7 @@ return {
 					text = {
 						[vim.diagnostic.severity.ERROR] = require("octopus._icons").hl.bug,
 						[vim.diagnostic.severity.WARN] = require("octopus._icons").hl.bug,
-						[vim.diagnostic.severity.HINT] = require("octopus._icons").dg.hint,
+						[vim.diagnostic.severity.HINT] = require("octopus._icons").hl.hint,
 						[vim.diagnostic.severity.INFO] = require("octopus._icons").hl.bug,
 					},
 				},
