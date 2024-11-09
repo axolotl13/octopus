@@ -19,7 +19,7 @@ local opts = {
     lazy = true,
   },
   install = {
-    colorscheme = { "habamax" },
+    colorscheme = { "catppuccin" },
   },
   performance = {
     rtp = {
