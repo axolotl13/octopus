@@ -10,6 +10,7 @@ return {
         dark = "macchiato",
       },
       integrations = {
+        mason = true,
         which_key = true,
       },
     },
