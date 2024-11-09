@@ -106,4 +106,9 @@ return {
       cmp.setup(opts)
     end,
   },
+  {
+    "folke/ts-comments.nvim",
+    event = "VeryLazy",
+    opts = {},
+  },
 }
