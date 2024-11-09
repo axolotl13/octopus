@@ -15,7 +15,36 @@ return {
       vim.cmd [[colorscheme catppuccin]]
     end,
   },
-  { "nvim-tree/nvim-web-devicons", lazy = true },
+  {
+    "nvim-tree/nvim-web-devicons",
+    lazy = true,
+    opts = {
+      cnf = { icon = "󱙌", color = "#898998", name = "Cnf" },
+      css = { icon = "", color = "#61afef", name = "Css" },
+      db = { icon = "󱘲", color = "#ff75a0", name = "Db" },
+      js = { icon = "󰌞", color = "#ebcb8b", name = "Js" },
+      md = { icon = "", color = "#898998", name = "Md" },
+      sh = { icon = "", color = "#6d9086", name = "Sh" },
+      sql = { icon = "󱘲", color = "#ff75a0", name = "Sql" },
+      ts = { icon = "", color = "#519aba", name = "Ts" },
+      tsx = { icon = "", color = "#519aba", name = "Tsx" },
+      jpg = { icon = "", color = "#bd77dc", name = "Jpg" },
+      jpeg = { icon = "", color = "#bd77dc", name = "Jpeg" },
+      key = { icon = "", color = "#7a0d21", name = "Key" },
+      pem = { icon = "", color = "#e8274b", name = "Pem" },
+      png = { icon = "", color = "#bd77dc", name = "Png" },
+      svg = { icon = "", color = "#ffb13b", name = "Svg" },
+      yaml = { icon = "", color = "#ebcb8b", name = "Yaml" },
+      yml = { icon = "", color = "#ebcb8b", name = "Yml" },
+      webp = { icon = "", color = "#a1b7ee", name = "Webp" },
+      [".gitignore"] = { icon = "", color = "#6d8086", name = "GitIgnore" },
+      ["package.json"] = { icon = "", color = "#e8274b", name = "PackageJson" },
+      ["package-lock.json"] = { icon = "", color = "#7a0d21", name = "PackageLockJson" },
+    },
+    config = function(_, opts)
+      require("nvim-web-devicons").set_icon(opts)
+    end,
+  },
   {
     "nvim-tree/nvim-tree.lua",
     opts = {
