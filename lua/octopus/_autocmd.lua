@@ -1,4 +1,33 @@
 local autocmd = vim.api.nvim_create_autocmd
+local opt = vim.opt
+
+vim.filetype.add {
+  pattern = {
+    [".*"] = {
+      function(path, buf)
+        return vim.bo[buf]
+            and vim.bo[buf].filetype ~= "bigfile"
+            and path
+            and vim.fn.getfsize(path) > 1.5 * 1024 * 1024
+            and "bigfile"
+          or nil
+      end,
+    },
+  },
+}
+
+autocmd({ "FileType" }, {
+  desc = "Disable certain functionality on very large files",
+  group = vim.api.nvim_create_augroup("bigfile", { clear = true }),
+  pattern = "bigfile",
+  callback = function()
+    local file = vim.fn.expand "<afile>"
+    vim.notify(("File: `%s` is greater than 2MB"):format(file), vim.log.levels.WARN)
+    opt.wrap = true
+    opt.list = false
+    opt.foldmethod = "manual"
+  end,
+})
 
 autocmd("TextYankPost", {
   desc = "Highlight text on yank",
@@ -10,7 +39,7 @@ autocmd("TextYankPost", {
 autocmd("BufEnter", {
   desc = "Don't auto comment new line",
   callback = function()
-    vim.opt.formatoptions:remove { "c", "r", "o" }
+    opt.formatoptions:remove { "c", "r", "o" }
   end,
 })
 
@@ -33,10 +62,10 @@ autocmd("BufReadPost", {
 autocmd("TermOpen", {
   desc = "Disable line number/fold column/sign column for terminals",
   callback = function()
-    vim.opt.number = false
-    vim.opt.relativenumber = false
-    vim.opt.foldcolumn = "0"
-    vim.opt.signcolumn = "no"
+    opt.number = false
+    opt.relativenumber = false
+    opt.foldcolumn = "0"
+    opt.signcolumn = "no"
   end,
 })
 
