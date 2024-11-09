@@ -8,6 +8,9 @@ local icons = {
 	hl = {
 		bug = "",
 		bug_alt = "",
+		install = "",
+		pending = "",
+		uninstall = "",
 	},
 }
 

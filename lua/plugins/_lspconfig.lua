@@ -200,6 +200,33 @@ return {
 					},
 				},
 			},
+			{
+				"williamboman/mason-lspconfig.nvim",
+				dependencies = {
+					"williamboman/mason.nvim",
+					opts = {
+						ui = {
+							icons = {
+								package_installed = require("octopus._icons").hl.install,
+								package_pending = require("octopus._icons").hl.pending,
+								package_uninstalled = require("octopus._icons").hl.uninstall,
+							},
+							keymaps = { uninstall_package = "d" },
+						},
+					},
+					keys = { { "<leader>,a", "<cmd>Mason<cr>", desc = "Open Mason" } },
+				},
+				opts = function()
+					return {
+						ensure_installed = { "lua_ls" },
+						handlers = {
+							function(server)
+								require("astrolsp").lsp_setup(server)
+							end,
+						},
+					}
+				end,
+			},
 		},
 		config = function()
 			local diagnostics = {
