@@ -11,6 +11,7 @@ return {
       },
       integrations = {
         mason = true,
+        nvim_surround = true,
         which_key = true,
       },
     },
