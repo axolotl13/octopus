@@ -418,8 +418,8 @@ return {
           init = function(self)
             self.bufnr = vim.api.nvim_get_current_buf()
           end,
+          { provider = require "custom._number" },
           lib.component.foldcolumn { foldcolumn = { padding = { right = 0 } } },
-          provider = require "custom._number",
           lib.component.signcolumn {
             signcolumn = { padding = { right = 0 } },
             on_click = {
