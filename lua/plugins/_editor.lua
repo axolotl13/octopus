@@ -6,6 +6,7 @@ return {
       spec = {
         {
           { "<leader>b", group = "Buffer" },
+          { "<leader>c", icon = { icon = " ", color = "gray" } },
           { "<leader>d", group = "Diffview", icon = { icon = "󰕛 ", color = "green" } },
           { "<leader>e", icon = { icon = "󰉌 ", color = "orange" } },
           { "<leader>g", group = "Git" },
@@ -292,5 +293,10 @@ return {
       },
     },
     keys = { { "<leader>,s", "<cmd>VenvSelect<cr>", desc = "Select Venv" } },
+  },
+  {
+    "brenoprata10/nvim-highlight-colors",
+    keys = { { "<leader>c", "<cmd>HighlightColors Toggle<cr>", desc = "Toggle Highlight Colors" } },
+    config = true,
   }
 }
