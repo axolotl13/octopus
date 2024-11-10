@@ -172,4 +172,47 @@ return {
     config = true,
     keys = { { "<leader>,v", "<cmd>Markview<cr>", desc = "Toggle Markview" } },
   },
+  {
+    "folke/flash.nvim",
+    opts = {
+      search = {
+        exclude = {
+          "NvimTree",
+          "mason",
+          "lazy",
+          "notify",
+          "terminal",
+          "cmp_menu",
+          "fugitive",
+          "flash_prompt",
+          function(win)
+            return not vim.api.nvim_win_get_config(win).focusable
+          end,
+        },
+      },
+      modes = {
+        char = {
+          keys = { "f", "F", "t", "T" },
+        },
+      },
+    },
+    keys = {
+      {
+        "s",
+        mode = { "n", "o", "x" },
+        function()
+          require("flash").jump()
+        end,
+        desc = "Flash",
+      },
+      {
+        "S",
+        mode = { "n", "o", "x" },
+        function()
+          require("flash").treesitter()
+        end,
+        desc = "Flash treesitter",
+      },
+    },
+  }
 }
