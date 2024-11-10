@@ -173,7 +173,7 @@ return {
     "OXY2DEV/markview.nvim",
     ft = "markdown",
     config = true,
-    keys = { { "<leader>,v", "<cmd>Markview<cr>", desc = "Toggle Markview" } },
+    keys = { { "<leader>,m", "<cmd>Markview<cr>", desc = "Toggle Markview" } },
   },
   {
     "folke/flash.nvim",
@@ -294,7 +294,7 @@ return {
         },
       },
     },
-    keys = { { "<leader>,s", "<cmd>VenvSelect<cr>", desc = "Select Venv" } },
+    keys = { { "<leader>,v", "<cmd>VenvSelect<cr>", desc = "Select Venv" } },
   },
   {
     "brenoprata10/nvim-highlight-colors",
@@ -305,7 +305,7 @@ return {
   {
     "nvzone/minty",
     keys = {
-      { "<leader>,d", "<cmd>Shades<cr>", desc = "Enable Shades" },
+      { "<leader>,s", "<cmd>Shades<cr>", desc = "Enable Shades" },
       { "<leader>,c", "<cmd>Huefy<cr>", desc = "Enable ColorPick" },
     }
   },
@@ -357,8 +357,8 @@ return {
       keys = {
         { "<leader>tt", "<cmd>ToggleTerm direction=horizontal<cr>", desc = "Toggle Terminal" },
         { "<leader>r", "<cmd>lua _toggle_serpl()<cr>", desc = "Replace Keywords" },
-        { "<leader>,l", "<cmd>lua _toggle_lazygit()<cr>", desc = "Lazygit" },
-        { "<leader>,o", "<cmd>lua _toggle_lazydocker()<cr>", desc = "Lazydocker" },
+        { "<leader>,g", "<cmd>lua _toggle_lazygit()<cr>", desc = "Lazygit" },
+        { "<leader>,d", "<cmd>lua _toggle_lazydocker()<cr>", desc = "Lazydocker" },
       },
     },
     keys = {
