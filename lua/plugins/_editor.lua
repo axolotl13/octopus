@@ -269,5 +269,10 @@ return {
     ft = { "markdown", "html", "tex" },
     keys = { { "<leader>,p", "<cmd>PasteImage<cr>", desc = "Paste image from clipboard" } },
     config = true,
+  },
+  {
+    "danymat/neogen",
+    keys = { { "<leader>,n", "<cmd>lua require('neogen').generate()<cr>", desc = "Generate Annotations" } },
+    config = true,
   }
 }
