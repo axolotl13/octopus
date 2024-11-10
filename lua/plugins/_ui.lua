@@ -349,5 +349,29 @@ return {
         },
       },
     },
+  },
+  {
+    "lewis6991/satellite.nvim",
+    event = "VeryLazy",
+    opts = {
+      current_only = true,
+      winblend = 40,
+      excluded_filetypes = {
+        "NvimTree",
+        "terminal",
+        "prompt",
+        "TelescopePrompt",
+        "gitsigns-blame",
+        "noice",
+        "notify",
+      },
+      handlers = {
+        gitsigns = {
+          signs = {
+            delete = "│",
+          },
+        },
+      },
+    },
   }
 }
