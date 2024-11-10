@@ -378,4 +378,14 @@ return {
       })
     end,
   },
+  {
+    "lewis6991/hover.nvim",
+    opts = {
+      init = function()
+        require "hover.providers.lsp"
+      end,
+      title = false,
+    },
+    keys = { { "<MouseMove>", '<cmd>lua require("hover").hover_mouse()<cr>', desc = "Hover (mouse)" } },
+  },
 }
