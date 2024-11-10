@@ -298,5 +298,13 @@ return {
     "brenoprata10/nvim-highlight-colors",
     keys = { { "<leader>c", "<cmd>HighlightColors Toggle<cr>", desc = "Toggle Highlight Colors" } },
     config = true,
+  },
+  { "nvzone/volt", lazy = true },
+  {
+    "nvzone/minty",
+    keys = {
+      { "<leader>,d", "<cmd>Shades<cr>", desc = "Enable Shades" },
+      { "<leader>,c", "<cmd>Huefy<cr>", desc = "Enable ColorPick" },
+    }
   }
 }
