@@ -265,7 +265,7 @@ return {
       max_width = function()
         return math.floor(vim.o.columns * 0.60)
       end,
-      stages = "fade",
+      stages = "static",
     },
     init = function()
       vim.notify = require "notify"
