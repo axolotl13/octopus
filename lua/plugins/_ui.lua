@@ -13,9 +13,9 @@ return {
         diffview = true,
         dropbar = true,
         mason = true,
-        nvim_surround = true,
         noice = true,
         notify = true,
+        nvim_surround = true,
         telescope = {
           enabled = true,
           style = "nvchad",
