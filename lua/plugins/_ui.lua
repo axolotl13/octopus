@@ -44,6 +44,7 @@ return {
       db = { icon = "󱘲", color = "#ff75a0", name = "Db" },
       js = { icon = "󰌞", color = "#ebcb8b", name = "Js" },
       md = { icon = "", color = "#898998", name = "Md" },
+      py = { icon = "", color = "#61afef", name = "Py" },
       sh = { icon = "", color = "#6d9086", name = "Sh" },
       sql = { icon = "󱘲", color = "#ff75a0", name = "Sql" },
       ts = { icon = "", color = "#519aba", name = "Ts" },
