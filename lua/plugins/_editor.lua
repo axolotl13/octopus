@@ -214,5 +214,16 @@ return {
         desc = "Flash treesitter",
       },
     },
+  },
+  {
+    "folke/zen-mode.nvim",
+    opts = {
+      plugins = {
+        options = {
+          laststatus = 0,
+        },
+      },
+    },
+    keys = { { "<leader>z", "<cmd>ZenMode<cr>", desc = "Enable ZenMode" } },
   }
 }
