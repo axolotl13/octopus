@@ -6,6 +6,7 @@ return {
       opts = { max_lines = 5 }
     },
     { "HiPhish/rainbow-delimiters.nvim" },
+    { "nvim-treesitter/nvim-treesitter-textobjects" },
   },
   build = ":TSUpdate",
   event = { "BufReadPost", "BufNewFile", "BufWritePre" },
@@ -77,6 +78,34 @@ return {
         node_decremental = "g-",
       },
     },
+    textobjects = {
+      select = {
+        enable = true,
+        lookahead = true,
+        keymaps = {
+          ["af"] = "@function.outer",
+          ["if"] = "@function.inner",
+          ["ab"] = "@statement.outer",
+          ["ib"] = "@statement.inner",
+          ["ac"] = "@class.outer",
+          ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+          ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
+        },
+        include_surrounding_whitespace = true,
+      },
+      move = {
+        enable = true,
+        set_jumps = true,
+        goto_next_start = {
+          ["<a-}>"] = { query = "@function.outer", desc = "Next method/function def start" },
+          ["]c"] = { query = "@class.outer", desc = "Next class start" },
+        },
+        goto_previous_start = {
+          ["<a-{>"] = { query = "@function.outer", desc = "Prev method/function def start" },
+          ["[c"] = { query = "@class.outer", desc = "Prev class start" },
+        },
+      },
+    }
   },
   config = function(_, opts)
     require("nvim-treesitter.configs").setup(opts)
