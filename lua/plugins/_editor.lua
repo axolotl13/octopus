@@ -166,4 +166,10 @@ return {
       { "<leader>se", "<cmd>Telescope grep_string<cr>", desc = "Search words under cursor" },
     },
   },
+  {
+    "OXY2DEV/markview.nvim",
+    ft = "markdown",
+    config = true,
+    keys = { { "<leader>,v", "<cmd>Markview<cr>", desc = "Toggle Markview" } },
+  },
 }
