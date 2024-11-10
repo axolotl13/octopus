@@ -274,5 +274,23 @@ return {
     "danymat/neogen",
     keys = { { "<leader>,n", "<cmd>lua require('neogen').generate()<cr>", desc = "Generate Annotations" } },
     config = true,
+  },
+  {
+    "linux-cultist/venv-selector.nvim",
+    branch = "regexp",
+    opts = {
+      settings = {
+        options = {
+          enable_default_searches = false,
+          notify_user_on_venv_activation = true,
+        },
+        search = {
+          venv = {
+            command = "fd '/bin/python$' . --full-path --color never -HI -a -L",
+          },
+        },
+      },
+    },
+    keys = { { "<leader>,s", "<cmd>VenvSelect<cr>", desc = "Select Venv" } },
   }
 }
