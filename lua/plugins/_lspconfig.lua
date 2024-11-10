@@ -188,10 +188,6 @@ return {
               enabled = false,
             },
           },
-          lsp_handlers = {
-            ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single", silent = true }),
-            ["textDocument/signatureHelp"] = false,
-          },
           mappings = {
             n = {
               gd = {
