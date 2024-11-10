@@ -11,6 +11,7 @@ return {
       },
       integrations = {
         diffview = true,
+        dropbar = true,
         mason = true,
         nvim_surround = true,
         notify = true,
@@ -267,6 +268,20 @@ return {
     },
     init = function()
       vim.notify = require "notify"
+    end,
+  },
+  {
+    "Bekaboo/dropbar.nvim",
+    event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+    opts = {
+      icons = {
+        kinds = {
+          symbols = require("octopus._icons").vs,
+        },
+      },
+    },
+    init = function()
+      vim.opt.mousemoveevent = true
     end,
   }
 }
