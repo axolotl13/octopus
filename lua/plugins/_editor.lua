@@ -306,5 +306,17 @@ return {
       { "<leader>,d", "<cmd>Shades<cr>", desc = "Enable Shades" },
       { "<leader>,c", "<cmd>Huefy<cr>", desc = "Enable ColorPick" },
     }
-  }
+  },
+  {
+    "akinsho/toggleterm.nvim",
+    opts = {
+      autochdir = true,
+      highlights = {
+        Normal = { link = "Normal" },
+      },
+    },
+    keys = {
+      { "<leader>tt", "<cmd>ToggleTerm direction=horizontal<cr>", desc = "Toggle Terminal" },
+    },
+  },
 }
