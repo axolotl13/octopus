@@ -384,6 +384,68 @@ return {
     end,
   },
   {
+    "stevearc/conform.nvim",
+    event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+    opts = {
+      formatters_by_ft = {
+        css = { "prettierd" },
+        dockerfile = { "hadolint" },
+        html = { "prettierd" },
+        json = { "prettierd" },
+        jsonc = { "prettierd" },
+        javascript = { "prettierd" },
+        javascriptreact = { "prettierd" },
+        less = { "prettierd" },
+        lua = { "stylua" },
+        markdown = { "markdownlint" },
+        php = { "phpactor" },
+        python = { "ruff_format" },
+        scss = { "prettierd" },
+        sh = { "shfmt" },
+        sql = { "sql_formatter" },
+        typescript = { "prettierd" },
+        typescriptreact = { "prettierd" },
+        xml = { "xmllint" },
+        yaml = { "prettierd" },
+      },
+      formatters = {
+        sql_formatter = {
+          args = { "-c", vim.fn.expand "$HOME" .. "/.sql_formatter.json" },
+        },
+      },
+    },
+  },
+  {
+    "mfussenegger/nvim-lint",
+    event = { "BufNewFile", "BufReadPost" },
+    opts = {
+      linters_by_ft = {
+        dockerfile = { "hadolint" },
+        gitcommit = { "gitlint" },
+        html = { "markuplint" },
+        lua = { "selene" },
+        markdown = { "markdownlint" },
+        sql = { "sqlfluff" },
+        yaml = { "yamllint" },
+      },
+      linter = {
+        sqlfluff = {
+          args = { "--config", vim.fn.expand "$HOME" .. "/.sqlfluff" },
+        },
+      },
+    },
+    config = function(_, opts)
+      local lint = require "lint"
+      lint.linters_by_ft = opts.linters_by_ft
+      lint.linter = opts.linter
+      vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave", "TextChanged" }, {
+        callback = function()
+          lint.try_lint()
+        end,
+      })
+    end,
+  },
+  {
     "lewis6991/hover.nvim",
     opts = {
       init = function()
