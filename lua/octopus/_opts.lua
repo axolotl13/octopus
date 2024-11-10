@@ -60,6 +60,6 @@ opt.whichwrap = "b,s,<,>,[,],h,l" -- Go to previous/next line
 opt.wrap = false -- Disable wrapping of lines longer than the width of window
 opt.writebackup = false -- Disable making a backup before overwriting a file
 
-g.loaded_perl_provider = 0  -- Disable perl provider
-g.loaded_ruby_provider = 0  -- Disable ruby provider
-g.loaded_node_provider = 0  -- Disable node provider
+g.loaded_perl_provider = 0 -- Disable perl provider
+g.loaded_ruby_provider = 0 -- Disable ruby provider
+g.loaded_node_provider = 0 -- Disable node provider

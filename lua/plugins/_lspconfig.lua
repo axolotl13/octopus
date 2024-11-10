@@ -385,7 +385,7 @@ return {
   },
   {
     "stevearc/conform.nvim",
-    event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+    lazy = true,
     opts = {
       formatters_by_ft = {
         css = { "prettierd" },
@@ -459,5 +459,5 @@ return {
     "nanotee/sqls.nvim",
     lazy = true,
     keys = { { "<f5>", mode = "x", ":SqlsExecuteQuery<cr>gv", "Execute query" } },
-  }
+  },
 }

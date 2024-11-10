@@ -3,7 +3,7 @@ return {
   dependencies = {
     {
       "nvim-treesitter/nvim-treesitter-context",
-      opts = { max_lines = 5 }
+      opts = { max_lines = 5 },
     },
     { "HiPhish/rainbow-delimiters.nvim" },
     { "nvim-treesitter/nvim-treesitter-textobjects" },
@@ -105,7 +105,7 @@ return {
           ["[c"] = { query = "@class.outer", desc = "Prev class start" },
         },
       },
-    }
+    },
   },
   config = function(_, opts)
     require("nvim-treesitter.configs").setup(opts)

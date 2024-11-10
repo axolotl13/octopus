@@ -307,7 +307,7 @@ return {
     keys = {
       { "<leader>,s", "<cmd>Shades<cr>", desc = "Enable Shades" },
       { "<leader>,c", "<cmd>Huefy<cr>", desc = "Enable ColorPick" },
-    }
+    },
   },
   {
     "CRAG666/code_runner.nvim",
@@ -336,9 +336,9 @@ return {
           }
         end
 
-        local serpl = create_floating_terminal("serpl")
-        local lazygit = create_floating_terminal("lazygit")
-        local lazydocker = create_floating_terminal("lazydocker")
+        local serpl = create_floating_terminal "serpl"
+        local lazygit = create_floating_terminal "lazygit"
+        local lazydocker = create_floating_terminal "lazydocker"
 
         function _G._toggle_serpl()
           serpl:toggle()

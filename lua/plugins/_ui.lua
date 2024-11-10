@@ -384,7 +384,7 @@ return {
   {
     "zeioth/heirline-components.nvim",
     lazy = true,
-    opts = { icons = require("octopus._icons").hl }
+    opts = { icons = require("octopus._icons").hl },
   },
   {
     "rebelot/heirline.nvim",
@@ -543,5 +543,5 @@ return {
         desc = "Pick Buffer",
       },
     },
-  }
+  },
 }
