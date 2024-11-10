@@ -247,5 +247,21 @@ return {
       { "<leader>dh", "<cmd>DiffviewFileHistory<cr>", desc = "History current branch" },
       { "<leader>dd", "<cmd>DiffviewFileHistory %<cr>", desc = "History current file" },
     },
-  }
+  },
+  {
+    "3rd/image.nvim",
+    ft = "markdown",
+    opts = {
+      integrations = {
+        markdown = {
+          clear_in_insert_mode = true,
+          only_render_image_at_cursor = true,
+        },
+      },
+      max_width = 100,
+      max_height = 30,
+      max_height_window_percentage = math.huge,
+      max_width_window_percentage = math.huge,
+    },
+  },
 }
