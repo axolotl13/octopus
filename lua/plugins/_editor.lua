@@ -361,9 +361,9 @@ return {
         { "<leader>,d", "<cmd>lua _toggle_lazydocker()<cr>", desc = "Lazydocker" },
       },
     },
-    keys = {
-      { "<leader>tt", "<cmd>ToggleTerm direction=horizontal<cr>", desc = "Toggle Terminal" },
-    },
+    cmd = { "RunCode", "RunFile" },
+    opts = { mode = "toggleterm" },
+    keys = { { "<f5>", "<cmd>RunCode<cr>", desc = "Run Code" } },
   },
   {
     "stevearc/resession.nvim",
