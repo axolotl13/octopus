@@ -281,9 +281,9 @@ return {
           opts = {
             ui = {
               icons = {
-                package_installed = require("octopus._icons").hl.install,
-                package_pending = require("octopus._icons").hl.pending,
-                package_uninstalled = require("octopus._icons").hl.uninstall,
+                package_installed = require("octopus._icons").hl.Install,
+                package_pending = require("octopus._icons").hl.Pending,
+                package_uninstalled = require("octopus._icons").hl.Uninstall,
               },
               keymaps = { uninstall_package = "d" },
             },
@@ -333,10 +333,10 @@ return {
         severity_sort = true,
         signs = {
           text = {
-            [vim.diagnostic.severity.ERROR] = require("octopus._icons").hl.bug,
-            [vim.diagnostic.severity.WARN] = require("octopus._icons").hl.bug,
-            [vim.diagnostic.severity.HINT] = require("octopus._icons").hl.hint,
-            [vim.diagnostic.severity.INFO] = require("octopus._icons").hl.bug,
+            [vim.diagnostic.severity.ERROR] = require("octopus._icons").hl.Bug,
+            [vim.diagnostic.severity.WARN] = require("octopus._icons").hl.Bug,
+            [vim.diagnostic.severity.HINT] = require("octopus._icons").hl.DiagnosticHint,
+            [vim.diagnostic.severity.INFO] = require("octopus._icons").hl.Bug,
           },
         },
       }
