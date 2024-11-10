@@ -10,6 +10,7 @@ return {
         dark = "macchiato",
       },
       integrations = {
+        diffview = true,
         mason = true,
         nvim_surround = true,
         telescope = {
