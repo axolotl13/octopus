@@ -11,6 +11,7 @@ return {
           { "<leader>e", icon = { icon = "󰉌 ", color = "orange" } },
           { "<leader>g", group = "Git" },
           { "<leader>p", group = "Lazy", icon = { icon = "󰒲 ", color = "cyan" } },
+          { "<leader>r", icon = "󰛔 " },
           { "<leader>s", group = "Search" },
           { "<leader>t", group = "Tabs" },
           { "<leader>,", group = "Misc", icon = { icon = " ", color = "pink" } },
@@ -308,11 +309,55 @@ return {
     }
   },
   {
-    "akinsho/toggleterm.nvim",
-    opts = {
-      autochdir = true,
-      highlights = {
-        Normal = { link = "Normal" },
+    "CRAG666/code_runner.nvim",
+    dependencies = {
+      "akinsho/toggleterm.nvim",
+      opts = {
+        autochdir = true,
+        highlights = {
+          Normal = { link = "Normal" },
+        },
+      },
+      config = function(_, opts)
+        local Terminal = require("toggleterm.terminal").Terminal
+
+        local function create_floating_terminal(cmd)
+          return Terminal:new {
+            cmd = cmd,
+            direction = "float",
+            float_opts = {
+              border = "double",
+              winblend = 10,
+            },
+            on_open = function(term)
+              vim.api.nvim_buf_set_keymap(term.bufnr, "n", "<esc>", "<cmd>close<cr>", { noremap = true, silent = true })
+            end,
+          }
+        end
+
+        local serpl = create_floating_terminal("serpl")
+        local lazygit = create_floating_terminal("lazygit")
+        local lazydocker = create_floating_terminal("lazydocker")
+
+        function _G._toggle_serpl()
+          serpl:toggle()
+        end
+
+        function _G._toggle_lazygit()
+          lazygit:toggle()
+        end
+
+        function _G._toggle_lazydocker()
+          lazydocker:toggle()
+        end
+
+        require("toggleterm").setup(opts)
+      end,
+      keys = {
+        { "<leader>tt", "<cmd>ToggleTerm direction=horizontal<cr>", desc = "Toggle Terminal" },
+        { "<leader>r", "<cmd>lua _toggle_serpl()<cr>", desc = "Replace Keywords" },
+        { "<leader>,l", "<cmd>lua _toggle_lazygit()<cr>", desc = "Lazygit" },
+        { "<leader>,o", "<cmd>lua _toggle_lazydocker()<cr>", desc = "Lazydocker" },
       },
     },
     keys = {
