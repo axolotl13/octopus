@@ -137,6 +137,11 @@ return {
                 },
               },
             },
+            sqls = {
+              on_attach = function(client, bufnr)
+                require("sqls").on_attach(client, bufnr)
+              end,
+            },
             texlab = {
               settings = {
                 texlab = {
@@ -388,4 +393,9 @@ return {
     },
     keys = { { "<MouseMove>", '<cmd>lua require("hover").hover_mouse()<cr>', desc = "Hover (mouse)" } },
   },
+  {
+    "nanotee/sqls.nvim",
+    lazy = true,
+    keys = { { "<f5>", mode = "x", ":SqlsExecuteQuery<cr>gv", "Execute query" } },
+  }
 }
