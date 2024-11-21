@@ -68,6 +68,7 @@ return {
   },
   {
     "nvim-tree/nvim-tree.lua",
+    lazy = true,
     opts = {
       hijack_cursor = true,
       disable_netrw = true,

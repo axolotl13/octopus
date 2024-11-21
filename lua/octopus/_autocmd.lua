@@ -68,8 +68,3 @@ autocmd("TermOpen", {
     opt.signcolumn = "no"
   end,
 })
-
-autocmd("TermOpen", {
-  desc = "Start insert open terminal",
-  command = "startinsert",
-})

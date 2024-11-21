@@ -320,9 +320,18 @@ return {
       "akinsho/toggleterm.nvim",
       opts = {
         autochdir = true,
+        start_in_insert = false,
         highlights = {
           Normal = { link = "Normal" },
         },
+        on_open = function(_)
+          local nvimtree = require "nvim-tree.api"
+          local nvimtree_view = require "nvim-tree.view"
+          if nvimtree_view.is_visible() then
+            nvimtree.tree.toggle()
+            nvimtree.tree.toggle(false, true)
+          end
+        end,
       },
       config = function(_, opts)
         local Terminal = require("toggleterm.terminal").Terminal
@@ -337,6 +346,7 @@ return {
             },
             on_open = function(term)
               vim.api.nvim_buf_set_keymap(term.bufnr, "n", "<esc>", "<cmd>close<cr>", { noremap = true, silent = true })
+              vim.cmd("startinsert")
             end,
           }
         end
