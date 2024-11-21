@@ -242,11 +242,6 @@ return {
           winbar_info = true,
         },
       },
-      hooks = {
-        diff_buf_read = function(_)
-          vim.opt_local.foldtext = " "
-        end,
-      },
     },
     keys = {
       { "<leader>do", "<cmd>DiffviewOpen<cr>", desc = "Open Diffview" },
