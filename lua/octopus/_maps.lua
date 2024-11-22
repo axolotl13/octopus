@@ -3,6 +3,7 @@ local map = function(mode, lhs, rhs, desc)
 end
 
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 -- Disable
 map("n", "<esc>", "<cmd>noh<cr>", "General Clear Highlight")
