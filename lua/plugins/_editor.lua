@@ -11,7 +11,7 @@ return {
           { "<leader>e", icon = { icon = "󰉌 ", color = "orange" } },
           { "<leader>g", group = "Git" },
           { "<leader>p", group = "Lazy", icon = { icon = "󰒲 ", color = "cyan" } },
-          { "<leader>r", icon = "󰛔 " },
+          { "<leader>r", group = "Replace", icon = "󰛔 " },
           { "<leader>s", group = "Search" },
           { "<leader>t", group = "Tabs" },
           { "<leader>x", group = "Session" },
@@ -341,7 +341,7 @@ return {
             },
             on_open = function(term)
               vim.api.nvim_buf_set_keymap(term.bufnr, "n", "<esc>", "<cmd>close<cr>", { noremap = true, silent = true })
-              vim.cmd("startinsert")
+              vim.cmd "startinsert"
             end,
           }
         end
@@ -366,7 +366,7 @@ return {
       end,
       keys = {
         { "<leader>tt", "<cmd>ToggleTerm direction=horizontal<cr>", desc = "Toggle Terminal" },
-        { "<leader>r", "<cmd>lua _toggle_serpl()<cr>", desc = "Replace Keywords" },
+        { "<leader>,r", "<cmd>lua _toggle_serpl()<cr>", desc = "Replace Keywords" },
         { "<leader>,g", "<cmd>lua _toggle_lazygit()<cr>", desc = "Lazygit" },
         { "<leader>,d", "<cmd>lua _toggle_lazydocker()<cr>", desc = "Lazydocker" },
       },
@@ -415,6 +415,28 @@ return {
       { "<leader>xs", "<cmd>lua require('resession').save()<cr>", desc = "Save Session" },
       { "<leader>xl", "<cmd>lua require('resession').load()<cr>", desc = "Load Session" },
       { "<leader>xd", "<cmd>lua require('resession').delete()<cr>", desc = "Delete Session" },
+    },
+  },
+  {
+    "MagicDuck/grug-far.nvim",
+    opts = {},
+    keys = {
+      { "<leader>rr", "<cmd>GrugFar<cr>", desc = "Replace" },
+      {
+        "<leader>re",
+        "<cmd>lua require'grug-far'.open({ prefills = { search = vim.fn.expand('<cword>') } })<cr>",
+        desc = "Replace current word",
+      },
+      {
+        "<leader>rt",
+        "<cmd>lua require'grug-far'.open({ prefills = { paths = vim.fn.expand('%') } })<cr>",
+        desc = "Replace file",
+      },
+      {
+        "<leader>rw",
+        "<cmd>lua require'grug-far'.open({ prefills = { search = vim.fn.expand('<cword>'), paths = vim.fn.expand('%') } })<cr>",
+        desc = "Replace current word in file",
+      },
     },
   },
   { "b0o/SchemaStore.nvim", lazy = true },
