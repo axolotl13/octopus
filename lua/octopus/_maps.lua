@@ -8,6 +8,8 @@ vim.g.maplocalleader = " "
 -- Disable
 map("n", "<esc>", "<cmd>noh<cr>", "General Clear Highlight")
 map("n", "<c-z>", "<nop>", "Disable Ctrl+Z")
+map("n", "q", "<nop>", "Disable Macro")
+map("v", "q", "<nop>", "Disable Macro")
 -- Cursor
 map("n", "|", "^", "Move Cursor Beginning of Line")
 -- Spell
