@@ -8,6 +8,7 @@ opt.clipboard = "unnamedplus" -- System clipboard
 opt.cursorline = true -- Highlight the text line of the cursor
 opt.expandtab = true -- Enable the use of space in tab
 opt.fileencoding = "utf-8" -- File content encoding for the buffer
+opt.iskeyword = "@,48-57,_,192-255,-,#"
 opt.fillchars = {
   foldopen = "",
   foldclose = "",
