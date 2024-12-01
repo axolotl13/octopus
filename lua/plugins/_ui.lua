@@ -457,7 +457,7 @@ return {
           lib.component.diagnostics(),
           lib.component.fill(),
           lib.component.cmd_info(),
-          lib.component.lsp { surround = { separator = "none" }, padding = { right = 2, left = 2 } },
+          lib.component.lsp { surround = { separator = "none" }, padding = { right = 2, left = 2 }, on_click = false },
           lib.component.fill(),
           {
             provider = function()
