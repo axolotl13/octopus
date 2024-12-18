@@ -440,4 +440,9 @@ return {
     },
   },
   { "b0o/SchemaStore.nvim", lazy = true },
+  {
+    "brianhuster/live-preview.nvim",
+    opts = { sync_scroll = true },
+    keys = { { "<leader>,w", "<cmd>LivePreview start<cr>", desc = "Live Preview" } },
+  },
 }
