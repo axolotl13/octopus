@@ -457,7 +457,7 @@ return {
           lib.component.diagnostics(),
           lib.component.fill(),
           lib.component.cmd_info(),
-          lib.component.lsp { surround = { separator = "none" }, padding = { right = 2, left = 2 }, on_click = false },
+          lib.component.lsp { on_click = false, surround = { separator = "none" }, padding = { right = 2, left = 2 } },
           lib.component.fill(),
           {
             provider = function()
@@ -482,6 +482,30 @@ return {
             file_read_only = false,
             surround = { separator = "none" },
             padding = { right = 2 },
+          },
+          {
+            provider = function()
+              local function file_size_human_readable(file)
+                local size = vim.fn.getfsize(file)
+                if size <= 0 then
+                  return ""
+                end
+                local suffixes = { "b", "k", "M", "G" }
+                local i = 1
+                while size > 1024 and i < #suffixes do
+                  size = size / 1024
+                  i = i + 1
+                end
+                return string.format(i == 1 and "%d%s" or "󰆓 %.1f%s  ", size, suffixes[i])
+              end
+
+              local file = vim.fn.expand "%:p"
+              if not file or file == "" then
+                return ""
+              end
+              return file_size_human_readable(file)
+            end,
+            hl = { fg = "diag_HINT" },
           },
           lib.component.mode {
             provider = " %6(%l/%2L%):%2c",
