@@ -46,29 +46,29 @@
     ],
     "description": "Inherit Existing Form View"
   },
-  "odoo_tree": {
-    "prefix": "otree",
+  "odoo_list": {
+    "prefix": "olist",
     "body": [
-      "<!-- ${1:model.name} tree view -->",
-      "<record id=\"${2:${1/[.]/_/g}}_view_tree\" model=\"ir.ui.view\">",
-      "\t<field name=\"name\">${1:first.name}.view.tree</field>",
+      "<!-- ${1:model.name} list view -->",
+      "<record id=\"${2:${1/[.]/_/g}}_view_list\" model=\"ir.ui.view\">",
+      "\t<field name=\"name\">${1:first.name}.view.list</field>",
       "\t<field name=\"model\">${1:first.name}</field>",
       "\t<field name=\"arch\" type=\"xml\">",
-      "\t\t<tree>",
+      "\t\t<list>",
       "\t\t\t<!-- Add your fields here -->",
       "\t\t\t$0",
-      "\t\t</tree>",
+      "\t\t</list>",
       "\t</field>",
       "</record>"
     ],
-    "description": "Create Tree View"
+    "description": "Create List View"
   },
-  "odoo_tree_inherit": {
-    "prefix": "otreei",
+  "odoo_list_inherit": {
+    "prefix": "olisti",
     "body": [
-      "<!-- ${1:model.name} inherit tree view -->",
+      "<!-- ${1:model.name} inherit list view -->",
       "<record id=\"${2:${1/[.]/_/g}}\" model=\"ir.ui.view\">",
-      "\t<field name=\"name\">${1:model.name}.inherit.view.tree</field>",
+      "\t<field name=\"name\">${1:model.name}.inherit.view.list</field>",
       "\t<field name=\"model\">${1:model.name}</field>",
       "\t<field name=\"inherit_id\" ref=\"${3:base_module}.${2:${1/[.]/_/g}}\"/>",
       "\t<field name=\"arch\" type=\"xml\">",
@@ -77,7 +77,7 @@
       "\t</field>",
       "</record>"
     ],
-    "description": "Inherit Existing Tree View"
+    "description": "Inherit Existing List View"
   },
   "odoo_search": {
     "prefix": "osearch",
@@ -321,7 +321,7 @@
       "\t<field name=\"name\">${1:model.name}.action</field>",
       "\t<field name=\"type\">ir.actions.act_window</field>",
       "\t<field name=\"res_model\">${1:model.name}</field>",
-      "\t<field name=\"view_mode\">${3:tree,form}</field>",
+      "\t<field name=\"view_mode\">${3:list,form}</field>",
       "\t<field name=\"view_type\">form</field>",
       "\t<field name=\"domain\">[${5}]</field>",
       "\t<field name=\"context\">{${6}}</field>",
