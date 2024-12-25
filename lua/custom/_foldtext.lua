@@ -95,7 +95,7 @@ function HighlightedFoldtext()
 end
 
 local function set_fold_hl()
-  local comment = vim.api.nvim_get_hl(0, { name = "Function", link = false })
+  local comment = vim.api.nvim_get_hl(0, { name = "Comment", link = false })
   vim.api.nvim_set_hl(0, "FoldedText", { fg = comment.fg, italic = true })
 end
 
