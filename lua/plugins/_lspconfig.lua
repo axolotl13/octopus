@@ -359,7 +359,7 @@ return {
   {
     "AstroNvim/astrolsp",
     opts = function(_, opts)
-      opts.capabilities = require("cmp_nvim_lsp").default_capabilities()
+      opts.capabilities = require('blink.cmp').get_lsp_capabilities(opts.capabilities)
       opts.capabilities = vim.list_extend(opts.capabilities, {
         textDocument = {
           foldingRange = {

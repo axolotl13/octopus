@@ -17,94 +17,141 @@ return {
     },
   },
   {
-    "hrsh7th/nvim-cmp",
+    "windwp/nvim-autopairs",
     event = "InsertEnter",
+    opts = {},
+  },
+  {
+    "xzbdmw/colorful-menu.nvim",
+    lazy = true,
+  },
+  {
+    "saghen/blink.cmp",
+    version = "*",
     dependencies = {
+      { "rafamadriz/friendly-snippets" },
       {
-        "windwp/nvim-autopairs",
-        config = function()
-          require("nvim-autopairs").setup()
-          require("cmp").event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
-        end,
+        "saghen/blink.compat",
+        version = "*",
+        lazy = true,
+        opts = {},
       },
-      { "saadparwaiz1/cmp_luasnip", lazy = true },
-      { "hrsh7th/cmp-buffer", lazy = true },
-      { "hrsh7th/cmp-path", lazy = true },
-      { "hrsh7th/cmp-nvim-lsp", lazy = true },
+      {
+        "supermaven-inc/supermaven-nvim",
+        lazy = true,
+        opts = {
+          ignore_filetypes = { "codecompanion", "bigfile", "grug-far" },
+          disable_inline_completion = true,
+          disable_keymaps = true,
+        },
+      },
     },
-    config = function()
-      vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
-
-      local cmp = require "cmp"
-      local luasnip = require "luasnip"
-      local icons = require("octopus._icons").vs
-
-      local opts = {
-        completion = {
-          completeopt = "menu,menuone,noinsert",
-        },
-        snippet = {
-          expand = function(args)
-            luasnip.lsp_expand(args.body)
+    opts = {
+      appearance = {
+        use_nvim_cmp_as_default = false,
+        kind_icons = require("octopus._icons").vs,
+      },
+      completion = {
+        accept = { auto_brackets = { enabled = true } },
+        list = { selection = { preselect = true, auto_insert = true } },
+        menu = {
+          auto_show = function(ctx)
+            return ctx.mode ~= "cmdline" or not vim.tbl_contains({ "/", "?" }, vim.fn.getcmdtype())
           end,
-        },
-        formatting = {
-          format = function(_, item)
-            if icons[item.kind] then
-              item.kind = icons[item.kind] .. item.kind
-            end
-            return item
-          end,
-        },
-        sources = {
-          { name = "nvim_lsp", priority = 1000 },
-          { name = "luasnip", priority = 750 },
-          { name = "buffer", priority = 500, group_index = 2 },
-          { name = "path", priority = 250 },
-        },
-        experimental = {
-          ghost_text = {
-            hl_group = "CmpGhostText",
+          draw = {
+            treesitter = { "lsp" },
+            columns = { { "kind_icon" }, { "label", gap = 1 } },
+            components = {
+              label = {
+                text = function(ctx)
+                  return require("colorful-menu").blink_components_text(ctx)
+                end,
+                highlight = function(ctx)
+                  return require("colorful-menu").blink_components_highlight(ctx)
+                end,
+              },
+            },
           },
         },
-        window = {
-          completion = {
-            winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
-            scrollbar = false,
+        documentation = {
+          auto_show = true,
+          auto_show_delay_ms = 500,
+        },
+        ghost_text = { enabled = true },
+      },
+      keymap = {
+        ["<Up>"] = { "select_prev", "fallback" },
+        ["<Down>"] = { "select_next", "fallback" },
+        ["<C-p>"] = { "select_prev", "fallback" },
+        ["<C-n>"] = { "select_next", "fallback" },
+        ["<PageUp>"] = { "scroll_documentation_up", "fallback" },
+        ["<PageDown>"] = { "scroll_documentation_down", "fallback" },
+        ["<C-e>"] = { "hide", "fallback" },
+        ["<CR>"] = { "accept", "fallback" },
+        ["<Tab>"] = {
+          function(cmp)
+            return cmp.select_next()
+          end,
+          "snippet_forward",
+          "fallback",
+        },
+        ["<S-Tab>"] = {
+          function(cmp)
+            return cmp.select_prev()
+          end,
+          "snippet_backward",
+          "fallback",
+        },
+      },
+      signature = { enabled = true },
+      snippets = { preset = "luasnip" },
+      sources = {
+        default = function(_)
+          if vim.bo.filetype == "codecompanion" then
+            return { "codecompanion" }
+          else
+            return { "supermaven", "lsp", "snippets", "path", "buffer" }
+          end
+        end,
+        providers = {
+          supermaven = {
+            name = "supermaven",
+            kind = "Supermaven",
+            module = "blink.compat.source",
+            score_offset = 100,
+            async = true,
+          },
+          codecompanion = {
+            name = "CodeCompanion",
+            module = "codecompanion.providers.completion.blink",
           },
         },
-        mapping = cmp.mapping.preset.insert {
-          ["<up>"] = cmp.mapping.select_prev_item(),
-          ["<down>"] = cmp.mapping.select_next_item(),
-          ["<c-p>"] = cmp.mapping.select_prev_item(),
-          ["<c-n>"] = cmp.mapping.select_next_item(),
-          ["<pageup>"] = cmp.mapping.scroll_docs(-4),
-          ["<pagedown>"] = cmp.mapping.scroll_docs(4),
-          ["<c-space>"] = cmp.mapping.complete(),
-          ["<c-e>"] = cmp.mapping.abort(),
-          ["<s-cr>"] = cmp.mapping.confirm(),
-          ["<cr>"] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace },
-          ["<tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
-            else
-              fallback()
+        cmdline = {},
+      },
+    },
+    config = function(_, opts)
+      for _, provider in pairs(opts.sources.providers or {}) do
+        if provider.kind then
+          local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
+          local kind_idx = #CompletionItemKind + 1
+
+          CompletionItemKind[kind_idx] = provider.kind
+          CompletionItemKind[provider.kind] = kind_idx
+
+          local transform_items = provider.transform_items
+          provider.transform_items = function(ctx, items)
+            items = transform_items and transform_items(ctx, items) or items
+            for _, item in ipairs(items) do
+              item.kind = kind_idx or item.kind
             end
-          end, { "i", "s" }),
-          ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-              luasnip.jump(-1)
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
-        },
-      }
-      cmp.setup(opts)
+            return items
+          end
+
+          provider.kind = nil
+        end
+      end
+
+      require("blink.cmp").setup(opts)
     end,
   },
   {

@@ -17,6 +17,7 @@ return {
         }
       end,
       integrations = {
+        blink_cmp = true,
         diffview = true,
         dropbar = true,
         mason = true,
