@@ -472,7 +472,7 @@ return {
             end,
             hl = { fg = "diag_INFO" },
           },
-          lib.component.file_encoding { hl = { fg = "diag_INFO" }, padding = { right = 2 } },
+          lib.component.file_encoding { padding = { right = 2 } },
           lib.component.treesitter { surround = { separator = "none" }, padding = { right = 2 } },
           lib.component.file_info {
             file_icon = { padding = { left = 0 } },
@@ -495,7 +495,7 @@ return {
                   size = size / 1024
                   i = i + 1
                 end
-                return string.format(i == 1 and "%d%s" or "󰆓 %.1f%s  ", size, suffixes[i])
+                return string.format(i == 1 and "%d%s  " or "󰆓 %.1f%s  ", size, suffixes[i])
               end
 
               local file = vim.fn.expand "%:p"
