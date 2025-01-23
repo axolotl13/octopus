@@ -15,7 +15,7 @@ return {
           { "<leader>s", group = "Search" },
           { "<leader>t", group = "Tabs" },
           { "<leader>x", group = "Session" },
-          { "<leader>,", group = "Misc", icon = { icon = " ", color = "pink" } },
+          { "<leader>,", group = "More", icon = { icon = "󰍻 ", color = "red" } },
           { "z", group = "fold" },
         },
       },
@@ -24,15 +24,6 @@ return {
         spelling = {
           enabled = false,
         },
-      },
-    },
-    keys = {
-      {
-        "<leader>?",
-        function()
-          require("which-key").show { global = false }
-        end,
-        desc = "Buffer local keymaps",
       },
     },
   },
