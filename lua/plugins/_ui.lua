@@ -326,7 +326,7 @@ return {
             height = "auto",
           },
           border = {
-            style = "double",
+            style = "single",
           },
         },
         popupmenu = {
@@ -340,8 +340,7 @@ return {
             height = 10,
           },
           border = {
-            style = "double",
-            padding = { 0, 1 },
+            style = "single",
           },
           win_options = {
             winhighlight = { Normal = "Normal", FloatBorder = "DiagnosticInfo" },
