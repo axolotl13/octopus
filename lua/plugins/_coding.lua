@@ -17,9 +17,17 @@ return {
     },
   },
   {
-    "windwp/nvim-autopairs",
+    "zbirenbaum/copilot.lua",
+    build = ":Copilot auth",
     event = "InsertEnter",
-    opts = {},
+    cmd = "Copilot",
+    opts = {
+      suggestion = { enabled = false },
+      panel = { enabled = false },
+      filetypes = {
+        bigfile = false,
+      },
+    },
   },
   {
     "xzbdmw/colorful-menu.nvim",
@@ -31,21 +39,7 @@ return {
     version = "*",
     dependencies = {
       { "rafamadriz/friendly-snippets" },
-      {
-        "saghen/blink.compat",
-        version = "*",
-        lazy = true,
-        opts = {},
-      },
-      {
-        "supermaven-inc/supermaven-nvim",
-        lazy = true,
-        opts = {
-          ignore_filetypes = { "codecompanion", "bigfile", "grug-far" },
-          disable_inline_completion = true,
-          disable_keymaps = true,
-        },
-      },
+      { "fang2hou/blink-copilot" },
     },
     opts = {
       appearance = {
@@ -124,24 +118,26 @@ return {
       signature = { enabled = true },
       snippets = { preset = "luasnip" },
       sources = {
-        default = function(_)
-          if vim.bo.filetype == "codecompanion" then
-            return { "codecompanion" }
-          else
-            return { "supermaven", "lsp", "snippets", "path", "buffer" }
-          end
-        end,
+        default = { "lsp", "path", "snippets", "buffer", "copilot" },
         providers = {
-          supermaven = {
-            name = "supermaven",
-            kind = "Supermaven",
-            module = "blink.compat.source",
+          copilot = {
+            name = "copilot",
+            module = "blink-copilot",
             score_offset = 100,
             async = true,
-          },
-          codecompanion = {
-            name = "CodeCompanion",
-            module = "codecompanion.providers.completion.blink",
+            opts = {
+              kind_name = "Copilot",
+              kind_icon = "",
+            },
+            transform_items = function(_, items)
+              local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
+              local kind_idx = #CompletionItemKind + 1
+              CompletionItemKind[kind_idx] = "Copilot"
+              for _, item in ipairs(items) do
+                item.kind = kind_idx
+              end
+              return items
+            end,
           },
         },
       },
