@@ -24,6 +24,7 @@ return {
   {
     "xzbdmw/colorful-menu.nvim",
     lazy = true,
+    opts = { max_width = 50 },
   },
   {
     "saghen/blink.cmp",
