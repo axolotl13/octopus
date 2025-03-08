@@ -138,8 +138,9 @@ return {
               },
             },
             sqls = {
-              on_attach = function(client, bufnr)
-                require("sqls").on_attach(client, bufnr)
+              on_attach = function(client)
+                client.server_capabilities.documentFormattingProvider = false
+                client.server_capabilities.documentRangeFormattingProvider = false
               end,
             },
             texlab = {
