@@ -10,6 +10,7 @@ return {
           { "<leader>d", group = "Diffview", icon = { icon = "󰕛 ", color = "green" } },
           { "<leader>e", icon = { icon = "󰉌 ", color = "orange" } },
           { "<leader>g", group = "Git" },
+          { "<leader>i", group = "ia", icon = { icon = "󱙺 ", color = "orange" } },
           { "<leader>p", group = "Lazy", icon = { icon = "󰒲 ", color = "cyan" } },
           { "<leader>r", group = "Replace", icon = "󰛔 " },
           { "<leader>s", group = "Search" },
@@ -162,8 +163,13 @@ return {
   },
   {
     "OXY2DEV/markview.nvim",
-    ft = "markdown",
-    config = true,
+    ft = { "markdown", "codecompanion" },
+    opts = {
+      preview = {
+        filetypes = { "markdown", "codecompanion" },
+        ignore_buftypes = {},
+      },
+    },
     keys = { { "<leader>,m", "<cmd>Markview<cr>", desc = "Toggle Markview" } },
   },
   {
@@ -174,9 +180,10 @@ return {
           "NvimTree",
           "mason",
           "lazy",
+          "codecompanion",
+          "grug-far",
           "notify",
           "terminal",
-          "cmp_menu",
           "fugitive",
           "flash_prompt",
           function(win)

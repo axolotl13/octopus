@@ -1,5 +1,62 @@
 return {
   {
+    "olimorris/codecompanion.nvim",
+    cmd = { "CodeCompanion", "CodeCompanionChat", "CodeCompanionActions", "CodeCompanionToggle" },
+    opts = {
+      strategies = {
+        chat = {
+          roles = {
+            llm = function(adapter)
+              return " CodeCompanion  " .. adapter.formatted_name
+            end,
+            user = " " .. (vim.env.USER or "User"),
+          },
+          slash_commands = {
+            ["file"] = {
+              opts = { provider = "snacks", contains_code = true },
+            },
+            ["buffer"] = {
+              opts = { provider = "snacks", contains_code = true },
+            },
+            ["symbols"] = {
+              opts = { provider = "snacks", contains_code = true },
+            },
+          },
+          adapter = "gemini",
+        },
+        inline = { adapter = "gemini" },
+      },
+      adapters = {
+        gemini = function()
+          return require("codecompanion.adapters").extend("gemini", {
+            env = {
+              api_key = function()
+                return os.getenv "GEMINI_API_KEY"
+              end,
+            },
+          })
+        end,
+      },
+      display = {
+        chat = {
+          window = {
+            opts = {
+              number = false,
+              relativenumber = false,
+            },
+          },
+        },
+      },
+      opts = {
+        language = "Spanish",
+      },
+    },
+    keys = {
+      { "<leader>ic", "<cmd>CodeCompanionChat Toggle<cr>", desc = "CodeCompanionChat" },
+      { "<leader>ia", "<cmd>CodeCompanionActions<cr>", desc = "CodeCompanionActions" },
+    },
+  },
+  {
     "zbirenbaum/copilot.lua",
     build = ":Copilot auth",
     event = "InsertEnter",
