@@ -86,9 +86,9 @@ return {
             basedpyright = {
               settings = {
                 basedpyright = {
-                  disableOrganizeImports = true,
                   analysis = {
                     typeCheckingMode = "standard",
+                    autoImportCompletions = true,
                   },
                 },
               },
@@ -96,9 +96,14 @@ return {
             cssls = { init_options = { provideFormatter = false } },
             html = { init_options = { provideFormatter = false } },
             jsonls = {
+              on_new_config = function(config)
+                if not config.settings.json.schemas then
+                  config.settings.json.schemas = {}
+                end
+                vim.list_extend(config.settings.json.schemas, require("schemastore").json.schemas())
+              end,
               settings = {
                 json = {
-                  schemas = require("schemastore").json.schemas(),
                   validate = { enable = true },
                 },
               },
@@ -125,6 +130,13 @@ return {
               end,
             },
             yamlls = {
+              on_new_config = function(config)
+                config.settings.yaml.schemas = vim.tbl_deep_extend(
+                  "force",
+                  config.settings.yaml.schemas or {},
+                  require("schemastore").yaml.schemas()
+                )
+              end,
               settings = {
                 redhat = { telemetry = { enabled = false } },
                 yaml = {
@@ -133,7 +145,6 @@ return {
                     enable = false,
                     url = "",
                   },
-                  schemas = require("schemastore").yaml.schemas(),
                 },
               },
             },
@@ -163,28 +174,30 @@ return {
             },
             vtsls = {
               settings = {
-                complete_function_calls = true,
-                vtsls = {
-                  enableMoveToFileCodeAction = true,
-                  experimental = {
-                    completion = {
-                      enableServerSideFuzzyMatch = true,
-                    },
-                  },
-                },
                 typescript = {
                   updateImportsOnFileMove = { enabled = "always" },
-                  suggest = {
-                    completeFunctionCalls = true,
-                  },
                   inlayHints = {
-                    enumMemberValues = { enabled = true },
+                    parameterNames = { enabled = "all" },
+                    parameterTypes = { enabled = true },
+                    variableTypes = { enabled = true },
+                    propertyDeclarationTypes = { enabled = true },
                     functionLikeReturnTypes = { enabled = true },
+                    enumMemberValues = { enabled = true },
+                  },
+                },
+                javascript = {
+                  updateImportsOnFileMove = { enabled = "always" },
+                  inlayHints = {
                     parameterNames = { enabled = "literals" },
                     parameterTypes = { enabled = true },
+                    variableTypes = { enabled = true },
                     propertyDeclarationTypes = { enabled = true },
-                    variableTypes = { enabled = false },
+                    functionLikeReturnTypes = { enabled = true },
+                    enumMemberValues = { enabled = true },
                   },
+                },
+                vtsls = {
+                  enableMoveToFileCodeAction = true,
                 },
               },
             },
@@ -294,7 +307,7 @@ return {
               keymaps = { uninstall_package = "d" },
             },
           },
-          keys = { { "<leader>,a", "<cmd>Mason<cr>", desc = "Open Mason" } },
+          keys = { { "<leader>,M", "<cmd>Mason<cr>", desc = "Open Mason" } },
         },
         opts = function()
           return {
@@ -315,8 +328,8 @@ return {
               "ruff",
               "solargraph",
               "sqls",
-              "texlab",
               "taplo",
+              "texlab",
               "vtsls",
               "yamlls",
             },
@@ -339,10 +352,10 @@ return {
         severity_sort = true,
         signs = {
           text = {
-            [vim.diagnostic.severity.ERROR] = require("octopus._icons").hl.Bug,
-            [vim.diagnostic.severity.WARN] = require("octopus._icons").hl.Bug,
+            [vim.diagnostic.severity.ERROR] = require("octopus._icons").hl.DiagnosticError,
+            [vim.diagnostic.severity.WARN] = require("octopus._icons").hl.DiagnosticWarn,
             [vim.diagnostic.severity.HINT] = require("octopus._icons").hl.DiagnosticHint,
-            [vim.diagnostic.severity.INFO] = require("octopus._icons").hl.Bug,
+            [vim.diagnostic.severity.INFO] = require("octopus._icons").hl.DiagnosticInfo,
           },
         },
       }
