@@ -56,13 +56,34 @@ return {
         accept = { auto_brackets = { enabled = true } },
         list = { selection = { preselect = true, auto_insert = true } },
         menu = {
-          auto_show = function(ctx)
-            return ctx.mode ~= "cmdline" or not vim.tbl_contains({ "/", "?" }, vim.fn.getcmdtype())
-          end,
+          winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
           draw = {
             treesitter = { "lsp" },
             columns = { { "kind_icon" }, { "label", gap = 1 } },
             components = {
+              kind_icon = {
+                ellipsis = false,
+                text = function(ctx)
+                  local icon = ctx.kind_icon
+                  if vim.tbl_contains({ "Path" }, ctx.source_name) then
+                    local dev_icon = require("nvim-web-devicons").get_icon(ctx.label)
+                    if dev_icon then
+                      icon = dev_icon
+                    end
+                  end
+                  return icon .. ctx.icon_gap
+                end,
+                highlight = function(ctx)
+                  local hl = ctx.kind_hl
+                  if vim.tbl_contains({ "Path" }, ctx.source_name) then
+                    local _, dev_hl = require("nvim-web-devicons").get_icon(ctx.label)
+                    if dev_hl then
+                      hl = dev_hl
+                    end
+                  end
+                  return hl
+                end,
+              },
               label = {
                 text = function(ctx)
                   return require("colorful-menu").blink_components_text(ctx)
@@ -81,13 +102,6 @@ return {
         ghost_text = { enabled = true },
       },
       keymap = {
-        ["<Up>"] = { "select_prev", "fallback" },
-        ["<Down>"] = { "select_next", "fallback" },
-        ["<C-p>"] = { "select_prev", "fallback" },
-        ["<C-n>"] = { "select_next", "fallback" },
-        ["<PageUp>"] = { "scroll_documentation_up", "fallback" },
-        ["<PageDown>"] = { "scroll_documentation_down", "fallback" },
-        ["<C-e>"] = { "hide", "fallback" },
         ["<CR>"] = { "accept", "fallback" },
         ["<Tab>"] = {
           function(cmp)
@@ -103,6 +117,9 @@ return {
           "snippet_backward",
           "fallback",
         },
+      },
+      cmdline = {
+        enabled = false,
       },
       signature = { enabled = true },
       snippets = { preset = "luasnip" },
@@ -127,33 +144,8 @@ return {
             module = "codecompanion.providers.completion.blink",
           },
         },
-        cmdline = {},
       },
     },
-    config = function(_, opts)
-      for _, provider in pairs(opts.sources.providers or {}) do
-        if provider.kind then
-          local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
-          local kind_idx = #CompletionItemKind + 1
-
-          CompletionItemKind[kind_idx] = provider.kind
-          CompletionItemKind[provider.kind] = kind_idx
-
-          local transform_items = provider.transform_items
-          provider.transform_items = function(ctx, items)
-            items = transform_items and transform_items(ctx, items) or items
-            for _, item in ipairs(items) do
-              item.kind = kind_idx or item.kind
-            end
-            return items
-          end
-
-          provider.kind = nil
-        end
-      end
-
-      require("blink.cmp").setup(opts)
-    end,
   },
   {
     "folke/ts-comments.nvim",
