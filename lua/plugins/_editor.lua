@@ -468,7 +468,7 @@ return {
       "akinsho/toggleterm.nvim",
       opts = {
         autochdir = true,
-        start_in_insert = false,
+        start_in_insert = true,
         highlights = {
           Normal = { link = "Normal" },
         },
@@ -481,48 +481,7 @@ return {
           end
         end,
       },
-      config = function(_, opts)
-        local Terminal = require("toggleterm.terminal").Terminal
-
-        local function create_floating_terminal(cmd)
-          return Terminal:new {
-            cmd = cmd,
-            direction = "float",
-            float_opts = {
-              border = "double",
-              winblend = 10,
-            },
-            on_open = function(term)
-              vim.api.nvim_buf_set_keymap(term.bufnr, "n", "<esc>", "<cmd>close<cr>", { noremap = true, silent = true })
-              vim.cmd "startinsert"
-            end,
-          }
-        end
-
-        local serpl = create_floating_terminal "serpl"
-        local lazygit = create_floating_terminal "lazygit"
-        local lazydocker = create_floating_terminal "lazydocker"
-
-        function _G._toggle_serpl()
-          serpl:toggle()
-        end
-
-        function _G._toggle_lazygit()
-          lazygit:toggle()
-        end
-
-        function _G._toggle_lazydocker()
-          lazydocker:toggle()
-        end
-
-        require("toggleterm").setup(opts)
-      end,
-      keys = {
-        { "<leader>tt", "<cmd>ToggleTerm direction=horizontal<cr>", desc = "Toggle Terminal" },
-        { "<leader>,r", "<cmd>lua _toggle_serpl()<cr>", desc = "Replace Keywords" },
-        { "<leader>,g", "<cmd>lua _toggle_lazygit()<cr>", desc = "Lazygit" },
-        { "<leader>,d", "<cmd>lua _toggle_lazydocker()<cr>", desc = "Lazydocker" },
-      },
+      keys = { { "<leader>tt", "<cmd>ToggleTerm direction=horizontal<cr>", desc = "Toggle Terminal" } },
     },
     cmd = { "RunCode", "RunFile" },
     opts = { mode = "toggleterm" },
