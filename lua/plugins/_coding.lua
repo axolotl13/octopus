@@ -1,22 +1,5 @@
 return {
   {
-    "L3MON4D3/LuaSnip",
-    lazy = true,
-    dependencies = {
-      "rafamadriz/friendly-snippets",
-      config = function()
-        require("luasnip.loaders.from_vscode").lazy_load()
-        require("luasnip.loaders.from_vscode").lazy_load { paths = { "./snippets" } }
-      end,
-    },
-    build = "make install_jsregexp",
-    opts = {
-      history = true,
-      delete_check_events = "TextChanged",
-      region_check_events = "CursorMoved",
-    },
-  },
-  {
     "zbirenbaum/copilot.lua",
     build = ":Copilot auth",
     event = "InsertEnter",
@@ -141,6 +124,23 @@ return {
           },
         },
       },
+    },
+  },
+  {
+    "L3MON4D3/LuaSnip",
+    lazy = true,
+    build = "make install_jsregexp",
+    dependencies = {
+      "rafamadriz/friendly-snippets",
+      config = function()
+        require("luasnip.loaders.from_vscode").lazy_load()
+        require("luasnip.loaders.from_vscode").lazy_load { paths = { "./snippets" } }
+      end,
+    },
+    opts = {
+      history = true,
+      delete_check_events = "TextChanged",
+      region_check_events = "CursorMoved",
     },
   },
   {
