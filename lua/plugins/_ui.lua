@@ -14,6 +14,14 @@ return {
           TreesitterContext = { bg = c.base },
           TreesitterContextBottom = { underline = true, sp = c.surface1 },
           TreesitterContextLineNumber = { bg = c.base },
+          SnacksPicker = { fg = c.fg, bg = c.mantle },
+          SnacksPickerTitle = { fg = c.mantle, bg = c.blue },
+          SnacksPickerBorder = { fg = c.mantle, bg = c.mantle },
+          SnacksPickerInput = { fg = c.fg, bg = c.mantle },
+          SnacksPickerInputTitle = { fg = c.mantle, bg = c.peach },
+          SnacksPickerInputBorder = { fg = c.mantle, bg = c.mantle },
+          SnacksPickerPreview = { fg = c.fg, bg = c.crust },
+          SnacksPickerPreviewBorder = { fg = c.crust, bg = c.crust },
         }
       end,
       integrations = {
@@ -24,10 +32,7 @@ return {
         noice = true,
         notify = true,
         nvim_surround = true,
-        telescope = {
-          enabled = true,
-          style = "nvchad",
-        },
+        snacks = { enabled = true },
         which_key = true,
       },
     },
@@ -261,6 +266,9 @@ return {
           "markdown",
           "text",
           "tex",
+          "snacks_picker_input",
+          "snacks_picker_list",
+          "snacks_picker_preview",
         },
       },
     },
@@ -369,6 +377,9 @@ return {
         "NvimTree",
         "terminal",
         "prompt",
+        "snacks_picker_input",
+        "snacks_picker_list",
+        "snacks_picker_preview",
         "TelescopePrompt",
         "gitsigns-blame",
         "noice",
@@ -393,8 +404,6 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     opts = function()
       local lib = require "heirline-components.all"
-      local env = require "heirline-components.core.env"
-      local core_utils = require "heirline-components.core.utils"
       local condition = require "heirline-components.core.condition"
 
       return {
@@ -414,26 +423,6 @@ return {
           },
           lib.component.fill { hl = { bg = "bg" } },
           lib.component.tabline_tabpages(),
-        },
-        statuscolumn = {
-          init = function(self)
-            self.bufnr = vim.api.nvim_get_current_buf()
-          end,
-          lib.component.foldcolumn { foldcolumn = { padding = { right = 0 } } },
-          lib.component.numbercolumn(),
-          lib.component.signcolumn {
-            signcolumn = { padding = { right = 0 } },
-            on_click = {
-              name = "sign_click",
-              callback = function(...)
-                local args = core_utils.statuscolumn_clickargs(...)
-                if args.sign and args.sign.name and env.sign_handlers[args.sign.name] then
-                  env.sign_handlers[args.sign.name](args)
-                end
-                vim.cmd ":silent! Gitsigns preview_hunk"
-              end,
-            },
-          },
         },
         statusline = {
           hl = { fg = "fg", bg = "bg" },

@@ -1,34 +1,6 @@
 local autocmd = vim.api.nvim_create_autocmd
 local opt = vim.opt
 
-vim.filetype.add {
-  pattern = {
-    [".*"] = {
-      function(path, buf)
-        return vim.bo[buf]
-            and vim.bo[buf].filetype ~= "bigfile"
-            and path
-            and vim.fn.getfsize(path) > 1.5 * 1024 * 1024
-            and "bigfile"
-          or nil
-      end,
-    },
-  },
-}
-
-autocmd({ "FileType" }, {
-  desc = "Disable certain functionality on very large files",
-  group = vim.api.nvim_create_augroup("bigfile", { clear = true }),
-  pattern = "bigfile",
-  callback = function()
-    local file = vim.fn.expand "<afile>"
-    vim.notify(("File: `%s` is greater than 2MB"):format(file), vim.log.levels.WARN)
-    opt.wrap = true
-    opt.list = false
-    opt.foldmethod = "manual"
-  end,
-})
-
 autocmd("TextYankPost", {
   desc = "Highlight text on yank",
   callback = function()

@@ -83,86 +83,6 @@ return {
   },
   { "nvim-lua/plenary.nvim", lazy = true },
   {
-    "nvim-telescope/telescope-fzf-native.nvim",
-    build = "make",
-    enabled = vim.fn.executable "make" == 1,
-    lazy = true,
-  },
-  {
-    "nvim-telescope/telescope.nvim",
-    cmd = "Telescope",
-    opts = function()
-      return {
-        defaults = {
-          vimgrep_arguments = {
-            "rg",
-            "--color=never",
-            "--no-heading",
-            "--with-filename",
-            "--line-number",
-            "--column",
-            "--smart-case",
-          },
-          mappings = {
-            i = {
-              ["<esc>"] = require("telescope.actions").close,
-              ["<c-n>"] = require("telescope.actions").cycle_history_next,
-              ["<c-p>"] = require("telescope.actions").cycle_history_prev,
-            },
-          },
-          prompt_prefix = "  ",
-          selection_caret = "  ",
-          sorting_strategy = "ascending",
-          layout_config = {
-            horizontal = {
-              prompt_position = "top",
-              preview_width = 0.55,
-              results_width = 0.8,
-            },
-            width = 0.87,
-            height = 0.80,
-            preview_cutoff = 120,
-          },
-          file_ignore_patterns = { "node_modules" },
-        },
-        pickers = {
-          find_files = {
-            find_command = { "fd", "--type", "f", "--strip-cwd-prefix" },
-          },
-          colorscheme = {
-            enable_preview = true,
-          },
-        },
-        extensions = {},
-      }
-    end,
-    config = function(_, opts)
-      require("telescope").setup(opts)
-      require("telescope").load_extension "fzf"
-    end,
-    keys = {
-      {
-        "<leader>sw",
-        "<cmd>Telescope current_buffer_fuzzy_find<cr>",
-        desc = "Search words in current buffer",
-      },
-      { "<leader>sx", "<cmd>Telescope command_history<cr>", desc = "Search command history" },
-      { "<leader>ss", "<cmd>Telescope live_grep<cr>", desc = "Search words" },
-      { "<leader>sf", "<cmd>Telescope find_files<cr>", desc = "Search files" },
-      { "<leader>sd", "<cmd>Telescope diagnostics<cr>", desc = "Search diagnostics" },
-      { "<leader>sc", "<cmd>Telescope git_commits<cr>", desc = "Git commits (repository)" },
-      { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Search keymaps" },
-      { "<leader>so", "<cmd>Telescope oldfiles<cr>", desc = "Search history" },
-      { "<leader>st", "<cmd>Telescope git_status<cr>", desc = "Git status" },
-      { "<leader>sb", "<cmd>Telescope git_branches<cr>", desc = "Git branches" },
-      { "<leader>sm", "<cmd>Telescope fd cwd=$HOME<cr>", desc = "Search files in HOME" },
-      { "<leader>sn", "<cmd>Telescope notify<cr>", desc = "Search notifications" },
-      { "<leader>sq", "<cmd>Telescope buffers<cr>", desc = "Search buffers" },
-      { "<leader>sr", "<cmd>Telescope colorscheme<cr>", desc = "Search themes" },
-      { "<leader>se", "<cmd>Telescope grep_string<cr>", desc = "Search words under cursor" },
-    },
-  },
-  {
     "OXY2DEV/markview.nvim",
     ft = { "markdown", "codecompanion" },
     opts = {
@@ -198,6 +118,43 @@ return {
         },
       },
     },
+    specs = {
+      {
+        "folke/snacks.nvim",
+        opts = {
+          picker = {
+            win = {
+              input = {
+                keys = {
+                  ["<a-s>"] = { "flash", mode = { "n", "i" } },
+                  ["s"] = { "flash" },
+                },
+              },
+            },
+            actions = {
+              flash = function(picker)
+                require("flash").jump {
+                  pattern = "^",
+                  label = { after = { 0, 0 } },
+                  search = {
+                    mode = "search",
+                    exclude = {
+                      function(win)
+                        return vim.bo[vim.api.nvim_win_get_buf(win)].filetype ~= "snacks_picker_list"
+                      end,
+                    },
+                  },
+                  action = function(match)
+                    local idx = picker.list:row2idx(match.pos[1])
+                    picker.list:_move(idx, true, true)
+                  end,
+                }
+              end,
+            },
+          },
+        },
+      },
+    },
     keys = {
       {
         "s",
@@ -218,15 +175,228 @@ return {
     },
   },
   {
-    "folke/zen-mode.nvim",
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
     opts = {
-      plugins = {
-        options = {
-          laststatus = 0,
+      bigfile = { size = 1.5 * 1024 * 1024 },
+      image = {},
+      lazygit = {},
+      picker = {
+        prompt = "  ",
+        win = {
+          input = {
+            keys = {
+              ["<c-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
+              ["<c-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
+            },
+          },
+          list = {
+            keys = {
+              ["<c-d>"] = { "scroll_down", mode = { "n" } },
+              ["<c-u>"] = { "scroll_up", mode = { "n" } },
+            },
+          },
+          preview = {
+            wo = {
+              cursorcolumn = false,
+              cursorline = false,
+              cursorlineopt = "both",
+              colorcolumn = "",
+              fillchars = "eob: ,lastline:…",
+              foldenable = false,
+              list = false,
+              listchars = "extends:…,tab:  ",
+              number = false,
+              relativenumber = false,
+              signcolumn = "no",
+              spell = false,
+              winbar = "",
+              statuscolumn = "",
+              wrap = false,
+              sidescrolloff = 0,
+            },
+          },
+        },
+        exclude = {
+          ".git",
+          "node_modules",
+          "venv",
+          ".venv",
+          "__pycache__",
+        },
+      },
+      scroll = {},
+      statuscolumn = {
+        folds = {
+          open = true,
+          git_hl = true,
+        },
+      },
+      zen = { toggles = { dim = false } },
+      styles = {
+        zen = {
+          backdrop = { transparent = false, blend = 80 },
         },
       },
     },
-    keys = { { "<leader>z", "<cmd>ZenMode<cr>", desc = "Enable ZenMode" } },
+    keys = {
+      {
+        "<leader>sB",
+        function()
+          Snacks.picker.git_branches()
+        end,
+        desc = "Git Branches",
+      },
+      {
+        "<leader>sc",
+        function()
+          Snacks.picker.git_log()
+        end,
+        desc = "Git Log",
+      },
+      {
+        "<leader>sS",
+        function()
+          Snacks.picker.git_status()
+        end,
+        desc = "Git Status",
+      },
+      {
+        "<leader>sT",
+        function()
+          Snacks.picker.git_stash()
+        end,
+        desc = "Git Stash",
+      },
+      {
+        "<leader>sD",
+        function()
+          Snacks.picker.git_diff()
+        end,
+        desc = "Git Diff (Hunks)",
+      },
+      {
+        "<leader>sf",
+        function()
+          Snacks.picker.files()
+        end,
+        desc = "Find Files",
+      },
+      {
+        "<leader>sb",
+        function()
+          Snacks.picker.buffers()
+        end,
+        desc = "Buffers",
+      },
+      {
+        "<leader>ss",
+        function()
+          Snacks.picker.grep()
+        end,
+        desc = "Grep",
+      },
+      {
+        "<leader>sW",
+        mode = { "n", "x" },
+        function()
+          Snacks.picker.grep_word()
+        end,
+        desc = "Visual selection or word",
+      },
+      {
+        "<leader>sw",
+        function()
+          Snacks.picker.lines()
+        end,
+        desc = "Buffer lines",
+      },
+      {
+        "<leader>sx",
+        function()
+          Snacks.picker.command_history()
+        end,
+        desc = "Command History",
+      },
+      {
+        "<leader>sP",
+        function()
+          Snacks.picker.projects()
+        end,
+        desc = "Projects",
+      },
+      {
+        "<leader>sr",
+        function()
+          Snacks.picker.recent()
+        end,
+        desc = "Recent",
+      },
+      {
+        "<leader>sd",
+        function()
+          Snacks.picker.diagnostics_buffer()
+        end,
+        desc = "Buffer Diagnostics",
+      },
+      {
+        "<leader>si",
+        function()
+          Snacks.picker.icons()
+        end,
+        desc = "Icons",
+      },
+      {
+        "<leader>sk",
+        function()
+          Snacks.picker.keymaps()
+        end,
+        desc = "Keymaps",
+      },
+      {
+        "<leader>sl",
+        function()
+          Snacks.picker.lazy()
+        end,
+        desc = "Search for Plugin Spec",
+      },
+      {
+        "<leader>su",
+        function()
+          Snacks.picker.undo()
+        end,
+        desc = "Undo History",
+      },
+      {
+        "<leader>st",
+        function()
+          Snacks.picker.colorschemes()
+        end,
+        desc = "Colorschemes",
+      },
+      {
+        "<leader>sy",
+        function()
+          Snacks.picker.lsp_symbols()
+        end,
+        desc = "LSP Symbol",
+      },
+      {
+        "<leader>,l",
+        function()
+          Snacks.lazygit()
+        end,
+        desc = "Lazygit",
+      },
+      {
+        "<leader>Z",
+        function()
+          Snacks.zen()
+        end,
+        desc = "Toggle Zen Mode",
+      },
+    },
   },
   {
     "sindrets/diffview.nvim",
@@ -248,22 +418,6 @@ return {
       { "<leader>df", "<cmd>DiffviewToggleFiles<cr>", desc = "Toggle file panel" },
       { "<leader>dh", "<cmd>DiffviewFileHistory<cr>", desc = "History current branch" },
       { "<leader>dd", "<cmd>DiffviewFileHistory %<cr>", desc = "History current file" },
-    },
-  },
-  {
-    "3rd/image.nvim",
-    ft = "markdown",
-    opts = {
-      integrations = {
-        markdown = {
-          clear_in_insert_mode = true,
-          only_render_image_at_cursor = true,
-        },
-      },
-      max_width = 100,
-      max_height = 30,
-      max_height_window_percentage = math.huge,
-      max_width_window_percentage = math.huge,
     },
   },
   {
