@@ -32,12 +32,13 @@ return {
     "lewis6991/gitsigns.nvim",
     event = { "BufReadPost", "BufNewFile", "BufWritePre" },
     opts = {
+      count_chars = { "₁", "₂", "₃", "₄", "₅", "₆", "₇", "₈", "₉", ["+"] = "₊" },
       signs = {
         add = { text = "┃" },
         change = { text = "┃" },
-        delete = { text = "┃" },
-        topdelete = { text = "┃" },
-        changedelete = { text = "┃" },
+        delete = { text = "┃", show_count = true },
+        topdelete = { text = "┃", show_count = true },
+        changedelete = { text = "┃", show_count = true },
         untracked = { text = "┃" },
       },
       signs_staged = {
