@@ -28,6 +28,7 @@ return {
         blink_cmp = true,
         diffview = true,
         dropbar = true,
+        grug_far = true,
         mason = true,
         noice = true,
         notify = true,
