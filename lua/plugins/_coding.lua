@@ -144,6 +144,11 @@ return {
     },
   },
   {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    opts = { disable_filetype = { "codecompanion", "snacks_picker_input", "grug-far" } },
+  },
+  {
     "folke/ts-comments.nvim",
     event = "VeryLazy",
     opts = {},
