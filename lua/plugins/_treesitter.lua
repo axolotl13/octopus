@@ -8,8 +8,12 @@ return {
     { "HiPhish/rainbow-delimiters.nvim" },
     { "nvim-treesitter/nvim-treesitter-textobjects" },
   },
+  init = function(plugin)
+    require("lazy.core.loader").add_to_rtp(plugin)
+    pcall(require, "nvim-treesitter.query_predicates")
+  end,
   build = ":TSUpdate",
-  event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+  event = "VeryLazy",
   opts = {
     ensure_installed = {
       "bash",
