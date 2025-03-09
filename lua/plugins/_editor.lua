@@ -181,6 +181,28 @@ return {
     opts = {
       bigfile = { size = 1.5 * 1024 * 1024 },
       image = {},
+      indent = {
+        scope = {
+          underline = true,
+          only_current = true,
+        },
+        filter = function(buf)
+          local excluded_filetypes = {
+            gitcommit = true,
+            fish = true,
+            markdown = true,
+            tex = true,
+            text = true,
+            yaml = true,
+            snacks_picker_preview = true,
+          }
+          local filetype = vim.bo[buf].filetype
+          return vim.g.snacks_indent ~= false
+            and vim.b[buf].snacks_indent ~= false
+            and vim.bo[buf].buftype == ""
+            and not excluded_filetypes[filetype]
+        end,
+      },
       lazygit = {},
       picker = {
         prompt = "  ",
