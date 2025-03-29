@@ -1,7 +1,12 @@
 local autocmd = vim.api.nvim_create_autocmd
 local opt = vim.opt
 
+local function augroup(name)
+  return vim.api.nvim_create_augroup("octopus_" .. name, { clear = true })
+end
+
 autocmd("TextYankPost", {
+  group = augroup("highlight_yank"),
   desc = "Highlight text on yank",
   callback = function()
     vim.highlight.on_yank()
@@ -9,6 +14,7 @@ autocmd("TextYankPost", {
 })
 
 autocmd("BufEnter", {
+  group = augroup("auto_comment"),
   desc = "Don't auto comment new line",
   callback = function()
     opt.formatoptions:remove { "c", "r", "o" }
@@ -16,6 +22,7 @@ autocmd("BufEnter", {
 })
 
 autocmd({ "BufWinLeave", "BufWritePost", "WinLeave" }, {
+  group = augroup("save_view"),
   desc = "Save view with mkview for real files",
   callback = function(args)
     if vim.b[args.buf].view_activated then
@@ -25,6 +32,7 @@ autocmd({ "BufWinLeave", "BufWritePost", "WinLeave" }, {
 })
 
 autocmd("BufWinEnter", {
+  group = augroup("load_view"),
   desc = "Try to load file view if available and enable view saving for real files",
   callback = function(args)
     if not vim.b[args.buf].view_activated then
