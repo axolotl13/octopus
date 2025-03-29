@@ -46,13 +46,3 @@ autocmd("BufWinEnter", {
     end
   end,
 })
-
-autocmd("TermOpen", {
-  desc = "Disable line number/fold column/sign column for terminals",
-  callback = function()
-    opt.number = false
-    opt.relativenumber = false
-    opt.foldcolumn = "0"
-    opt.signcolumn = "no"
-  end,
-})
