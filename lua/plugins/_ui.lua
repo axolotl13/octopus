@@ -201,17 +201,20 @@ return {
   },
   {
     "Bekaboo/dropbar.nvim",
-    event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+    event = "UIEnter",
+    dependencies = {
+      "nvim-telescope/telescope-fzf-native.nvim",
+      build = "make",
+      enabled = vim.fn.executable "make" == 1,
+      lazy = true,
+    },
     opts = {
       icons = {
         kinds = {
-          symbols = require("octopus._icons").vs,
+          symbols = require("octopus._icons").symbols,
         },
       },
     },
-    init = function()
-      vim.opt.mousemoveevent = true
-    end,
   },
   { "MunifTanjim/nui.nvim", lazy = true },
   {
