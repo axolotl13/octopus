@@ -457,15 +457,13 @@ return {
     "linux-cultist/venv-selector.nvim",
     branch = "regexp",
     opts = {
-      settings = {
-        options = {
-          enable_default_searches = false,
-          notify_user_on_venv_activation = true,
-        },
-        search = {
-          venv = {
-            command = "fd '/bin/python$' . --full-path --color never -HI -a -L",
-          },
+      options = {
+        enable_default_searches = false,
+        notify_user_on_venv_activation = true,
+      },
+      search = {
+        venv = {
+          command = "fd '/bin/python$' . --full-path --color never -HI -a -L",
         },
       },
     },
