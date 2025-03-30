@@ -152,23 +152,27 @@ return {
           only_current = true,
         },
         filter = function(buf)
-          local excluded_filetypes = {
-            gitcommit = true,
-            fish = true,
-            markdown = true,
-            tex = true,
-            text = true,
-            yaml = true,
-            snacks_picker_preview = true,
+          local included_filetypes = {
+            html = true,
+            java = true,
+            javascript = true,
+            lua = true,
+            python = true,
+            sh = true,
+            rust = true,
+            tsx = true,
+            typescript = true,
+            xml = true,
           }
           local filetype = vim.bo[buf].filetype
           return vim.g.snacks_indent ~= false
             and vim.b[buf].snacks_indent ~= false
             and vim.bo[buf].buftype == ""
-            and not excluded_filetypes[filetype]
+            and included_filetypes[filetype]
         end,
       },
       lazygit = {},
+      notifier = {},
       picker = {
         prompt = "  ",
         win = {
@@ -186,22 +190,10 @@ return {
           },
           preview = {
             wo = {
-              cursorcolumn = false,
-              cursorline = false,
-              cursorlineopt = "both",
-              colorcolumn = "",
-              fillchars = "eob: ,lastline:…",
               foldenable = false,
-              list = false,
-              listchars = "extends:…,tab:  ",
-              number = false,
-              relativenumber = false,
               signcolumn = "no",
-              spell = false,
               winbar = "",
               statuscolumn = "",
-              wrap = false,
-              sidescrolloff = 0,
             },
           },
         },
@@ -223,10 +215,15 @@ return {
       zen = { toggles = { dim = false } },
       styles = {
         zen = {
-          backdrop = { transparent = false, blend = 80 },
+          backdrop = { transparent = false, blend = 90 },
         },
       },
     },
+    config = function(_, opts)
+      require("snacks").setup(opts)
+      local notify = vim.notify
+      vim.notify = notify
+    end,
     keys = {
       {
         "<leader>sB",
@@ -368,6 +365,13 @@ return {
           Snacks.picker.lsp_symbols()
         end,
         desc = "LSP Symbol",
+      },
+      {
+        "<leader>sn",
+        function()
+          Snacks.picker.notifications()
+        end,
+        desc = "Notifications",
       },
       {
         "<leader>,l",

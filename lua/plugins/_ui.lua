@@ -31,7 +31,6 @@ return {
         grug_far = true,
         mason = true,
         noice = true,
-        notify = true,
         nvim_surround = true,
         snacks = { enabled = true },
         which_key = true,
