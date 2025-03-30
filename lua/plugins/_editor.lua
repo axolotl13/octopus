@@ -471,8 +471,8 @@ return {
   },
   {
     "brenoprata10/nvim-highlight-colors",
+    opts = { render = "virtual" },
     keys = { { "<leader>c", "<cmd>HighlightColors Toggle<cr>", desc = "Toggle Highlight Colors" } },
-    config = true,
   },
   { "nvzone/volt", lazy = true },
   {
