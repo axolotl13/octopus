@@ -450,8 +450,8 @@ return {
   },
   {
     "danymat/neogen",
+    opts = { snippet_engine = "luasnip" },
     keys = { { "<leader>,n", "<cmd>lua require('neogen').generate()<cr>", desc = "Generate Annotations" } },
-    config = true,
   },
   {
     "linux-cultist/venv-selector.nvim",
