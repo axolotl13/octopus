@@ -83,6 +83,9 @@ return {
       { "fang2hou/blink-copilot" },
     },
     opts = {
+      enabled = function()
+        return not vim.tbl_contains({ "grug-far", "bigfile" }, vim.bo.filetype)
+      end,
       appearance = {
         use_nvim_cmp_as_default = false,
         kind_icons = require("octopus._icons").vs,
@@ -90,6 +93,7 @@ return {
       completion = {
         accept = { auto_brackets = { enabled = true } },
         list = { selection = { preselect = true, auto_insert = true } },
+        keyword = { range = "full" },
         menu = {
           winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
           draw = {
@@ -160,6 +164,7 @@ return {
       snippets = { preset = "luasnip" },
       sources = {
         default = { "lsp", "path", "snippets", "buffer", "copilot" },
+        per_filetype = { codecompanion = { "codecompanion" } },
         providers = {
           copilot = {
             name = "copilot",
