@@ -609,6 +609,6 @@ return {
   {
     "brianhuster/live-preview.nvim",
     opts = { sync_scroll = true },
-    keys = { { "<leader>,w", "<cmd>LivePreview start<cr>", desc = "Live Preview" } },
+    keys = { { "<leader>,l", "<cmd>LivePreview start<cr>", desc = "Live Preview" } },
   },
 }
