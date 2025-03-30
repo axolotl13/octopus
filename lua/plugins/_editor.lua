@@ -555,20 +555,54 @@ return {
     "MagicDuck/grug-far.nvim",
     opts = {},
     keys = {
-      { "<leader>rr", "<cmd>GrugFar<cr>", desc = "Replace" },
       {
-        "<leader>re",
-        "<cmd>lua require'grug-far'.open({ prefills = { search = vim.fn.expand('<cword>') } })<cr>",
-        desc = "Replace current word",
-      },
-      {
-        "<leader>rt",
-        "<cmd>lua require'grug-far'.open({ prefills = { paths = vim.fn.expand('%') } })<cr>",
-        desc = "Replace file",
+        "<leader>rr",
+        function()
+          local grug = require "grug-far"
+          grug.open {
+            transient = true,
+          }
+        end,
+        desc = "Replace",
       },
       {
         "<leader>rw",
-        "<cmd>lua require'grug-far'.open({ prefills = { search = vim.fn.expand('<cword>'), paths = vim.fn.expand('%') } })<cr>",
+        function()
+          local grug = require "grug-far"
+          local ext = vim.bo.buftype == "" and vim.fn.expand "cword"
+          if ext ~= "" then
+            grug.open {
+              transient = true,
+              prefills = { search = vim.fn.expand "<cword>" },
+            }
+          else
+            vim.notify("No word under cursor", vim.log.levels.WARN, { title = "Grug-far" })
+          end
+        end,
+        desc = "Replace current word",
+      },
+      {
+        "<leader>rf",
+        function()
+          local grug = require "grug-far"
+          local ext = vim.bo.buftype == "" and vim.fn.expand "%"
+          grug.open {
+            transient = true,
+            prefills = { paths = ext },
+          }
+        end,
+        desc = "Replace file",
+      },
+      {
+        "<leader>rW",
+        function()
+          local grug = require "grug-far"
+          local ext = vim.bo.buftype == "" and vim.fn.expand "%"
+          grug.open {
+            transient = true,
+            prefills = { paths = ext, search = vim.fn.expand "<cword>" },
+          }
+        end,
         desc = "Replace current word in file",
       },
     },
