@@ -3,7 +3,7 @@ return {
   dependencies = {
     {
       "nvim-treesitter/nvim-treesitter-context",
-      opts = { max_lines = 5 },
+      opts = { max_lines = 5,  multiwindow = true },
     },
     { "HiPhish/rainbow-delimiters.nvim" },
     { "nvim-treesitter/nvim-treesitter-textobjects" },
