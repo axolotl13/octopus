@@ -373,8 +373,14 @@ return {
   {
     "AstroNvim/astrolsp",
     opts = function(_, opts)
-      opts.capabilities = require('blink.cmp').get_lsp_capabilities(opts.capabilities)
-      opts.capabilities = vim.list_extend(opts.capabilities, {
+      opts.capabilities =
+        vim.tbl_deep_extend("force", opts.capabilities or {}, require("blink.cmp").get_lsp_capabilities() or {})
+    end,
+  },
+  {
+    "AstroNvim/astrolsp",
+    opts = function(_, opts)
+      opts.capabilities = vim.tbl_deep_extend("force", opts.capabilities, {
         textDocument = {
           foldingRange = {
             dynamicRegistration = false,
