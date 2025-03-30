@@ -18,9 +18,10 @@ local opts = {
   defaults = {
     lazy = true,
   },
-  install = {
-    colorscheme = { "catppuccin" },
+  spec = {
+    { import = "plugins" },
   },
+  install = { colorscheme = { "catppuccin", "habamax" } },
   performance = {
     rtp = {
       disabled_plugins = {
@@ -28,7 +29,6 @@ local opts = {
         "loaded_netrwPlugin",
         "gzip",
         "matchit",
-        "matchparen",
         "netrwPlugin",
         "tarPlugin",
         "tohtml",
@@ -39,4 +39,4 @@ local opts = {
   },
 }
 
-require("lazy").setup("plugins", opts)
+require("lazy").setup(opts)
