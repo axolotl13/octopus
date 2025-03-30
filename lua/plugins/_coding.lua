@@ -66,6 +66,7 @@ return {
       panel = { enabled = false },
       filetypes = {
         bigfile = false,
+        csv = false,
       },
     },
   },
