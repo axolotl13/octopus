@@ -611,4 +611,13 @@ return {
     opts = { sync_scroll = true },
     keys = { { "<leader>,l", "<cmd>LivePreview start<cr>", desc = "Live Preview" } },
   },
+  {
+    "hat0uma/csvview.nvim",
+    cmd = { "CsvViewEnable", "CsvViewDisable", "CsvViewToggle" },
+    opts = {},
+    keys = {
+      { "<leader>,XX", "<cmd>CsvViewToggle<cr>", desc = "Toggle CSV View" },
+      { "<leader>,XY", "<cmd>CsvViewToggle display_mode=border header_lnum=1<cr>", desc = "Toggle CSV View" },
+    },
+  },
 }
