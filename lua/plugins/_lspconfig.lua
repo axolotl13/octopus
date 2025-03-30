@@ -439,6 +439,7 @@ return {
     "mfussenegger/nvim-lint",
     event = { "BufNewFile", "BufReadPost" },
     opts = {
+      events = { "BufWritePost", "BufReadPost", "InsertLeave", "TextChanged" },
       linters_by_ft = {
         dockerfile = { "hadolint" },
         gitcommit = { "gitlint" },
@@ -448,7 +449,7 @@ return {
         sql = { "sqlfluff" },
         yaml = { "yamllint" },
       },
-      linter = {
+      linters = {
         sqlfluff = {
           args = { "--config", vim.fn.expand "$HOME" .. "/.sqlfluff" },
         },
@@ -457,8 +458,8 @@ return {
     config = function(_, opts)
       local lint = require "lint"
       lint.linters_by_ft = opts.linters_by_ft
-      lint.linter = opts.linter
-      vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave", "TextChanged" }, {
+      lint.linter = opts.linters
+      vim.api.nvim_create_autocmd(opts.events, {
         callback = function()
           lint.try_lint()
         end,
