@@ -162,7 +162,6 @@ return {
         enabled = false,
       },
       signature = { enabled = true },
-      snippets = { preset = "luasnip" },
       sources = {
         default = { "lsp", "path", "snippets", "buffer", "copilot" },
         per_filetype = { codecompanion = { "codecompanion" } },
@@ -213,6 +212,9 @@ return {
       history = true,
       delete_check_events = "TextChanged",
       region_check_events = "CursorMoved",
+    },
+    specs = {
+      { "Saghen/blink.cmp", opts = { snippets = { preset = "luasnip" } } },
     },
   },
   {
