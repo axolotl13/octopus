@@ -54,6 +54,8 @@ return {
     keys = {
       { "<leader>ic", "<cmd>CodeCompanionChat Toggle<cr>", desc = "CodeCompanionChat" },
       { "<leader>ia", "<cmd>CodeCompanionActions<cr>", desc = "CodeCompanionActions" },
+      { "<leader>iC", "<cmd>CodeCompanion /commit<cr>", desc = "CodeCompanion /commit" },
+      { mode = "v", "<leader>ie", "<cmd>CodeCompanion /explain<cr>", desc = "CodeCompanion /explain" },
     },
   },
   {
