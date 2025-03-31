@@ -148,6 +148,15 @@ return {
         default = { "lsp", "path", "snippets", "buffer" },
       },
     },
+    specs = {
+      {
+        "AstroNvim/astrolsp",
+        opts = function(_, opts)
+          opts.capabilities =
+            vim.tbl_deep_extend("force", opts.capabilities or {}, require("blink.cmp").get_lsp_capabilities() or {})
+        end,
+      },
+    },
   },
   {
     "xzbdmw/colorful-menu.nvim",
