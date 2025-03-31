@@ -202,12 +202,6 @@ return {
   {
     "Bekaboo/dropbar.nvim",
     event = "UIEnter",
-    dependencies = {
-      "nvim-telescope/telescope-fzf-native.nvim",
-      build = "make",
-      enabled = vim.fn.executable "make" == 1,
-      lazy = true,
-    },
     opts = {
       icons = {
         kinds = {
