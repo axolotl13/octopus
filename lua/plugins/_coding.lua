@@ -76,6 +76,7 @@ return {
       end,
       appearance = {
         use_nvim_cmp_as_default = false,
+        kind_icons = require("octopus._icons").vs,
       },
       completion = {
         accept = { auto_brackets = { enabled = true } },
@@ -176,14 +177,6 @@ return {
         },
       },
     },
-  },
-  {
-    "saghen/blink.cmp",
-    opts = function(_, opts)
-      opts.appearance = opts.appearance or {}
-      opts.appearance.kind_icons =
-        vim.tbl_extend("force", opts.appearance.kind_icons or {}, require("octopus._icons").vs)
-    end,
   },
   {
     "L3MON4D3/LuaSnip",
