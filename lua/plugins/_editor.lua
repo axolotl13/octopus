@@ -7,7 +7,7 @@ return {
         {
           { "<leader>b", group = "Buffer" },
           { "<leader>c", icon = { icon = " ", color = "gray" } },
-          { "<leader>d", group = "Diffview", icon = { icon = "󰕛 ", color = "green" } },
+          { "<leader>d", group = "Diff", icon = { icon = " ", color = "green" } },
           { "<leader>e", icon = { icon = "󰉌 ", color = "orange" } },
           { "<leader>g", group = "Git" },
           { "<leader>i", group = "ia", icon = { icon = "󱙺 ", color = "orange" } },
