@@ -60,8 +60,8 @@ return {
           vim.keymap.set(mode, l, r, { buffer = bufnr, desc = desc })
         end
 
-        map("n", "<leader>gg", gs.stage_hunk, "Stage git hunk")
-        map("n", "<leader>gu", gs.reset_hunk, "Reset git hunk")
+        map({ "n", "v" }, "<leader>gg", gs.stage_hunk, "Stage git hunk")
+        map({ "n", "v" }, "<leader>gu", gs.reset_hunk, "Reset git hunk")
         map("n", "<leader>ga", gs.stage_buffer, "Stage git buffer")
         map("n", "<leader>gq", gs.undo_stage_hunk, "Unstage git hunk")
         map("n", "<leader>gr", gs.reset_buffer, "Reset git buffer")
