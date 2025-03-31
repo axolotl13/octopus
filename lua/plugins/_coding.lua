@@ -57,18 +57,10 @@ return {
       { "<leader>iC", "<cmd>CodeCompanion /commit<cr>", desc = "CodeCompanion /commit" },
       { mode = "v", "<leader>ie", "<cmd>CodeCompanion /explain<cr>", desc = "CodeCompanion /explain" },
     },
-  },
-  {
-    "zbirenbaum/copilot.lua",
-    build = ":Copilot auth",
-    event = "InsertEnter",
-    cmd = "Copilot",
-    opts = {
-      suggestion = { enabled = false },
-      panel = { enabled = false },
-      filetypes = {
-        bigfile = false,
-        csv = false,
+    specs = {
+      {
+        "Saghen/blink.cmp",
+        opts = { sources = { per_filetype = { codecompanion = { "codecompanion" } } } },
       },
     },
   },
@@ -77,7 +69,6 @@ return {
     version = "*",
     dependencies = {
       { "rafamadriz/friendly-snippets" },
-      { "fang2hou/blink-copilot" },
     },
     opts = {
       enabled = function()
@@ -153,29 +144,7 @@ return {
       },
       signature = { enabled = true },
       sources = {
-        default = { "lsp", "path", "snippets", "buffer", "copilot" },
-        per_filetype = { codecompanion = { "codecompanion" } },
-        providers = {
-          copilot = {
-            name = "copilot",
-            module = "blink-copilot",
-            score_offset = 100,
-            async = true,
-            opts = {
-              kind_name = "Copilot",
-              kind_icon = "",
-            },
-            transform_items = function(_, items)
-              local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
-              local kind_idx = #CompletionItemKind + 1
-              CompletionItemKind[kind_idx] = "Copilot"
-              for _, item in ipairs(items) do
-                item.kind = kind_idx
-              end
-              return items
-            end,
-          },
-        },
+        default = { "lsp", "path", "snippets", "buffer" },
       },
     },
   },
