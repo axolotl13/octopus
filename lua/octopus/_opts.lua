@@ -1,69 +1,86 @@
 local opt = vim.opt
 local g = vim.g
 
-opt.background = "dark" -- Background color
-opt.backspace:append { "nostop" } -- Don't stop backspace at insert
-opt.backup = false -- Make backups before writing
-opt.clipboard = "unnamedplus" -- System clipboard
-opt.cursorline = true -- Highlight the text line of the cursor
-opt.expandtab = true -- Enable the use of space in tab
-opt.fileencoding = "utf-8" -- File content encoding for the buffer
-opt.iskeyword = "@,48-57,_,192-255,-,#"
+-- opt.autowriteall = true
+opt.background = "dark"
+opt.clipboard = "unnamedplus"
+opt.cmdheight = 0
+opt.completeopt = { "menu", "menuone" }
+-- opt.confirm = true
+opt.cursorline = true
+opt.diffopt = vim.list_extend(vim.opt.diffopt:get(), { "algorithm:histogram", "linematch:60" })
+opt.expandtab = true
+opt.fileencoding = "utf-8"
 opt.fillchars = {
+  fold = " ",
   foldopen = "",
   foldclose = "",
-  fold = " ",
   foldsep = " ",
   diff = "╱",
   eob = " ",
 }
-opt.foldenable = true
 opt.foldcolumn = "1"
-opt.foldlevelstart = 99
-opt.foldlevel = 99
-opt.foldmethod = "expr"
+opt.foldenable = true
 opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+opt.foldlevel = 99
+opt.foldlevelstart = 99
+opt.foldmethod = "expr"
+opt.foldopen = "block,mark,percent,quickfix,search,tag,undo"
 opt.foldtext = require "custom._foldtext"
-opt.guicursor = "n:blinkon200,i-ci-ve:ver25" -- Enable cursor blink
-opt.hidden = true -- Allows you to hide buffers with unsaved changes
-opt.ignorecase = false -- Case insensitive searching
-opt.laststatus = 3 -- Global statusline
-opt.list = true -- Show invisible characters
+opt.guicursor = "n-v-c:blinkon200-blinkoff150,i-ci:ver30-blinkon200-blinkoff150"
+opt.ignorecase = false
+opt.iskeyword = "@,48-57,_,192-255,-,#"
+opt.laststatus = 3
+if opt.wrap then
+  vim.opt.linebreak = true
+end
+opt.list = true
 opt.listchars = {
-  eol = "↩",
-  trail = "·",
-  lead = "·",
+  eol = "󰘌",
   tab = "..",
+  lead = "·",
+  trail = "·",
+  extends = "󰶺",
+  precedes = "󰶻",
 }
-opt.mouse = "a" -- Enable mouse support
-opt.number = true -- Show numberline
-opt.pumheight = 15 -- Height of the pop up menu
-opt.relativenumber = true -- Show relative numberline
-opt.scrolloff = 6 -- Number of lines to leave before/after the cursor when scrolling
-opt.shiftwidth = 2 -- Number of space inserted for indentation
-opt.shortmess:append { s = true, I = true, c = true } -- Disable search count wrap and startup messages
-opt.showmode = false -- Disable showing modes in command line
-opt.sidescrolloff = 6 -- Same but for side scrolling.
-opt.smartcase = true -- Case sensitivie searching
-opt.smartindent = true -- Smarter autoindentation
-opt.smoothscroll = true
-opt.spelllang = "en" -- Spellchecking in english by default
-opt.splitbelow = true -- Splitting a new window below the current one
-opt.splitright = true -- Splitting a new window at the right of the current one
-opt.swapfile = false -- Ask what state to recover when opening a file that was not saved
-opt.tabstop = 2 -- Number of space in a tab
-opt.termguicolors = true -- Enable 24-bit RGB color
-opt.timeoutlen = 300 -- Shorten key timeout length a little bit for which-key
-opt.title = true -- Set terminal title
-opt.undofile = true -- Enable persistent undo
-opt.updatetime = 300 -- Length of time to wait before triggering the plugin
-opt.whichwrap = "b,s,<,>,[,],h,l" -- Go to previous/next line
-opt.wrap = false -- Disable wrapping of lines longer than the width of window
-opt.writebackup = false -- Disable making a backup before overwriting a file
+opt.mouse = "a"
+opt.mousemoveevent = true
+opt.number = true
+opt.pumheight = 15
+if opt.number then
+  opt.relativenumber = true
+end
+opt.scrolloff = 6
+opt.shiftwidth = 2
+opt.shortmess:append { s = true, I = true, c = true }
+if opt.cmdheight ~= "0" then
+  opt.showmode = false
+end
+opt.sidescrolloff = 16
+if opt.ignorecase then
+  opt.smartcase = true
+end
+-- opt.smoothscroll = true
+opt.splitbelow = true
+opt.splitright = true
+-- opt.startofline = true
+opt.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
+opt.swapfile = false
+opt.tabstop = 2
+opt.termguicolors = true
+opt.timeoutlen = 300
+opt.title = true
+opt.undofile = true
+opt.updatetime = 300
+opt.virtualedit = "block"
+opt.whichwrap = "b,s,<,>,[,],h,l"
+opt.wrap = false
+opt.writebackup = false
 
-g.loaded_perl_provider = 0 -- Disable perl provider
-g.loaded_ruby_provider = 0 -- Disable ruby provider
-g.loaded_node_provider = 0 -- Disable node provider
+g.loaded_perl_provider = 0
+g.loaded_ruby_provider = 0
+
+vim.cmd "colorscheme habamax"
 
 if g.neovide then
   opt.guifont = "JetBrainsMonoNL NFM:h13"
