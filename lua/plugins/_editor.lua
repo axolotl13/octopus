@@ -512,28 +512,22 @@ return {
   },
   {
     "CRAG666/code_runner.nvim",
-    dependencies = {
-      "akinsho/toggleterm.nvim",
-      opts = {
-        autochdir = true,
-        start_in_insert = true,
-        highlights = {
-          Normal = { link = "Normal" },
-        },
-        on_open = function(_)
-          local nvimtree = require "nvim-tree.api"
-          local nvimtree_view = require "nvim-tree.view"
-          if nvimtree_view.is_visible() then
-            nvimtree.tree.toggle()
-            nvimtree.tree.toggle(false, true)
-          end
-        end,
-      },
-      keys = { { "<leader>tt", "<cmd>ToggleTerm direction=horizontal<cr>", desc = "Toggle Terminal" } },
-    },
+    dependencies = { "akinsho/toggleterm.nvim" },
     cmd = { "RunCode", "RunFile" },
-    opts = { mode = "toggleterm" },
+    opts = {},
     keys = { { "<f5>", "<cmd>RunCode<cr>", desc = "Run Code" } },
+  },
+  {
+    "akinsho/toggleterm.nvim",
+    opts = {
+      autochdir = true,
+      start_in_insert = true,
+      highlights = {
+        Normal = { link = "Normal" },
+      },
+    },
+    keys = { { "<leader>tt", "<cmd>ToggleTerm direction=horizontal<cr>", desc = "Toggle Terminal" } },
+    specs = { { "CRAG666/code_runner.nvim", opts = { mode = "toggleterm" } } },
   },
   {
     "stevearc/resession.nvim",

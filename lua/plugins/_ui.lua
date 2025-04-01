@@ -197,6 +197,21 @@ return {
       { "ñ", "<cmd>NvimTreeToggle<cr>", desc = "Open Explorer" },
       { "Ñ", "<cmd>NvimTreeFocus<cr>", desc = "Focus Explorer" },
     },
+    specs = {
+      {
+        "akinsho/toggleterm.nvim",
+        opts = {
+          on_open = function(_)
+            local nvimtree = require "nvim-tree.api"
+            local nvimtree_view = require "nvim-tree.view"
+            if nvimtree_view.is_visible() then
+              nvimtree.tree.toggle()
+              nvimtree.tree.toggle(false, true)
+            end
+          end,
+        },
+      },
+    },
   },
   { "tzachar/local-highlight.nvim", event = "VeryLazy", opts = {} },
   {
