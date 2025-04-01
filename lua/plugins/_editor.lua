@@ -425,6 +425,28 @@ return {
         desc = "Toggle Zen Mode",
       },
     },
+    specs = {
+      {
+        "olimorris/codecompanion.nvim",
+        opts = {
+          strategies = {
+            chat = {
+              slash_commands = {
+                ["file"] = {
+                  opts = { provider = "snacks", contains_code = true },
+                },
+                ["buffer"] = {
+                  opts = { provider = "snacks", contains_code = true },
+                },
+                ["symbols"] = {
+                  opts = { provider = "snacks", contains_code = true },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
   },
   {
     "sindrets/diffview.nvim",

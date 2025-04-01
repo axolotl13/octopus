@@ -11,17 +11,6 @@ return {
             end,
             user = " " .. (vim.env.USER or "User"),
           },
-          slash_commands = {
-            ["file"] = {
-              opts = { provider = "snacks", contains_code = true },
-            },
-            ["buffer"] = {
-              opts = { provider = "snacks", contains_code = true },
-            },
-            ["symbols"] = {
-              opts = { provider = "snacks", contains_code = true },
-            },
-          },
           adapter = "gemini",
         },
         inline = { adapter = "gemini" },
