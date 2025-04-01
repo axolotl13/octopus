@@ -194,6 +194,7 @@ return {
     },
     specs = {
       { "Saghen/blink.cmp", opts = { snippets = { preset = "luasnip" } } },
+      { "danymat/neogen", opts = { snippet_engine = "luasnip" } },
     },
   },
   {

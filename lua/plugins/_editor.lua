@@ -478,7 +478,7 @@ return {
   },
   {
     "danymat/neogen",
-    opts = { snippet_engine = "luasnip" },
+    opts = {},
     keys = { { "<leader>,n", "<cmd>lua require('neogen').generate()<cr>", desc = "Generate Annotations" } },
   },
   {
