@@ -22,6 +22,12 @@ return {
             [vim.diagnostic.severity.HINT] = require("octopus._icons").hl.DiagnosticHint,
             [vim.diagnostic.severity.INFO] = require("octopus._icons").hl.DiagnosticInfo,
           },
+          linehl = {
+            [vim.diagnostic.severity.ERROR] = "Error",
+            [vim.diagnostic.severity.WARN] = "Warn",
+            [vim.diagnostic.severity.INFO] = "Info",
+            [vim.diagnostic.severity.HINT] = "Hint",
+          },
         },
       },
     },
