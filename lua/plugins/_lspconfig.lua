@@ -262,27 +262,13 @@ return {
       },
       mappings = {
         n = {
-          grd = {
-            function()
-              vim.lsp.buf.definition()
-            end,
-            desc = "Goto Definition",
-            cond = "textDocument/definition",
-          },
-          gri = {
-            function()
-              vim.lsp.buf.implementation()
-            end,
-            desc = "Implementation",
-            cond = "textDocument/implementation",
-          },
-          grn = {
-            function()
-              vim.lsp.buf.rename()
-            end,
-            desc = "Rename",
-            cond = "textDocument/rename",
-          },
+          grd = { vim.lsp.buf.definition, desc = "Goto Definition", cond = "textDocument/definition" },
+          gri = { vim.lsp.buf.implementation, desc = "Goto Implementation", cond = "textDocument/implementation" },
+          grr = { vim.lsp.buf.references, desc = "References", cond = "textDocument/references" },
+          grt = { vim.lsp.buf.type_definition, desc = "Goto Type Definition", cond = "textDocument/typeDefinition" },
+          grD = { vim.lsp.buf.declaration, desc = "Goto Declaration", cond = "textDocument/declaration" },
+          grn = { vim.lsp.buf.rename, desc = "Rename", cond = "textDocument/rename" },
+          gra = { vim.lsp.buf.code_action, desc = "Code Action", cond = "textDocument/codeAction" },
           ["<leader>f"] = {
             function()
               vim.lsp.buf.format()
@@ -290,35 +276,7 @@ return {
             desc = "Format Buffer",
             cond = "textDocument/formatting",
           },
-          grD = {
-            function()
-              vim.lsp.buf.declaration()
-            end,
-            desc = "Goto Declaration",
-            cond = "textDocument/declaration",
-          },
-          grt = {
-            function()
-              vim.lsp.buf.type_definition()
-            end,
-            desc = "Type Definition",
-            cond = "textDocument/typeDefinition",
-          },
-          gra = {
-            function()
-              vim.lsp.buf.code_action()
-            end,
-            desc = "Code Action",
-            cond = "textDocument/codeAction",
-          },
-          grr = {
-            function()
-              vim.lsp.buf.references()
-            end,
-            desc = "Goto References",
-            cond = "textDocument/references",
-          },
-          grk = {
+          grK = {
             function()
               vim.lsp.buf.signature_help()
             end,
