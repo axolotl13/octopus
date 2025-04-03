@@ -6,7 +6,7 @@ local function augroup(name)
 end
 
 autocmd("TextYankPost", {
-  group = augroup("highlight_yank"),
+  group = augroup "highlight_yank",
   desc = "Highlight text on yank",
   callback = function()
     vim.highlight.on_yank()
@@ -14,35 +14,25 @@ autocmd("TextYankPost", {
 })
 
 autocmd("BufEnter", {
-  group = augroup("auto_comment"),
+  group = augroup "auto_comment",
   desc = "Don't auto comment new line",
   callback = function()
     opt.formatoptions:remove { "c", "r", "o" }
   end,
 })
 
-autocmd({ "BufWinLeave", "BufWritePost", "WinLeave" }, {
-  group = augroup("save_view"),
-  desc = "Save view with mkview for real files",
+autocmd("BufReadPost", {
+  group = augroup "restore_cursor",
+  desc = "Restore last cursor position when opening a file",
   callback = function(args)
-    if vim.b[args.buf].view_activated then
-      vim.cmd.mkview { mods = { emsg_silent = true } }
+    local buf = args.buf
+    if vim.b[buf].last_loc_restored or vim.tbl_contains({ "gitcommit" }, vim.bo[buf].filetype) then
+      return
     end
-  end,
-})
-
-autocmd("BufWinEnter", {
-  group = augroup("load_view"),
-  desc = "Try to load file view if available and enable view saving for real files",
-  callback = function(args)
-    if not vim.b[args.buf].view_activated then
-      local filetype = vim.api.nvim_get_option_value("filetype", { buf = args.buf })
-      local buftype = vim.api.nvim_get_option_value("buftype", { buf = args.buf })
-      local ignore_filetypes = { "gitcommit", "gitrebase", "svg", "hgcommit" }
-      if buftype == "" and filetype and filetype ~= "" and not vim.tbl_contains(ignore_filetypes, filetype) then
-        vim.b[args.buf].view_activated = true
-        vim.cmd.loadview { mods = { emsg_silent = true } }
-      end
+    vim.b[buf].last_loc_restored = true
+    local mark = vim.api.nvim_buf_get_mark(buf, '"')
+    if mark[1] > 0 and mark[1] <= vim.api.nvim_buf_line_count(buf) then
+      pcall(vim.api.nvim_win_set_cursor, 0, mark)
     end
   end,
 })
