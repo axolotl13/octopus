@@ -36,9 +36,7 @@ return {
           },
         },
       },
-      opts = {
-        language = "Spanish",
-      },
+      opts = { language = "Spanish" },
     },
     keys = {
       { "<leader>ic", "<cmd>CodeCompanionChat Toggle<cr>", desc = "CodeCompanionChat" },
