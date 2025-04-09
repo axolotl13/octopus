@@ -54,9 +54,7 @@ return {
   {
     "saghen/blink.cmp",
     version = "*",
-    dependencies = {
-      { "rafamadriz/friendly-snippets" },
-    },
+    dependencies = { "rafamadriz/friendly-snippets" },
     opts = {
       enabled = function()
         return not vim.tbl_contains({ "grug-far", "bigfile" }, vim.bo.filetype)
