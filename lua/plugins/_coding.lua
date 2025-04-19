@@ -210,9 +210,8 @@ return {
       {
         "Saghen/blink.cmp",
         dependencies = { "fang2hou/blink-copilot" },
-        optional = true,
         opts = function(_, opts)
-          opts.sources.default = table.insert(opts.sources.default, { "copilot" })
+          table.insert(opts.sources.default, "copilot")
           opts.sources.providers = {
             copilot = {
               name = "copilot",
