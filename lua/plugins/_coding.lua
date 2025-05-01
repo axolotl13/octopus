@@ -123,21 +123,18 @@ return {
         ghost_text = { enabled = true },
       },
       keymap = {
-        ["<CR>"] = { "accept", "fallback" },
         ["<Tab>"] = {
           function(cmp)
-            return cmp.select_next()
+            if cmp.snippet_active() then
+              return cmp.accept()
+            else
+              return cmp.select_and_accept()
+            end
           end,
           "snippet_forward",
           "fallback",
         },
-        ["<S-Tab>"] = {
-          function(cmp)
-            return cmp.select_prev()
-          end,
-          "snippet_backward",
-          "fallback",
-        },
+        ["<S-Tab>"] = { "snippet_backward", "fallback" },
       },
       cmdline = {
         enabled = false,
