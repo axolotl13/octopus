@@ -621,6 +621,16 @@ return {
         desc = "Replace current word in file",
       },
     },
+    specs = {
+      {
+        "saghen/blink.cmp",
+        opts = {
+          enabled = function()
+            return not vim.tbl_contains({ "grug-far" }, vim.bo.filetype)
+          end,
+        },
+      },
+    },
   },
   { "b0o/SchemaStore.nvim", lazy = true },
   {

@@ -70,9 +70,6 @@ return {
     version = "*",
     dependencies = { "rafamadriz/friendly-snippets" },
     opts = {
-      enabled = function()
-        return not vim.tbl_contains({ "grug-far", "bigfile" }, vim.bo.filetype)
-      end,
       appearance = {
         use_nvim_cmp_as_default = false,
         kind_icons = require("octopus._icons").vs,
