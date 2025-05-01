@@ -84,13 +84,8 @@ return {
   { "nvim-lua/plenary.nvim", lazy = true },
   {
     "OXY2DEV/markview.nvim",
-    ft = { "markdown", "codecompanion" },
-    opts = {
-      preview = {
-        filetypes = { "markdown", "codecompanion" },
-        ignore_buftypes = {},
-      },
-    },
+    ft = { "markdown" },
+    opts = {},
     keys = { { "<leader>,m", "<cmd>Markview<cr>", desc = "Toggle Markview" } },
   },
   {

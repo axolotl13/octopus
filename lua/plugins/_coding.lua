@@ -53,6 +53,16 @@ return {
         "Saghen/blink.cmp",
         opts = { sources = { per_filetype = { codecompanion = { "codecompanion" } } } },
       },
+      {
+        "OXY2DEV/markview.nvim",
+        ft = { "markdown", "codecompanion" },
+        opts = {
+          preview = {
+            filetypes = { "markdown", "codecompanion" },
+            ignore_buftypes = {},
+          },
+        },
+      },
     },
   },
   {
