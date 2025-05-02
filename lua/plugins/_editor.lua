@@ -468,7 +468,7 @@ return {
   {
     "HakonHarnes/img-clip.nvim",
     ft = { "markdown", "html", "tex" },
-    keys = { { "<leader>,p", "<cmd>PasteImage<cr>", desc = "Paste image from clipboard" } },
+    keys = { { "<leader>,P", "<cmd>PasteImage<cr>", desc = "Paste image from clipboard" } },
     config = true,
   },
   {
@@ -636,7 +636,7 @@ return {
   {
     "brianhuster/live-preview.nvim",
     opts = { sync_scroll = true },
-    keys = { { "<leader>,l", "<cmd>LivePreview start<cr>", desc = "Live Preview" } },
+    keys = { { "<leader>,p", "<cmd>LivePreview start<cr>", desc = "Live Preview" } },
   },
   {
     "hat0uma/csvview.nvim",
