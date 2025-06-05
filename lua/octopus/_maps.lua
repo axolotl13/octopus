@@ -7,23 +7,21 @@ vim.g.maplocalleader = " "
 
 -- Disable
 map("n", "<esc>", "<cmd>noh<cr>", "General Clear Highlight")
-map("n", "<c-z>", "<nop>", "Disable Ctrl+Z")
+map("n", "<c-z>", "<nop>", "Disable ctrl+z")
 map("n", "q", "<nop>", "Disable Macro")
 map("v", "q", "<nop>", "Disable Macro")
 -- Cursor
 map("n", "|", "^", "Move Cursor Beginning of Line")
 -- Spell
-map("n", "<leader>,e", "<cmd>set spell<cr>", "Enable Spell")
-map("n", "<leader>,q", "<cmd>set nospell<cr>", "Disable Spell")
+map("n", "<leader>,e", "<cmd>set spell!<cr>", "Toggle Spell")
 -- Diffmode
 map("n", "<leader>dt", "<cmd>diffthis<cr>", "DiffThis")
-map("n", "<leader>dz", "<cmd>diffoff<cr>", "DiffOff")
-map("n", "<leader>du", "<cmd>diffput<cr>", "DiffPut")
+map("n", "<leader>dQ", "<cmd>diffoff<cr>", "DiffOff")
 -- Move line
-map("n", "<a-up>", ":m .-2<cr>==", "Move Line Up")
-map("n", "<a-down>", ":m .+1<cr>==", "Move Line Down")
-map("x", "<a-up>", ":m '<-2<CR>gv-gv", "Move Line Up")
-map("x", "<a-down>", ":m '>+1<CR>gv-gv", "Move Line Down")
+map("n", "<a-up>", "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", "Move Line Up")
+map("n", "<a-down>", "<cmd>execute 'move .+' . v:count1<cr>==", "Move Line Down")
+map("v", "<a-up>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", "Move Line Up")
+map("v", "<a-down>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", "Move Line Down")
 -- Indent
 map("v", "<", "<gv")
 map("v", ">", ">gv")
@@ -42,15 +40,16 @@ map("n", "<c-s>", "<cmd>w!<cr>", "Save File")
 map("i", "<c-s>", "<cmd>w!<cr><esc>", "Save File")
 -- Buffers
 map("n", "<leader>ba", "<cmd>%y+<cr>", "Copy Buffer")
+map("n", "<leader>bd", "<cmd>%d+<cr>", "Remove All Text")
 map("n", "<leader>bq", "<cmd>bd!<cr>", "Close Buffer")
 map("n", "<leader>bn", "<cmd>enew<cr>", "New Buffer")
 map("n", "<c-x>", "<cmd>qa!<cr>", "Close All Buffer")
--- map("n", "<tab>", "<cmd>bnext<cr>", "Next Buffer")
--- map("n", "<s-tab>", "<cmd>bprevious<cr>", "Previous Buffer")
+map("n", "<tab>", "<cmd>bnext<cr>", "Next Buffer")
+map("n", "<s-tab>", "<cmd>bprevious<cr>", "Previous Buffer")
 -- Tab
 map("n", "<leader>tn", "<cmd>tabnew<cr>", "New Tab")
-map("n", "<leader>tk", "<cmd>tabnext<cr>", "Next Tab")
-map("n", "<leader>tj", "<cmd>tabprevious<cr>", "Previous Tab")
+map("n", "<leader>tN", "<cmd>tabnext<cr>", "Next Tab")
+map("n", "<leader>tP", "<cmd>tabprevious<cr>", "Previous Tab")
 map("n", "<leader>tq", "<cmd>tabclose<cr>", "Close Tab")
 -- Terminal
 map("t", "<esc>", "<C-\\><C-n>", "Escape Terminal Mode")
