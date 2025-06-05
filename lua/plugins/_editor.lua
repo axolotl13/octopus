@@ -183,6 +183,7 @@ return {
           underline = true,
           only_current = true,
         },
+        animate = { enabled = false },
         filter = function(buf)
           local included_filetypes = {
             html = true,
@@ -237,7 +238,6 @@ return {
           "__pycache__",
         },
       },
-      scroll = {},
       statuscolumn = {
         folds = {
           open = true,
@@ -494,7 +494,7 @@ return {
   },
   {
     "brenoprata10/nvim-highlight-colors",
-    opts = { render = "virtual" },
+    opts = {},
     keys = { { "<leader>c", "<cmd>HighlightColors Toggle<cr>", desc = "Toggle Highlight Colors" } },
   },
   { "nvzone/volt", lazy = true },
