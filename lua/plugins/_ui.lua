@@ -212,7 +212,6 @@ return {
       },
     },
   },
-  { "tzachar/local-highlight.nvim", event = "VeryLazy", opts = {} },
   {
     "Bekaboo/dropbar.nvim",
     event = "UIEnter",
