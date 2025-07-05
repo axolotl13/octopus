@@ -22,6 +22,7 @@ return {
           SnacksPickerInputBorder = { fg = c.mantle, bg = c.mantle },
           SnacksPickerPreview = { fg = c.fg, bg = c.crust },
           SnacksPickerPreviewBorder = { fg = c.crust, bg = c.crust },
+          Folded = { fg = c.blue, bg = c.surface0 },
         }
       end,
       integrations = {
