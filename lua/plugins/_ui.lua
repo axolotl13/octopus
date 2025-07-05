@@ -104,9 +104,6 @@ return {
           enable = true,
         },
         icons = {
-          show = {
-            modified = false,
-          },
           glyphs = {
             default = require("octopus._icons").hl.Default,
             symlink = require("octopus._icons").hl.Symlink,
@@ -206,8 +203,7 @@ return {
         opts = {
           on_open = function(_)
             local nvimtree = require "nvim-tree.api"
-            local nvimtree_view = require "nvim-tree.view"
-            if nvimtree_view.is_visible() then
+            if nvimtree.tree.is_visible() then
               nvimtree.tree.toggle()
               nvimtree.tree.toggle(false, true)
             end
