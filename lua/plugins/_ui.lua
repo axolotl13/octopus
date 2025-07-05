@@ -31,6 +31,7 @@ return {
         dropbar = true,
         grug_far = true,
         mason = true,
+        markview = true,
         noice = true,
         nvim_surround = true,
         snacks = { enabled = true },
