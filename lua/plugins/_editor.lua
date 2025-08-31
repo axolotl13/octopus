@@ -464,8 +464,8 @@ return {
   {
     "HakonHarnes/img-clip.nvim",
     ft = { "markdown", "html", "tex" },
+    opts = {},
     keys = { { "<leader>,P", "<cmd>PasteImage<cr>", desc = "Paste image from clipboard" } },
-    config = true,
   },
   {
     "danymat/neogen",
