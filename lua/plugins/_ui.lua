@@ -74,6 +74,44 @@ return {
     config = function(_, opts)
       require("nvim-web-devicons").set_icon(opts)
     end,
+    specs = {
+      {
+        "Saghen/blink.cmp",
+        opts = {
+          completion = {
+            menu = {
+              draw = {
+                components = {
+                  kind_icon = {
+                    ellipsis = false,
+                    text = function(ctx)
+                      local icon = ctx.kind_icon
+                      if vim.tbl_contains({ "Path" }, ctx.source_name) then
+                        local dev_icon = require("nvim-web-devicons").get_icon(ctx.label)
+                        if dev_icon then
+                          icon = dev_icon
+                        end
+                      end
+                      return icon .. ctx.icon_gap
+                    end,
+                    highlight = function(ctx)
+                      local hl = ctx.kind_hl
+                      if vim.tbl_contains({ "Path" }, ctx.source_name) then
+                        local _, dev_hl = require("nvim-web-devicons").get_icon(ctx.label)
+                        if dev_hl then
+                          hl = dev_hl
+                        end
+                      end
+                      return hl
+                    end,
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
   },
   {
     "nvim-tree/nvim-tree.lua",
