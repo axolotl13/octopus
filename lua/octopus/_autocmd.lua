@@ -1,12 +1,8 @@
 local autocmd = vim.api.nvim_create_autocmd
-local opt = vim.opt
-
-local function augroup(name)
-  return vim.api.nvim_create_augroup("octopus_" .. name, { clear = true })
-end
+local augroup = vim.api.nvim_create_augroup
 
 autocmd("TextYankPost", {
-  group = augroup "highlight_yank",
+  group = augroup("highlight_yank", { clear = true }),
   desc = "Highlight text on yank",
   callback = function()
     vim.highlight.on_yank()
@@ -14,15 +10,15 @@ autocmd("TextYankPost", {
 })
 
 autocmd("BufEnter", {
-  group = augroup "auto_comment",
+  group = augroup("auto_comment", { clear = true }),
   desc = "Don't auto comment new line",
   callback = function()
-    opt.formatoptions:remove { "c", "r", "o" }
+    vim.opt.formatoptions:remove { "c", "r", "o" }
   end,
 })
 
 autocmd("BufReadPost", {
-  group = augroup "restore_cursor",
+  group = augroup("restore_cursor", { clear = true }),
   desc = "Restore last cursor position when opening a file",
   callback = function(args)
     local buf = args.buf
