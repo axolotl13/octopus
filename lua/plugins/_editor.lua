@@ -49,9 +49,7 @@ return {
         changedelete = { text = "┃" },
         untracked = { text = "┃" },
       },
-      current_line_blame_opts = {
-        ignore_whitespace = true,
-      },
+      current_line_blame_opts = { ignore_whitespace = true },
       max_file_length = 20000,
       on_attach = function(bufnr)
         local gs = package.loaded.gitsigns
