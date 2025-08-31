@@ -413,7 +413,7 @@ return {
         desc = "Lazygit",
       },
       {
-        "<leader>Z",
+        "<leader>z",
         function()
           Snacks.zen()
         end,
