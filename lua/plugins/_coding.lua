@@ -17,15 +17,17 @@ return {
         cmd = { adapter = "gemini" },
       },
       adapters = {
-        gemini = function()
-          return require("codecompanion.adapters").extend("gemini", {
-            env = {
-              api_key = function()
-                return os.getenv "GEMINI_API_KEY"
-              end,
-            },
-          })
-        end,
+        http = {
+          gemini_cli = function()
+            return require("codecompanion.adapters").extend("gemini_cli", {
+              env = {
+                api_key = function()
+                  return os.getenv "GEMINI_API_KEY"
+                end,
+              },
+            })
+          end,
+        },
       },
       display = {
         chat = {
