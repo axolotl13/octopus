@@ -47,33 +47,13 @@ return {
             },
           },
         },
-        documentation = {
-          auto_show = true,
-          auto_show_delay_ms = 500,
-        },
+        documentation = { auto_show = true, auto_show_delay_ms = 500 },
         ghost_text = { enabled = true },
       },
-      keymap = {
-        ["<Tab>"] = {
-          function(cmp)
-            if cmp.snippet_active() then
-              return cmp.accept()
-            else
-              return cmp.select_and_accept()
-            end
-          end,
-          "snippet_forward",
-          "fallback",
-        },
-        ["<S-Tab>"] = { "snippet_backward", "fallback" },
-      },
-      cmdline = {
-        enabled = false,
-      },
+      keymap = { preset = "super-tab" },
+      cmdline = { enabled = false },
       signature = { enabled = true },
-      sources = {
-        default = { "lsp", "path", "snippets", "buffer" },
-      },
+      sources = { default = { "lsp", "path", "snippets", "buffer" } },
     },
     specs = {
       {
