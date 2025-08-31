@@ -107,11 +107,7 @@ return {
           end,
         },
       },
-      modes = {
-        char = {
-          keys = { "f", "F", "t", "T" },
-        },
-      },
+      modes = { char = { keys = { "f", "F", "t", "T" } } },
     },
     keys = {
       {
