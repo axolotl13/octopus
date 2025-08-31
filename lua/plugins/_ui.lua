@@ -111,6 +111,10 @@ return {
           },
         },
       },
+      {
+        "OXY2DEV/markview.nvim",
+        opts = { preview = { icon_provider = "devicons" } },
+      },
     },
   },
   {
