@@ -116,6 +116,7 @@ return {
               score_offset = 100,
               async = true,
               opts = {
+                max_completions = 1,
                 kind_name = "Copilot",
                 kind_icon = "",
               },
