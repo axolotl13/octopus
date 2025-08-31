@@ -469,7 +469,6 @@ return {
   },
   {
     "linux-cultist/venv-selector.nvim",
-    branch = "regexp",
     opts = {
       options = {
         enable_default_searches = false,
@@ -481,7 +480,7 @@ return {
         },
       },
     },
-    keys = { { "<leader>,v", "<cmd>VenvSelect<cr>", desc = "Select Venv" } },
+    keys = { { "<leader>,v", "<cmd>VenvSelect<cr>", desc = "Select virtual environment" } },
   },
   {
     "brenoprata10/nvim-highlight-colors",
