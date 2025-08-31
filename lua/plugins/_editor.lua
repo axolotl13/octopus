@@ -468,11 +468,6 @@ return {
     keys = { { "<leader>,P", "<cmd>PasteImage<cr>", desc = "Paste image from clipboard" } },
   },
   {
-    "danymat/neogen",
-    opts = {},
-    keys = { { "<leader>,n", "<cmd>lua require('neogen').generate()<cr>", desc = "Generate Annotations" } },
-  },
-  {
     "linux-cultist/venv-selector.nvim",
     branch = "regexp",
     opts = {
