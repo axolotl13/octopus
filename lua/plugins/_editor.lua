@@ -507,12 +507,7 @@ return {
   {
     "stevearc/resession.nvim",
     lazy = false,
-    opts = {
-      autosave = {
-        enabled = true,
-        notify = false,
-      },
-    },
+    opts = {},
     config = function(_, opts)
       local resession = require "resession"
       resession.setup(opts)
