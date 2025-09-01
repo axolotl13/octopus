@@ -279,6 +279,13 @@ return {
         desc = "Git Status",
       },
       {
+        "<leader>sm",
+        function()
+          Snacks.picker.marks()
+        end,
+        desc = "Marks",
+      },
+      {
         "<leader>sT",
         function()
           Snacks.picker.git_stash()
