@@ -487,14 +487,6 @@ return {
     opts = {},
     keys = { { "<leader>c", "<cmd>HighlightColors Toggle<cr>", desc = "Toggle Highlight Colors" } },
   },
-  { "nvzone/volt", lazy = true },
-  {
-    "nvzone/minty",
-    keys = {
-      { "<leader>,s", "<cmd>Shades<cr>", desc = "Enable Shades" },
-      { "<leader>,c", "<cmd>Huefy<cr>", desc = "Enable ColorPick" },
-    },
-  },
   {
     "CRAG666/code_runner.nvim",
     dependencies = { "akinsho/toggleterm.nvim" },
