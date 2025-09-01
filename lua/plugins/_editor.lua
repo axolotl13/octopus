@@ -466,6 +466,26 @@ return {
     ft = { "markdown", "html", "tex" },
     opts = {},
     keys = { { "<leader>,P", "<cmd>PasteImage<cr>", desc = "Paste image from clipboard" } },
+    specs = {
+      {
+        "folke/snacks.nvim",
+        keys = {
+          {
+            "<leader>sI",
+            function()
+              Snacks.picker.files {
+                ft = { "jpg", "jpeg", "png", "webp" },
+                confirm = function(self, item, _)
+                  self:close()
+                  require("img-clip").paste_image({}, "./" .. item.file)
+                end,
+              }
+            end,
+            desc = "Insert image from file",
+          },
+        },
+      },
+    },
   },
   {
     "linux-cultist/venv-selector.nvim",
