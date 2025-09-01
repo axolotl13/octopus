@@ -185,9 +185,7 @@ return {
         highlight_modified = "icon",
         highlight_hidden = "name",
         highlight_bookmarks = "icon",
-        indent_markers = {
-          enable = true,
-        },
+        indent_markers = { enable = true },
         icons = {
           glyphs = {
             default = require("octopus._icons").hl.Default,
@@ -217,12 +215,7 @@ return {
           },
         },
       },
-      update_focused_file = {
-        enable = true,
-        update_root = {
-          enable = true,
-        },
-      },
+      update_focused_file = { enable = true, update_root = { enable = true } },
       diagnostics = {
         enable = true,
         icons = {
@@ -232,9 +225,7 @@ return {
           error = require("octopus._icons").hl.DiagnosticError,
         },
       },
-      modified = {
-        enable = true,
-      },
+      modified = { enable = true },
       filters = {
         custom = {
           ".git",
@@ -247,24 +238,9 @@ return {
           ".env",
         },
       },
-      actions = {
-        change_dir = {
-          global = true,
-        },
-        open_file = {
-          quit_on_open = true,
-        },
-      },
-      tab = {
-        sync = {
-          open = true,
-        },
-      },
-      ui = {
-        confirm = {
-          trash = false,
-        },
-      },
+      actions = { change_dir = { global = true }, open_file = { quit_on_open = true } },
+      tab = { sync = { open = true } },
+      ui = { confirm = { trash = false } },
     },
     init = function()
       vim.api.nvim_create_autocmd("BufEnter", {
