@@ -537,6 +537,7 @@ return {
     end,
     keys = {
       { "<leader>xs", "<cmd>lua require('resession').save()<cr>", desc = "Save Session" },
+      { "<leader>xt", "<cmd>lua require('resession').save_tab()<cr>", desc = "Save Tab Session" },
       { "<leader>xl", "<cmd>lua require('resession').load()<cr>", desc = "Load Session" },
       { "<leader>xd", "<cmd>lua require('resession').delete()<cr>", desc = "Delete Session" },
     },
