@@ -548,23 +548,16 @@ return {
       {
         "<leader>rr",
         function()
-          local grug = require "grug-far"
-          grug.open {
-            transient = true,
-          }
+          require("grug-far").open { transient = true }
         end,
         desc = "Replace",
       },
       {
         "<leader>rw",
         function()
-          local grug = require "grug-far"
           local ext = vim.bo.buftype == "" and vim.fn.expand "cword"
           if ext ~= "" then
-            grug.open {
-              transient = true,
-              prefills = { search = vim.fn.expand "<cword>" },
-            }
+            require("grug-far").open { transient = true, prefills = { search = vim.fn.expand "<cword>" } }
           else
             vim.notify("No word under cursor", vim.log.levels.WARN, { title = "Grug-far" })
           end
@@ -574,24 +567,16 @@ return {
       {
         "<leader>rf",
         function()
-          local grug = require "grug-far"
           local ext = vim.bo.buftype == "" and vim.fn.expand "%"
-          grug.open {
-            transient = true,
-            prefills = { paths = ext },
-          }
+          require("grug-far").open { transient = true, prefills = { paths = ext } }
         end,
         desc = "Replace file",
       },
       {
         "<leader>rW",
         function()
-          local grug = require "grug-far"
           local ext = vim.bo.buftype == "" and vim.fn.expand "%"
-          grug.open {
-            transient = true,
-            prefills = { paths = ext, search = vim.fn.expand "<cword>" },
-          }
+          require("grug-far").open { transient = true, prefills = { paths = ext, search = vim.fn.expand "<cword>" } }
         end,
         desc = "Replace current word in file",
       },
