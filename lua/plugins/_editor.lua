@@ -499,9 +499,7 @@ return {
     opts = {
       autochdir = true,
       start_in_insert = true,
-      highlights = {
-        Normal = { link = "Normal" },
-      },
+      highlights = { Normal = { link = "Normal" } },
     },
     keys = { { "<leader>tt", "<cmd>ToggleTerm direction=horizontal<cr>", desc = "Toggle Terminal" } },
     specs = { { "CRAG666/code_runner.nvim", opts = { mode = "toggleterm" } } },
