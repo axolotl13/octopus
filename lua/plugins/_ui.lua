@@ -312,56 +312,25 @@ return {
           ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
           ["vim.lsp.util.stylize_markdown"] = true,
         },
-        signature = {
-          enabled = false,
-          auto_open = {
-            trigger = false,
-          },
-        },
-        progress = {
-          enabled = false,
-        },
+        signature = { enabled = false, auto_open = { trigger = false } },
+        progress = { enabled = false },
       },
       views = {
         cmdline_popup = {
-          position = {
-            row = 5,
-            col = "50%",
-          },
-          size = {
-            width = 60,
-            height = "auto",
-          },
-          border = {
-            style = "single",
-          },
+          position = { row = 5, col = "50%" },
+          size = { width = 60, height = "auto" },
+          border = { style = "single" },
         },
         popupmenu = {
           relative = "editor",
-          position = {
-            row = 8,
-            col = "50%",
-          },
-          size = {
-            width = 60,
-            height = 10,
-          },
-          border = {
-            style = "single",
-          },
-          win_options = {
-            winhighlight = { Normal = "Normal", FloatBorder = "DiagnosticInfo" },
-          },
+          position = { row = 8, col = "50%" },
+          size = { width = 60, height = 10 },
+          border = { style = "single" },
+          win_options = { winhighlight = { Normal = "Normal", FloatBorder = "DiagnosticInfo" } },
         },
       },
       routes = {
-        {
-          filter = {
-            event = "msg_show",
-            kind = "search_count",
-          },
-          opts = { skip = true },
-        },
+        { filter = { event = "msg_show", kind = "search_count" }, opts = { skip = true } },
       },
     },
   },
