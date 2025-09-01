@@ -43,6 +43,16 @@ return {
       vim.opt.background = "dark"
       vim.cmd [[colorscheme catppuccin]]
     end,
+    specs = {
+      {
+        "akinsho/bufferline.nvim",
+        opts = function(_, opts)
+          if (vim.g.colors_name or ""):find "catppuccin" then
+            opts.highlights = require("catppuccin.groups.integrations.bufferline").get_theme { styles = { "bold" } }
+          end
+        end,
+      },
+    },
   },
   {
     "nvim-tree/nvim-web-devicons",
@@ -114,6 +124,39 @@ return {
       {
         "OXY2DEV/markview.nvim",
         opts = { preview = { icon_provider = "devicons" } },
+      },
+    },
+  },
+  {
+    "akinsho/bufferline.nvim",
+    version = "*",
+    event = "VeryLazy",
+    opts = {
+      options = {
+        indicator = { style = "none" },
+        diagnostics = "nvim_lsp",
+        diagnostics_indicator = function(count, level)
+          local icons = require "octopus._icons"
+          local icon = level:match "error" and icons.hl.Bug or icons.hl.DiagnosticHint
+          return count .. " " .. icon
+        end,
+        offsets = { { filetype = "NvimTree", separator = false } },
+        separator_style = "thin",
+        always_show_bufferline = false,
+        hover = { enabled = true, delay = 200, reveal = { "close" } },
+      },
+    },
+    keys = {
+      { "<a-left>", "<cmd>BufferLineMovePrev<cr>", desc = "Move buffer left" },
+      { "<a-right>", "<cmd>BufferLineMoveNext<cr>", desc = "Move buffer right" },
+      { "<leader>bp", "<cmd>BufferLinePick<cr>", desc = "Pick buffer" },
+      {
+        "<c-z>",
+        function()
+          vim.cmd "BufferLineCloseRight"
+          vim.cmd "BufferLineCloseLeft"
+        end,
+        desc = "Close all buffer except current",
       },
     },
   },
