@@ -336,17 +336,8 @@ return {
     },
   },
   {
-    "williamboman/mason.nvim",
-    opts = {
-      ui = {
-        icons = {
-          package_installed = require("octopus._icons").hl.Install,
-          package_pending = require("octopus._icons").hl.Pending,
-          package_uninstalled = require("octopus._icons").hl.Uninstall,
-        },
-        keymaps = { uninstall_package = "d" },
-      },
-    },
+    "mason-org/mason.nvim",
+    opts = { ui = { keymaps = { uninstall_package = "d" }, }, },
     keys = { { "<leader>,M", "<cmd>Mason<cr>", desc = "Open Mason" } },
   },
   {
