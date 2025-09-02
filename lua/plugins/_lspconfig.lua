@@ -206,12 +206,6 @@ return {
             },
           },
         },
-        sqls = {
-          on_attach = function(client)
-            client.server_capabilities.documentFormattingProvider = false
-            client.server_capabilities.documentRangeFormattingProvider = false
-          end,
-        },
         texlab = {
           settings = {
             texlab = {
@@ -336,7 +330,6 @@ return {
         "phpactor",
         "ruff",
         "solargraph",
-        "sqls",
         "taplo",
         "texlab",
         "vtsls",
@@ -390,16 +383,10 @@ return {
         python = { "ruff_format" },
         scss = { "prettierd" },
         sh = { "shfmt" },
-        sql = { "sql_formatter" },
         typescript = { "prettierd" },
         typescriptreact = { "prettierd" },
         xml = { "xmllint" },
         yaml = { "prettierd" },
-      },
-      formatters = {
-        sql_formatter = {
-          args = { "-c", vim.fn.expand "$HOME" .. "/.sql_formatter.json" },
-        },
       },
     },
     specs = {
@@ -431,13 +418,7 @@ return {
         html = { "markuplint" },
         lua = { "selene" },
         markdown = { "markdownlint" },
-        sql = { "sqlfluff" },
         yaml = { "yamllint" },
-      },
-      linters = {
-        sqlfluff = {
-          args = { "--config", vim.fn.expand "$HOME" .. "/.sqlfluff" },
-        },
       },
     },
     config = function(_, opts)
@@ -450,10 +431,5 @@ return {
         end,
       })
     end,
-  },
-  {
-    "nanotee/sqls.nvim",
-    lazy = true,
-    keys = { { "<f5>", mode = "x", ":SqlsExecuteQuery<cr>gv", "Execute query" } },
   },
 }
