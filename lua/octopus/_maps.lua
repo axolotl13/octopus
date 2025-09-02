@@ -1,4 +1,4 @@
-local map = function(mode, lhs, rhs, desc)
+local keymap = function(mode, lhs, rhs, desc)
   vim.keymap.set(mode, lhs, rhs, { desc = desc, silent = true })
 end
 
@@ -6,57 +6,58 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Disable
-map("n", "<esc>", "<cmd>noh<cr>", "General Clear Highlight")
-map("n", "<c-z>", "<nop>", "Disable ctrl+z")
-map("n", "q", "<nop>", "Disable Macro")
-map("v", "q", "<nop>", "Disable Macro")
+keymap("n", "<esc>", "<cmd>noh<cr>", "Clear Highlight")
+keymap("n", "<c-z>", "<nop>", "Disable ctrl+z")
+keymap({"n", "v"}, "q", "<nop>", "Disable Macro")
 -- Cursor
-map("n", "|", "^", "Move Cursor Beginning of Line")
+keymap("n", "|", "^", "Move Cursor Beginning of Line")
 -- Spell
-map("n", "<leader>,e", "<cmd>set spell!<cr>", "Toggle Spell")
+keymap("n", "<leader>,e", "<cmd>set spell!<cr>", "Toggle Spell")
 -- Diffmode
-map("n", "<leader>dt", "<cmd>diffthis<cr>", "DiffThis")
-map("n", "<leader>dQ", "<cmd>diffoff<cr>", "DiffOff")
+keymap("n", "<leader>dt", "<cmd>diffthis<cr>", "DiffThis")
+keymap("n", "<leader>dQ", "<cmd>diffoff<cr>", "DiffOff")
 -- Move line
-map("n", "<a-up>", "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", "Move Line Up")
-map("n", "<a-down>", "<cmd>execute 'move .+' . v:count1<cr>==", "Move Line Down")
-map("v", "<a-up>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", "Move Line Up")
-map("v", "<a-down>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", "Move Line Down")
+keymap("n", "<a-up>", "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", "Move Line Up")
+keymap("n", "<a-down>", "<cmd>execute 'move .+' . v:count1<cr>==", "Move Line Down")
+keymap("v", "<a-up>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", "Move Line Up")
+keymap("v", "<a-down>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", "Move Line Down")
+keymap("n", "<c-d>", "<c-d>zz")
+keymap("n", "<c-u>", "<c-u>zz")
 -- Indent
-map("v", "<", "<gv")
-map("v", ">", ">gv")
+keymap("v", "<", "<gv")
+keymap("v", ">", ">gv")
 -- Switch Windows
-map("n", "<c-l>", "<C-w>l", "Switch Window Right")
-map("n", "<c-h>", "<C-w>h", "Switch Window Left")
-map("n", "<c-k>", "<C-w>k", "Switch Window Up")
-map("n", "<c-j>", "<C-w>j", "Switch Window Down")
+keymap("n", "<c-l>", "<c-w>l", "Switch Window Right")
+keymap("n", "<c-h>", "<c-w>h", "Switch Window Left")
+keymap("n", "<c-k>", "<c-w>k", "Switch Window Up")
+keymap("n", "<c-j>", "<c-w>j", "Switch Window Down")
 -- Resize Windows
-map("n", "<c-right>", ":vert resize +2<cr>", "Resize Window Right")
-map("n", "<c-left>", ":vert resize -2<cr>", "Resize Window Left")
+keymap("n", "<c-right>", ":vert resize +2<cr>", "Resize Window Right")
+keymap("n", "<c-left>", ":vert resize -2<cr>", "Resize Window Left")
 -- map("n", "<c-up>", ":resize +2<cr>", "Resize Window Up")
 -- map("n", "<c-down>", ":resize -2<cr>", "Resize Window Down")
 -- Save Files
-map("n", "<c-s>", "<cmd>w!<cr>", "Save File")
-map("i", "<c-s>", "<cmd>w!<cr><esc>", "Save File")
+keymap("n", "<c-s>", "<cmd>w!<cr>", "Save File")
+keymap("i", "<c-s>", "<cmd>w!<cr><esc>", "Save File")
 -- Buffers
-map("n", "<leader>ba", "<cmd>%y+<cr>", "Copy Buffer")
-map("n", "<leader>bd", "<cmd>%d+<cr>", "Remove All Text")
-map("n", "<leader>bq", "<cmd>bd!<cr>", "Close Buffer")
-map("n", "<leader>bn", "<cmd>enew<cr>", "New Buffer")
-map("n", "<c-x>", "<cmd>qa!<cr>", "Close All Buffer")
-map("n", "<tab>", "<cmd>bnext<cr>", "Next Buffer")
-map("n", "<s-tab>", "<cmd>bprevious<cr>", "Previous Buffer")
+keymap("n", "<leader>ba", "<cmd>%y+<cr>", "Copy Buffer")
+keymap("n", "<leader>bd", "<cmd>%d+<cr>", "Remove All Text")
+keymap("n", "<leader>bq", "<cmd>bd!<cr>", "Close Buffer")
+keymap("n", "<leader>bn", "<cmd>enew<cr>", "New Buffer")
+keymap("n", "<c-x>", "<cmd>qa!<cr>", "Close All Buffer")
+keymap("n", "<tab>", "<cmd>bnext<cr>", "Next Buffer")
+keymap("n", "<s-tab>", "<cmd>bprevious<cr>", "Previous Buffer")
 -- Tab
-map("n", "<leader>tn", "<cmd>tabnew<cr>", "New Tab")
-map("n", "<leader>tN", "<cmd>tabnext<cr>", "Next Tab")
-map("n", "<leader>tP", "<cmd>tabprevious<cr>", "Previous Tab")
-map("n", "<leader>tq", "<cmd>tabclose<cr>", "Close Tab")
+keymap("n", "<leader>tn", "<cmd>tabnew<cr>", "New Tab")
+keymap("n", "<leader>tN", "<cmd>tabnext<cr>", "Next Tab")
+keymap("n", "<leader>tP", "<cmd>tabprevious<cr>", "Previous Tab")
+keymap("n", "<leader>tq", "<cmd>tabclose<cr>", "Close Tab")
 -- Terminal
-map("t", "<esc>", "<C-\\><C-n>", "Escape Terminal Mode")
+keymap("t", "<esc>", "<c-\\><c-n>", "Escape Terminal Mode")
 -- Misc
-map("n", "<leader>n", "<cmd>set rnu!<cr>", "Toggle Relativenumber")
+keymap("n", "<leader>n", "<cmd>set rnu!<cr>", "Toggle Relativenumber")
 -- Lazy
-map("n", "<leader>ps", "<cmd>Lazy<cr>", "Lazy")
-map("n", "<leader>pu", "<cmd>Lazy update<cr>", "Lazy Update")
-map("n", "<leader>py", "<cmd>Lazy sync<cr>", "Lazy Sync")
-map("n", "<leader>pc", "<cmd>Lazy clean<cr>", "Lazy Clean")
+keymap("n", "<leader>ps", "<cmd>Lazy<cr>", "Lazy")
+keymap("n", "<leader>pu", "<cmd>Lazy update<cr>", "Lazy Update")
+keymap("n", "<leader>py", "<cmd>Lazy sync<cr>", "Lazy Sync")
+keymap("n", "<leader>pc", "<cmd>Lazy clean<cr>", "Lazy Clean")
