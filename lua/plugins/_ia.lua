@@ -77,6 +77,12 @@ return {
           },
         },
       },
+      {
+        "windwp/nvim-autopairs",
+        opts = function(_, opts)
+          table.insert(opts.disable_filetype, "codecompanion")
+        end,
+      },
     },
   },
 }

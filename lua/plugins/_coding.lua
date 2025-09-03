@@ -129,7 +129,7 @@ return {
   {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
-    opts = { disable_filetype = { "codecompanion", "snacks_picker_input", "grug-far" } },
+    opts = {},
   },
   {
     "folke/ts-comments.nvim",

@@ -448,6 +448,10 @@ return {
           },
         },
       },
+      {
+        "windwp/nvim-autopairs",
+        opts = { disable_filetype = { "snacks_picker_input" } },
+      },
     },
   },
   {
@@ -617,6 +621,12 @@ return {
             return not vim.tbl_contains({ "grug-far" }, vim.bo.filetype)
           end,
         },
+      },
+      {
+        "windwp/nvim-autopairs",
+        opts = function(_, opts)
+          table.insert(opts.disable_filetype, "grug-far")
+        end,
       },
     },
   },
