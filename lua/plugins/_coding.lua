@@ -4,10 +4,7 @@ return {
     version = "*",
     dependencies = { "rafamadriz/friendly-snippets" },
     opts = {
-      appearance = {
-        use_nvim_cmp_as_default = false,
-        kind_icons = require("octopus._icons").vs,
-      },
+      appearance = { kind_icons = require("octopus._icons").kind },
       completion = {
         accept = { auto_brackets = { enabled = true } },
         list = { selection = { preselect = true, auto_insert = true } },
@@ -29,16 +26,12 @@ return {
       cmdline = { enabled = false },
       signature = { enabled = true },
       sources = { default = { "lsp", "path", "snippets", "buffer" } },
+      fuzzy = { implementation = "prefer_rust_with_warning" },
     },
-    specs = {
-      {
-        "AstroNvim/astrolsp",
-        opts = function(_, opts)
-          opts.capabilities =
-            vim.tbl_deep_extend("force", opts.capabilities or {}, require("blink.cmp").get_lsp_capabilities() or {})
-        end,
-      },
-    },
+    init = function()
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities = vim.tbl_deep_extend("force", capabilities, require("blink.cmp").get_lsp_capabilities({}, false))
+    end,
   },
   {
     "xzbdmw/colorful-menu.nvim",
@@ -89,6 +82,7 @@ return {
   },
   {
     "zbirenbaum/copilot.lua",
+    -- enabled = false,
     build = ":Copilot auth",
     event = "InsertEnter",
     cmd = "Copilot",
@@ -115,7 +109,7 @@ return {
               opts = {
                 max_completions = 1,
                 kind_name = "Copilot",
-                kind_icon = "",
+                kind_icon = " ",
               },
               transform_items = function(_, items)
                 local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
