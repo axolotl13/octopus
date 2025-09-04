@@ -377,21 +377,13 @@ return {
         yaml = { "prettierd" },
       },
     },
-    specs = {
+    keys = {
       {
-        "AstroNvim/astrolsp",
-        opts = {
-          mappings = {
-            n = {
-              ["<leader>f"] = {
-                function()
-                  require("conform").format { async = true }
-                end,
-                desc = "Format Buffer",
-              },
-            },
-          },
-        },
+        "<leader>f",
+        function()
+          require("conform").format { async = true }
+        end,
+        desc = "Format Buffer with Conform",
       },
     },
   },
