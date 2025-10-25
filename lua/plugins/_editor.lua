@@ -21,12 +21,6 @@ return {
           { "z", group = "fold" },
         },
       },
-      plugins = {
-        register = false,
-        spelling = {
-          enabled = false,
-        },
-      },
     },
   },
   {
