@@ -38,7 +38,7 @@ return {
     opts = { max_width = 50 },
     specs = {
       {
-        "Saghen/blink.cmp",
+        "saghen/blink.cmp",
         opts = {
           completion = {
             menu = {
@@ -72,12 +72,11 @@ return {
       end,
     },
     opts = {
-      history = true,
       delete_check_events = "TextChanged",
       region_check_events = "CursorMoved",
     },
     specs = {
-      { "Saghen/blink.cmp", opts = { snippets = { preset = "luasnip" } } },
+      { "saghen/blink.cmp", opts = { snippets = { preset = "luasnip" } } },
     },
   },
   {
