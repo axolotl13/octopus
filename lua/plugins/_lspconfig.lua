@@ -367,7 +367,7 @@ return {
         javascriptreact = { "prettierd" },
         less = { "prettierd" },
         lua = { "stylua" },
-        markdown = { "markdownlint" },
+        markdown = { "markdownlint-cli2" },
         python = { "ruff_format" },
         scss = { "prettierd" },
         sh = { "shfmt" },
@@ -397,14 +397,16 @@ return {
         gitcommit = { "gitlint" },
         html = { "markuplint" },
         lua = { "selene" },
-        markdown = { "markdownlint" },
+        markdown = { "markdownlint-cli2" },
         yaml = { "yamllint" },
       },
     },
     config = function(_, opts)
+      local lint = require "lint"
+      lint.linters_by_ft = opts.linters_by_ft
       vim.api.nvim_create_autocmd(opts.events, {
         callback = function()
-          require("lint").try_lint()
+          lint.try_lint()
         end,
       })
     end,
