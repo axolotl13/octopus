@@ -1,7 +1,7 @@
 return {
   {
     "saghen/blink.cmp",
-    version = "*",
+    version = "1.*",
     dependencies = { "rafamadriz/friendly-snippets" },
     opts = {
       appearance = { kind_icons = require("octopus._icons").kind },
