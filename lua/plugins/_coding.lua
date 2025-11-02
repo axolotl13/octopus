@@ -85,52 +85,6 @@ return {
     },
   },
   {
-    "zbirenbaum/copilot.lua",
-    -- enabled = false,
-    build = ":Copilot auth",
-    event = "InsertEnter",
-    cmd = "Copilot",
-    opts = {
-      suggestion = { enabled = false },
-      panel = { enabled = false },
-      filetypes = {
-        bigfile = false,
-        csv = false,
-      },
-    },
-    specs = {
-      {
-        "Saghen/blink.cmp",
-        dependencies = { "fang2hou/blink-copilot" },
-        opts = function(_, opts)
-          table.insert(opts.sources.default, "copilot")
-          opts.sources.providers = {
-            copilot = {
-              name = "copilot",
-              module = "blink-copilot",
-              score_offset = 100,
-              async = true,
-              opts = {
-                max_completions = 1,
-                kind_name = "Copilot",
-                kind_icon = " ",
-              },
-              transform_items = function(_, items)
-                local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
-                local kind_idx = #CompletionItemKind + 1
-                CompletionItemKind[kind_idx] = "Copilot"
-                for _, item in ipairs(items) do
-                  item.kind = kind_idx
-                end
-                return items
-              end,
-            },
-          }
-        end,
-      },
-    },
-  },
-  {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
     opts = { disable_filetype = { "codecompanion", "snacks_picker_input", "grug-far" } },
