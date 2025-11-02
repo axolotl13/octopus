@@ -56,26 +56,25 @@ return {
           vim.keymap.set(mode, l, r, { buffer = bufnr, desc = desc })
         end
 
-        map({ "n", "v" }, "<leader>gg", gs.stage_hunk, "Stage git hunk")
-        map({ "n", "v" }, "<leader>gu", gs.reset_hunk, "Reset git hunk")
-        map("n", "<leader>ga", gs.stage_buffer, "Stage git buffer")
-        map("n", "<leader>gq", gs.undo_stage_hunk, "Unstage git hunk")
-        map("n", "<leader>gr", gs.reset_buffer, "Reset git buffer")
-        map("n", "<leader>g}", gs.next_hunk, "Next git hunk")
-        map("n", "<leader>g{", gs.prev_hunk, "Previous git hunk")
-        map("n", "<leader>gp", gs.preview_hunk, "Preview git hunk")
-        map("n", "<leader>gd", gs.diffthis, "View git diff")
-        map("n", "<leader>gt", gs.blame, "View git blame")
-        map("n", "<leader>gl", gs.toggle_current_line_blame, "Toggle git blame line")
-        map("n", "<leader>gh", gs.toggle_deleted, "Toggle git show deleted")
-        map("n", "<leader>gn", gs.toggle_numhl, "Toggle numhl")
+        map({ "n", "v" }, "<leader>gg", gs.stage_hunk, "stage/unstage git hunk")
+        map({ "n", "v" }, "<leader>gu", gs.reset_hunk, "reset git hunk")
+        map("n", "<leader>ga", gs.stage_buffer, "stage git buffer")
+        map("n", "<leader>gr", gs.reset_buffer, "reset git buffer")
+        map("n", "<leader>g}", gs.next_hunk, "next git hunk")
+        map("n", "<leader>g{", gs.prev_hunk, "previous git hunk")
+        map("n", "<leader>gp", gs.preview_hunk, "preview git hunk")
+        map("n", "<leader>gd", gs.diffthis, "view git diff")
+        map("n", "<leader>gt", gs.blame, "view git blame")
+        map("n", "<leader>gl", gs.toggle_current_line_blame, "toggle git blame line")
+        map("n", "<leader>gh", gs.toggle_deleted, "toggle git show deleted")
+        map("n", "<leader>gn", gs.toggle_numhl, "toggle numhl")
       end,
     },
   },
   {
     "tpope/vim-fugitive",
     cmd = "Git",
-    keys = { { "<leader>gc", "<cmd>Git commit<cr>", desc = "Git commit" } },
+    keys = { { "<leader>gc", "<cmd>Git commit<cr>", desc = "git commit" } },
   },
   { "nvim-lua/plenary.nvim", lazy = true },
   {
