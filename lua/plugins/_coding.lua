@@ -28,6 +28,14 @@ return {
       sources = { default = { "lsp", "path", "snippets", "buffer" } },
       fuzzy = { implementation = "prefer_rust_with_warning" },
     },
+    specs = {
+      {
+        "neovim/nvim-lspconfig",
+        opts = function(_, opts)
+          opts.capabilities = require("blink.cmp").get_lsp_capabilities(opts.capabilities)
+        end,
+      },
+    },
   },
   {
     "xzbdmw/colorful-menu.nvim",
