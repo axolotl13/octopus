@@ -56,32 +56,32 @@ return {
           vim.keymap.set(mode, l, r, { buffer = bufnr, desc = desc })
         end
 
-        map({ "n", "v" }, "<leader>gg", gs.stage_hunk, "stage/unstage git hunk")
-        map({ "n", "v" }, "<leader>gu", gs.reset_hunk, "reset git hunk")
-        map("n", "<leader>ga", gs.stage_buffer, "stage git buffer")
-        map("n", "<leader>gr", gs.reset_buffer, "reset git buffer")
-        map("n", "<leader>g}", gs.next_hunk, "next git hunk")
-        map("n", "<leader>g{", gs.prev_hunk, "previous git hunk")
-        map("n", "<leader>gp", gs.preview_hunk, "preview git hunk")
-        map("n", "<leader>gd", gs.diffthis, "view git diff")
-        map("n", "<leader>gt", gs.blame, "view git blame")
-        map("n", "<leader>gl", gs.toggle_current_line_blame, "toggle git blame line")
-        map("n", "<leader>gh", gs.toggle_deleted, "toggle git show deleted")
-        map("n", "<leader>gn", gs.toggle_numhl, "toggle numhl")
+        map({ "n", "v" }, "<leader>gg", gs.stage_hunk, "Stage/unstage git hunk")
+        map({ "n", "v" }, "<leader>gu", gs.reset_hunk, "Reset git hunk")
+        map("n", "<leader>ga", gs.stage_buffer, "Stage git buffer")
+        map("n", "<leader>gr", gs.reset_buffer, "Reset git buffer")
+        map("n", "<leader>g}", gs.next_hunk, "Next git hunk")
+        map("n", "<leader>g{", gs.prev_hunk, "Previous git hunk")
+        map("n", "<leader>gp", gs.preview_hunk, "Preview git hunk")
+        map("n", "<leader>gd", gs.diffthis, "View git diff")
+        map("n", "<leader>gt", gs.blame, "View git blame")
+        map("n", "<leader>gl", gs.toggle_current_line_blame, "Toggle git blame line")
+        map("n", "<leader>gh", gs.toggle_deleted, "Toggle git show deleted")
+        map("n", "<leader>gn", gs.toggle_numhl, "Toggle numhl")
       end,
     },
   },
   {
     "tpope/vim-fugitive",
     cmd = "Git",
-    keys = { { "<leader>gc", "<cmd>Git commit<cr>", desc = "git commit" } },
+    keys = { { "<leader>gc", "<cmd>Git commit<cr>", desc = "Git commit" } },
   },
   { "nvim-lua/plenary.nvim", lazy = true },
   {
     "OXY2DEV/markview.nvim",
     ft = { "markdown" },
     opts = {},
-    keys = { { "<leader>,m", "<cmd>Markview<cr>", desc = "toggle markview" } },
+    keys = { { "<leader>,m", "<cmd>Markview<cr>", desc = "Toggle markview" } },
   },
   {
     "folke/flash.nvim",
@@ -113,7 +113,7 @@ return {
         function()
           require("flash").jump()
         end,
-        desc = "flash",
+        desc = "Flash",
       },
       {
         "<c-s>",
@@ -121,7 +121,7 @@ return {
         function()
           require("flash").toggle()
         end,
-        desc = "toggle flash search",
+        desc = "Toggle flash search",
       },
     },
     specs = {
@@ -278,77 +278,77 @@ return {
         function()
           require("snacks").picker.git_branches()
         end,
-        desc = "git branches",
+        desc = "Git branches",
       },
       {
         "<leader>sc",
         function()
           require("snacks").picker.git_log()
         end,
-        desc = "git log",
+        desc = "Git log",
       },
       {
         "<leader>sS",
         function()
           require("snacks").picker.git_status()
         end,
-        desc = "git status",
+        desc = "Git status",
       },
       {
         "<leader>sm",
         function()
           require("snacks").picker.marks()
         end,
-        desc = "marks",
+        desc = "Marks",
       },
       {
         "<leader>sT",
         function()
           require("snacks").picker.git_stash()
         end,
-        desc = "git stash",
+        desc = "Git stash",
       },
       {
         "<leader>sD",
         function()
           require("snacks").picker.git_diff()
         end,
-        desc = "git diff (hunks)",
+        desc = "Git diff (hunks)",
       },
       {
         "<leader>gL",
         function()
           require("snacks").git.blame_line()
         end,
-        desc = "git blame line",
+        desc = "Git blame line",
       },
       {
         "<leader>gw",
         function()
           require("snacks").gitbrowse()
         end,
-        desc = "git browse",
+        desc = "Git browse",
       },
       {
         "<leader>sf",
         function()
           require("snacks").picker.files()
         end,
-        desc = "find files",
+        desc = "Find files",
       },
       {
         "<leader>sb",
         function()
           require("snacks").picker.buffers()
         end,
-        desc = "buffers",
+        desc = "Buffers",
       },
       {
         "<leader>ss",
         function()
           require("snacks").picker.grep()
         end,
-        desc = "grep",
+        desc = "Grep",
       },
       {
         "<leader>sW",
@@ -356,98 +356,98 @@ return {
         function()
           require("snacks").picker.grep_word()
         end,
-        desc = "visual selection or word",
+        desc = "Visual selection or word",
       },
       {
         "<leader>sw",
         function()
           require("snacks").picker.lines()
         end,
-        desc = "buffer lines",
+        desc = "Buffer lines",
       },
       {
         "<leader>sx",
         function()
           require("snacks").picker.command_history()
         end,
-        desc = "command history",
+        desc = "Command history",
       },
       {
         "<leader>sP",
         function()
           require("snacks").picker.projects()
         end,
-        desc = "projects",
+        desc = "Projects",
       },
       {
         "<leader>sr",
         function()
           require("snacks").picker.recent()
         end,
-        desc = "recent",
+        desc = "Recent",
       },
       {
         "<leader>sd",
         function()
           require("snacks").picker.diagnostics_buffer()
         end,
-        desc = "buffer diagnostics",
+        desc = "Buffer diagnostics",
       },
       {
         "<leader>si",
         function()
           require("snacks").picker.icons()
         end,
-        desc = "icons",
+        desc = "Icons",
       },
       {
         "<leader>sk",
         function()
           require("snacks").picker.keymaps()
         end,
-        desc = "keymaps",
+        desc = "Keymaps",
       },
       {
         "<leader>sl",
         function()
           require("snacks").picker.lazy()
         end,
-        desc = "search for plugin spec",
+        desc = "Search for plugin spec",
       },
       {
         "<leader>su",
         function()
           require("snacks").picker.undo()
         end,
-        desc = "undo history",
+        desc = "Undo history",
       },
       {
         "<leader>st",
         function()
           require("snacks").picker.colorschemes()
         end,
-        desc = "colorschemes",
+        desc = "Colorschemes",
       },
       {
         "<leader>sn",
         function()
           require("snacks").picker.notifications()
         end,
-        desc = "notifications",
+        desc = "Notifications",
       },
       {
         "<leader>,l",
         function()
           require("snacks").lazygit()
         end,
-        desc = "lazygit",
+        desc = "Lazygit",
       },
       {
         "<leader>se",
         function()
           require("snacks").explorer()
         end,
-        desc = "toggle explorer",
+        desc = "Toggle explorer",
       },
     },
     specs = {
@@ -459,42 +459,42 @@ return {
             function()
               require("snacks").picker.lsp_definitions()
             end,
-            desc = "goto definition",
+            desc = "Goto definition",
           },
           {
             "grD",
             function()
               require("snacks").picker.lsp_declarations()
             end,
-            desc = "goto declaration",
+            desc = "Goto declaration",
           },
           {
             "grr",
             function()
               require("snacks").picker.lsp_references()
             end,
-            desc = "references",
+            desc = "References",
           },
           {
             "gri",
             function()
               require("snacks").picker.lsp_implementations()
             end,
-            desc = "goto implementation",
+            desc = "Goto implementation",
           },
           {
             "grt",
             function()
               require("snacks").picker.lsp_type_definitions()
             end,
-            desc = "goto type definition",
+            desc = "Goto type definition",
           },
           {
             "gry",
             function()
               require("snacks").picker.lsp_symbols()
             end,
-            desc = "lsp symbols",
+            desc = "Lsp symbols",
           },
         },
       },
@@ -531,18 +531,18 @@ return {
       },
     },
     keys = {
-      { "<leader>do", "<cmd>DiffviewOpen<cr>", desc = "open (diffview)" },
-      { "<leader>dq", "<cmd>DiffviewClose<cr>", desc = "close (diffview)" },
-      { "<leader>df", "<cmd>DiffviewToggleFiles<cr>", desc = "toggle file panel (diffview)" },
-      { "<leader>dh", "<cmd>DiffviewFileHistory<cr>", desc = "history current branch (diffview)" },
-      { "<leader>dd", "<cmd>DiffviewFileHistory %<cr>", desc = "history current file (diffview)" },
+      { "<leader>do", "<cmd>DiffviewOpen<cr>", desc = "Open [diffview]" },
+      { "<leader>dq", "<cmd>DiffviewClose<cr>", desc = "Close [diffview]" },
+      { "<leader>df", "<cmd>DiffviewToggleFiles<cr>", desc = "Toggle file panel [diffview]" },
+      { "<leader>dh", "<cmd>DiffviewFileHistory<cr>", desc = "History current branch [diffview]" },
+      { "<leader>dd", "<cmd>DiffviewFileHistory %<cr>", desc = "History current file [diffview]" },
     },
   },
   {
     "HakonHarnes/img-clip.nvim",
     ft = { "markdown", "html", "tex" },
     opts = {},
-    keys = { { "<leader>,P", "<cmd>PasteImage<cr>", desc = "paste image from clipboard (img-clip)" } },
+    keys = { { "<leader>,P", "<cmd>PasteImage<cr>", desc = "Paste image from clipboard [img-clip]" } },
     specs = {
       {
         "folke/snacks.nvim",
@@ -550,7 +550,7 @@ return {
           {
             "<leader>sI",
             function()
-              Snacks.picker.files {
+              require("snacks").picker.files {
                 ft = { "jpg", "jpeg", "png", "webp" },
                 confirm = function(self, item, _)
                   self:close()
@@ -558,7 +558,7 @@ return {
                 end,
               }
             end,
-            desc = "insert image from file (img-clip)",
+            desc = "Insert image from file [img-clip]",
           },
         },
       },
@@ -582,14 +582,14 @@ return {
   {
     "brenoprata10/nvim-highlight-colors",
     opts = {},
-    keys = { { "<leader>c", "<cmd>HighlightColors Toggle<cr>", desc = "toggle highlight colors" } },
+    keys = { { "<leader>c", "<cmd>HighlightColors Toggle<cr>", desc = "Toggle color highlight" } },
   },
   {
     "CRAG666/code_runner.nvim",
     dependencies = { "akinsho/toggleterm.nvim" },
     cmd = { "RunCode", "RunFile" },
     opts = {},
-    keys = { { "<f5>", "<cmd>RunCode<cr>", desc = "run code" } },
+    keys = { { "<f5>", "<cmd>RunCode<cr>", desc = "Run code" } },
   },
   {
     "akinsho/toggleterm.nvim",
@@ -598,7 +598,7 @@ return {
       start_in_insert = true,
       highlights = { Normal = { link = "Normal" } },
     },
-    keys = { { "<leader>tt", "<cmd>ToggleTerm direction=horizontal<cr>", desc = "toggle terminal" } },
+    keys = { { "<leader>tt", "<cmd>ToggleTerm direction=horizontal<cr>", desc = "Toggle terminal" } },
     specs = { { "CRAG666/code_runner.nvim", opts = { mode = "toggleterm" } } },
   },
   {
@@ -633,10 +633,10 @@ return {
       })
     end,
     keys = {
-      { "<leader>xs", "<cmd>lua require('resession').save()<cr>", desc = "save session" },
-      { "<leader>xt", "<cmd>lua require('resession').save_tab()<cr>", desc = "save tab session" },
-      { "<leader>xl", "<cmd>lua require('resession').load()<cr>", desc = "load session" },
-      { "<leader>xd", "<cmd>lua require('resession').delete()<cr>", desc = "delete session" },
+      { "<leader>xs", "<cmd>lua require('resession').save()<cr>", desc = "Save session" },
+      { "<leader>xt", "<cmd>lua require('resession').save_tab()<cr>", desc = "Save tab session" },
+      { "<leader>xl", "<cmd>lua require('resession').load()<cr>", desc = "Load session" },
+      { "<leader>xd", "<cmd>lua require('resession').delete()<cr>", desc = "Delete session" },
     },
   },
   {
@@ -648,7 +648,7 @@ return {
         function()
           require("grug-far").open { transient = true }
         end,
-        desc = "replace",
+        desc = "Replace",
       },
       {
         "<leader>rw",
@@ -660,7 +660,7 @@ return {
             vim.notify("No word under cursor", vim.log.levels.WARN, { title = "Grug-far" })
           end
         end,
-        desc = "replace current word",
+        desc = "Replace current word",
       },
       {
         "<leader>rf",
@@ -668,7 +668,7 @@ return {
           local ext = vim.bo.buftype == "" and vim.fn.expand "%"
           require("grug-far").open { transient = true, prefills = { paths = ext } }
         end,
-        desc = "replace file",
+        desc = "Replace file",
       },
       {
         "<leader>rW",
@@ -676,7 +676,7 @@ return {
           local ext = vim.bo.buftype == "" and vim.fn.expand "%"
           require("grug-far").open { transient = true, prefills = { paths = ext, search = vim.fn.expand "<cword>" } }
         end,
-        desc = "replace current word in file",
+        desc = "Replace current word in file",
       },
     },
     specs = {
@@ -694,15 +694,15 @@ return {
   {
     "brianhuster/live-preview.nvim",
     opts = { sync_scroll = true },
-    keys = { { "<leader>,p", "<cmd>LivePreview start<cr>", desc = "live preview" } },
+    keys = { { "<leader>,p", "<cmd>LivePreview start<cr>", desc = "Live preview" } },
   },
   {
     "hat0uma/csvview.nvim",
     cmd = { "CsvViewEnable", "CsvViewDisable", "CsvViewToggle" },
     opts = {},
     keys = {
-      { "<leader>,xx", "<cmd>CsvViewToggle<cr>", desc = "toggle csv view" },
-      { "<leader>,xy", "<cmd>CsvViewToggle display_mode=border header_lnum=1<cr>", desc = "toggle csv view options" },
+      { "<leader>,xx", "<cmd>CsvViewToggle<cr>", desc = "Toggle csv view" },
+      { "<leader>,xy", "<cmd>CsvViewToggle display_mode=border header_lnum=1<cr>", desc = "Toggle csv view options" },
     },
   },
 }
