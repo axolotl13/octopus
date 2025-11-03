@@ -346,162 +346,44 @@ return {
     opts = { icons = require("octopus._icons").hl },
   },
   {
-    "rebelot/heirline.nvim",
-    event = { "BufReadPost", "BufNewFile" },
-    opts = function()
-      local lib = require "heirline-components.all"
-      local condition = require "heirline-components.core.condition"
-
-      return {
-        tabline = {
-          lib.component.tabline_conditional_padding {
-            provider = function(self)
-              return string.rep(" ", vim.api.nvim_win_get_width(self.winid))
-            end,
-            hl = { bg = "bg" },
-          },
-          lib.component.tabline_buffers {
-            file_modified = {
-              padding = { left = 1, right = 1 },
-              condition = condition.is_file,
-            },
-            surround = false,
-          },
-          lib.component.fill { hl = { bg = "bg" } },
-          lib.component.tabline_tabpages(),
+    "linux-cultist/venv-selector.nvim",
+    opts = {
+      options = {
+        enable_default_searches = false,
+        notify_user_on_venv_activation = true,
+      },
+      search = {
+        venv = {
+          command = "fd '/bin/python$' . --full-path --color never -HI -a -L",
         },
-        statusline = {
-          hl = { fg = "fg", bg = "bg" },
-          { provider = " ", hl = { bg = "none" } },
-          lib.component.mode {
-            provider = " ",
-            mode_text = {},
-            surround = { separator = { "", "" } },
-            hl = { bold = true },
-          },
-          lib.component.git_branch { padding = { left = 2 }, surround = { separator = "none" } },
-          lib.component.file_info {
-            filetype = false,
-            filename = {},
-            file_modified = { hl = { fg = "git_added" }, padding = { left = 1 } },
-            file_read_only = {},
-            padding = { left = 2 },
-          },
-          lib.component.virtual_env { surround = { separator = "none" }, padding = { right = 1 } },
-          lib.component.git_diff(),
-          lib.component.diagnostics(),
-          lib.component.fill(),
-          lib.component.cmd_info(),
-          lib.component.lsp { on_click = false, surround = { separator = "none" }, padding = { right = 2, left = 2 } },
-          lib.component.fill(),
-          {
-            provider = function()
-              local fmt = vim.bo.fileformat
-              if fmt ~= "" then
-                local symbols = {
-                  unix = "",
-                  dos = "",
-                  mac = "",
-                }
-                return symbols[fmt]
-              end
-            end,
-            hl = { fg = "diag_INFO" },
-          },
-          lib.component.file_encoding { padding = { right = 2 } },
-          lib.component.treesitter { surround = { separator = "none" }, padding = { right = 2 } },
-          lib.component.file_info {
-            file_icon = { padding = { left = 0 } },
-            filename = false,
-            file_modified = false,
-            file_read_only = false,
-            surround = { separator = "none" },
-            padding = { right = 2 },
-          },
-          {
-            provider = function()
-              local function file_size_human_readable(file)
-                local size = vim.fn.getfsize(file)
-                if size <= 0 then
-                  return ""
-                end
-                local suffixes = { "b", "k", "M", "G" }
-                local i = 1
-                while size > 1024 and i < #suffixes do
-                  size = size / 1024
-                  i = i + 1
-                end
-                return string.format(i == 1 and "%d%s  " or "󰆓 %.1f%s  ", size, suffixes[i])
-              end
-
-              local file = vim.fn.expand "%:p"
-              if not file or file == "" then
+      },
+    },
+    keys = { { "<leader>,v", "<cmd>VenvSelect<cr>", desc = "Select virtual environment" } },
+    specs = {
+      {
+        "nvim-lualine/lualine.nvim",
+        opts = function(_, opts)
+          table.insert(opts.sections.lualine_x, 1, {
+            function()
+              local venv_path = require("venv-selector").venv()
+              if not venv_path or venv_path == "" then
                 return ""
               end
-              return file_size_human_readable(file)
+
+              local venv_name = vim.fn.fnamemodify(venv_path, ":t")
+              if not venv_name then
+                return ""
+              end
+
+              local output = "🐍 " .. venv_name .. " "
+              return output
             end,
-            hl = { fg = "diag_HINT" },
-          },
-          lib.component.mode {
-            provider = " %6(%l/%2L%):%2c",
-            surround = {
-              separator = { "", "" },
-            },
-            hl = { bold = true },
-            padding = { right = 1 },
-          },
-          { provider = " ", hl = { bg = "none" } },
-        },
-      }
-    end,
-    config = function(_, opts)
-      local heirline = require "heirline"
-      local heirline_components = require "heirline-components.all"
-
-      heirline_components.init.subscribe_to_events()
-      heirline.load_colors(heirline_components.hl.get_colors())
-      heirline.setup(opts)
-
-      vim.api.nvim_create_autocmd({ "BufAdd", "BufEnter", "TabNewEntered", "BufDelete" }, {
-        callback = function()
-          if #vim.t.bufs > 1 then
-            vim.o.showtabline = 2
-          elseif vim.o.showtabline ~= 1 then
-            vim.o.showtabline = 1
-          end
+            color = { fg = "#ebbcba" },
+            cond = function()
+              return os.getenv "VIRTUAL_ENV" ~= nil
+            end,
+          })
         end,
-      })
-    end,
-    keys = {
-      {
-        "<c-z>",
-        "<cmd>lua require('heirline-components.buffer').close_all(true)<cr>",
-        desc = "Close all buffer except current",
-      },
-      {
-        "<tab>",
-        "<cmd>lua require('heirline-components.buffer').nav(vim.v.count > 0 and vim.v.count or 1)<cr>",
-        desc = "Next Buffer",
-      },
-      {
-        "<s-tab>",
-        "<cmd>lua require('heirline-components.buffer').nav(-(vim.v.count > 0 and vim.v.count or 1))<cr>",
-        desc = "Previous Buffer",
-      },
-      {
-        "<a-right>",
-        "<cmd>lua require('heirline-components.buffer').move(vim.v.count > 0 and vim.v.count or 1)<cr>",
-        desc = "Move Buffer right",
-      },
-      {
-        "<a-left>",
-        "<cmd>lua require('heirline-components.buffer').move(-(vim.v.count > 0 and vim.v.count or 1))<cr>",
-        desc = "Move Buffer left",
-      },
-      {
-        "<leader>bp",
-        "<cmd>lua require('heirline-components.all').heirline.buffer_picker(function(bufnr) vim.api.nvim_win_set_buf(0, bufnr) end)<cr>",
-        desc = "Pick Buffer",
       },
     },
   },

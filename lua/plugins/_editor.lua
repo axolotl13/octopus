@@ -565,21 +565,6 @@ return {
     },
   },
   {
-    "linux-cultist/venv-selector.nvim",
-    opts = {
-      options = {
-        enable_default_searches = false,
-        notify_user_on_venv_activation = true,
-      },
-      search = {
-        venv = {
-          command = "fd '/bin/python$' . --full-path --color never -HI -a -L",
-        },
-      },
-    },
-    keys = { { "<leader>,v", "<cmd>VenvSelect<cr>", desc = "select virtual environment" } },
-  },
-  {
     "brenoprata10/nvim-highlight-colors",
     opts = {},
     keys = { { "<leader>c", "<cmd>HighlightColors Toggle<cr>", desc = "Toggle color highlight" } },
