@@ -331,13 +331,7 @@ return {
         "noice",
         "notify",
       },
-      handlers = {
-        gitsigns = {
-          signs = {
-            delete = "│",
-          },
-        },
-      },
+      handlers = { gitsigns = { signs = { delete = "│" } } },
     },
   },
   {
