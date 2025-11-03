@@ -48,7 +48,7 @@ return {
         "akinsho/bufferline.nvim",
         opts = function(_, opts)
           if (vim.g.colors_name or ""):find "catppuccin" then
-            opts.highlights = require("catppuccin.groups.integrations.bufferline").get_theme { styles = { "bold" } }
+            opts.highlights = require("catppuccin.special.bufferline").get_theme { styles = { "bold" } }
           end
         end,
       },
