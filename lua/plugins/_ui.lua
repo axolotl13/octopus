@@ -137,7 +137,7 @@ return {
         diagnostics = "nvim_lsp",
         diagnostics_indicator = function(count, level)
           local icons = require "octopus._icons"
-          local icon = level:match "error" and icons.hl.Bug or icons.hl.DiagnosticHint
+          local icon = level:match "error" and icons.common.Bug or icons.diag.Hint
           return count .. " " .. icon
         end,
         offsets = { { filetype = "NvimTree", separator = false } },
@@ -188,29 +188,19 @@ return {
         indent_markers = { enable = true },
         icons = {
           glyphs = {
-            default = require("octopus._icons").hl.Default,
-            symlink = require("octopus._icons").hl.Symlink,
-            bookmark = require("octopus._icons").hl.Bookmark,
-            modified = require("octopus._icons").hl.FileModified,
-            hidden = require("octopus._icons").hl.Hidden,
+            default = require("octopus._icons").common.DefaultFile,
+            bookmark = require("octopus._icons").common.BookmarkFilled,
+            modified = require("octopus._icons").common.FileModified,
             folder = {
-              arrow_open = require("octopus._icons").hl.ArrowOpen,
-              arrow_closed = require("octopus._icons").hl.ArrowClose,
-              default = require("octopus._icons").hl.Folder,
-              open = require("octopus._icons").hl.FolderOpen,
-              empty = require("octopus._icons").hl.Empty,
-              empty_open = require("octopus._icons").hl.EmptyOpen,
-              symlink = require("octopus._icons").hl.FolderSymlink,
-              symlink_open = require("octopus._icons").hl.SymlinkOpen,
+              default = require("octopus._icons").common.Folder,
+              open = require("octopus._icons").common.FolderOpen,
+              empty_open = require("octopus._icons").common.EmptyOpen,
+              symlink = require("octopus._icons").common.FolderSymlink,
             },
             git = {
-              unstaged = require("octopus._icons").hl.Unstaged,
-              staged = require("octopus._icons").hl.Staged,
-              unmerged = require("octopus._icons").hl.GitBranch,
-              renamed = require("octopus._icons").hl.Renamed,
-              untracked = require("octopus._icons").hl.Untracked,
-              deleted = require("octopus._icons").hl.Delete,
-              ignored = require("octopus._icons").hl.Ignored,
+              unmerged = require("octopus._icons").git.Branch,
+              untracked = require("octopus._icons").git.Untracked,
+              deleted = require("octopus._icons").git.Delete,
             },
           },
         },
@@ -219,10 +209,10 @@ return {
       diagnostics = {
         enable = true,
         icons = {
-          hint = require("octopus._icons").hl.DiagnosticHint,
-          info = require("octopus._icons").hl.DiagnosticInfo,
-          warning = require("octopus._icons").hl.DiagnosticWarn,
-          error = require("octopus._icons").hl.DiagnosticError,
+          hint = require("octopus._icons").diag.Hint,
+          info = require("octopus._icons").diag.Info,
+          warning = require("octopus._icons").diag.Warn,
+          error = require("octopus._icons").diag.Error,
         },
       },
       modified = { enable = true },
@@ -276,7 +266,7 @@ return {
   {
     "Bekaboo/dropbar.nvim",
     event = "UIEnter",
-    opts = { icons = { kinds = { symbols = require("octopus._icons").symbols } } },
+    opts = { icons = { kinds = { symbols = require("octopus._icons").kind } } },
   },
   { "MunifTanjim/nui.nvim", lazy = true },
   {
