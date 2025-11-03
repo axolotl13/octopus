@@ -335,9 +335,43 @@ return {
     },
   },
   {
-    "zeioth/heirline-components.nvim",
-    lazy = true,
-    opts = { icons = require("octopus._icons").hl },
+    "nvim-lualine/lualine.nvim",
+    event = "VeryLazy",
+    opts = {
+      options = {
+        section_separators = { left = "", right = "" },
+        component_separators = { left = "", right = "" },
+      },
+      sections = {
+        lualine_a = { { "mode", icon = "", separator = { right = "" } } },
+        lualine_b = {
+          "branch",
+          {
+            "diff",
+            symbols = { added = "󰐗 ", modified = "󰙦 ", removed = "󰍶 " },
+          },
+          "diagnostics",
+        },
+        lualine_c = {
+          {
+            "filename",
+            path = 4,
+            symbols = { modified = "", readonly = "" },
+          },
+          "filesize",
+        },
+        lualine_x = {
+          "selectioncount",
+          { "lsp_status", icon = "" },
+          "encoding",
+          { "fileformat", symbols = { unix = "" } },
+          "filetype",
+        },
+        lualine_y = { "progress" },
+        lualine_z = { "%5(%l/%2L%):%2c" },
+      },
+      extensions = { "lazy", "man", "mason", "nvim-tree", "toggleterm" },
+    },
   },
   {
     "linux-cultist/venv-selector.nvim",
