@@ -81,7 +81,7 @@ return {
     "OXY2DEV/markview.nvim",
     ft = { "markdown" },
     opts = {},
-    keys = { { "<leader>,m", "<cmd>Markview<cr>", desc = "Toggle Markview" } },
+    keys = { { "<leader>,m", "<cmd>Markview<cr>", desc = "toggle markview" } },
   },
   {
     "folke/flash.nvim",
@@ -113,7 +113,7 @@ return {
         function()
           require("flash").jump()
         end,
-        desc = "Flash",
+        desc = "flash",
       },
       {
         "<c-s>",
@@ -121,7 +121,7 @@ return {
         function()
           require("flash").toggle()
         end,
-        desc = "Toggle Flash Search",
+        desc = "toggle flash search",
       },
     },
     specs = {
@@ -167,7 +167,7 @@ return {
     priority = 1000,
     lazy = false,
     opts = {
-      bigfile = { size = 1.5 * 1024 * 1024 },
+      bigfile = {},
       image = {},
       indent = {
         scope = {
@@ -195,6 +195,7 @@ return {
             and included_filetypes[filetype]
         end,
       },
+      input = {},
       lazygit = {},
       notifier = {},
       picker = {
@@ -235,6 +236,7 @@ return {
           "__pycache__",
         },
       },
+      scroll = { enabled = false },
       statuscolumn = {
         folds = {
           open = true,
@@ -257,171 +259,213 @@ return {
       {
         "<leader>sB",
         function()
-          Snacks.picker.git_branches()
+          require("snacks").picker.git_branches()
         end,
-        desc = "Git Branches",
+        desc = "git branches",
       },
       {
         "<leader>sc",
         function()
-          Snacks.picker.git_log()
+          require("snacks").picker.git_log()
         end,
-        desc = "Git Log",
+        desc = "git log",
       },
       {
         "<leader>sS",
         function()
-          Snacks.picker.git_status()
+          require("snacks").picker.git_status()
         end,
-        desc = "Git Status",
+        desc = "git status",
       },
       {
         "<leader>sm",
         function()
-          Snacks.picker.marks()
+          require("snacks").picker.marks()
         end,
-        desc = "Marks",
+        desc = "marks",
       },
       {
         "<leader>sT",
         function()
-          Snacks.picker.git_stash()
+          require("snacks").picker.git_stash()
         end,
-        desc = "Git Stash",
+        desc = "git stash",
       },
       {
         "<leader>sD",
         function()
-          Snacks.picker.git_diff()
+          require("snacks").picker.git_diff()
         end,
-        desc = "Git Diff (Hunks)",
+        desc = "git diff (hunks)",
+      },
+      {
+        "<leader>gL",
+        function()
+          require("snacks").git.blame_line()
+        end,
+        desc = "git blame line",
+      },
+      {
+        "<leader>gw",
+        function()
+          require("snacks").gitbrowse()
+        end,
+        desc = "git browse",
       },
       {
         "<leader>sf",
         function()
-          Snacks.picker.files()
+          require("snacks").picker.files()
         end,
-        desc = "Find Files",
+        desc = "find files",
       },
       {
         "<leader>sb",
         function()
-          Snacks.picker.buffers()
+          require("snacks").picker.buffers()
         end,
-        desc = "Buffers",
+        desc = "buffers",
       },
       {
         "<leader>ss",
         function()
-          Snacks.picker.grep()
+          require("snacks").picker.grep()
         end,
-        desc = "Grep",
+        desc = "grep",
       },
       {
         "<leader>sW",
         mode = { "n", "x" },
         function()
-          Snacks.picker.grep_word()
+          require("snacks").picker.grep_word()
         end,
-        desc = "Visual selection or word",
+        desc = "visual selection or word",
       },
       {
         "<leader>sw",
         function()
-          Snacks.picker.lines()
+          require("snacks").picker.lines()
         end,
-        desc = "Buffer lines",
+        desc = "buffer lines",
       },
       {
         "<leader>sx",
         function()
-          Snacks.picker.command_history()
+          require("snacks").picker.command_history()
         end,
-        desc = "Command History",
+        desc = "command history",
       },
       {
         "<leader>sP",
         function()
-          Snacks.picker.projects()
+          require("snacks").picker.projects()
         end,
-        desc = "Projects",
+        desc = "projects",
       },
       {
         "<leader>sr",
         function()
-          Snacks.picker.recent()
+          require("snacks").picker.recent()
         end,
-        desc = "Recent",
+        desc = "recent",
       },
       {
         "<leader>sd",
         function()
-          Snacks.picker.diagnostics_buffer()
+          require("snacks").picker.diagnostics_buffer()
         end,
-        desc = "Buffer Diagnostics",
+        desc = "buffer diagnostics",
       },
       {
         "<leader>si",
         function()
-          Snacks.picker.icons()
+          require("snacks").picker.icons()
         end,
-        desc = "Icons",
+        desc = "icons",
       },
       {
         "<leader>sk",
         function()
-          Snacks.picker.keymaps()
+          require("snacks").picker.keymaps()
         end,
-        desc = "Keymaps",
+        desc = "keymaps",
       },
       {
         "<leader>sl",
         function()
-          Snacks.picker.lazy()
+          require("snacks").picker.lazy()
         end,
-        desc = "Search for Plugin Spec",
+        desc = "search for plugin spec",
       },
       {
         "<leader>su",
         function()
-          Snacks.picker.undo()
+          require("snacks").picker.undo()
         end,
-        desc = "Undo History",
+        desc = "undo history",
       },
       {
         "<leader>st",
         function()
-          Snacks.picker.colorschemes()
+          require("snacks").picker.colorschemes()
         end,
-        desc = "Colorschemes",
+        desc = "colorschemes",
       },
       {
         "<leader>sy",
         function()
-          Snacks.picker.lsp_symbols()
+          require("snacks").picker.lsp_symbols()
         end,
-        desc = "LSP Symbol",
+        desc = "lsp symbol",
       },
       {
         "<leader>sn",
         function()
-          Snacks.picker.notifications()
+          require("snacks").picker.notifications()
         end,
-        desc = "Notifications",
+        desc = "notifications",
       },
       {
         "<leader>,l",
         function()
-          Snacks.lazygit()
+          require("snacks").lazygit()
         end,
-        desc = "Lazygit",
+        desc = "lazygit",
+      },
+      {
+        "<leader>,a",
+        function()
+          require("snacks").toggle.animate():toggle()
+        end,
+        desc = "toggle animation",
+      },
+      {
+        "<leader>,s",
+        function()
+          require("snacks").toggle.scroll():toggle()
+        end,
+        desc = "toggle scroll",
+      },
+      {
+        "<leader>,i",
+        function()
+          require("snacks").toggle.indent():toggle()
+        end,
+        desc = "toggle indent guides",
       },
       {
         "<leader>z",
         function()
-          Snacks.zen()
+          require("snacks").toggle.zen():toggle()
         end,
-        desc = "Toggle ZenMode",
+        desc = "toggle zenmode",
+      },
+      {
+        "<leader>se",
+        function()
+          require("snacks").explorer()
+        end,
+        desc = "toggle explorer",
       },
     },
     specs = {
@@ -458,18 +502,18 @@ return {
       },
     },
     keys = {
-      { "<leader>do", "<cmd>DiffviewOpen<cr>", desc = "Open Diffview" },
-      { "<leader>dq", "<cmd>DiffviewClose<cr>", desc = "Close Diffview" },
-      { "<leader>df", "<cmd>DiffviewToggleFiles<cr>", desc = "Toggle file panel" },
-      { "<leader>dh", "<cmd>DiffviewFileHistory<cr>", desc = "History current branch" },
-      { "<leader>dd", "<cmd>DiffviewFileHistory %<cr>", desc = "History current file" },
+      { "<leader>do", "<cmd>DiffviewOpen<cr>", desc = "open (diffview)" },
+      { "<leader>dq", "<cmd>DiffviewClose<cr>", desc = "close (diffview)" },
+      { "<leader>df", "<cmd>DiffviewToggleFiles<cr>", desc = "toggle file panel (diffview)" },
+      { "<leader>dh", "<cmd>DiffviewFileHistory<cr>", desc = "history current branch (diffview)" },
+      { "<leader>dd", "<cmd>DiffviewFileHistory %<cr>", desc = "history current file (diffview)" },
     },
   },
   {
     "HakonHarnes/img-clip.nvim",
     ft = { "markdown", "html", "tex" },
     opts = {},
-    keys = { { "<leader>,P", "<cmd>PasteImage<cr>", desc = "Paste image from clipboard" } },
+    keys = { { "<leader>,P", "<cmd>PasteImage<cr>", desc = "paste image from clipboard (img-clip)" } },
     specs = {
       {
         "folke/snacks.nvim",
@@ -485,7 +529,7 @@ return {
                 end,
               }
             end,
-            desc = "Insert image from file",
+            desc = "insert image from file (img-clip)",
           },
         },
       },
@@ -504,19 +548,19 @@ return {
         },
       },
     },
-    keys = { { "<leader>,v", "<cmd>VenvSelect<cr>", desc = "Select virtual environment" } },
+    keys = { { "<leader>,v", "<cmd>VenvSelect<cr>", desc = "select virtual environment" } },
   },
   {
     "brenoprata10/nvim-highlight-colors",
     opts = {},
-    keys = { { "<leader>c", "<cmd>HighlightColors Toggle<cr>", desc = "Toggle Highlight Colors" } },
+    keys = { { "<leader>c", "<cmd>HighlightColors Toggle<cr>", desc = "toggle highlight colors" } },
   },
   {
     "CRAG666/code_runner.nvim",
     dependencies = { "akinsho/toggleterm.nvim" },
     cmd = { "RunCode", "RunFile" },
     opts = {},
-    keys = { { "<f5>", "<cmd>RunCode<cr>", desc = "Run Code" } },
+    keys = { { "<f5>", "<cmd>RunCode<cr>", desc = "run code" } },
   },
   {
     "akinsho/toggleterm.nvim",
@@ -525,7 +569,7 @@ return {
       start_in_insert = true,
       highlights = { Normal = { link = "Normal" } },
     },
-    keys = { { "<leader>tt", "<cmd>ToggleTerm direction=horizontal<cr>", desc = "Toggle Terminal" } },
+    keys = { { "<leader>tt", "<cmd>ToggleTerm direction=horizontal<cr>", desc = "toggle terminal" } },
     specs = { { "CRAG666/code_runner.nvim", opts = { mode = "toggleterm" } } },
   },
   {
@@ -560,10 +604,10 @@ return {
       })
     end,
     keys = {
-      { "<leader>xs", "<cmd>lua require('resession').save()<cr>", desc = "Save Session" },
-      { "<leader>xt", "<cmd>lua require('resession').save_tab()<cr>", desc = "Save Tab Session" },
-      { "<leader>xl", "<cmd>lua require('resession').load()<cr>", desc = "Load Session" },
-      { "<leader>xd", "<cmd>lua require('resession').delete()<cr>", desc = "Delete Session" },
+      { "<leader>xs", "<cmd>lua require('resession').save()<cr>", desc = "save session" },
+      { "<leader>xt", "<cmd>lua require('resession').save_tab()<cr>", desc = "save tab session" },
+      { "<leader>xl", "<cmd>lua require('resession').load()<cr>", desc = "load session" },
+      { "<leader>xd", "<cmd>lua require('resession').delete()<cr>", desc = "delete session" },
     },
   },
   {
@@ -575,7 +619,7 @@ return {
         function()
           require("grug-far").open { transient = true }
         end,
-        desc = "Replace",
+        desc = "replace",
       },
       {
         "<leader>rw",
@@ -587,7 +631,7 @@ return {
             vim.notify("No word under cursor", vim.log.levels.WARN, { title = "Grug-far" })
           end
         end,
-        desc = "Replace current word",
+        desc = "replace current word",
       },
       {
         "<leader>rf",
@@ -595,7 +639,7 @@ return {
           local ext = vim.bo.buftype == "" and vim.fn.expand "%"
           require("grug-far").open { transient = true, prefills = { paths = ext } }
         end,
-        desc = "Replace file",
+        desc = "replace file",
       },
       {
         "<leader>rW",
@@ -603,7 +647,7 @@ return {
           local ext = vim.bo.buftype == "" and vim.fn.expand "%"
           require("grug-far").open { transient = true, prefills = { paths = ext, search = vim.fn.expand "<cword>" } }
         end,
-        desc = "Replace current word in file",
+        desc = "replace current word in file",
       },
     },
     specs = {
@@ -621,15 +665,15 @@ return {
   {
     "brianhuster/live-preview.nvim",
     opts = { sync_scroll = true },
-    keys = { { "<leader>,p", "<cmd>LivePreview start<cr>", desc = "Live Preview" } },
+    keys = { { "<leader>,p", "<cmd>LivePreview start<cr>", desc = "live preview" } },
   },
   {
     "hat0uma/csvview.nvim",
     cmd = { "CsvViewEnable", "CsvViewDisable", "CsvViewToggle" },
     opts = {},
     keys = {
-      { "<leader>,xx", "<cmd>CsvViewToggle<cr>", desc = "Toggle CSV View" },
-      { "<leader>,xy", "<cmd>CsvViewToggle display_mode=border header_lnum=1<cr>", desc = "Toggle CSV View Options" },
+      { "<leader>,xx", "<cmd>CsvViewToggle<cr>", desc = "toggle csv view" },
+      { "<leader>,xy", "<cmd>CsvViewToggle display_mode=border header_lnum=1<cr>", desc = "toggle csv view options" },
     },
   },
 }
