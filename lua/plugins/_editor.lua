@@ -174,7 +174,7 @@ return {
           underline = true,
           only_current = true,
         },
-        animate = { enabled = false },
+        animate = { enabled = true },
         filter = function(buf)
           local included_filetypes = {
             html = true,
@@ -236,7 +236,7 @@ return {
           "__pycache__",
         },
       },
-      scroll = { enabled = false },
+      scroll = { enabled = true },
       statuscolumn = {
         folds = {
           open = true,
@@ -250,10 +250,27 @@ return {
         },
       },
     },
-    config = function(_, opts)
-      require("snacks").setup(opts)
-      local notify = vim.notify
-      vim.notify = notify
+    init = function()
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "VeryLazy",
+        callback = function()
+          local snacks = require "snacks"
+
+          snacks.toggle.option("spell", { name = "Spelling" }):map "<leader>,e"
+          snacks.toggle.option("wrap", { name = "Wrap" }):map "<leader>,w"
+          snacks.toggle.option("relativenumber", { name = "Relative Number" }):map "<leader>n"
+          snacks.toggle.diagnostics():map "<leader>,d"
+          snacks.toggle
+            .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
+            :map "<leader>,c"
+          snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map "<leader>,b"
+          snacks.toggle.inlay_hints():map "gh"
+          snacks.toggle.animate():map "<leader>,a"
+          snacks.toggle.indent():map "<leader>,i"
+          snacks.toggle.scroll():map "<leader>,s"
+          snacks.toggle.zen():map "<leader>z"
+        end,
+      })
     end,
     keys = {
       {
@@ -412,13 +429,6 @@ return {
         desc = "colorschemes",
       },
       {
-        "<leader>sy",
-        function()
-          require("snacks").picker.lsp_symbols()
-        end,
-        desc = "lsp symbol",
-      },
-      {
         "<leader>sn",
         function()
           require("snacks").picker.notifications()
@@ -433,34 +443,6 @@ return {
         desc = "lazygit",
       },
       {
-        "<leader>,a",
-        function()
-          require("snacks").toggle.animate():toggle()
-        end,
-        desc = "toggle animation",
-      },
-      {
-        "<leader>,s",
-        function()
-          require("snacks").toggle.scroll():toggle()
-        end,
-        desc = "toggle scroll",
-      },
-      {
-        "<leader>,i",
-        function()
-          require("snacks").toggle.indent():toggle()
-        end,
-        desc = "toggle indent guides",
-      },
-      {
-        "<leader>z",
-        function()
-          require("snacks").toggle.zen():toggle()
-        end,
-        desc = "toggle zenmode",
-      },
-      {
         "<leader>se",
         function()
           require("snacks").explorer()
@@ -469,6 +451,53 @@ return {
       },
     },
     specs = {
+      {
+        "neovim/nvim-lspconfig",
+        keys = {
+          {
+            "grd",
+            function()
+              require("snacks").picker.lsp_definitions()
+            end,
+            desc = "goto definition",
+          },
+          {
+            "grD",
+            function()
+              require("snacks").picker.lsp_declarations()
+            end,
+            desc = "goto declaration",
+          },
+          {
+            "grr",
+            function()
+              require("snacks").picker.lsp_references()
+            end,
+            desc = "references",
+          },
+          {
+            "gri",
+            function()
+              require("snacks").picker.lsp_implementations()
+            end,
+            desc = "goto implementation",
+          },
+          {
+            "grt",
+            function()
+              require("snacks").picker.lsp_type_definitions()
+            end,
+            desc = "goto type definition",
+          },
+          {
+            "gry",
+            function()
+              require("snacks").picker.lsp_symbols()
+            end,
+            desc = "lsp symbols",
+          },
+        },
+      },
       {
         "olimorris/codecompanion.nvim",
         opts = {
