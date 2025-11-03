@@ -1,26 +1,21 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    event = { "BufReadPost", "BufNewFile", "BufWritePre" },
-    dependencies = {
-      { "AstroNvim/astrolsp" },
-      { "williamboman/mason-lspconfig.nvim" },
-    },
+    lazy = false,
+    dependencies = { "mason-org/mason-lspconfig.nvim" },
     opts = {
       diagnostics = {
         underline = true,
         update_in_insert = false,
-        virtual_text = false,
-        virtual_lines = {
-          current_line = true,
-        },
+        virtual_text = { prefix = "" },
+        -- virtual_lines = { current_line = true },
         severity_sort = true,
         signs = {
           text = {
-            [vim.diagnostic.severity.ERROR] = require("octopus._icons").hl.DiagnosticError,
-            [vim.diagnostic.severity.WARN] = require("octopus._icons").hl.DiagnosticWarn,
-            [vim.diagnostic.severity.HINT] = require("octopus._icons").hl.DiagnosticHint,
-            [vim.diagnostic.severity.INFO] = require("octopus._icons").hl.DiagnosticInfo,
+            [vim.diagnostic.severity.ERROR] = require("octopus._icons").diag.Error,
+            [vim.diagnostic.severity.WARN] = require("octopus._icons").diag.Warn,
+            [vim.diagnostic.severity.HINT] = require("octopus._icons").diag.Hint,
+            [vim.diagnostic.severity.INFO] = require("octopus._icons").diag.Info,
           },
           linehl = {
             [vim.diagnostic.severity.ERROR] = "Error",
@@ -30,126 +25,23 @@ return {
           },
         },
       },
-    },
-    config = function(_, opts)
-      if type(opts.diagnostics.signs) ~= "boolean" then
-        for severity, icon in pairs(opts.diagnostics.signs.text) do
-          local name = vim.diagnostic.severity[severity]:lower():gsub("^%l", string.upper)
-          name = "DiagnosticSign" .. name
-          vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
-        end
-      end
-      vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
-    end,
-    keys = {
-      {
-        "[d",
-        function()
-          vim.diagnostic.goto_prev()
-        end,
-        desc = "Previous Diagnostic",
-      },
-      {
-        "]d",
-        function()
-          vim.diagnostic.goto_next()
-        end,
-        desc = "Next Diagnostic",
-      },
-      {
-        "<c-w>d",
-        function()
-          vim.diagnostic.open_float()
-        end,
-        desc = "Hover Diagnostic",
-      },
-    },
-  },
-  {
-    "AstroNvim/astrolsp",
-    opts = {
-      features = {
-        codelens = true,
-        inlay_hints = true,
-        semantic_tokens = true,
-      },
-      autocmds = {
-        lsp_document_highlight = {
-          cond = "textDocument/documentHighlight",
-          {
-            event = { "CursorHold", "CursorHoldI" },
-            desc = "Document Highlighting",
-            callback = function()
-              vim.lsp.buf.document_highlight()
-            end,
-          },
-          {
-            event = { "CursorMoved", "CursorMovedI", "BufLeave" },
-            desc = "Document Highlighting Clear",
-            callback = function()
-              vim.lsp.buf.clear_references()
-            end,
-          },
-        },
-        lsp_codelens_refresh = {
-          cond = "textDocument/codeLens",
-          {
-            event = { "InsertLeave", "BufEnter" },
-            desc = "Refresh codelens (buffer)",
-            callback = function(args)
-              if require("astrolsp").config.features.codelens then
-                vim.lsp.codelens.refresh { bufnr = args.buf }
-              end
-            end,
-          },
-        },
-        lsp_auto_format = {
-          cond = "textDocument/formatting",
-          {
-            event = "BufWritePre",
-            desc = "Autoformat on save",
-            callback = function(_, _, bufnr)
-              local astrolsp = require "astrolsp"
-              local autoformat = assert(astrolsp.config.formatting.format_on_save)
-              local buffer_autoformat = vim.b[bufnr].autoformat
-              if buffer_autoformat == nil then
-                buffer_autoformat = autoformat.enabled
-              end
-              if buffer_autoformat and ((not autoformat.filter) or autoformat.filter(bufnr)) then
-                vim.lsp.buf.format(vim.tbl_deep_extend("force", astrolsp.format_opts, { bufnr = bufnr }))
-              end
-            end,
-          },
-        },
-        no_insert_inlay_hints = {
-          cond = vim.lsp.inlay_hint and "textDocument/inlayHint" or false,
-          {
-            event = "InsertEnter",
-            desc = "Disable inlay hints on insert",
-            callback = function(args)
-              local filter = { bufnr = args.buf }
-              if vim.lsp.inlay_hint.is_enabled(filter) then
-                vim.lsp.inlay_hint.enable(false, filter)
-                vim.api.nvim_create_autocmd("InsertLeave", {
-                  buffer = args.buf,
-                  once = true,
-                  callback = function()
-                    vim.lsp.inlay_hint.enable(true, filter)
-                  end,
-                })
-              end
-            end,
-          },
-        },
-      },
       capabilities = vim.lsp.protocol.make_client_capabilities(),
-      config = {
+      inlay_hints = { enabled = true },
+      codelens = { enabled = true },
+      servers = {
         basedpyright = {
           settings = {
             basedpyright = {
               analysis = {
-                typeCheckingMode = "standard",
                 autoImportCompletions = true,
+                autoSearchPaths = true,
+                useLibraryCodeForTypes = true,
+                typeCheckingMode = "standard",
+              },
+              python = {
+                analysis = {
+                  diagnosticMode = "workspace",
+                },
               },
             },
           },
@@ -157,52 +49,20 @@ return {
         cssls = { init_options = { provideFormatter = false } },
         html = { init_options = { provideFormatter = false } },
         jsonls = {
-          on_new_config = function(config)
-            if not config.settings.json.schemas then
-              config.settings.json.schemas = {}
-            end
-            vim.list_extend(config.settings.json.schemas, require("schemastore").json.schemas())
+          on_new_config = function(new_config)
+            new_config.settings.json.schemas = new_config.settings.json.schemas or {}
+            vim.list_extend(new_config.settings.json.schemas, require("schemastore").json.schemas())
           end,
           settings = {
-            json = {
-              validate = { enable = true },
-            },
+            json = { validate = { enable = true } },
           },
         },
         lua_ls = {
           settings = {
             Lua = {
               hint = { enable = true, arrayIndex = "Disable" },
-              diagnostics = {
-                globals = { "vim" },
-              },
-              workspace = {
-                checkThirdParty = false,
-              },
-              telemetry = {
-                enable = false,
-              },
-            },
-          },
-        },
-        ruff = {
-          on_attach = function(client)
-            client.server_capabilities.hoverProvider = false
-          end,
-        },
-        yamlls = {
-          on_new_config = function(config)
-            config.settings.yaml.schemas =
-              vim.tbl_deep_extend("force", config.settings.yaml.schemas or {}, require("schemastore").yaml.schemas())
-          end,
-          settings = {
-            redhat = { telemetry = { enabled = false } },
-            yaml = {
-              validate = true,
-              schemaStore = {
-                enable = false,
-                url = "",
-              },
+              diagnostics = { globals = { "vim" } },
+              workspace = { checkThirdParty = false },
             },
           },
         },
@@ -253,66 +113,137 @@ return {
             },
           },
         },
-      },
-      defaults = { hover = false, signature_help = false },
-      formatting = {
-        format_on_save = {
-          enabled = false,
-        },
-      },
-      mappings = {
-        n = {
-          grd = { vim.lsp.buf.definition, desc = "Goto Definition", cond = "textDocument/definition" },
-          gri = { vim.lsp.buf.implementation, desc = "Goto Implementation", cond = "textDocument/implementation" },
-          grr = { vim.lsp.buf.references, desc = "References", cond = "textDocument/references" },
-          grt = { vim.lsp.buf.type_definition, desc = "Goto Type Definition", cond = "textDocument/typeDefinition" },
-          grD = { vim.lsp.buf.declaration, desc = "Goto Declaration", cond = "textDocument/declaration" },
-          grn = { vim.lsp.buf.rename, desc = "Rename", cond = "textDocument/rename" },
-          gra = { vim.lsp.buf.code_action, desc = "Code Action", cond = "textDocument/codeAction" },
-          ["<leader>f"] = {
-            function()
-              vim.lsp.buf.format()
-            end,
-            desc = "Format Buffer",
-            cond = "textDocument/formatting",
-          },
-          grK = {
-            function()
-              vim.lsp.buf.signature_help()
-            end,
-            desc = "Signature Help",
-            cond = "textDocument/signatureHelp",
-          },
-          grh = {
-            function()
-              require("astrolsp.toggles").buffer_inlay_hints()
-            end,
-            desc = "Toggle Inlay Hints",
-            cond = vim.lsp.inlay_hint and "textDocument/inlayHint" or false,
+        yamlls = {
+          on_new_config = function(new_config)
+            new_config.settings.yaml.schemas = vim.tbl_deep_extend(
+              "force",
+              new_config.settings.yaml.schemas or {},
+              require("schemastore").yaml.schemas()
+            )
+          end,
+          settings = {
+            redhat = { telemetry = { enabled = false } },
+            yaml = {
+              validate = true,
+              schemaStore = {
+                enable = false,
+                url = "",
+              },
+            },
           },
         },
       },
     },
-    specs = {
-      {
-        "williamboman/mason-lspconfig.nvim",
-        opts = {
-          handlers = {
-            function(server)
-              require("astrolsp").lsp_setup(server)
-            end,
+    config = function(_, opts)
+      vim.diagnostic.config(opts.diagnostics)
+
+      vim.lsp.config("*", {
+        capabilities = {
+          textDocument = {
+            semanticTokens = { multilineTokenSupport = true },
+            foldingRange = {
+              dynamicRegistration = true,
+              lineFoldingOnly = true,
+            },
           },
         },
-        config = function(_, opts)
-          require("astrolsp.mason-lspconfig").register_servers()
-          require("mason-lspconfig").setup(opts)
+      })
+
+      vim.api.nvim_create_autocmd("LspAttach", {
+        group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
+        callback = function(event)
+          local function client_supports_method(client, method, bufnr)
+            return client:supports_method(method, bufnr)
+          end
+
+          local client = assert(vim.lsp.get_client_by_id(event.data.client_id))
+          local bufnr = event.buf
+
+          if
+            client
+            and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, bufnr)
+          then
+            local highlight_augroup = vim.api.nvim_create_augroup("lsp-highlight", { clear = false })
+            vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+              buffer = bufnr,
+              group = highlight_augroup,
+              callback = vim.lsp.buf.document_highlight,
+            })
+
+            vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+              buffer = bufnr,
+              group = highlight_augroup,
+              callback = vim.lsp.buf.clear_references,
+            })
+
+            vim.api.nvim_create_autocmd("LspDetach", {
+              group = vim.api.nvim_create_augroup("lsp-detach", { clear = true }),
+              callback = function(event2)
+                vim.lsp.buf.clear_references()
+                vim.api.nvim_clear_autocmds { group = "lsp-highlight", buffer = event2.buf }
+              end,
+            })
+          end
+
+          if opts.inlay_hints.enabled then
+            if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, bufnr) then
+              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = bufnr })
+            end
+          end
+
+          if opts.codelens.enabled then
+            if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_codeLens, bufnr) then
+              vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+                buffer = bufnr,
+                callback = vim.lsp.codelens.refresh,
+              })
+            end
+          end
+
+          if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_foldingRange) then
+            local win = vim.api.nvim_get_current_win()
+            vim.wo[win][0].foldexpr = "v:lua.vim.lsp.foldexpr()"
+          end
         end,
+      })
+
+      for name, config in pairs(opts.servers) do
+        vim.lsp.config(name, config)
+      end
+    end,
+    keys = {
+      {
+        "gh",
+        function()
+          vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+        end,
+        desc = "Toggle inlay hint",
+      },
+      {
+        "gK",
+        function()
+          local new_config = not vim.diagnostic.config().virtual_lines
+          vim.diagnostic.config { virtual_lines = new_config }
+        end,
+        desc = "Toggle virtual lines",
+      },
+      {
+        "grh",
+        function()
+          vim.diagnostic.open_float()
+        end,
+        desc = "Hover diagnostic",
       },
     },
   },
   {
-    "williamboman/mason-lspconfig.nvim",
-    dependencies = { "williamboman/mason.nvim" },
+    "mason-org/mason.nvim",
+    opts = { ui = { keymaps = { uninstall_package = "d" } } },
+    keys = { { "<leader>,M", "<cmd>Mason<cr>", desc = "Open mason" } },
+  },
+  {
+    "mason-org/mason-lspconfig.nvim",
+    dependencies = { { "mason-org/mason.nvim" } },
     opts = {
       ensure_installed = {
         "basedpyright",
@@ -334,24 +265,6 @@ return {
         "yamlls",
       },
     },
-  },
-  {
-    "mason-org/mason.nvim",
-    opts = { ui = { keymaps = { uninstall_package = "d" }, }, },
-    keys = { { "<leader>,M", "<cmd>Mason<cr>", desc = "Open Mason" } },
-  },
-  {
-    "AstroNvim/astrolsp",
-    opts = function(_, opts)
-      opts.capabilities = vim.tbl_deep_extend("force", opts.capabilities, {
-        textDocument = {
-          foldingRange = {
-            dynamicRegistration = false,
-            lineFoldingOnly = true,
-          },
-        },
-      })
-    end,
   },
   {
     "stevearc/conform.nvim",
@@ -382,7 +295,7 @@ return {
         function()
           require("conform").format { async = true }
         end,
-        desc = "Format Buffer with Conform",
+        desc = "Format buffer with conform",
       },
     },
   },
