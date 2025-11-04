@@ -724,4 +724,29 @@ return {
       { "<leader>,xy", "<cmd>CsvViewToggle display_mode=border header_lnum=1<cr>", desc = "Toggle csv view options" },
     },
   },
+  {
+    "benlubas/molten-nvim",
+    version = "^1.0.0",
+    build = ":UpdateRemotePlugins",
+    keys = {
+      { "<leader>mi", "<cmd>MoltenInit<cr>", desc = "Initialize molten" },
+      { "<leader>mw", "<cmd>noautocmd MoltenEnterOutput<cr>", desc = "Open output window" },
+      { "<leader>mq", "<cmd>MoltenDeinit<cr>", desc = "Close molten" },
+      { "<leader>mn", "<cmd>MoltenNext<cr>", desc = "Jump to the next code" },
+      { "<leader>mp", "<cmd>MoltenPrev<cr>", desc = "Jump to the previous code" },
+      { "<leader>mr", "<cmd>MoltenReevaluateCell<cr>", desc = "Re-eval cel" },
+      { "<leader>mh", "<cmd>MoltenHideOutput<cr>", desc = "Close output window" },
+      { "<leader>md", "<cmd>MoltenDelete<cr>", desc = "Delete molten cell" },
+      { "<leader>ml", "<cmd>MoltenEvaluateLine<cr>", desc = "Evaluate line" },
+      { "<leader>ms", mode = { "x" }, ":<c-u>MoltenEvaluateVisual<cr>gv", desc = "Execute visual selection" },
+    },
+    specs = {
+      {
+        "folke/which-key.nvim",
+        opts = function(_, opts)
+          table.insert(opts.spec, { { "<leader>m", group = "molten", icon = { icon = " ", color = "blue" } } })
+        end,
+      },
+    },
+  },
 }
