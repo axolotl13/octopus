@@ -52,7 +52,13 @@ return {
     },
     specs = {
       {
-        "Saghen/blink.cmp",
+        "folke/which-key.nvim",
+        opts = function(_, opts)
+          table.insert(opts.spec, { { "<leader>i", group = "ia", icon = { icon = "󱙺 ", color = "orange" } } })
+        end,
+      },
+      {
+        "saghen/blink.cmp",
         opts = { sources = { per_filetype = { codecompanion = { "codecompanion" } } } },
       },
       {

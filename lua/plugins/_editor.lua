@@ -7,17 +7,9 @@ return {
       spec = {
         {
           { "<leader>b", group = "buffer" },
-          { "<leader>c", icon = { icon = " ", color = "gray" } },
           { "<leader>d", group = "diff", icon = { icon = " ", color = "green" } },
-          { "<leader>e", icon = { icon = "󰉌 ", color = "orange" } },
-          { "<leader>g", group = "git" },
-          { "<leader>i", group = "ia", icon = { icon = "󱙺 ", color = "orange" } },
           { "<leader>p", group = "lazy", icon = { icon = "󰒲 ", color = "cyan" } },
-          { "<leader>r", group = "replace", icon = "󰛔 " },
-          { "<leader>s", group = "search" },
           { "<leader>t", group = "tabs" },
-          { "<leader>x", group = "session" },
-          { "<leader>,", group = "more", icon = { icon = " ", color = "red" } },
           { "[", group = "prev" },
           { "]", group = "next" },
           { "g", group = "goto" },
@@ -69,6 +61,14 @@ return {
         map("n", "<leader>gh", gs.toggle_deleted, "Toggle git show deleted")
         map("n", "<leader>gn", gs.toggle_numhl, "Toggle numhl")
       end,
+    },
+    specs = {
+      {
+        "folke/which-key.nvim",
+        opts = function(_, opts)
+          table.insert(opts.spec, { { "<leader>g", group = "git" } })
+        end,
+      },
     },
   },
   {
@@ -452,6 +452,18 @@ return {
     },
     specs = {
       {
+        "folke/which-key.nvim",
+        opts = function(_, opts)
+          table.insert(
+            opts.spec,
+            {
+              { "<leader>s", group = "search" },
+              { "<leader>,", group = "more", icon = { icon = " ", color = "red" } },
+            }
+          )
+        end,
+      },
+      {
         "neovim/nvim-lspconfig",
         keys = {
           {
@@ -568,6 +580,14 @@ return {
     "brenoprata10/nvim-highlight-colors",
     opts = {},
     keys = { { "<leader>c", "<cmd>HighlightColors Toggle<cr>", desc = "Toggle color highlight" } },
+    specs = {
+      {
+        "folke/which-key.nvim",
+        opts = function(_, opts)
+          table.insert(opts.spec, { { "<leader>c", icon = { icon = " ", color = "gray" } } })
+        end,
+      },
+    },
   },
   {
     "CRAG666/code_runner.nvim",
@@ -623,6 +643,14 @@ return {
       { "<leader>xl", "<cmd>lua require('resession').load()<cr>", desc = "Load session" },
       { "<leader>xd", "<cmd>lua require('resession').delete()<cr>", desc = "Delete session" },
     },
+    specs = {
+      {
+        "folke/which-key.nvim",
+        opts = function(_, opts)
+          table.insert(opts.spec, { { "<leader>x", group = "session" } })
+        end,
+      },
+    },
   },
   {
     "MagicDuck/grug-far.nvim",
@@ -665,6 +693,12 @@ return {
       },
     },
     specs = {
+      {
+        "folke/which-key.nvim",
+        opts = function(_, opts)
+          table.insert(opts.spec, { { "<leader>r", group = "replace", icon = "󰛔 " } })
+        end,
+      },
       {
         "saghen/blink.cmp",
         opts = {

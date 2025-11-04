@@ -250,6 +250,12 @@ return {
     },
     specs = {
       {
+        "folke/which-key.nvim",
+        opts = function(_, opts)
+          table.insert(opts.spec, { { "<leader>e", icon = { icon = "󰉌 ", color = "orange" } } })
+        end,
+      },
+      {
         "akinsho/toggleterm.nvim",
         opts = {
           on_open = function(_)
