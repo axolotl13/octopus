@@ -454,13 +454,10 @@ return {
       {
         "folke/which-key.nvim",
         opts = function(_, opts)
-          table.insert(
-            opts.spec,
-            {
-              { "<leader>s", group = "search" },
-              { "<leader>,", group = "more", icon = { icon = " ", color = "red" } },
-            }
-          )
+          table.insert(opts.spec, {
+            { "<leader>s", group = "search" },
+            { "<leader>,", group = "more", icon = { icon = " ", color = "red" } },
+          })
         end,
       },
       {
