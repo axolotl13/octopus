@@ -150,14 +150,8 @@ return {
       { "<a-left>", "<cmd>BufferLineMovePrev<cr>", desc = "Move buffer left" },
       { "<a-right>", "<cmd>BufferLineMoveNext<cr>", desc = "Move buffer right" },
       { "<leader>bp", "<cmd>BufferLinePick<cr>", desc = "Pick buffer" },
-      {
-        "<c-z>",
-        function()
-          vim.cmd "BufferLineCloseRight"
-          vim.cmd "BufferLineCloseLeft"
-        end,
-        desc = "Close all buffer except current",
-      },
+      { "<leader>bP", "<cmd>BufferLineTogglePin<cr>", desc = "Pin buffer" },
+      { "<c-z>", "<cmd>BufferLineCloseOthers<cr>", desc = "Close all buffer except current" },
     },
   },
   {
