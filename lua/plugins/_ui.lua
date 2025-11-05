@@ -208,8 +208,8 @@ return {
         indent_markers = { enable = true },
         icons = {
           glyphs = {
-            default = require("octopus._icons").common.DefaultFile,
-            bookmark = require("octopus._icons").common.BookmarkFilled,
+            default = require("octopus._icons").common.Default,
+            bookmark = require("octopus._icons").common.Bookmark,
             modified = require("octopus._icons").common.FileModified,
             folder = {
               default = require("octopus._icons").common.Folder,

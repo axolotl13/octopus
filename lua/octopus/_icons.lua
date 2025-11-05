@@ -20,12 +20,10 @@ M.git = {
 }
 
 M.common = {
-  DefaultFile = "",
-  BookmarkFilled = "",
   FileModified = "",
   ActiveTS = "󰫈",
   Bug = "",
-  Bug_alt = "",
+  BugAlt = "",
   Bookmark = "",
   Default = "",
   Folder = "",
