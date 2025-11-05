@@ -135,22 +135,11 @@ return {
       },
     },
     config = function(_, opts)
-      vim.diagnostic.config(opts.diagnostics)
+      local autocmd = vim.api.nvim_create_autocmd
+      local augroup = vim.api.nvim_create_augroup
 
-      vim.lsp.config("*", {
-        capabilities = {
-          textDocument = {
-            semanticTokens = { multilineTokenSupport = true },
-            foldingRange = {
-              dynamicRegistration = true,
-              lineFoldingOnly = true,
-            },
-          },
-        },
-      })
-
-      vim.api.nvim_create_autocmd("LspAttach", {
-        group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
+      autocmd("LspAttach", {
+        group = augroup("lsp-attach", { clear = true }),
         callback = function(event)
           local function client_supports_method(client, method, bufnr)
             return client:supports_method(method, bufnr)
@@ -163,21 +152,21 @@ return {
             client
             and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, bufnr)
           then
-            local highlight_augroup = vim.api.nvim_create_augroup("lsp-highlight", { clear = false })
-            vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+            local lsp_hl = augroup("lsp-highlight", { clear = false })
+            autocmd({ "CursorHold", "CursorHoldI" }, {
               buffer = bufnr,
-              group = highlight_augroup,
+              group = lsp_hl,
               callback = vim.lsp.buf.document_highlight,
             })
 
-            vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+            autocmd({ "CursorMoved", "CursorMovedI" }, {
               buffer = bufnr,
-              group = highlight_augroup,
+              group = lsp_hl,
               callback = vim.lsp.buf.clear_references,
             })
 
-            vim.api.nvim_create_autocmd("LspDetach", {
-              group = vim.api.nvim_create_augroup("lsp-detach", { clear = true }),
+            autocmd("LspDetach", {
+              group = augroup("lsp-detach", { clear = true }),
               callback = function(event2)
                 vim.lsp.buf.clear_references()
                 vim.api.nvim_clear_autocmds { group = "lsp-highlight", buffer = event2.buf }
@@ -187,13 +176,13 @@ return {
 
           if opts.inlay_hints.enabled then
             if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, bufnr) then
-              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = bufnr })
+              vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
             end
           end
 
           if opts.codelens.enabled then
             if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_codeLens, bufnr) then
-              vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+              autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
                 buffer = bufnr,
                 callback = vim.lsp.codelens.refresh,
               })
@@ -202,10 +191,23 @@ return {
 
           if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_foldingRange) then
             local win = vim.api.nvim_get_current_win()
+            vim.wo[win][0].foldmethod = "expr"
             vim.wo[win][0].foldexpr = "v:lua.vim.lsp.foldexpr()"
           end
         end,
       })
+
+      opts.capabilities.textDocument.semanticTokens = { multilineTokenSupport = true }
+      opts.capabilities.textDocument.foldingRange = {
+        dynamicRegistration = false,
+        lineFoldingOnly = true,
+      }
+
+      vim.lsp.config("*", {
+        capabilities = opts.capabilities,
+      })
+
+      vim.diagnostic.config(opts.diagnostics)
 
       for name, config in pairs(opts.servers) do
         vim.lsp.config(name, config)
