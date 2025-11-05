@@ -324,6 +324,7 @@ return {
       },
       {
         "<leader>gw",
+        mode = { "n", "v" },
         function()
           require("snacks").gitbrowse()
         end,
