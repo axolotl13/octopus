@@ -269,6 +269,7 @@ return {
           snacks.toggle.indent():map "<leader>,i"
           snacks.toggle.scroll():map "<leader>,s"
           snacks.toggle.zen():map "<leader>z"
+          snacks.toggle.zoom():map "<f12>"
         end,
       })
     end,
@@ -336,6 +337,13 @@ return {
           require("snacks").picker.files()
         end,
         desc = "Find files",
+      },
+      {
+        "<leader>sF",
+        function()
+          require("snacks").picker.files { cwd = vim.fn.stdpath "config" }
+        end,
+        desc = "Find config file",
       },
       {
         "<leader>sb",
