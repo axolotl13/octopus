@@ -3,7 +3,9 @@ local g = vim.g
 
 -- opt.autowriteall = true
 opt.background = "dark"
-opt.clipboard = "unnamedplus"
+vim.schedule(function()
+  opt.clipboard = "unnamedplus"
+end)
 opt.cmdheight = 0
 opt.completeopt = { "menu", "menuone" }
 -- opt.confirm = true
