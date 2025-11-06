@@ -26,6 +26,7 @@ return {
       capabilities = vim.lsp.protocol.make_client_capabilities(),
       inlay_hints = { enabled = true },
       codelens = { enabled = true },
+      folds = { enabled = true },
       servers = {
         basedpyright = {
           settings = {
@@ -187,10 +188,12 @@ return {
             end
           end
 
-          if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_foldingRange) then
-            local win = vim.api.nvim_get_current_win()
-            vim.wo[win][0].foldmethod = "expr"
-            vim.wo[win][0].foldexpr = "v:lua.vim.lsp.foldexpr()"
+          if opts.folds.enabled then
+            if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_foldingRange) then
+              local win = vim.api.nvim_get_current_win()
+              vim.wo[win][0].foldmethod = "expr"
+              vim.wo[win][0].foldexpr = "v:lua.vim.lsp.foldexpr()"
+            end
           end
         end,
       })
