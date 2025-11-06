@@ -5,7 +5,7 @@ return {
       diagnostics = {
         underline = true,
         update_in_insert = false,
-        virtual_text = { prefix = "" },
+        virtual_text = { prefix = "", source = "if_many" },
         -- virtual_lines = { current_line = true },
         severity_sort = true,
         signs = {
