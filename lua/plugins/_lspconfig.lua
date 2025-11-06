@@ -1,8 +1,6 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    lazy = false,
-    dependencies = { "mason-org/mason-lspconfig.nvim" },
     opts = {
       diagnostics = {
         underline = true,
@@ -245,7 +243,8 @@ return {
   },
   {
     "mason-org/mason-lspconfig.nvim",
-    dependencies = { { "mason-org/mason.nvim" } },
+    lazy = false,
+    dependencies = { "mason-org/mason.nvim", "neovim/nvim-lspconfig" },
     opts = {
       ensure_installed = {
         "basedpyright",
