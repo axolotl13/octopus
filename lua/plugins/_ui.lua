@@ -321,9 +321,6 @@ return {
           win_options = { winhighlight = { Normal = "Normal", FloatBorder = "DiagnosticInfo" } },
         },
       },
-      routes = {
-        { filter = { event = "msg_show", kind = "search_count" }, opts = { skip = true } },
-      },
     },
   },
   {
