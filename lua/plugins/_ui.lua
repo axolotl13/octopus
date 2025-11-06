@@ -292,7 +292,18 @@ return {
   {
     "Bekaboo/dropbar.nvim",
     event = "UIEnter",
-    opts = { icons = { kinds = { symbols = require("octopus._icons").kind } } },
+    opts = {
+      icons = { kinds = { symbols = require("octopus._icons").kind } },
+      bar = {
+        attach_events = {
+          "BufEnter",
+          "BufWinEnter",
+          "BufWritePost",
+          "FileType",
+          "LspAttach",
+        },
+      },
+    },
   },
   { "MunifTanjim/nui.nvim", lazy = true },
   {
