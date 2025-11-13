@@ -309,6 +309,7 @@ return {
     opts = {
       events = { "BufWritePost", "BufReadPost", "InsertLeave", "TextChanged" },
       linters_by_ft = {
+        bash = { "shellcheck" },
         dockerfile = { "hadolint" },
         gitcommit = { "gitlint" },
         html = { "markuplint" },
