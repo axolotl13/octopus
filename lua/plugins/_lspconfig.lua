@@ -6,7 +6,7 @@ return {
         underline = true,
         update_in_insert = false,
         virtual_text = { prefix = "", source = "if_many" },
-        -- virtual_lines = { current_line = true },
+        virtual_lines = { current_line = true },
         severity_sort = true,
         signs = {
           text = {
@@ -175,7 +175,27 @@ return {
 
           if opts.inlay_hints.enabled then
             if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, bufnr) then
-              vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+              local filter = { bufnr = bufnr }
+              local group = augroup("lsp-inlay-hints", { clear = true })
+              vim.lsp.inlay_hint.enable(true, filter)
+              autocmd({ "InsertEnter" }, {
+                group = group,
+                buffer = bufnr,
+                callback = function()
+                  if vim.lsp.inlay_hint.is_enabled(filter) then
+                    vim.lsp.inlay_hint.enable(false, filter)
+                  end
+                end,
+              })
+              autocmd({ "InsertLeave" }, {
+                group = group,
+                buffer = bufnr,
+                callback = function()
+                  if not vim.lsp.inlay_hint.is_enabled(filter) then
+                    vim.lsp.inlay_hint.enable(true, filter)
+                  end
+                end,
+              })
             end
           end
 
