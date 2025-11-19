@@ -2,7 +2,6 @@ local opt = vim.opt
 local g = vim.g
 
 -- opt.autowriteall = true
-opt.background = "dark"
 vim.schedule(function()
   opt.clipboard = "unnamedplus"
 end)
@@ -82,7 +81,7 @@ opt.writebackup = false
 g.loaded_perl_provider = 0
 g.loaded_ruby_provider = 0
 
-vim.cmd "colorscheme habamax"
+vim.cmd "colorscheme default"
 
 if g.neovide then
   opt.guifont = "JetBrainsMonoNL NFM:h13"

@@ -40,7 +40,6 @@ return {
     },
     config = function(_, opts)
       require("catppuccin").setup(opts)
-      vim.opt.background = "dark"
       vim.cmd [[colorscheme catppuccin]]
     end,
     specs = {
