@@ -66,25 +66,6 @@ return {
     },
   },
   {
-    "L3MON4D3/LuaSnip",
-    version = "v2.*",
-    build = "make install_jsregexp",
-    dependencies = {
-      "rafamadriz/friendly-snippets",
-      config = function()
-        require("luasnip.loaders.from_vscode").lazy_load()
-        require("luasnip.loaders.from_vscode").lazy_load { paths = { "./snippets" } }
-      end,
-    },
-    opts = {
-      delete_check_events = "TextChanged",
-      region_check_events = "CursorMoved",
-    },
-    specs = {
-      { "saghen/blink.cmp", opts = { snippets = { preset = "luasnip" } } },
-    },
-  },
-  {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
     opts = { disable_filetype = { "codecompanion", "snacks_picker_input", "grug-far" } },
