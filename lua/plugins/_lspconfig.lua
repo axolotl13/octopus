@@ -258,6 +258,55 @@ return {
         desc = "Hover diagnostic",
       },
     },
+    specs = {
+      {
+        "folke/snacks.nvim",
+        keys = {
+          {
+            "grd",
+            function()
+              require("snacks").picker.lsp_definitions()
+            end,
+            desc = "Goto definition",
+          },
+          {
+            "grD",
+            function()
+              require("snacks").picker.lsp_declarations()
+            end,
+            desc = "Goto declaration",
+          },
+          {
+            "grr",
+            function()
+              require("snacks").picker.lsp_references()
+            end,
+            desc = "References",
+          },
+          {
+            "gri",
+            function()
+              require("snacks").picker.lsp_implementations()
+            end,
+            desc = "Goto implementation",
+          },
+          {
+            "grt",
+            function()
+              require("snacks").picker.lsp_type_definitions()
+            end,
+            desc = "Goto type definition",
+          },
+          {
+            "gry",
+            function()
+              require("snacks").picker.lsp_symbols()
+            end,
+            desc = "Lsp symbols",
+          },
+        },
+      },
+    },
   },
   {
     "mason-org/mason.nvim",
